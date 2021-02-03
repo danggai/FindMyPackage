@@ -1,32 +1,34 @@
 package com.example.findmypackage.ui.main
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.annotation.LayoutRes
+import com.example.findmypackage.BindingFragment
 import com.example.findmypackage.R
+import com.example.findmypackage.databinding.MainFragmentBinding
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 
-class MainFragment : Fragment() {
+class MainFragment : BindingFragment<MainFragmentBinding>() {
 
     companion object {
+        val TAG: String = MainFragment::class.java.simpleName
         fun newInstance() = MainFragment()
     }
 
-    private lateinit var viewModel: MainViewModel
+    private lateinit var mVM: MainViewModel
 
-    override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View {
-        return inflater.inflate(R.layout.main_fragment, container, false)
-    }
+    @LayoutRes
+    override fun getLayoutResId() = R.layout.main_fragment
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.vm = getViewModel()
+        binding.lifecycleOwner = viewLifecycleOwner
+
+        binding.vm?.let {
+            mVM = it
+        }
+
     }
 
 }
