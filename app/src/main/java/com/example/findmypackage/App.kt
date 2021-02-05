@@ -1,7 +1,9 @@
 package com.example.findmypackage
 
 import android.app.Application
-import com.example.findmypackage.ViewModelModule
+import com.example.findmypackage.di.NetworkModule
+import com.example.findmypackage.di.ViewModelModule
+import com.example.findmypackage.di.repositoryModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -13,7 +15,7 @@ class App: Application() {
         startKoin {
             androidLogger()
             androidContext(this@App)
-            modules(ViewModelModule)
+            modules(listOf(ViewModelModule, NetworkModule, repositoryModule))
         }
     }
 

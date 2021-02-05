@@ -1,10 +1,9 @@
-package com.example.findmypackage
-
+package com.example.findmypackage.di
 
 import com.example.findmypackage.ui.main.MainViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val ViewModelModule = module {
-    viewModel { MainViewModel() }
+    viewModel { MainViewModel(get(), get()) }
 }
