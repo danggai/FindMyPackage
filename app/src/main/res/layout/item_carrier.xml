@@ -1,0 +1,38 @@
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+        <variable
+            name="vm"
+            type="com.example.findmypackage.ui.trackAdd.TrackAddViewModel"/>
+        <variable
+            name="item"
+            type="com.example.findmypackage.data.res.ResCarrier"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:paddingVertical="10dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_carrier_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{item.name}"
+            android:textColor="@color/black"
+            android:textAlignment="center"
+            android:hint="@string/carrier_name"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

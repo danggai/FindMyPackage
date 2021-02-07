@@ -22,6 +22,14 @@
 
         </activity>
 
+        <activity android:name=".ui.trackAdd.TrackAddActivity">
+
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+
     </application>
 
 </manifest>
