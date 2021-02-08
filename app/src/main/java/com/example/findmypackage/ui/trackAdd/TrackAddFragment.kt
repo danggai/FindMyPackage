@@ -28,11 +28,5 @@ class TrackAddFragment : BindingFragment<TrackAddFragmentBinding>() {
         binding.vm?.let {
             mVM = it
         }
-
-        initUi()
-    }
-
-    private fun initUi() {
-        mVM.initUI()
     }
 }

@@ -10,7 +10,7 @@
             type="com.example.findmypackage.ui.trackAdd.TrackAddViewModel"/>
         <variable
             name="item"
-            type="com.example.findmypackage.data.res.ResCarrier"/>
+            type="com.example.findmypackage.data.local.Carrier"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

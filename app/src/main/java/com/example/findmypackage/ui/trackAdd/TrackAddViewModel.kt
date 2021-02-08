@@ -5,7 +5,9 @@ import android.view.View
 import androidx.lifecycle.MutableLiveData
 import com.example.findmypackage.R
 import com.example.findmypackage.core.BaseViewModel
+import com.example.findmypackage.data.AppSession
 import com.example.findmypackage.data.api.ApiRepository
+import com.example.findmypackage.data.local.Carrier
 import com.example.findmypackage.data.res.ResCarrier
 import com.example.findmypackage.util.log
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -19,30 +21,13 @@ class TrackAddViewModel(override val app: Application, private val api: ApiRepos
     val lvPostNum: MutableLiveData<String> = MutableLiveData("")
     val lvCarrier: MutableLiveData<String> = MutableLiveData("")
 
-    private var lvCarrierList: MutableLiveData<MutableList<ResCarrier>> = MutableLiveData(mutableListOf())
+    private var lvCarrierList: MutableLiveData<List<Carrier>> = MutableLiveData(listOf())
     val _lvCarrierList = lvCarrierList
     var lvClearItem: MutableLiveData<Boolean> = MutableLiveData(false)
 
-    private val rxApiCarrier: PublishSubject<Boolean> = PublishSubject.create()
-
-    val compositeDisposable = CompositeDisposable()
 
     init {
-        compositeDisposable.add( rxApiCarrier
-            .observeOn(Schedulers.newThread())
-            .filter { it }
-            .switchMap {
-                api.carriers()
-            }
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe{ res ->
-                lvCarrierList.value = res.toMutableList()
-            }
-        )
-    }
-
-    fun initUI() {
-        rxApiCarrier.onNext(true)
+        lvCarrierList.value = AppSession.getCarrierList()
     }
 
     fun onClick(view: View) {

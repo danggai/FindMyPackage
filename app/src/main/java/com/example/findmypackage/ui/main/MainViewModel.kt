@@ -5,9 +5,13 @@ import android.view.View
 import androidx.lifecycle.MutableLiveData
 import com.example.findmypackage.R
 import com.example.findmypackage.core.BaseViewModel
+import com.example.findmypackage.data.AppSession
 import com.example.findmypackage.data.api.ApiRepository
 import com.example.findmypackage.data.res.ResCarrier
+import com.example.findmypackage.util.log
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 
 
@@ -24,26 +28,21 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
     val compositeDisposable = CompositeDisposable()
 
     init {
-
-//        compositeDisposable.add( rxApiCarrier
-//            .observeOn(Schedulers.newThread())
-//            .filter { it }
-//            .switchMap {
-//                api.carriers()
-//            }
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribe{ res ->
-//                //                    for (item in res) {
-//                //                        log.e(item.toString())
-//                //                    }
-//                lvCarrierList.value = res.toList()
-//            }
-//        )
-
+        compositeDisposable.add( rxApiCarrier
+            .observeOn(Schedulers.newThread())
+            .filter { it }
+            .switchMap {
+                api.carriers()
+            }
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe{ res ->
+                AppSession.setCarrierList(res.toMutableList())
+            }
+        )
     }
 
     fun initUI() {
-//        rxApiCarrier.onNext(true)
+        rxApiCarrier.onNext(true)
     }
 
     fun onClick(view: View) {

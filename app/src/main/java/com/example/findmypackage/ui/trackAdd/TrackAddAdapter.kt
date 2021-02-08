@@ -6,31 +6,22 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import androidx.databinding.DataBindingUtil
 import com.example.findmypackage.R
-import com.example.findmypackage.data.res.ResCarrier
+import com.example.findmypackage.data.local.Carrier
 import com.example.findmypackage.databinding.ItemCarrierBinding
 
+class TrackAddAdapter(private val viewModel: TrackAddViewModel) : BaseAdapter() {
 
-class TrackAddAdapter(val viewModel: TrackAddViewModel) : BaseAdapter() {
-
-    private var mDataSet = arrayListOf<ResCarrier>()
+    private var mDataSet = mutableListOf<Carrier>()
 
     companion object {
         const val TYPE_CARRIER = 0
     }
 
-    fun addItem(item: ResCarrier) {
-        mDataSet.add(item)
-        notifyDataSetChanged()
     }
 
-    fun setItemList(_itemList: MutableList<ResCarrier>) {
+    fun setItemList(_itemList: MutableList<Carrier>) {
         mDataSet.clear()
         mDataSet.addAll(_itemList)
-        notifyDataSetChanged()
-    }
-
-    fun clear() {
-        mDataSet.clear()
         notifyDataSetChanged()
     }
 
@@ -38,7 +29,7 @@ class TrackAddAdapter(val viewModel: TrackAddViewModel) : BaseAdapter() {
         return mDataSet.size
     }
 
-    override fun getItem(p0: Int): ResCarrier {
+    override fun getItem(p0: Int): Carrier {
         return mDataSet[p0]
     }
 
