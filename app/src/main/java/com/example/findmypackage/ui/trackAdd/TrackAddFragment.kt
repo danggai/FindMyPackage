@@ -27,6 +27,7 @@ class TrackAddFragment : BindingFragment<TrackAddFragmentBinding>() {
 
         binding.vm?.let {
             mVM = it
+            it.setCommonFun(view)
         }
     }
 }

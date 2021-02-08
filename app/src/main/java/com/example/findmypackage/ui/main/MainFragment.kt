@@ -30,6 +30,7 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
 
         binding.vm?.let {
             mVM = it
+            it.setCommonFun(view)
         }
 
         initUi()

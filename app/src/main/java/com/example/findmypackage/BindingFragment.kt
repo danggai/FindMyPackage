@@ -8,8 +8,9 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.example.findmypackage.ui.base.BaseFragment
 
-abstract class BindingFragment<T: ViewDataBinding> : Fragment() {
+abstract class BindingFragment<T: ViewDataBinding> : BaseFragment() {
     @LayoutRes
     abstract fun getLayoutResId(): Int
 
