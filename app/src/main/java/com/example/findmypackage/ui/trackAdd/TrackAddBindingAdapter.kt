@@ -25,18 +25,4 @@ object TrackAddBindingAdapter {
             }
         }
     }
-
-    @BindingAdapter(value = ["clearItem"], requireAll = true)
-    @JvmStatic fun bindItemClear(
-        view: GridView,
-        isClearItem: Boolean
-    ) {
-        if (isClearItem) {
-            view.adapter?.run {
-                if (this is TrackAddAdapter) {
-                    this.clear()
-                }
-            }
-        }
-    }
 }

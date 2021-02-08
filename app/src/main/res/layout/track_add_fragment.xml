@@ -32,7 +32,6 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 viewModel="@{vm}"
                 items="@{vm._lvCarrierList}"
-                clearItem="@{vm.lvClearItem}"
                 />
 
             <androidx.appcompat.widget.AppCompatEditText

@@ -23,8 +23,6 @@ class TrackAddViewModel(override val app: Application, private val api: ApiRepos
 
     private var lvCarrierList: MutableLiveData<List<Carrier>> = MutableLiveData(listOf())
     val _lvCarrierList = lvCarrierList
-    var lvClearItem: MutableLiveData<Boolean> = MutableLiveData(false)
-
 
     init {
         lvCarrierList.value = AppSession.getCarrierList()
