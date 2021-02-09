@@ -13,11 +13,11 @@ object log {
         Log.d(TAG, "(" + element[1].fileName + ":" + element[1].lineNumber + ") " +  element[1].methodName)
     }
 
-    fun d (msg: String) {
+    fun d (msg: Any) {
         val e = Exception()
         val element: Array<StackTraceElement> = e.stackTrace
 
-        Log.d(TAG, "(" + element[1].fileName + ":" + element[1].lineNumber + ") " +  element[1].methodName + ": " + msg)
+        Log.d(TAG, "(" + element[1].fileName + ":" + element[1].lineNumber + ") " +  element[1].methodName + ": " + msg.toString())
     }
 
     fun e () {
@@ -27,11 +27,11 @@ object log {
         Log.e(TAG, "(" + element[1].fileName + ":" + element[1].lineNumber + ") " +  element[1].methodName)
     }
 
-    fun e (msg: String) {
+    fun e (msg: Any) {
         val e = Exception()
         val element: Array<StackTraceElement> = e.stackTrace
 
-        Log.e(TAG, "(" + element[1].fileName + ":" + element[1].lineNumber + ") " +  element[1].methodName + ": " + msg)
+        Log.e(TAG, "(" + element[1].fileName + ":" + element[1].lineNumber + ") " +  element[1].methodName + ": " + msg.toString())
     }
 
 }
