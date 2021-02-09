@@ -13,26 +13,21 @@
             type="com.example.findmypackage.data.local.Carrier"/>
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_carrier_name"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        android:paddingVertical="10dp">
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_carrier_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{item.name}"
-            android:textColor="@color/black"
-            android:textAlignment="center"
-            android:hint="@string/carrier_name"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        android:paddingVertical="10dp"
+        android:paddingHorizontal="5dp"
+        android:text="@{item.name}"
+        android:hint="@string/carrier_name"
+        android:singleLine="true"
+        android:textColor="@color/f1"
+        android:background="@color/c1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
 </layout>

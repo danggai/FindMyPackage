@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">FindMyPackage</string>
     <string name="carrier_name">택배사 이름</string>
+    <string name="post_num">운송장 번호</string>
+    <string name="post_track">운송장 조회</string>
+    <string name="msg_post_empty">운송장 번호를 입력해주세요.</string>
+    <string name="msg_carrier_empty">조회 하실 택배사를 선택해주세요.</string>
 </resources>

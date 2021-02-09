@@ -9,55 +9,65 @@
             type="com.example.findmypackage.ui.trackAdd.TrackAddViewModel"/>
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        >
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_body"
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:paddingTop="20dp"
-            android:paddingHorizontal="20dp"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical"
             >
 
             <GridView
                 android:id="@+id/gv_carriers"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/c1"
+                android:numColumns="3"
+                android:paddingBottom="5dp"
                 viewModel="@{vm}"
                 items="@{vm._lvCarrierList}"
                 />
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/tv_post_num"
-                android:layout_width="200dp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_body"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{vm.lvPostNum}"
-                android:textSize="20sp"
-                android:hint=""
-                android:layout_marginTop="50dp"
-                app:layout_constraintTop_toBottomOf="@+id/gv_carriers"
-                app:layout_constraintLeft_toLeftOf="parent" />
+                >
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_search"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:text="search"
-                android:textAllCaps="false"
-                android:onClick="@{(v)->vm.onClick(v)}"
-                app:layout_constraintTop_toBottomOf="@id/tv_post_num"
-                app:layout_constraintLeft_toLeftOf="parent" />
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/tv_post_num"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:paddingVertical="10dp"
+                    android:text="@{vm.lvPostNum}"
+                    android:textSize="18sp"
+                    android:textColor="@color/c1"
+                    android:textColorHint="@color/f2"
+                    android:textAlignment="center"
+                    android:maxLines="1"
+                    android:hint="@string/post_num"
+                    android:background="@color/transparent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/btn_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:paddingVertical="10dp"
+                    android:text="@string/post_track"
+                    android:textSize="20sp"
+                    android:textColor="@color/f1"
+                    android:textAlignment="center"
+                    android:background="@color/c1"
+                    android:onClick="@{(v)->vm.onClick(v)}"
+                    app:layout_constraintTop_toBottomOf="@id/tv_post_num"
+                    app:layout_constraintLeft_toLeftOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
 </layout>
