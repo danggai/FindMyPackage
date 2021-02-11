@@ -8,6 +8,7 @@ import com.example.findmypackage.data.AppSession
 import com.example.findmypackage.data.api.ApiRepository
 import com.example.findmypackage.data.res.ResCarrier
 import com.example.findmypackage.ui.base.BaseViewModel
+import com.example.findmypackage.util.log
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -21,8 +22,8 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
 
     private val rxApiCarrier: PublishSubject<Boolean> = PublishSubject.create()
 
-    private var lvMyTracksList: MutableLiveData<List<ResCarrier>> = MutableLiveData(listOf())
-    val _lvMyTracksList = lvMyTracksList
+    private var _lvMyTracksList: MutableLiveData<List<ResCarrier>> = MutableLiveData(listOf())
+    val lvMyTracksList = _lvMyTracksList
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -35,9 +36,11 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
                     api.carriers()
                 }
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe{ res ->
-                    AppSession.setCarrierList(res.toMutableList())
-                }
+                .subscribe ({ res ->
+                    AppSession.setCarrierList(res)
+                }, {
+                    it.message?.let { msg -> log.e(msg) }
+                })
         )
     }
 
