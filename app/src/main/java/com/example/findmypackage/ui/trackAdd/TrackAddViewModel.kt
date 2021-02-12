@@ -9,6 +9,10 @@ import com.example.findmypackage.data.AppSession
 import com.example.findmypackage.data.api.ApiRepository
 import com.example.findmypackage.data.local.Carrier
 import com.example.findmypackage.util.log
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
+import io.reactivex.subjects.PublishSubject
 
 
 class TrackAddViewModel(override val app: Application, private val api: ApiRepository) : BaseViewModel(app) {
@@ -16,11 +20,29 @@ class TrackAddViewModel(override val app: Application, private val api: ApiRepos
     var lvPostNum: MutableLiveData<String> = MutableLiveData("")
     var lvCarrierId: MutableLiveData<String> = MutableLiveData("")
 
+    private val rxApiCarrierTracks: PublishSubject<Pair<String, String>> = PublishSubject.create()
+
     private var _lvCarrierList: MutableLiveData<List<Carrier>> = MutableLiveData(listOf())
     val lvCarrierList = _lvCarrierList
 
+    private val compositeDisposable = CompositeDisposable()
+
     init {
-        lvCarrierList.value = AppSession.getCarrierList()
+        compositeDisposable.add(
+            rxApiCarrierTracks
+                .observeOn(Schedulers.newThread())
+                .switchMap {
+                    log.e()
+                    api.carriersTracks(it.first, it.second)
+                }
+                .subscribe({ res ->
+                    log.e(res)
+                }, {
+                    it.message?.let { msg -> log.e(msg) }
+                })
+        )
+
+        _lvCarrierList.value = AppSession.getCarrierList()
     }
 
     fun onClick(view: View) {
@@ -46,12 +68,14 @@ class TrackAddViewModel(override val app: Application, private val api: ApiRepos
 
     private fun trackPost() {
         when {
-            lvCarrierId.value?.isEmpty() == true -> {
+            lvPostNum.value?.isNotEmpty()?:false && lvCarrierId.value?.isNotEmpty()?:false -> {
+                rxApiCarrierTracks.onNext(Pair(lvCarrierId.value!!, lvPostNum.value!!))
+            } lvCarrierId.value?.isEmpty() == true -> {
                 lvMakeToast.value = getString(R.string.msg_carrier_empty)
             } lvPostNum.value?.isEmpty() == true -> {
                 lvMakeToast.value = getString(R.string.msg_post_empty)
             } else -> {
-
+                log.e()
             }
         }
     }

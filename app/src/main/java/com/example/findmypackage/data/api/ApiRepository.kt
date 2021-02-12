@@ -1,6 +1,7 @@
 package com.example.findmypackage.data.api
 
 import com.example.findmypackage.data.local.Carrier
+import com.example.findmypackage.data.local.Tracks
 import com.example.findmypackage.data.res.*
 import com.example.findmypackage.util.log
 import io.reactivex.Observable
@@ -27,12 +28,19 @@ class ApiRepository(private val api: ApiInterface) {
 
     fun carriersTracks(carrierId: String, trackId: String): Observable<ResTracks> {
         log.d()
+        val emptyData = Tracks(Tracks.From("",""), Tracks.To("",""), Tracks.State("",""), listOf(), Tracks.Carrier("","",""))
         return Observable.just(true)
             .switchMap {
                 api.carriersTracks(carrierId, trackId)
             }
             .map { res ->
-                res.body()
+                when {
+                    res.isSuccessful -> {
+                        ResTracks(Meta(res.code(), res.message()), res.body()?:emptyData)
+                    } else -> {
+                        ResTracks(Meta(res.code(), res.message()), emptyData)
+                    }
+                }
             }
     }
 }

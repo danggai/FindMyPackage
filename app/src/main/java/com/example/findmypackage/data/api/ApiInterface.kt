@@ -12,7 +12,7 @@ interface ApiInterface {
     @GET("carriers/")
     fun carriers(): Observable<Response<List<Carrier>>>
 
-    @GET("carriers/:{carrId}/tracks/:{trackId}")
-    fun carriersTracks(@Path("carrId") carrierId: String, @Path("trackId") trackId: String): Observable<Response<ResTracks>>
+    @GET("carriers/{carrId}/tracks/{trackId}")
+    fun carriersTracks(@Path("carrId") carrierId: String, @Path("trackId") trackId: String): Observable<Response<Tracks>>
 
 }
