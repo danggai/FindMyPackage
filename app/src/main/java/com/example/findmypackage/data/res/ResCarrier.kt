@@ -1,10 +1,10 @@
 package com.example.findmypackage.data.res
 
-import com.google.gson.annotations.SerializedName
+import com.example.findmypackage.data.local.Carrier
 
 data class ResCarrier (
-    @SerializedName("id") val id: String,
-    @SerializedName("name") val name: String,
-    @SerializedName("tel") val tel: String?) {
+    val meta: Meta,
+    val data: List<Carrier>
+) {
 
 }
