@@ -1,4 +1,4 @@
-package com.example.findmypackage.ui.trackAdd
+package com.example.findmypackage.ui.track.add
 
 import android.app.Activity
 import android.content.Intent

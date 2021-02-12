@@ -1,7 +1,6 @@
-package com.example.findmypackage.ui.trackAdd
+package com.example.findmypackage.ui.track.add
 
 import android.graphics.Color
-import android.graphics.ColorSpace
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

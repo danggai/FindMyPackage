@@ -7,7 +7,7 @@ import androidx.lifecycle.Observer
 import com.example.findmypackage.BindingFragment
 import com.example.findmypackage.R
 import com.example.findmypackage.databinding.MainFragmentBinding
-import com.example.findmypackage.ui.trackAdd.TrackAddActivity
+import com.example.findmypackage.ui.track.add.TrackAddActivity
 import com.example.findmypackage.util.log
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 

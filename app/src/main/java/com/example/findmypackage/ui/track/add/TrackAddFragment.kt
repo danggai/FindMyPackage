@@ -1,11 +1,14 @@
-package com.example.findmypackage.ui.trackAdd
+package com.example.findmypackage.ui.track.add
 
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
+import androidx.lifecycle.Observer
 import com.example.findmypackage.BindingFragment
 import com.example.findmypackage.R
 import com.example.findmypackage.databinding.TrackAddFragmentBinding
+import com.example.findmypackage.ui.track.detail.TrackDetailActivity
+import com.example.findmypackage.util.log
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class TrackAddFragment : BindingFragment<TrackAddFragmentBinding>() {
@@ -29,5 +32,15 @@ class TrackAddFragment : BindingFragment<TrackAddFragmentBinding>() {
             mVM = it
             it.setCommonFun(view)
         }
+
+        initLv()
+    }
+
+    private fun initLv() {
+        mVM.lvStartDetailAct.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                log.e()
+            }
+        })
     }
 }

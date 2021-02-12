@@ -6,13 +6,13 @@
     <data>
         <variable
             name="vm"
-            type="com.example.findmypackage.ui.trackAdd.TrackAddViewModel"/>
+            type="com.example.findmypackage.ui.track.add.TrackAddViewModel"/>
     </data>
 
     <FrameLayout
         android:id="@+id/fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.trackAdd.TrackAddActivity" />
+        tools:context=".ui.track.add.TrackAddActivity" />
 
 </layout>

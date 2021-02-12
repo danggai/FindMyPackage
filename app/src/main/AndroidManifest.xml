@@ -24,16 +24,10 @@
 
         </activity>
 
-        <activity android:name=".ui.trackAdd.TrackAddActivity"
+        <activity android:name="com.example.findmypackage.ui.track.add.TrackAddActivity"
             android:windowSoftInputMode="adjustResize"
-            android:launchMode="singleTop" >
+            android:launchMode="singleTop" />
 
-            <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER" />
-
-            </intent-filter>
-
-        </activity>
 
     </application>
 

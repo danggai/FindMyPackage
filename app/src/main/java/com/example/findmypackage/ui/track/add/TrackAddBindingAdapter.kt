@@ -1,9 +1,8 @@
-package com.example.findmypackage.ui.trackAdd;
+package com.example.findmypackage.ui.track.add;
 
 import android.widget.GridView
 import androidx.databinding.BindingAdapter;
 import com.example.findmypackage.data.local.Carrier
-import com.example.findmypackage.data.res.ResCarrier
 
 import kotlin.jvm.JvmStatic;
 

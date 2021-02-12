@@ -1,8 +1,9 @@
-package com.example.findmypackage.ui.trackAdd
+package com.example.findmypackage.ui.track.add
 
 import android.app.Application
 import android.view.View
 import androidx.lifecycle.MutableLiveData
+import com.example.findmypackage.Constant
 import com.example.findmypackage.R
 import com.example.findmypackage.ui.base.BaseViewModel
 import com.example.findmypackage.data.AppSession
@@ -17,8 +18,10 @@ import io.reactivex.subjects.PublishSubject
 
 class TrackAddViewModel(override val app: Application, private val api: ApiRepository) : BaseViewModel(app) {
 
-    var lvPostNum: MutableLiveData<String> = MutableLiveData("")
+    var lvStartDetailAct: MutableLiveData<Boolean> = MutableLiveData(false)
+
     var lvCarrierId: MutableLiveData<String> = MutableLiveData("")
+    var lvTrackId: MutableLiveData<String> = MutableLiveData("")
 
     private val rxApiCarrierTracks: PublishSubject<Pair<String, String>> = PublishSubject.create()
 
@@ -35,8 +38,24 @@ class TrackAddViewModel(override val app: Application, private val api: ApiRepos
                     log.e()
                     api.carriersTracks(it.first, it.second)
                 }
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ res ->
                     log.e(res)
+                    when (res.meta.code) {
+                        Constant.META_CODE_SUCCESS -> {
+                            lvStartDetailAct.value = true
+                        }
+                        Constant.META_CODE_BAD_REQUEST,
+                        Constant.META_CODE_NOT_FOUND,
+                        Constant.META_CODE_SERVER_ERROR -> {
+
+                        }
+                        else -> {
+
+                        }
+
+
+                    }
                 }, {
                     it.message?.let { msg -> log.e(msg) }
                 })
@@ -68,11 +87,11 @@ class TrackAddViewModel(override val app: Application, private val api: ApiRepos
 
     private fun trackPost() {
         when {
-            lvPostNum.value?.isNotEmpty()?:false && lvCarrierId.value?.isNotEmpty()?:false -> {
-                rxApiCarrierTracks.onNext(Pair(lvCarrierId.value!!, lvPostNum.value!!))
+            lvTrackId.value?.isNotEmpty()?:false && lvCarrierId.value?.isNotEmpty()?:false -> {
+                rxApiCarrierTracks.onNext(Pair(lvCarrierId.value!!, lvTrackId.value!!))
             } lvCarrierId.value?.isEmpty() == true -> {
                 lvMakeToast.value = getString(R.string.msg_carrier_empty)
-            } lvPostNum.value?.isEmpty() == true -> {
+            } lvTrackId.value?.isEmpty() == true -> {
                 lvMakeToast.value = getString(R.string.msg_post_empty)
             } else -> {
                 log.e()

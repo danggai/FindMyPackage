@@ -6,7 +6,7 @@
     <data>
         <variable
             name="vm"
-            type="com.example.findmypackage.ui.trackAdd.TrackAddViewModel"/>
+            type="com.example.findmypackage.ui.track.add.TrackAddViewModel"/>
     </data>
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -40,7 +40,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:paddingVertical="10dp"
-                    android:text="@={vm.lvPostNum}"
+                    android:text="@={vm.lvTrackId}"
                     android:textSize="18sp"
                     android:textColor="@color/c1"
                     android:textColorHint="@color/f2"
