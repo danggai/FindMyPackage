@@ -40,6 +40,7 @@ class TrackAddFragment : BindingFragment<TrackAddFragmentBinding>() {
         mVM.lvStartDetailAct.observe(viewLifecycleOwner, Observer {
             if (it) {
                 log.e()
+                activity?.let {act -> TrackDetailActivity.normalStart(act, mVM.lvCarrierId.value!! , mVM.lvTrackId.value!! )}
             }
         })
     }
