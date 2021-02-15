@@ -6,7 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import com.example.findmypackage.R
 import com.example.findmypackage.data.AppSession
 import com.example.findmypackage.data.api.ApiRepository
-import com.example.findmypackage.data.res.ResCarrier
+import com.example.findmypackage.data.db.track.TrackDao
+import com.example.findmypackage.data.db.track.TrackEntity
 import com.example.findmypackage.ui.base.BaseViewModel
 import com.example.findmypackage.util.log
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -15,36 +16,56 @@ import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 
 
-class MainViewModel(override val app: Application, private val api: ApiRepository) : BaseViewModel(app) {
+class MainViewModel(override val app: Application, private val api: ApiRepository, private val dao: TrackDao) : BaseViewModel(app) {
 
     var lvStartAddAct: MutableLiveData<Boolean> = MutableLiveData()
     var lvStartDetailAct: MutableLiveData<Boolean> = MutableLiveData()
 
     private val rxApiCarrier: PublishSubject<Boolean> = PublishSubject.create()
+    private val rxDaoSelectAll: PublishSubject<Boolean> = PublishSubject.create()
 
-    private var _lvMyTracksList: MutableLiveData<List<ResCarrier>> = MutableLiveData(listOf())
+    private var _lvMyTracksList: MutableLiveData<List<TrackEntity>> = MutableLiveData(listOf())
     val lvMyTracksList = _lvMyTracksList
 
     private val compositeDisposable = CompositeDisposable()
 
     init {
-        compositeDisposable.add(
-            rxApiCarrier
-                .observeOn(Schedulers.newThread())
-                .filter { it }
-                .switchMap {
-                    api.carriers()
-                }
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe ({ res ->
-                    AppSession.setCarrierList(res)
-                }, {
-                    it.message?.let { msg -> log.e(msg) }
-                })
+        compositeDisposable
+            .addAll(
+                rxApiCarrier
+                    .observeOn(Schedulers.newThread())
+                    .filter { it }
+                    .switchMap {
+                        api.carriers()
+                    }
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe ({ res ->
+                        AppSession.setCarrierList(res)
+                    }, {
+                        it.message?.let { msg -> log.e(msg) }
+                    })
+                , rxDaoSelectAll
+                    .observeOn(Schedulers.newThread())
+                    .filter { it }
+                    .switchMap {
+                        dao.selectAll()
+                    }
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe ({ items ->
+                        _lvMyTracksList.value = items
+                        log.e(items)
+                    }, {
+                        it.message?.let { msg -> log.e(msg) }
+                    })
         )
     }
 
+    fun getAllTrackList() {
+        rxDaoSelectAll.onNext(true)
+    }
+
     fun initUI() {
+        getAllTrackList()
         rxApiCarrier.onNext(true)
     }
 

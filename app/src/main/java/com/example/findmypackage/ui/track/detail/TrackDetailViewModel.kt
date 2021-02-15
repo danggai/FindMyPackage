@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.findmypackage.Constant
 import com.example.findmypackage.ui.base.BaseViewModel
 import com.example.findmypackage.data.api.ApiRepository
+import com.example.findmypackage.data.local.Tracks
 import com.example.findmypackage.util.log
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -16,6 +17,8 @@ class TrackDetailViewModel(override val app: Application, private val api: ApiRe
 
     var lvTest: MutableLiveData<String> = MutableLiveData("")
     private val rxApiCarrierTracks: PublishSubject<Pair<String, String>> = PublishSubject.create()
+
+    var lvTrackData: MutableLiveData<Tracks> = MutableLiveData(Tracks(Tracks.From("",""), Tracks.To("",""), Tracks.State("",""), listOf(), Tracks.Carrier("","","")))
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -32,7 +35,7 @@ class TrackDetailViewModel(override val app: Application, private val api: ApiRe
                     log.e(res)
                     when (res.meta.code) {
                         Constant.META_CODE_SUCCESS -> {
-//                            lvTest.value = res.data.state.text
+                            lvTrackData.value = res.data
                         }
                         Constant.META_CODE_BAD_REQUEST,
                         Constant.META_CODE_NOT_FOUND,

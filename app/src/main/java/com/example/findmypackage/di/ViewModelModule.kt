@@ -7,7 +7,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val ViewModelModule = module {
-    viewModel { MainViewModel(get(), get()) }
-    viewModel { TrackAddViewModel(get(), get()) }
+    viewModel { MainViewModel(get(), get(), get()) }
+    viewModel { TrackAddViewModel(get(), get(), get()) }
     viewModel { TrackDetailViewModel(get(), get()) }
 }

@@ -37,6 +37,12 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
         initLv()
     }
 
+    override fun onResume() {
+        super.onResume()
+        log.e()
+        mVM.getAllTrackList()
+    }
+
     private fun initUi() {
         mVM.initUI()
     }

@@ -19,9 +19,11 @@
 
             <TextView
                 android:id="@+id/tv_test"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{vm.lvTest}"/>
+                android:backgroundTint="@color/f2"
+                android:textColor="@color/c1"
+                android:text="@{vm.lvTrackData.Carrier.id}"/>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

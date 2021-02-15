@@ -15,6 +15,16 @@
         android:background="@color/white"
         >
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_track_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/f1"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            viewModel="@{vm}"
+            items="@{vm.lvMyTracksList}"
+            />
+
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/btn_add"
             android:layout_width="wrap_content"

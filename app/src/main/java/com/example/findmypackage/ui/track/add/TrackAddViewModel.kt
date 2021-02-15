@@ -8,6 +8,8 @@ import com.example.findmypackage.R
 import com.example.findmypackage.ui.base.BaseViewModel
 import com.example.findmypackage.data.AppSession
 import com.example.findmypackage.data.api.ApiRepository
+import com.example.findmypackage.data.db.track.TrackDao
+import com.example.findmypackage.data.db.track.TrackEntity
 import com.example.findmypackage.data.local.Carrier
 import com.example.findmypackage.util.log
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -16,14 +18,16 @@ import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 
 
-class TrackAddViewModel(override val app: Application, private val api: ApiRepository) : BaseViewModel(app) {
+class TrackAddViewModel(override val app: Application, private val api: ApiRepository, private val dao: TrackDao) : BaseViewModel(app) {
 
     var lvStartDetailAct: MutableLiveData<Boolean> = MutableLiveData(false)
 
     var lvCarrierId: MutableLiveData<String> = MutableLiveData("")
     var lvTrackId: MutableLiveData<String> = MutableLiveData("")
+    var lvItemName: MutableLiveData<String> = MutableLiveData("")
 
     private val rxApiCarrierTracks: PublishSubject<Pair<String, String>> = PublishSubject.create()
+    private val rxDaoInsert: PublishSubject<TrackEntity> = PublishSubject.create()
 
     private var _lvCarrierList: MutableLiveData<List<Carrier>> = MutableLiveData(listOf())
     val lvCarrierList = _lvCarrierList
@@ -31,7 +35,7 @@ class TrackAddViewModel(override val app: Application, private val api: ApiRepos
     private val compositeDisposable = CompositeDisposable()
 
     init {
-        compositeDisposable.add(
+        compositeDisposable.addAll(
             rxApiCarrierTracks
                 .observeOn(Schedulers.newThread())
                 .switchMap {
@@ -44,6 +48,7 @@ class TrackAddViewModel(override val app: Application, private val api: ApiRepos
                     when (res.meta.code) {
                         Constant.META_CODE_SUCCESS -> {
                             lvStartDetailAct.value = true
+                            rxDaoInsert.onNext(TrackEntity(lvTrackId.value?:"0", lvItemName.value?:getString(R.string.unknown_item),  res.data.from.name,  res.data.carrier.id, res.data.carrier.name, null, null))
                         }
                         Constant.META_CODE_BAD_REQUEST,
                         Constant.META_CODE_NOT_FOUND,
@@ -53,9 +58,15 @@ class TrackAddViewModel(override val app: Application, private val api: ApiRepos
                         else -> {
 
                         }
-
-
                     }
+                }, {
+                    it.message?.let { msg -> log.e(msg) }
+                })
+            , rxDaoInsert
+                .observeOn(Schedulers.newThread())
+                .subscribe ({ item ->
+                    dao.insert(item)
+                    log.e(item)
                 }, {
                     it.message?.let { msg -> log.e(msg) }
                 })
