@@ -35,7 +35,7 @@
                 >
 
                 <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/tv_post_num"
+                    android:id="@+id/tv_track_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -46,7 +46,7 @@
                     android:textColorHint="@color/f2"
                     android:textAlignment="center"
                     android:maxLines="1"
-                    android:hint="@string/post_num"
+                    android:hint="@string/track_id"
                     android:background="@color/transparent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent" />
@@ -57,13 +57,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:paddingVertical="10dp"
-                    android:text="@string/post_track"
+                    android:text="@string/track_search"
                     android:textSize="20sp"
                     android:textColor="@color/f1"
                     android:textAlignment="center"
                     android:background="@color/c1"
                     android:onClick="@{(v)->vm.onClick(v)}"
-                    app:layout_constraintTop_toBottomOf="@id/tv_post_num"
+                    app:layout_constraintTop_toBottomOf="@id/tv_track_id"
                     app:layout_constraintLeft_toLeftOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

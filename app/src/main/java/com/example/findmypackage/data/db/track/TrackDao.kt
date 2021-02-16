@@ -9,10 +9,10 @@ interface TrackDao {
     @Query("SELECT * FROM Track")
     fun selectAll(): Observable<List<TrackEntity>>
 
-    @Query("SELECT DISTINCT * FROM Track WHERE postNumber = :id")
+    @Query("SELECT DISTINCT * FROM Track WHERE trackId = :id")
     fun selectById(id: String): Observable<TrackEntity>
 
-    @Query("DELETE FROM Track WHERE postNumber = :id")
+    @Query("DELETE FROM Track WHERE trackId = :id")
     fun deleteById(id: String)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

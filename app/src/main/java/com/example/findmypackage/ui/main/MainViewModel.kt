@@ -19,7 +19,7 @@ import io.reactivex.subjects.PublishSubject
 class MainViewModel(override val app: Application, private val api: ApiRepository, private val dao: TrackDao) : BaseViewModel(app) {
 
     var lvStartAddAct: MutableLiveData<Boolean> = MutableLiveData()
-    var lvStartDetailAct: MutableLiveData<Boolean> = MutableLiveData()
+    var lvStartDetailAct: MutableLiveData<TrackEntity> = MutableLiveData()
 
     private val rxApiCarrier: PublishSubject<Boolean> = PublishSubject.create()
     private val rxDaoSelectAll: PublishSubject<Boolean> = PublishSubject.create()
@@ -75,6 +75,10 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
                 lvStartAddAct.value = true
             }
         }
+    }
+
+    fun onClickItem(item: TrackEntity) {
+        lvStartDetailAct.value = item
     }
 
 }

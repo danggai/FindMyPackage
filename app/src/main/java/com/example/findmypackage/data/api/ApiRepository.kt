@@ -9,8 +9,8 @@ import io.reactivex.Observable
 class ApiRepository(private val api: ApiInterface) {
 
     fun carriers(): Observable<ResCarrier> {
-        val emptyData = listOf<Carrier>()
         log.d()
+        val emptyData = listOf<Carrier>()
         return Observable.just(true)
             .switchMap {
                 api.carriers()

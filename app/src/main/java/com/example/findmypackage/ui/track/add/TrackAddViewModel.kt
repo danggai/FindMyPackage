@@ -79,7 +79,7 @@ class TrackAddViewModel(override val app: Application, private val api: ApiRepos
         when (view.id) {
             R.id.btn_search -> {
                 log.d()
-                trackPost()
+                trackSearch()
             }
             else -> {
                 log.e()
@@ -96,14 +96,14 @@ class TrackAddViewModel(override val app: Application, private val api: ApiRepos
         }
     }
 
-    private fun trackPost() {
+    private fun trackSearch() {
         when {
             lvTrackId.value?.isNotEmpty()?:false && lvCarrierId.value?.isNotEmpty()?:false -> {
                 rxApiCarrierTracks.onNext(Pair(lvCarrierId.value!!, lvTrackId.value!!))
             } lvCarrierId.value?.isEmpty() == true -> {
                 lvMakeToast.value = getString(R.string.msg_carrier_empty)
             } lvTrackId.value?.isEmpty() == true -> {
-                lvMakeToast.value = getString(R.string.msg_post_empty)
+                lvMakeToast.value = getString(R.string.msg_track_id_empty)
             } else -> {
                 log.e()
             }

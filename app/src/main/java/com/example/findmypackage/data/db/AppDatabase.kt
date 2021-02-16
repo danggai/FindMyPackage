@@ -18,7 +18,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun getTrackListDao(): TrackDao
 
     companion object {
-        const val DB_VERSION = 2
+        const val DB_VERSION = 1
         private const val DB_NAME = "my_db"
 
         @Volatile
@@ -36,7 +36,7 @@ abstract class AppDatabase : RoomDatabase() {
 
         private val MIGRATION_1_TO_2 = object : Migration(1, 2) {
             override fun migrate(database: SupportSQLiteDatabase) {
-
+//                database.execSQL("ALTER TABLE Track RENAME COLUMN postNumber TO trackId;")
             }
         }
     }

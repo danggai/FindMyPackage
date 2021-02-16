@@ -8,6 +8,7 @@ import com.example.findmypackage.BindingFragment
 import com.example.findmypackage.R
 import com.example.findmypackage.databinding.MainFragmentBinding
 import com.example.findmypackage.ui.track.add.TrackAddActivity
+import com.example.findmypackage.ui.track.detail.TrackDetailActivity
 import com.example.findmypackage.util.log
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
@@ -55,10 +56,8 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
             }
         })
         mVM.lvStartDetailAct.observe(viewLifecycleOwner, Observer{
-            if (it) {
-                log.d()
-//                activity?.let {act -> TrackAddActivity.normalStart(act)}
-            }
+            log.d()
+            activity?.let {act -> TrackDetailActivity.normalStart(act, it.carrierId, it.trackId)}
         })
     }
 }
