@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.findmypackage.Constant
 import com.example.findmypackage.ui.base.BaseViewModel
 import com.example.findmypackage.data.api.ApiRepository
+import com.example.findmypackage.data.db.track.TrackEntity
 import com.example.findmypackage.data.local.Tracks
 import com.example.findmypackage.util.log
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -17,6 +18,9 @@ class TrackDetailViewModel(override val app: Application, private val api: ApiRe
 
     var lvTest: MutableLiveData<String> = MutableLiveData("")
     private val rxApiCarrierTracks: PublishSubject<Pair<String, String>> = PublishSubject.create()
+
+    var lvTrackId : MutableLiveData<String> = MutableLiveData("")
+    var lvTrackEntity: MutableLiveData<TrackEntity> = MutableLiveData(TrackEntity("","","","","","",""))
 
     var lvTrackData: MutableLiveData<Tracks> = MutableLiveData(Tracks(Tracks.From("",""), Tracks.To("",""), Tracks.State("",""), listOf(), Tracks.Carrier("","","")))
 
@@ -57,7 +61,14 @@ class TrackDetailViewModel(override val app: Application, private val api: ApiRe
 
     fun initUi(carrierId: String, trackId: String) {
         log.e()
+        lvTrackId.value = trackId
         rxApiCarrierTracks.onNext(Pair(carrierId, trackId))
+    }
+
+    fun initUi(item: TrackEntity) {
+        log.e()
+        lvTrackEntity.value = item
+        rxApiCarrierTracks.onNext(Pair(item.carrierId, item.trackId ))
     }
 
 }

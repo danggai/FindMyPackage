@@ -6,11 +6,13 @@ import android.os.Bundle
 import androidx.annotation.LayoutRes
 import com.example.findmypackage.BindingActivity
 import com.example.findmypackage.R
+import com.example.findmypackage.data.db.track.TrackEntity
 import com.example.findmypackage.databinding.TrackDetailActivityBinding
 
 class TrackDetailActivity : BindingActivity<TrackDetailActivityBinding>() {
 
     companion object {
+        const val ARG_TRACK_ENTITY = "ARG_TRACK_ENTITY"
         const val ARG_CARRIER_ID = "ARG_CARRIER_ID"
         const val ARG_TRACK_ID = "ARG_TRACK_ID"
 
@@ -18,6 +20,12 @@ class TrackDetailActivity : BindingActivity<TrackDetailActivityBinding>() {
             val intent= Intent(activity, TrackDetailActivity::class.java)
             intent.putExtra(ARG_CARRIER_ID, carrierId)
             intent.putExtra(ARG_TRACK_ID, trackId)
+            activity.startActivity(intent)
+        }
+
+        fun normalStart (activity: Activity, item: TrackEntity) {
+            val intent= Intent(activity, TrackDetailActivity::class.java)
+            intent.putExtra(ARG_TRACK_ENTITY, item)
             activity.startActivity(intent)
         }
     }
