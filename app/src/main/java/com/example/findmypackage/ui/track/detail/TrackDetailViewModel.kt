@@ -15,10 +15,11 @@ import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 
 
-class TrackDetailViewModel(override val app: Application, private val api: ApiRepository) : BaseViewModel(app) {
+class TrackDetailViewModel(override val app: Application, private val api: ApiRepository, private val dao: TrackDao)  : BaseViewModel(app) {
 
     var lvTest: MutableLiveData<String> = MutableLiveData("")
     private val rxApiCarrierTracks: PublishSubject<Pair<String, String>> = PublishSubject.create()
+    private val rxDaoSelect: PublishSubject<String> = PublishSubject.create()
 
     var lvTrackEntity: MutableLiveData<TrackEntity> = MutableLiveData(TrackEntity("","","","","","",""))
     var lvTrackData: MutableLiveData<Tracks> = MutableLiveData(Tracks(Tracks.From("",""), Tracks.To("",""), Tracks.State("",""), listOf(), Tracks.Carrier("","","")))
@@ -26,7 +27,7 @@ class TrackDetailViewModel(override val app: Application, private val api: ApiRe
     private val compositeDisposable = CompositeDisposable()
 
     init {
-        compositeDisposable.add(
+        compositeDisposable.addAll(
             rxApiCarrierTracks
                 .observeOn(Schedulers.newThread())
                 .switchMap {
@@ -54,13 +55,25 @@ class TrackDetailViewModel(override val app: Application, private val api: ApiRe
                 }, {
                     it.message?.let { msg -> log.e(msg) }
                 })
+            , rxDaoSelect
+                .observeOn(Schedulers.newThread())
+                .switchMap { trackId ->
+                    dao.selectById(trackId)
+                }
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe ({ item ->
+                    lvTrackEntity.value = item
+                    rxApiCarrierTracks.onNext(Pair(item.carrierId, item.trackId))
+                }, {
+                    it.message?.let { msg -> log.e(msg) }
+                })
         )
 
     }
 
     fun initUi(trackId: String) {
         log.e()
-        rxApiCarrierTracks.onNext(Pair(carrierId, trackId))
+        rxDaoSelect.onNext(trackId)
     }
 
     fun initUi(item: TrackEntity) {
