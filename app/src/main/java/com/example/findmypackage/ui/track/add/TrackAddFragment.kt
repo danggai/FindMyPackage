@@ -41,7 +41,7 @@ class TrackAddFragment : BindingFragment<TrackAddFragmentBinding>() {
             if (it) {
                 log.e()
                 activity?.let { act ->
-                    TrackDetailActivity.normalStart(act, mVM.lvCarrierId.value!! , mVM.lvTrackId.value!! )
+                    TrackDetailActivity.normalStart(act, mVM.lvTrackId.value!! )
                     act.finish()
                 }
             }

@@ -17,13 +17,13 @@ data class TrackEntity (
     @ColumnInfo(name = "recent_status") val recentStatus: String?,
 ): Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString()
+        parcel.readString()?:"",
+        parcel.readString()?:"",
+        parcel.readString()?:"",
+        parcel.readString()?:"",
+        parcel.readString()?:"",
+        parcel.readString()?:"",
+        parcel.readString()?:""
     ) {
     }
 

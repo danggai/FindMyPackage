@@ -36,13 +36,7 @@ class TrackDetailFragment : BindingFragment<TrackDetailFragmentBinding>() {
 
     private fun initUi() {
         val intent = getIntent()
-        intent.getParcelableExtra<TrackEntity>(TrackDetailActivity.ARG_TRACK_ENTITY)?.let {
-            mVM.initUi(it)
-        }
-        intent.getStringExtra(TrackDetailActivity.ARG_CARRIER_ID)?.let { carrierId ->
-            intent.getStringExtra(TrackDetailActivity.ARG_TRACK_ID)?.let { trackId ->
-                mVM.initUi(carrierId, trackId)
-            }
-        }
+        intent.getParcelableExtra<TrackEntity>(TrackDetailActivity.ARG_TRACK_ENTITY)?.let { item -> mVM.initUi(item) }
+        intent.getStringExtra(TrackDetailActivity.ARG_TRACK_ID)?.let { trackId -> mVM.initUi(trackId) }
     }
 }
