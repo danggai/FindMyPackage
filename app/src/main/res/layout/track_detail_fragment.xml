@@ -14,16 +14,169 @@
             android:layout_height="match_parent"
             android:background="@color/f1"
             android:orientation="vertical"
-            android:gravity="center"
             >
 
-            <TextView
-                android:id="@+id/tv_test"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/f2"
-                android:textColor="@color/c1"
-                android:text="@{vm.lvTrackData.Carrier.id}"/>
+                android:layout_marginHorizontal="15dp"
+                >
+
+                <TextView
+                    style="@style/EditText"
+                    android:text="택배사"
+                    android:textColor="@color/c1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    style="@style/EditText"
+                    android:id="@+id/tv_carrier_name"
+                    android:textColor="@color/c1"
+                    android:text="@{vm.lvTrackEntity.carrierName}"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                >
+
+                <TextView
+                    style="@style/EditText"
+                    android:textColor="@color/c1"
+                    android:text="운송장번호"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    />
+
+                <TextView
+                    style="@style/EditText"
+                    android:id="@+id/tv_track_id"
+                    android:textColor="@color/c1"
+                    android:text="@{vm.lvTrackEntity.trackId}"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                >
+
+                <TextView
+                    style="@style/EditText"
+                    android:textColor="@color/c1"
+                    android:text="상품명"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    />
+
+                <TextView
+                    style="@style/EditText"
+                    android:id="@+id/tv_item_name"
+                    android:textColor="@color/c1"
+                    android:text="@{vm.lvTrackEntity.itemName}"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                >
+
+                <TextView
+                    style="@style/EditText"
+                    android:text="받는 사람"
+                    android:textColor="@color/c1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    style="@style/EditText"
+                    android:id="@+id/tv_to_name"
+                    android:textColor="@color/c1"
+                    android:text="@{vm.lvTrackData.To.name}"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                >
+
+                <TextView
+                    style="@style/EditText"
+                    android:textColor="@color/c1"
+                    android:text="보내는 사람"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    />
+
+                <TextView
+                    style="@style/EditText"
+                    android:id="@+id/tv_from_name"
+                    android:textColor="@color/c1"
+                    android:text="@{vm.lvTrackData.From.name}"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                >
+
+                <TextView
+                    style="@style/EditText"
+                    android:textColor="@color/c1"
+                    android:text="배송 상태"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    />
+
+                <TextView
+                    style="@style/EditText"
+                    android:id="@+id/tv_state_text"
+                    android:textColor="@color/c1"
+                    android:text="@{vm.lvTrackData.state.text}"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

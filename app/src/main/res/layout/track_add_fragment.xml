@@ -12,7 +12,7 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/f1"
+            android:background="@color/c1"
             android:orientation="vertical"
             >
 
@@ -21,7 +21,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:background="@color/c1"
                 android:numColumns="3"
                 android:paddingBottom="5dp"
                 viewModel="@{vm}"
@@ -35,35 +34,47 @@
                 >
 
                 <androidx.appcompat.widget.AppCompatEditText
+                    style="@style/EditText.MatchWrap"
+                    android:id="@+id/tv_item_name"
+                    android:layout_marginTop="5dp"
+                    android:paddingVertical="10dp"
+                    android:text="@={vm.lvItemName}"
+                    android:textSize="18sp"
+                    android:textColor="@color/c1"
+                    android:textColorHint="@color/f2"
+                    android:hint="@string/item_name"
+                    android:background="@color/f1"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/tv_track_id"
+                    app:layout_constraintLeft_toLeftOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    style="@style/EditText.MatchWrap"
                     android:id="@+id/tv_track_id"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="1dp"
                     android:paddingVertical="10dp"
                     android:text="@={vm.lvTrackId}"
                     android:textSize="18sp"
                     android:textColor="@color/c1"
                     android:textColorHint="@color/f2"
-                    android:textAlignment="center"
-                    android:maxLines="1"
                     android:hint="@string/track_id"
-                    android:background="@color/transparent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:background="@color/f1"
+                    app:layout_constraintTop_toBottomOf="@id/tv_item_name"
+                    app:layout_constraintBottom_toTopOf="@id/btn_search"
                     app:layout_constraintLeft_toLeftOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/EditText.MatchWrap"
                     android:id="@+id/btn_search"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
                     android:paddingVertical="10dp"
                     android:text="@string/track_search"
                     android:textSize="20sp"
                     android:textColor="@color/f1"
-                    android:textAlignment="center"
                     android:background="@color/c1"
                     android:onClick="@{(v)->vm.onClick(v)}"
                     app:layout_constraintTop_toBottomOf="@id/tv_track_id"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
