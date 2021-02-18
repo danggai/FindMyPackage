@@ -19,8 +19,8 @@ class TrackAddAdapter(private val viewModel: TrackAddViewModel) : BaseAdapter() 
     companion object {
         const val TYPE_CARRIER = 0
 
-        var c1 = Color.rgb(187, 134, 252)
-        var f1 = Color.rgb(255, 255, 255)
+        var c1 = Color.parseColor("#8AAAE5")
+        var f1 = Color.parseColor("#FEFEFE")
     }
 
     fun setItemList(_itemList: MutableList<Carrier>) {
