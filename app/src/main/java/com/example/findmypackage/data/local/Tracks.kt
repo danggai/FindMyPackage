@@ -22,27 +22,10 @@ data class Tracks (
         val text: String,
     )
 
-    data class Progress(
-        val time: String,
-        val location: Location,
-        val status: Status,
-        val description: String,
-    )
-
     data class Carrier(
         val id: String,
         val name: String,
         val tel: String?
     )
-
-    data class Location(
-        val name: String,
-    )
-
-    data class Status(
-        val id: String,
-        val text: String,
-    )
-
 
 }
