@@ -1,0 +1,142 @@
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+        <variable
+            name="vm"
+            type="com.example.findmypackage.ui.track.detail.TrackDetailViewModel"/>
+        <variable
+            name="item"
+            type="com.example.findmypackage.data.local.Progress"/>
+    </data>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="25dp"
+            android:layout_height="match_parent"
+            >
+
+            <View
+                android:id="@+id/line_top"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintVertical_weight="1"
+                android:background="@drawable/dotted_line_vertical"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/line_bottom"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                />
+
+            <View
+                android:id="@+id/line_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintVertical_weight="1"
+                android:background="@drawable/dotted_line_vertical"
+                app:layout_constraintTop_toBottomOf="@id/line_top"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:background="@drawable/marker_timeline"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_gravity="center_vertical"
+            app:cardBackgroundColor="@color/f2"
+            app:contentPadding="8dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="5dp"
+                >
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TextView"
+                    android:id="@+id/tv_location_name"
+                    android:hint="@string/location"
+                    android:textColor="@color/b1"
+                    android:textSize="13dp"
+                    tools:text="@{item.location.name}"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TextView"
+                    android:id="@+id/tv_time"
+                    android:hint="@string/time"
+                    android:textSize="10dp"
+                    android:textColor="@color/b1"
+                    tools:text="=@{item.time}"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_location_name"
+                    app:layout_constraintRight_toRightOf="parent"
+                    />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TextView"
+                    android:id="@+id/tv_status"
+                    android:hint="@string/now_status"
+                    android:textSize="17dp"
+                    android:textColor="@color/b1"
+                    android:textStyle="bold"
+                    tools:text="@{item.status.text}"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TextView"
+                    android:id="@+id/tv_description"
+                    android:hint="@string/description"
+                    android:textSize="12dp"
+                    android:textColor="@color/b1"
+                    android:layout_marginTop="8dp"
+                    tools:text="@{item.description}"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_status"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    />
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+</layout>

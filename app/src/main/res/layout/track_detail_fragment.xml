@@ -12,171 +12,213 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/f1"
+            android:background="@color/c1"
             android:orientation="vertical"
             >
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:layout_marginHorizontal="15dp"
+                android:weightSum="10"
                 >
 
                 <TextView
                     style="@style/EditText"
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
                     android:text="택배사"
-                    android:textColor="@color/c1"
+                    android:textColor="@color/f1"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     style="@style/EditText"
-                    android:id="@+id/tv_carrier_name"
-                    android:textColor="@color/c1"
+                    android:layout_width="0dp"
+                    android:layout_weight="7"
+                    android:textColor="@color/f1"
                     android:text="@{vm.lvTrackEntity.carrierName}"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintLeft_toRightOf="parent"
                     />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="15dp"
+                android:weightSum="10"
                 >
 
                 <TextView
                     style="@style/EditText"
-                    android:textColor="@color/c1"
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
                     android:text="운송장번호"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    />
-
-                <TextView
-                    style="@style/EditText"
-                    android:id="@+id/tv_track_id"
-                    android:textColor="@color/c1"
-                    android:text="@{vm.lvTrackEntity.trackId}"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                >
-
-                <TextView
-                    style="@style/EditText"
-                    android:textColor="@color/c1"
-                    android:text="상품명"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    />
-
-                <TextView
-                    style="@style/EditText"
-                    android:id="@+id/tv_item_name"
-                    android:textColor="@color/c1"
-                    android:text="@{vm.lvTrackEntity.itemName}"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                >
-
-                <TextView
-                    style="@style/EditText"
-                    android:text="받는 사람"
-                    android:textColor="@color/c1"
+                    android:textColor="@color/f1"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     style="@style/EditText"
-                    android:id="@+id/tv_to_name"
-                    android:textColor="@color/c1"
+                    android:layout_width="0dp"
+                    android:layout_weight="7"
+                    android:textColor="@color/f1"
+                    android:text="@{vm.lvTrackEntity.trackId}"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="parent"
+                    />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:weightSum="10"
+                >
+
+                <TextView
+                    style="@style/EditText"
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:text="상품명"
+                    android:textColor="@color/f1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    style="@style/EditText"
+                    android:layout_width="0dp"
+                    android:layout_weight="7"
+                    android:textColor="@color/f1"
+                    android:text="@{vm.lvTrackEntity.itemName}"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="parent"
+                    />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:weightSum="10"
+                >
+
+                <TextView
+                    style="@style/EditText"
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:text="받는 사람"
+                    android:textColor="@color/f1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    style="@style/EditText"
+                    android:layout_width="0dp"
+                    android:layout_weight="7"
+                    android:textColor="@color/f1"
                     android:text="@{vm.lvTrackData.To.name}"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintLeft_toRightOf="parent"
                     />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="15dp"
+                android:weightSum="10"
                 >
 
                 <TextView
                     style="@style/EditText"
-                    android:textColor="@color/c1"
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
                     android:text="보내는 사람"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:textColor="@color/f1"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     style="@style/EditText"
-                    android:id="@+id/tv_from_name"
-                    android:textColor="@color/c1"
+                    android:layout_width="0dp"
+                    android:layout_weight="7"
                     android:text="@{vm.lvTrackData.From.name}"
+                    android:textColor="@color/f1"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintLeft_toRightOf="parent"
                     />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="15dp"
+                android:weightSum="10"
                 >
 
                 <TextView
                     style="@style/EditText"
-                    android:textColor="@color/c1"
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
                     android:text="배송 상태"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:textColor="@color/f1"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     style="@style/EditText"
-                    android:id="@+id/tv_state_text"
-                    android:textColor="@color/c1"
+                    android:layout_width="0dp"
+                    android:layout_weight="7"
                     android:text="@{vm.lvTrackData.state.text}"
+                    android:textColor="@color/f1"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintLeft_toRightOf="parent"
                     />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/f1"
+                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="15dp"
+                />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/f1"
+                app:stackFromEnd="true"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                items="@{vm.lvTrackData.progresses}"
+                viewModel="@{vm}"
+                />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

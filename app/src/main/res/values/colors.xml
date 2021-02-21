@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="b1">#FF000000</color>
+    <color name="b1">#000000</color>
+    <color name="b2">#777777</color>
 
     <color name="c1">#8AAAE5</color>
 
     <color name="f1">#FEFEFE</color>
-    <color name="f2">#aaaaaa</color>
+    <color name="f2">#F0F0F0</color>
+    <color name="f3">#aaaaaa</color>
 
     <color name="transparent">#00ffffff</color>
 

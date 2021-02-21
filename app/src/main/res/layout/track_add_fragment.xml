@@ -27,10 +27,12 @@
                 items="@{vm.lvCarrierList}"
                 />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/cl_body"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/f1"
                 >
 
                 <androidx.appcompat.widget.AppCompatEditText
@@ -41,28 +43,27 @@
                     android:text="@={vm.lvItemName}"
                     android:textSize="18sp"
                     android:textColor="@color/c1"
-                    android:textColorHint="@color/f2"
+                    android:textColorHint="@color/f3"
                     android:hint="@string/item_name"
-                    android:background="@color/f1"
-                    app:layout_constraintVertical_chainStyle="packed"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toTopOf="@id/tv_track_id"
-                    app:layout_constraintLeft_toLeftOf="parent" />
+                    android:background="@color/f1" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/c1"
+                    android:layout_marginHorizontal="20dp"
+                    />
 
                 <androidx.appcompat.widget.AppCompatEditText
                     style="@style/EditText.MatchWrap"
                     android:id="@+id/tv_track_id"
-                    android:layout_marginTop="1dp"
                     android:paddingVertical="10dp"
                     android:text="@={vm.lvTrackId}"
                     android:textSize="18sp"
                     android:textColor="@color/c1"
-                    android:textColorHint="@color/f2"
+                    android:textColorHint="@color/f3"
                     android:hint="@string/track_id"
-                    android:background="@color/f1"
-                    app:layout_constraintTop_toBottomOf="@id/tv_item_name"
-                    app:layout_constraintBottom_toTopOf="@id/btn_search"
-                    app:layout_constraintLeft_toLeftOf="parent" />
+                    android:background="@color/f1" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     style="@style/EditText.MatchWrap"
@@ -72,12 +73,9 @@
                     android:textSize="20sp"
                     android:textColor="@color/f1"
                     android:background="@color/c1"
-                    android:onClick="@{(v)->vm.onClick(v)}"
-                    app:layout_constraintTop_toBottomOf="@id/tv_track_id"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent" />
+                    android:onClick="@{(v)->vm.onClick(v)}" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
