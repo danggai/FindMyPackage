@@ -9,6 +9,7 @@ import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
+import com.example.findmypackage.Constant
 import com.example.findmypackage.R
 import com.example.findmypackage.data.local.Progress
 import com.example.findmypackage.databinding.ItemProgressBinding
@@ -29,9 +30,6 @@ class TrackDetailAdapter(private val viewModel: TrackDetailViewModel) : Recycler
         var f2 = Color.parseColor("#F0F0F0")
         var b1 = Color.parseColor("#000000")
         var b2 = Color.parseColor("#777777")
-
-        val beforeFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX")
-        val afterFormat = SimpleDateFormat("yyyy-MM-dd HH:mm")
     }
 
     fun setItemList(_itemList: MutableList<Progress>) {
@@ -48,8 +46,8 @@ class TrackDetailAdapter(private val viewModel: TrackDetailViewModel) : Recycler
     }
 
     private fun convertDateString(string: String): String {
-        val beforeDate: Date? = beforeFormat.parse(string)
-        beforeDate?.let { return afterFormat.format(it) }
+        val beforeDate: Date? = SimpleDateFormat(Constant.DATE_FORMAT_BEFORE).parse(string)
+        beforeDate?.let { return SimpleDateFormat(Constant.DATE_FORMAT_AFTER).format(it) }
         return "날짜 정보가 없습니다."
     }
 

@@ -16,6 +16,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class TrackAddViewModel(override val app: Application, private val api: ApiRepository, private val dao: TrackDao) : BaseViewModel(app) {
@@ -48,12 +50,13 @@ class TrackAddViewModel(override val app: Application, private val api: ApiRepos
                     when (res.meta.code) {
                         Constant.META_CODE_SUCCESS -> {
                             lvStartDetailAct.value = true
-                            rxDaoInsert.onNext(TrackEntity(lvTrackId.value?:"0", lvItemName.value?:getString(R.string.unknown_item),  res.data.from.name,  res.data.carrier.id, res.data.carrier.name, null, null))
+                            val dateStr = SimpleDateFormat(Constant.DATE_FORMAT_BEFORE).format(Date())
+                            rxDaoInsert.onNext(TrackEntity(lvTrackId.value?:"0", lvItemName.value?:getString(R.string.unknown_item),  res.data.from.name,  res.data.carrier.id, res.data.carrier.name, dateStr, res.data.state.id))
                         }
                         Constant.META_CODE_BAD_REQUEST,
                         Constant.META_CODE_NOT_FOUND,
                         Constant.META_CODE_SERVER_ERROR -> {
-
+                            lvMakeToast.value = getString(R.string.msg_network_error)
                         }
                         else -> {
 
