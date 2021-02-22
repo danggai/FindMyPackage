@@ -3,6 +3,7 @@ package com.example.findmypackage.ui.main
 import android.app.Application
 import android.view.View
 import androidx.lifecycle.MutableLiveData
+import com.example.findmypackage.Constant
 import com.example.findmypackage.R
 import com.example.findmypackage.data.AppSession
 import com.example.findmypackage.data.api.ApiRepository
@@ -18,14 +19,19 @@ import io.reactivex.subjects.PublishSubject
 
 class MainViewModel(override val app: Application, private val api: ApiRepository, private val dao: TrackDao) : BaseViewModel(app) {
 
-    var lvStartAddAct: MutableLiveData<Boolean> = MutableLiveData()
+    var lvStartAddAct: MutableLiveData<Boolean> = MutableLiveData(false)
     var lvStartDetailAct: MutableLiveData<TrackEntity> = MutableLiveData()
+    var lvIsRefresh: MutableLiveData<Boolean> = MutableLiveData(false)
 
     private val rxApiCarrier: PublishSubject<Boolean> = PublishSubject.create()
+    private val rxApiCarrierTracks: PublishSubject<Pair<String, String>> = PublishSubject.create()
     private val rxDaoSelectAll: PublishSubject<Boolean> = PublishSubject.create()
+    private val rxDaoUpdate: PublishSubject<TrackEntity> = PublishSubject.create()
 
     private var _lvMyTracksList: MutableLiveData<List<TrackEntity>> = MutableLiveData(listOf())
     val lvMyTracksList = _lvMyTracksList
+
+    private var lvRefreshStack: MutableLiveData<MutableList<Boolean>> = MutableLiveData(mutableListOf())
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -57,6 +63,39 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
                     }, {
                         it.message?.let { msg -> log.e(msg) }
                     })
+                , rxDaoUpdate
+                    .observeOn(Schedulers.newThread())
+                    .subscribe ({ item ->
+                        dao.update(item)
+                    }, {
+                        it.message?.let { msg -> log.e(msg) }
+                    })
+                , rxApiCarrierTracks
+                    .observeOn(Schedulers.newThread())
+                    .switchMap {
+                        api.carriersTracks(it.first, it.second)
+                    }
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({ res ->
+                        when (res.meta.code) {
+                            Constant.META_CODE_SUCCESS -> {
+                                checkRefreshing()
+//                                res.data.
+//                                var item = TrackEntity(data.first)
+//                                rxDaoUpdate.onNext(res.data)
+                            }
+                            Constant.META_CODE_BAD_REQUEST,
+                            Constant.META_CODE_NOT_FOUND,
+                            Constant.META_CODE_SERVER_ERROR -> {
+                                checkRefreshing()
+                            }
+                            else -> {
+                                checkRefreshing()
+                            }
+                        }
+                    }, {
+                        it.message?.let { msg -> log.e(msg) }
+                    })
         )
     }
 
@@ -79,6 +118,21 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
 
     fun onClickItem(item: TrackEntity) {
         lvStartDetailAct.value = item
+    }
+
+    fun refreshAll() {
+        for (item in _lvMyTracksList.value!!) {
+            log.e(item)
+            if (item.recentStatus != Constant.STATE_DELIVERY_COMPLETE) {
+                lvRefreshStack.value?.add(true)
+                rxApiCarrierTracks.onNext(Pair(item.carrierId, item.trackId))
+            }
+        }
+    }
+
+    private fun checkRefreshing() {
+        lvRefreshStack.value?.remove(true)
+        if (lvRefreshStack.value?.size == 0) lvIsRefresh.value = false
     }
 
 }
