@@ -3,6 +3,7 @@ package com.example.findmypackage.ui.track.detail
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import com.example.findmypackage.Constant
+import com.example.findmypackage.R
 import com.example.findmypackage.ui.base.BaseViewModel
 import com.example.findmypackage.data.api.ApiRepository
 import com.example.findmypackage.data.db.track.TrackDao
@@ -44,13 +45,11 @@ class TrackDetailViewModel(override val app: Application, private val api: ApiRe
                         Constant.META_CODE_BAD_REQUEST,
                         Constant.META_CODE_NOT_FOUND,
                         Constant.META_CODE_SERVER_ERROR -> {
-
+                            lvMakeToast.value = getString(R.string.msg_network_error)
                         }
                         else -> {
 
                         }
-
-
                     }
                 }, {
                     it.message?.let { msg -> log.e(msg) }

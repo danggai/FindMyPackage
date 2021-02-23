@@ -87,6 +87,7 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
                             Constant.META_CODE_BAD_REQUEST,
                             Constant.META_CODE_NOT_FOUND,
                             Constant.META_CODE_SERVER_ERROR -> {
+                                lvMakeToast.value = getString(R.string.msg_network_error)
                                 checkRefreshing()
                             }
                             else -> {

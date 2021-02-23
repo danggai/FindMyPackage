@@ -13,6 +13,7 @@
 
     <string name="msg_track_id_empty">운송장 번호를 입력해주세요.</string>
     <string name="msg_carrier_empty">조회 하실 택배사를 선택해주세요.</string>
+    <string name="msg_network_error">존재하지 않는 운송장 번호거나, 네트워크 오류가 발생했습니다.</string>
     <string name="empty_track_list">저장 된 운송장 번호가 없습니다.</string>
     <string name="empty_progress_list">운송 정보를 가져오는 중입니다.</string>
 </resources>
