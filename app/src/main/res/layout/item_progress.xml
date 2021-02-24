@@ -84,7 +84,6 @@
                 android:padding="5dp"
                 >
 
-
                 <androidx.appcompat.widget.AppCompatTextView
                     style="@style/TextView"
                     android:id="@+id/tv_location_name"
@@ -130,8 +129,6 @@
                     app:layout_constraintTop_toBottomOf="@+id/tv_status"
                     app:layout_constraintLeft_toLeftOf="parent"
                     />
-
-
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

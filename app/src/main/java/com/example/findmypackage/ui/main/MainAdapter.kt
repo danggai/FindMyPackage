@@ -5,11 +5,14 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
+import com.example.findmypackage.Constant
 import com.example.findmypackage.R
 import com.example.findmypackage.data.db.track.TrackEntity
 import com.example.findmypackage.databinding.ItemTrackBinding
 import com.example.findmypackage.databinding.ItemTrackEmptyBinding
 import com.example.findmypackage.ui.main.MainViewModel
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MainAdapter(private val viewModel: MainViewModel) : RecyclerView.Adapter<MainAdapter.ItemViewHolder>() {
 
@@ -29,6 +32,13 @@ class MainAdapter(private val viewModel: MainViewModel) : RecyclerView.Adapter<M
         }
         notifyDataSetChanged()
     }
+
+    private fun convertDateString(string: String): String {
+        val beforeDate: Date? = SimpleDateFormat(Constant.DATE_FORMAT_BEFORE).parse(string)
+        beforeDate?.let { return SimpleDateFormat(Constant.DATE_FORMAT_AFTER).format(it) }
+        return "날짜 정보가 없습니다."
+    }
+
     override fun getItemCount(): Int {
         return mDataSet.size
     }
@@ -55,8 +65,10 @@ class MainAdapter(private val viewModel: MainViewModel) : RecyclerView.Adapter<M
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         when (holder.binding) {
             is ItemTrackBinding -> {
-                holder.binding.item = mDataSet[position] as TrackEntity
+                val item = mDataSet[position] as TrackEntity
+                holder.binding.item = item
                 holder.binding.vm = viewModel
+                holder.binding.tvTime.text = item.recentTime?.let {convertDateString(item.recentTime)}
             }
             is ItemTrackEmptyBinding -> {
                 holder.binding.vm = viewModel
