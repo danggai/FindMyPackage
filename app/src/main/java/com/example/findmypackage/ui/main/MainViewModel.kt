@@ -79,10 +79,11 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
                     .subscribe({ res ->
                         when (res.meta.code) {
                             Constant.META_CODE_SUCCESS -> {
+                                log.e(res.data)
+                                rxDaoUpdate.onNext(
+                                    TrackEntity(res.trackId, "", res.data.from.name, res.data.carrier.id, res.data.carrier.name, res.data.progresses[res.data.progresses.size-1].time, res.data.state.text)
+                                )
                                 checkRefreshing()
-//                                res.data.
-//                                var item = TrackEntity(data.first)
-//                                rxDaoUpdate.onNext(res.data)
                             }
                             Constant.META_CODE_BAD_REQUEST,
                             Constant.META_CODE_NOT_FOUND,
