@@ -14,6 +14,7 @@ import com.example.findmypackage.R
 import com.example.findmypackage.data.local.Progress
 import com.example.findmypackage.databinding.ItemProgressBinding
 import com.example.findmypackage.databinding.ItemProgressEmptyBinding
+import com.example.findmypackage.util.CommonFuntion
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -45,12 +46,6 @@ class TrackDetailAdapter(private val viewModel: TrackDetailViewModel) : Recycler
         notifyDataSetChanged()
     }
 
-    private fun convertDateString(string: String): String {
-        val beforeDate: Date? = SimpleDateFormat(Constant.DATE_FORMAT_BEFORE).parse(string)
-        beforeDate?.let { return SimpleDateFormat(Constant.DATE_FORMAT_AFTER).format(it) }
-        return "날짜 정보가 없습니다."
-    }
-
     override fun getItemViewType(position: Int): Int {
         return when (mDataSet[position]) {
             is Progress -> TYPE_PROGRESS_ITEM
@@ -78,7 +73,7 @@ class TrackDetailAdapter(private val viewModel: TrackDetailViewModel) : Recycler
 
                 holder.binding.item = item
                 holder.binding.vm = viewModel
-                holder.binding.tvTime.text = convertDateString(item.time)
+                holder.binding.tvTime.text = CommonFuntion.convertDateString(item.time)
                 when (position) {
                     0 -> {
                         holder.binding.cvBody.setBackgroundColor(f1)

@@ -11,6 +11,7 @@ import com.example.findmypackage.data.api.ApiRepository
 import com.example.findmypackage.data.db.track.TrackDao
 import com.example.findmypackage.data.db.track.TrackEntity
 import com.example.findmypackage.data.local.Carrier
+import com.example.findmypackage.util.CommonFuntion
 import com.example.findmypackage.util.log
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -50,8 +51,7 @@ class TrackAddViewModel(override val app: Application, private val api: ApiRepos
                     when (res.meta.code) {
                         Constant.META_CODE_SUCCESS -> {
                             lvStartDetailAct.value = true
-                            val dateStr = SimpleDateFormat(Constant.DATE_FORMAT_BEFORE).format(Date())
-                            rxDaoInsert.onNext(TrackEntity(lvTrackId.value?:"0", lvItemName.value?:getString(R.string.item_name_empty),  res.data.from.name,  res.data.carrier.id, res.data.carrier.name, dateStr, res.data.state.id))
+                            rxDaoInsert.onNext(TrackEntity(lvTrackId.value?:"0", lvItemName.value?:getString(R.string.item_name_empty),  res.data.from.name,  res.data.carrier.id, res.data.carrier.name, CommonFuntion.now(), res.data.state.text))
                         }
                         Constant.META_CODE_BAD_REQUEST,
                         Constant.META_CODE_NOT_FOUND,

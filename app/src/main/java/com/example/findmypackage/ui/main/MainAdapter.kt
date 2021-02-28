@@ -11,6 +11,7 @@ import com.example.findmypackage.data.db.track.TrackEntity
 import com.example.findmypackage.databinding.ItemTrackBinding
 import com.example.findmypackage.databinding.ItemTrackEmptyBinding
 import com.example.findmypackage.ui.main.MainViewModel
+import com.example.findmypackage.util.CommonFuntion
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -31,12 +32,6 @@ class MainAdapter(private val viewModel: MainViewModel) : RecyclerView.Adapter<M
             mDataSet.add(EmptyItem())
         }
         notifyDataSetChanged()
-    }
-
-    private fun convertDateString(string: String): String {
-        val beforeDate: Date? = SimpleDateFormat(Constant.DATE_FORMAT_BEFORE).parse(string)
-        beforeDate?.let { return SimpleDateFormat(Constant.DATE_FORMAT_AFTER).format(it) }
-        return "날짜 정보가 없습니다."
     }
 
     override fun getItemCount(): Int {
@@ -68,7 +63,7 @@ class MainAdapter(private val viewModel: MainViewModel) : RecyclerView.Adapter<M
                 val item = mDataSet[position] as TrackEntity
                 holder.binding.item = item
                 holder.binding.vm = viewModel
-                holder.binding.tvTime.text = item.recentTime?.let {convertDateString(item.recentTime)}
+                holder.binding.tvTime.text = item.recentTime?.let {CommonFuntion.convertDateString(item.recentTime)}
             }
             is ItemTrackEmptyBinding -> {
                 holder.binding.vm = viewModel
