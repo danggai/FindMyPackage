@@ -171,36 +171,6 @@
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:weightSum="10"
-                >
-
-                <TextView
-                    style="@style/EditText"
-                    android:layout_width="0dp"
-                    android:layout_weight="3"
-                    android:text="배송 상태"
-                    android:textColor="@color/f1"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    style="@style/EditText"
-                    android:layout_width="0dp"
-                    android:layout_weight="7"
-                    android:text="@{vm.lvTrackData.state.text}"
-                    android:textColor="@color/f1"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toRightOf="parent"
-                    />
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
