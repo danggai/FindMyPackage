@@ -6,6 +6,7 @@ import androidx.annotation.LayoutRes
 import androidx.lifecycle.Observer
 import com.example.findmypackage.BindingFragment
 import com.example.findmypackage.R
+import com.example.findmypackage.data.rxbus.RxBusMainRefresh
 import com.example.findmypackage.databinding.MainFragmentBinding
 import com.example.findmypackage.ui.track.add.TrackAddActivity
 import com.example.findmypackage.ui.track.detail.TrackDetailActivity
@@ -24,6 +25,19 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
     @LayoutRes
     override fun getLayoutResId() = R.layout.main_fragment
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        retainInstance = true
+
+        RxBusMainRefresh.getSubject()?.let { event ->
+            event.subscribe {
+                log.e()
+                if (it) mVM?.getAllTrackList()
+            }
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.vm = getViewModel()
@@ -38,10 +52,9 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
         initLv()
     }
 
-    override fun onResume() {
-        super.onResume()
-        log.e()
-        mVM.getAllTrackList()
+    override fun onDestroy() {
+        super.onDestroy()
+        RxBusMainRefresh.release()
     }
 
     private fun initUi() {
@@ -60,4 +73,5 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
             activity?.let {act -> TrackDetailActivity.normalStart(act, item)}
         })
     }
+
 }

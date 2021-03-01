@@ -6,6 +6,7 @@ import androidx.annotation.LayoutRes
 import androidx.lifecycle.Observer
 import com.example.findmypackage.BindingFragment
 import com.example.findmypackage.R
+import com.example.findmypackage.data.rxbus.RxBusMainRefresh
 import com.example.findmypackage.databinding.TrackAddFragmentBinding
 import com.example.findmypackage.extension.onlyEngNum
 import com.example.findmypackage.ui.track.detail.TrackDetailActivity
@@ -48,6 +49,7 @@ class TrackAddFragment : BindingFragment<TrackAddFragmentBinding>() {
                 log.e()
                 activity?.let { act ->
                     TrackDetailActivity.normalStart(act, mVM.lvTrackId.value!! )
+                    RxBusMainRefresh.getSubject()?.onNext(true)
                     act.finish()
                 }
             }
