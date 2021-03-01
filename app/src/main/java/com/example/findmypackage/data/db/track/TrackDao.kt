@@ -12,6 +12,9 @@ interface TrackDao {
     @Query("SELECT DISTINCT * FROM Track WHERE trackId = :id")
     fun selectById(id: String): Observable<TrackEntity>
 
+    @Query("SELECT DISTINCT item_name FROM Track WHERE trackId = :id")
+    fun selectItemNameById(id: String): String
+
     @Query("DELETE FROM Track WHERE trackId = :id")
     fun deleteById(id: String)
 

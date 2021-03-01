@@ -34,9 +34,9 @@ class ApiRepository(private val api: ApiInterface) {
             .map { res ->
                 when {
                     res.isSuccessful -> {
-                        ResTracks(Meta(res.code(), res.message()), res.body()?:emptyData)
+                        ResTracks(Meta(res.code(), res.message()), res.body()?:emptyData, trackId)
                     } else -> {
-                        ResTracks(Meta(res.code(), res.message()), emptyData)
+                        ResTracks(Meta(res.code(), res.message()), emptyData, trackId)
                     }
                 }
             }

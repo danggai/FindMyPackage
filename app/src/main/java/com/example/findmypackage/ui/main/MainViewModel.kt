@@ -66,7 +66,9 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
                 , rxDaoUpdate
                     .observeOn(Schedulers.newThread())
                     .subscribe ({ item ->
-                        dao.update(item)
+                        dao.update(
+                            TrackEntity(item.trackId, dao.selectItemNameById(item.trackId), item.fromName, item.carrierId, item.carrierName, item.recentTime, item.recentStatus)
+                        )
                     }, {
                         it.message?.let { msg -> log.e(msg) }
                     })
