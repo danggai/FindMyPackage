@@ -12,7 +12,6 @@ import com.example.findmypackage.data.db.track.TrackEntity
 import com.example.findmypackage.ui.base.BaseViewModel
 import com.example.findmypackage.util.log
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 
@@ -33,74 +32,72 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
 
     private var lvRefreshStack: MutableLiveData<MutableList<Boolean>> = MutableLiveData(mutableListOf())
 
-    private val compositeDisposable = CompositeDisposable()
-
     init {
-        compositeDisposable
-            .addAll(
-                rxApiCarrier
-                    .observeOn(Schedulers.newThread())
-                    .filter { it }
-                    .switchMap {
-                        api.carriers()
-                    }
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe ({ res ->
-                        AppSession.setCarrierList(res)
-                    }, {
-                        it.message?.let { msg -> log.e(msg) }
-                    })
-                , rxDaoSelectAll
-                    .observeOn(Schedulers.newThread())
-                    .filter { it }
-                    .switchMap {
-                        dao.selectAll()
-                    }
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe ({ items ->
-                        _lvMyTracksList.value = items
-                        log.e(items)
-                    }, {
-                        it.message?.let { msg -> log.e(msg) }
-                    })
-                , rxDaoUpdate
-                    .observeOn(Schedulers.newThread())
-                    .subscribe ({ item ->
-                        dao.update(
-                            TrackEntity(item.trackId, dao.selectItemNameById(item.trackId), item.fromName, item.carrierId, item.carrierName, item.recentTime, item.recentStatus)
+        rxApiCarrier
+            .observeOn(Schedulers.newThread())
+            .filter { it }
+            .switchMap {
+                api.carriers()
+            }
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe ({ res ->
+                AppSession.setCarrierList(res)
+            }, {
+                it.message?.let { msg -> log.e(msg) }
+            }).addCompositeDisposable()
+
+        rxDaoSelectAll
+            .observeOn(Schedulers.newThread())
+            .filter { it }
+            .switchMap {
+                dao.selectAll()
+            }
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe ({ items ->
+                _lvMyTracksList.value = items
+                log.e(items)
+            }, {
+                it.message?.let { msg -> log.e(msg) }
+            }).addCompositeDisposable()
+
+        rxDaoUpdate
+            .observeOn(Schedulers.newThread())
+            .subscribe ({ item ->
+                dao.update(
+                    TrackEntity(item.trackId, dao.selectItemNameById(item.trackId), item.fromName, item.carrierId, item.carrierName, item.recentTime, item.recentStatus)
+                )
+            }, {
+                it.message?.let { msg -> log.e(msg) }
+            }).addCompositeDisposable()
+
+        rxApiCarrierTracks
+            .observeOn(Schedulers.newThread())
+            .switchMap {
+                api.carriersTracks(it.first, it.second)
+            }
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ res ->
+                when (res.meta.code) {
+                    Constant.META_CODE_SUCCESS -> {
+                        log.e(res.data)
+                        rxDaoUpdate.onNext(
+                            TrackEntity(res.trackId, "", res.data.from.name, res.data.carrier.id, res.data.carrier.name, res.data.progresses[res.data.progresses.size-1].time, res.data.state.text)
                         )
-                    }, {
-                        it.message?.let { msg -> log.e(msg) }
-                    })
-                , rxApiCarrierTracks
-                    .observeOn(Schedulers.newThread())
-                    .switchMap {
-                        api.carriersTracks(it.first, it.second)
+                        checkRefreshing()
                     }
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({ res ->
-                        when (res.meta.code) {
-                            Constant.META_CODE_SUCCESS -> {
-                                log.e(res.data)
-                                rxDaoUpdate.onNext(
-                                    TrackEntity(res.trackId, "", res.data.from.name, res.data.carrier.id, res.data.carrier.name, res.data.progresses[res.data.progresses.size-1].time, res.data.state.text)
-                                )
-                                checkRefreshing()
-                            }
-                            Constant.META_CODE_BAD_REQUEST,
-                            Constant.META_CODE_NOT_FOUND,
-                            Constant.META_CODE_SERVER_ERROR -> {
-                                lvMakeToast.value = getString(R.string.msg_network_error)
-                                checkRefreshing()
-                            }
-                            else -> {
-                                checkRefreshing()
-                            }
-                        }
-                    }, {
-                        it.message?.let { msg -> log.e(msg) }
-                    })
-        )
+                    Constant.META_CODE_BAD_REQUEST,
+                    Constant.META_CODE_NOT_FOUND,
+                    Constant.META_CODE_SERVER_ERROR -> {
+                        lvMakeToast.value = getString(R.string.msg_network_error)
+                        checkRefreshing()
+                    }
+                    else -> {
+                        checkRefreshing()
+                    }
+                }
+            }, {
+                it.message?.let { msg -> log.e(msg) }
+            }).addCompositeDisposable()
     }
 
     fun getAllTrackList() {

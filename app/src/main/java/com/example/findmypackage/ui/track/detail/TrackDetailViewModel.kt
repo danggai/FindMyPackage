@@ -11,7 +11,6 @@ import com.example.findmypackage.data.db.track.TrackEntity
 import com.example.findmypackage.data.local.Tracks
 import com.example.findmypackage.util.log
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 
@@ -25,49 +24,45 @@ class TrackDetailViewModel(override val app: Application, private val api: ApiRe
     var lvTrackEntity: MutableLiveData<TrackEntity> = MutableLiveData(TrackEntity("","","","","","",""))
     var lvTrackData: MutableLiveData<Tracks> = MutableLiveData(Tracks(Tracks.From("",""), Tracks.To("",""), Tracks.State("",""), listOf(), Tracks.Carrier("","","")))
 
-    private val compositeDisposable = CompositeDisposable()
-
     init {
-        compositeDisposable.addAll(
-            rxApiCarrierTracks
-                .observeOn(Schedulers.newThread())
-                .switchMap {
-                    log.e()
-                    api.carriersTracks(it.first, it.second)
-                }
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ res ->
-                    log.e(res)
-                    when (res.meta.code) {
-                        Constant.META_CODE_SUCCESS -> {
-                            lvTrackData.value = res.data
-                        }
-                        Constant.META_CODE_BAD_REQUEST,
-                        Constant.META_CODE_NOT_FOUND,
-                        Constant.META_CODE_SERVER_ERROR -> {
-                            lvMakeToast.value = getString(R.string.msg_network_error)
-                        }
-                        else -> {
-
-                        }
+        rxApiCarrierTracks
+            .observeOn(Schedulers.newThread())
+            .switchMap {
+                log.e()
+                api.carriersTracks(it.first, it.second)
+            }
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ res ->
+                log.e(res)
+                when (res.meta.code) {
+                    Constant.META_CODE_SUCCESS -> {
+                        lvTrackData.value = res.data
                     }
-                }, {
-                    it.message?.let { msg -> log.e(msg) }
-                })
-            , rxDaoSelect
-                .observeOn(Schedulers.newThread())
-                .switchMap { trackId ->
-                    dao.selectById(trackId)
-                }
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe ({ item ->
-                    lvTrackEntity.value = item
-                    rxApiCarrierTracks.onNext(Pair(item.carrierId, item.trackId))
-                }, {
-                    it.message?.let { msg -> log.e(msg) }
-                })
-        )
+                    Constant.META_CODE_BAD_REQUEST,
+                    Constant.META_CODE_NOT_FOUND,
+                    Constant.META_CODE_SERVER_ERROR -> {
+                        lvMakeToast.value = getString(R.string.msg_network_error)
+                    }
+                    else -> {
 
+                    }
+                }
+            }, {
+                it.message?.let { msg -> log.e(msg) }
+            }).addCompositeDisposable()
+
+        rxDaoSelect
+            .observeOn(Schedulers.newThread())
+            .switchMap { trackId ->
+                dao.selectById(trackId)
+            }
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe ({ item ->
+                lvTrackEntity.value = item
+                rxApiCarrierTracks.onNext(Pair(item.carrierId, item.trackId))
+            }, {
+                it.message?.let { msg -> log.e(msg) }
+            }).addCompositeDisposable()
     }
 
     fun initUi(trackId: String) {
