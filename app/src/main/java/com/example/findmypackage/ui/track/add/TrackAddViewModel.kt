@@ -11,13 +11,10 @@ import com.example.findmypackage.data.api.ApiRepository
 import com.example.findmypackage.data.db.track.TrackDao
 import com.example.findmypackage.data.db.track.TrackEntity
 import com.example.findmypackage.data.local.Carrier
-import com.example.findmypackage.util.CommonFuntion
 import com.example.findmypackage.util.log
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
-import java.text.SimpleDateFormat
-import java.util.*
 
 
 class TrackAddViewModel(override val app: Application, private val api: ApiRepository, private val dao: TrackDao) : BaseViewModel(app) {

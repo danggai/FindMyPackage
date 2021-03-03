@@ -3,7 +3,6 @@ package com.example.findmypackage.data.api
 import com.example.findmypackage.data.local.Carrier
 import com.example.findmypackage.data.local.Tracks
 import com.example.findmypackage.data.res.*
-import com.example.findmypackage.util.log
 import io.reactivex.Observable
 
 class ApiRepository(private val api: ApiInterface) {
