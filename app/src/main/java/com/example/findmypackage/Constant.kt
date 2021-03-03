@@ -8,6 +8,8 @@ object Constant {
     const val META_CODE_NOT_FOUND = 404
     const val META_CODE_SERVER_ERROR = 500
 
+    const val PATTERN_ENG_NUM_ONLY = "^[a-zA-Z0-9]+$"
+
     const val STATE_DELIVERY_COMPLETE = "delivered"
 
     const val DATE_FORMAT_BEFORE = "yyyy-MM-dd'T'HH:mm:ssX"
