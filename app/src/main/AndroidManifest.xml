@@ -14,7 +14,8 @@
         android:theme="@style/Theme.FindMyPackage"
         >
 
-        <activity android:name=".ui.main.MainActivity"
+        <activity
+            android:name=".ui.main.MainActivity"
             android:launchMode="singleTask" >
 
             <intent-filter>
@@ -24,13 +25,23 @@
 
         </activity>
 
-        <activity android:name="com.example.findmypackage.ui.track.add.TrackAddActivity"
+        <activity
+            android:name="com.example.findmypackage.ui.track.add.TrackAddActivity"
             android:windowSoftInputMode="adjustResize"
             android:launchMode="singleTop" />
 
-        <activity android:name="com.example.findmypackage.ui.track.detail.TrackDetailActivity"
+        <activity
+            android:name="com.example.findmypackage.ui.track.detail.TrackDetailActivity"
             android:windowSoftInputMode="adjustResize"
             android:launchMode="singleTop" />
+
+        <service
+            android:name="com.example.findmypackage.util.MyNotificationListenerService"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService"/>
+            </intent-filter>
+        </service>
 
     </application>
 
