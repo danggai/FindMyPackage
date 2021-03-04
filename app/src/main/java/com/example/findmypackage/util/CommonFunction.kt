@@ -4,13 +4,13 @@ import com.example.findmypackage.Constant
 import java.text.SimpleDateFormat
 import java.util.*
 
-object CommonFuntion {
+object CommonFunction {
 
     fun now(): String {
         return SimpleDateFormat(Constant.DATE_FORMAT_BEFORE).format(Date())
     }
 
-    fun convertStateString(string: String): String {
+    fun convertState(string: String): String {
         TODO()
         when (string) {
 
@@ -23,6 +23,4 @@ object CommonFuntion {
         beforeDate?.let { return SimpleDateFormat(Constant.DATE_FORMAT_AFTER).format(it) }
         return "날짜 정보가 없습니다."
     }
-
-
 }

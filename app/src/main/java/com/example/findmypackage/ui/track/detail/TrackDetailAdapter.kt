@@ -9,14 +9,11 @@ import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import com.example.findmypackage.Constant
 import com.example.findmypackage.R
 import com.example.findmypackage.data.local.Progress
 import com.example.findmypackage.databinding.ItemProgressBinding
 import com.example.findmypackage.databinding.ItemProgressEmptyBinding
-import com.example.findmypackage.util.CommonFuntion
-import java.text.SimpleDateFormat
-import java.util.*
+import com.example.findmypackage.util.CommonFunction
 
 
 class TrackDetailAdapter(private val viewModel: TrackDetailViewModel) : RecyclerView.Adapter<TrackDetailAdapter.ItemViewHolder>() {
@@ -73,7 +70,7 @@ class TrackDetailAdapter(private val viewModel: TrackDetailViewModel) : Recycler
 
                 holder.binding.item = item
                 holder.binding.vm = viewModel
-                holder.binding.tvTime.text = CommonFuntion.convertDateString(item.time)
+                holder.binding.tvTime.text = CommonFunction.convertDateString(item.time)
                 when (position) {
                     0 -> {
                         holder.binding.cvBody.setBackgroundColor(f1)

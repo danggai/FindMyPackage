@@ -5,15 +5,11 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import com.example.findmypackage.Constant
 import com.example.findmypackage.R
 import com.example.findmypackage.data.db.track.TrackEntity
 import com.example.findmypackage.databinding.ItemTrackBinding
 import com.example.findmypackage.databinding.ItemTrackEmptyBinding
-import com.example.findmypackage.ui.main.MainViewModel
-import com.example.findmypackage.util.CommonFuntion
-import java.text.SimpleDateFormat
-import java.util.*
+import com.example.findmypackage.util.CommonFunction
 
 class MainAdapter(private val viewModel: MainViewModel) : RecyclerView.Adapter<MainAdapter.ItemViewHolder>() {
 
@@ -63,7 +59,7 @@ class MainAdapter(private val viewModel: MainViewModel) : RecyclerView.Adapter<M
                 val item = mDataSet[position] as TrackEntity
                 holder.binding.item = item
                 holder.binding.vm = viewModel
-                holder.binding.tvTime.text = item.recentTime?.let {CommonFuntion.convertDateString(item.recentTime)}
+                holder.binding.tvTime.text = item.recentTime?.let {CommonFunction.convertDateString(item.recentTime)}
             }
             is ItemTrackEmptyBinding -> {
                 holder.binding.vm = viewModel
