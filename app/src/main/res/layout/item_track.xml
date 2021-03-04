@@ -13,82 +13,116 @@
             type="com.example.findmypackage.data.db.track.TrackEntity"/>
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_item"
+    <com.chauthai.swipereveallayout.SwipeRevealLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:background="@color/c1"
-        android:paddingHorizontal="10dp"
-        android:paddingVertical="15dp"
-        android:onClick="@{()->vm.onClickItem(item)}"
-        >
+        android:background="@color/b1"
+        app:mode="same_level"
+        app:dragEdge="right">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            style="@style/TextView"
-            android:layout_width="230dp"
-            android:id="@+id/tv_item_name"
-            android:hint="@string/item_name_empty"
-            android:gravity="start"
-            android:text="@{item.itemName}"
-            android:textSize="24dp"
-            android:textColor="@color/f1"
-            android:textStyle="bold"
-            android:singleLine="true"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent" />
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:background="@color/c2"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:onClick="@{()->vm.onClickDelete(item)}"
+            >
 
-        <androidx.appcompat.widget.AppCompatTextView
-            style="@style/TextView"
-            android:id="@+id/tv_carrier_name"
-            android:hint="@string/carrier_name"
-            android:gravity="start"
-            android:text="@{item.carrierName}"
-            android:textSize="14dp"
-            android:textColor="@color/f1"
-            android:textIsSelectable="true"
-            app:layout_constraintTop_toBottomOf="@id/tv_item_name"
-            app:layout_constraintLeft_toLeftOf="parent"/>
+            <ImageView
+                android:layout_gravity="center"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/icon_trash"
+                />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            style="@style/TextView"
-            android:id="@+id/tv_track_id"
-            android:hint="@string/track_id"
-            android:gravity="start"
-            android:text="@{item.trackId}"
-            android:textColor="@color/f1"
-            android:textIsSelectable="true"
-            app:layout_constraintTop_toBottomOf="@id/tv_carrier_name"
-            app:layout_constraintLeft_toLeftOf="parent"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <androidx.appcompat.widget.AppCompatTextView
-            style="@style/TextView"
-            android:id="@+id/tv_status"
-            android:hint="@string/now_status_empty"
-            android:gravity="end"
-            android:textSize="18dp"
-            android:textColor="@color/f1"
-            android:textStyle="bold"
-            tools:text="@{item.recentStatus}"
-            app:layout_constraintVertical_chainStyle="packed"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/tv_time"
-            />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            style="@style/TextView"
-            android:id="@+id/tv_time"
-            android:hint="@string/recent_time_empty"
-            android:gravity="end"
-            android:textColor="@color/f1"
-            android:textSize="13dp"
-            tools:text="=@{item.recentTime}"
-            app:layout_constraintTop_toBottomOf="@id/tv_status"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/c1"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="15dp"
+                android:onClick="@{()->vm.onClickItem(item)}"
+                >
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TextView"
+                    android:layout_width="230dp"
+                    android:id="@+id/tv_item_name"
+                    android:hint="@string/item_name_empty"
+                    android:gravity="start"
+                    android:text="@{item.itemName}"
+                    android:textSize="24dp"
+                    android:textColor="@color/f1"
+                    android:textStyle="bold"
+                    android:singleLine="true"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TextView"
+                    android:id="@+id/tv_carrier_name"
+                    android:hint="@string/carrier_name"
+                    android:gravity="start"
+                    android:text="@{item.carrierName}"
+                    android:textSize="14dp"
+                    android:textColor="@color/f1"
+                    android:textIsSelectable="true"
+                    app:layout_constraintTop_toBottomOf="@id/tv_item_name"
+                    app:layout_constraintLeft_toLeftOf="parent"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TextView"
+                    android:id="@+id/tv_track_id"
+                    android:hint="@string/track_id"
+                    android:gravity="start"
+                    android:text="@{item.trackId}"
+                    android:textColor="@color/f1"
+                    android:textIsSelectable="true"
+                    app:layout_constraintTop_toBottomOf="@id/tv_carrier_name"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TextView"
+                    android:id="@+id/tv_status"
+                    android:hint="@string/now_status_empty"
+                    android:gravity="end"
+                    android:textSize="18dp"
+                    android:textColor="@color/f1"
+                    android:textStyle="bold"
+                    tools:text="@{item.recentStatus}"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/tv_time"
+                    />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TextView"
+                    android:id="@+id/tv_time"
+                    android:hint="@string/recent_time_empty"
+                    android:gravity="end"
+                    android:textColor="@color/f1"
+                    android:textSize="13dp"
+                    tools:text="=@{item.recentTime}"
+                    app:layout_constraintTop_toBottomOf="@id/tv_status"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </FrameLayout>
+
+    </com.chauthai.swipereveallayout.SwipeRevealLayout>
 
 </layout>

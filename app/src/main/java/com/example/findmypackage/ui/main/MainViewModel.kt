@@ -26,6 +26,7 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
     private val rxApiCarrierTracks: PublishSubject<Pair<String, String>> = PublishSubject.create()
     private val rxDaoSelectAll: PublishSubject<Boolean> = PublishSubject.create()
     private val rxDaoUpdate: PublishSubject<TrackEntity> = PublishSubject.create()
+    private val rxDaoDelete: PublishSubject<TrackEntity> = PublishSubject.create()
 
     private var _lvMyTracksList: MutableLiveData<List<TrackEntity>> = MutableLiveData(listOf())
     val lvMyTracksList = _lvMyTracksList
@@ -66,6 +67,15 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
                 dao.update(
                     TrackEntity(item.trackId, dao.selectItemNameById(item.trackId), item.fromName, item.carrierId, item.carrierName, item.recentTime, item.recentStatus)
                 )
+            }, {
+                it.message?.let { msg -> log.e(msg) }
+            }).addCompositeDisposable()
+
+        rxDaoDelete
+            .observeOn(Schedulers.newThread())
+            .subscribe({ item ->
+                dao.deleteById(item.trackId)
+                rxDaoSelectAll.onNext(true)
             }, {
                 it.message?.let { msg -> log.e(msg) }
             }).addCompositeDisposable()
@@ -118,7 +128,13 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
     }
 
     fun onClickItem(item: TrackEntity) {
+        log.e()
         lvStartDetailAct.value = item
+    }
+
+    fun onClickDelete(item: TrackEntity) {
+        log.e()
+        rxDaoDelete.onNext(item)
     }
 
     fun refreshAll() {

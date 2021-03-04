@@ -4,13 +4,11 @@
     <color name="b2">#777777</color>
 
     <color name="c1">#8AAAE5</color>
+    <color name="c2">#dd8AAAE5</color>
 
     <color name="f1">#FEFEFE</color>
     <color name="f2">#F0F0F0</color>
     <color name="f3">#aaaaaa</color>
 
     <color name="transparent">#00ffffff</color>
-
-
-
 </resources>
