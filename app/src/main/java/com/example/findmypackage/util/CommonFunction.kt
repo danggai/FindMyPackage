@@ -18,6 +18,17 @@ object CommonFunction {
         return ""
     }
 
+    fun getTrackId(string: String): String {
+        if (string.contains("송장")) {
+            for (line in string.split("\n")) {
+                if (line.contains("송장")) {
+                    return line.replace(Regex(Constant.PATTERN_NUM_ONLY), "")
+                }
+            }
+        }
+        return ""
+    }
+
     fun convertDateString(string: String): String {
         val beforeDate: Date? = SimpleDateFormat(Constant.DATE_FORMAT_BEFORE).parse(string)
         beforeDate?.let { return SimpleDateFormat(Constant.DATE_FORMAT_AFTER).format(it) }

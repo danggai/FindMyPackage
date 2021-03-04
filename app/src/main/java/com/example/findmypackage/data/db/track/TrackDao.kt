@@ -19,7 +19,10 @@ interface TrackDao {
     fun deleteById(id: String)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(item: TrackEntity)
+    fun insertWithReplace(item: TrackEntity)
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun insertWithIgnore(item: TrackEntity)
 
     @Update(onConflict = OnConflictStrategy.ABORT)
     fun update(item: TrackEntity)

@@ -65,7 +65,7 @@ class TrackAddViewModel(override val app: Application, private val api: ApiRepos
         rxDaoInsert
             .observeOn(Schedulers.newThread())
             .subscribe ({ item ->
-                dao.insert(item)
+                dao.insertWithReplace(item)
                 log.e(item)
             }, {
                 it.message?.let { msg -> log.e(msg) }
