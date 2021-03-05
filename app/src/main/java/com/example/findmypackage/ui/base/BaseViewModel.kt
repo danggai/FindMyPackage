@@ -11,6 +11,7 @@ open class BaseViewModel(open val app: Application) : ViewModel() {
     private val compositeDisposable = CompositeDisposable()
 
     var lvMakeToast: MutableLiveData<String> = MutableLiveData("")
+    var lvCopyClipboard: MutableLiveData<String> = MutableLiveData("")
 
     fun getString(resId: Int): String {
         return app.getString(resId)

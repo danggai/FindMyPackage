@@ -87,8 +87,18 @@
                     android:text="@{item.trackId}"
                     android:textColor="@color/f1"
                     android:textIsSelectable="true"
+                    android:onClick="@{() -> vm.onClickTrackId(item)}"
                     app:layout_constraintTop_toBottomOf="@id/tv_carrier_name"
                     app:layout_constraintLeft_toLeftOf="parent"
+                    />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="@color/f1"
+                    app:layout_constraintLeft_toLeftOf="@id/tv_track_id"
+                    app:layout_constraintRight_toRightOf="@id/tv_track_id"
+                    app:layout_constraintTop_toBottomOf="@id/tv_track_id"
                     />
 
                 <androidx.appcompat.widget.AppCompatTextView

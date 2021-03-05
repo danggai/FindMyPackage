@@ -132,6 +132,10 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
         lvStartDetailAct.value = item
     }
 
+    fun onClickTrackId(item: TrackEntity) {
+        lvCopyClipboard.value = item.trackId
+    }
+
     fun onClickDelete(item: TrackEntity) {
         log.e()
         rxDaoDelete.onNext(item)
