@@ -29,6 +29,7 @@ open class BaseFragment: Fragment() {
                 if (msg.isNotBlank()) makeToast(msg)
             }
         })
+
         lvCopyClipboard.observe(viewLifecycleOwner, Observer{ trackId ->
             activity?.let {
                 val clipboard = it.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager?

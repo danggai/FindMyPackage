@@ -17,7 +17,6 @@ import io.reactivex.subjects.PublishSubject
 
 class TrackDetailViewModel(override val app: Application, private val api: ApiRepository, private val dao: TrackDao)  : BaseViewModel(app) {
 
-    var lvTest: MutableLiveData<String> = MutableLiveData("")
     private val rxApiCarrierTracks: PublishSubject<Pair<String, String>> = PublishSubject.create()
     private val rxDaoSelect: PublishSubject<String> = PublishSubject.create()
 
