@@ -29,6 +29,24 @@ object CommonFunction {
         return ""
     }
 
+    fun getItemName(string: String): String {
+        val keywords: MutableList<String> = mutableListOf("상품명")
+        for (keyword in keywords) {
+            if (string.contains(keyword)) {
+                val substring = string.substring(string.lastIndexOf(keyword) + keyword.length + 1)
+                val tokens = substring.split(":", "\n")
+                log.e(tokens)
+                for (name in tokens) {
+                    if (name.length > keyword.length) {
+                        log.e(name)
+                        return name.trim()
+                    }
+                }
+            }
+        }
+        return "자동 등록 된 물건"
+    }
+
     fun convertDateString(string: String): String {
         val beforeDate: Date? = SimpleDateFormat(Constant.DATE_FORMAT_BEFORE).parse(string)
         beforeDate?.let { return SimpleDateFormat(Constant.DATE_FORMAT_AFTER).format(it) }

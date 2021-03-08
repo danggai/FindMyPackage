@@ -50,11 +50,12 @@ class MyNotificationListenerService: NotificationListenerService() {
 
             val carrierId: String = CarrierUtil.getCarrierId(text.toString())
             val trackId: String = CommonFunction.getTrackId(text.toString())
+            val itemName: String = CommonFunction.getItemName(text.toString())
 
             log.e("carrierId = $carrierId, trackId = $trackId")
             if ((trackId.length in 9..14 && CarrierUtil.checkCarrierId(carrierId))) {
                 rxDaoInsertWithIgnore.onNext(
-                    TrackEntity(trackId, "자동 등록 된 물건", "", carrierId, CarrierUtil.getCarrierName(carrierId), CommonFunction.now(), "")
+                    TrackEntity(trackId, itemName, "", carrierId, CarrierUtil.getCarrierName(carrierId), CommonFunction.now(), "")
                 )
             }
         }
