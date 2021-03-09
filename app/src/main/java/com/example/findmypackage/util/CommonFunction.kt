@@ -30,7 +30,7 @@ object CommonFunction {
     }
 
     fun getItemName(string: String): String {
-        val keywords: MutableList<String> = mutableListOf("상품명")
+        val keywords: MutableList<String> = mutableListOf("상품명", "물품명")
         for (keyword in keywords) {
             if (string.contains(keyword)) {
                 val substring = string.substring(string.lastIndexOf(keyword) + keyword.length + 1)

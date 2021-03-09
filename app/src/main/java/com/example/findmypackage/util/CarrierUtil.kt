@@ -9,6 +9,7 @@ object CarrierUtil {
         "Kuroneko Yamato" to "jp.yamato",
         "Japan Post" to "jp.yuubin",
         "CJ대한통운" to "kr.cjlogistics",
+        "대한통운" to "kr.cjlogistics",
         "CU 편의점택배" to "kr.cupost",
         "CUPost" to "kr.cupost",
         "GS Postbox택배" to "kr.cvsnet",
