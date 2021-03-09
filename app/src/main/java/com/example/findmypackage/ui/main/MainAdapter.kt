@@ -5,15 +5,19 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
+import com.chauthai.swipereveallayout.ViewBinderHelper
 import com.example.findmypackage.R
 import com.example.findmypackage.data.db.track.TrackEntity
 import com.example.findmypackage.databinding.ItemTrackBinding
 import com.example.findmypackage.databinding.ItemTrackEmptyBinding
 import com.example.findmypackage.util.CommonFunction
 
+
 class MainAdapter(private val viewModel: MainViewModel) : RecyclerView.Adapter<MainAdapter.ItemViewHolder>() {
 
     private var mDataSet = mutableListOf<Any>()
+
+    private val viewBinderHelper = ViewBinderHelper()
 
     companion object {
         const val TYPE_TRACK_ITEM = 0
@@ -60,6 +64,9 @@ class MainAdapter(private val viewModel: MainViewModel) : RecyclerView.Adapter<M
                 holder.binding.item = item
                 holder.binding.vm = viewModel
                 holder.binding.tvTime.text = item.recentTime?.let {CommonFunction.convertDateString(item.recentTime)}
+
+                viewBinderHelper.setOpenOnlyOne(true)
+                viewBinderHelper.bind(holder.binding.srl, item.trackId)
             }
             is ItemTrackEmptyBinding -> {
                 holder.binding.vm = viewModel

@@ -24,6 +24,7 @@
             android:background="@color/f1" />
 
         <com.chauthai.swipereveallayout.SwipeRevealLayout
+            android:id="@+id/srl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/b1"
@@ -96,7 +97,6 @@
                         android:gravity="start"
                         android:text="@{item.trackId}"
                         android:textColor="@color/f1"
-                        android:textIsSelectable="true"
                         android:onClick="@{() -> vm.onClickTrackId(item)}"
                         app:layout_constraintTop_toBottomOf="@id/tv_carrier_name"
                         app:layout_constraintLeft_toLeftOf="parent"
