@@ -143,7 +143,7 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
 
     fun refreshAll() {
         for (item in _lvMyTracksList.value!!) {
-            if (item.recentStatus != Constant.STATE_DELIVERY_COMPLETE) {
+            if (item.recentStatus?.contains(Constant.STATE_DELIVERY_COMPLETE) == false) {
                 lvRefreshStack.value?.add(true)
                 rxApiCarrierTracks.onNext(Pair(item.carrierId, item.trackId))
             }
