@@ -16,4 +16,10 @@ object Constant {
 
     const val DATE_FORMAT_BEFORE = "yyyy-MM-dd'T'HH:mm:ssX"
     const val DATE_FORMAT_AFTER = "yyyy-MM-dd HH:mm"
+
+    const val PUSH_CHANNEL_ID = "default"
+    const val PUSH_CHANNEL_NAME= "default"
+    const val PUSH_CHANNEL_DESC = "default"
+    const val PUSH_TITLE_NEW = "신규 운송장 추가"
+    const val PUSH_TITLE_EXIST = "운송장 갱신"
 }
