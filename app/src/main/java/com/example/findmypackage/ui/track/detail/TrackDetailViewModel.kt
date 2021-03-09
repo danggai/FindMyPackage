@@ -19,6 +19,7 @@ class TrackDetailViewModel(override val app: Application, private val api: ApiRe
 
     private val rxApiCarrierTracks: PublishSubject<Pair<String, String>> = PublishSubject.create()
     private val rxDaoSelect: PublishSubject<String> = PublishSubject.create()
+    private val rxDaoUpdate: PublishSubject<TrackEntity> = PublishSubject.create()
 
     var lvTrackEntity: MutableLiveData<TrackEntity> = MutableLiveData(TrackEntity("","","","","","",""))
     var lvTrackData: MutableLiveData<Tracks> = MutableLiveData(Tracks(Tracks.From("",""), Tracks.To("",""), Tracks.State("",""), listOf(), Tracks.Carrier("","","")))
@@ -36,6 +37,9 @@ class TrackDetailViewModel(override val app: Application, private val api: ApiRe
                 when (res.meta.code) {
                     Constant.META_CODE_SUCCESS -> {
                         lvTrackData.value = res.data
+                        rxDaoUpdate.onNext(
+                            TrackEntity(res.trackId, "", res.data.from.name, res.data.carrier.id, res.data.carrier.name, res.data.progresses[res.data.progresses.size-1].time, res.data.state.text)
+                        )
                     }
                     Constant.META_CODE_BAD_REQUEST,
                     Constant.META_CODE_NOT_FOUND,
@@ -59,6 +63,14 @@ class TrackDetailViewModel(override val app: Application, private val api: ApiRe
             .subscribe ({ item ->
                 lvTrackEntity.value = item
                 rxApiCarrierTracks.onNext(Pair(item.carrierId, item.trackId))
+            }, {
+                it.message?.let { msg -> log.e(msg) }
+            }).addCompositeDisposable()
+
+        rxDaoUpdate
+            .observeOn(Schedulers.newThread())
+            .subscribe ({ item ->
+                dao.update(TrackEntity(item.trackId, dao.selectItemNameById(item.trackId), item.fromName, item.carrierId, item.carrierName, item.recentTime, item.recentStatus))
             }, {
                 it.message?.let { msg -> log.e(msg) }
             }).addCompositeDisposable()
