@@ -133,6 +133,7 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
     }
 
     fun onClickTrackId(item: TrackEntity) {
+        log.e()
         lvCopyClipboard.value = item.trackId
     }
 

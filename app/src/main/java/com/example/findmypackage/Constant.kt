@@ -17,6 +17,8 @@ object Constant {
     const val DATE_FORMAT_BEFORE = "yyyy-MM-dd'T'HH:mm:ssX"
     const val DATE_FORMAT_AFTER = "yyyy-MM-dd HH:mm"
 
+    const val CLIPBOARD_LABEL_TRACK_ID = "track_id"
+
     const val PUSH_CHANNEL_ID = "default"
     const val PUSH_CHANNEL_NAME= "default"
     const val PUSH_CHANNEL_DESC = "default"

@@ -1,15 +1,13 @@
 package com.example.findmypackage.ui.base
 
-import android.app.Activity
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
-import android.content.Intent
+import android.content.*
+import android.content.ClipboardManager.OnPrimaryClipChangedListener
 import android.view.View
 import android.widget.Toast
-import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.content.MimeTypeFilter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.example.findmypackage.Constant
 import com.example.findmypackage.R
 
 open class BaseFragment: Fragment() {
@@ -24,19 +22,23 @@ open class BaseFragment: Fragment() {
 
     fun BaseViewModel.setCommonFun(view: View) {
 
-        lvMakeToast.observe(viewLifecycleOwner, Observer{ msg ->
+        lvMakeToast.observe(viewLifecycleOwner, Observer { msg ->
             activity?.let {
                 if (msg.isNotBlank()) makeToast(msg)
             }
         })
 
-        lvCopyClipboard.observe(viewLifecycleOwner, Observer{ trackId ->
+        lvCopyClipboard.observe(viewLifecycleOwner, Observer { trackId ->
             activity?.let {
-                val clipboard = it.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager?
-                val clip = ClipData.newPlainText("label", trackId)
-                clipboard?.setPrimaryClip(clip)
+                val clipboard: ClipboardManager = context!!.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+//                clipboard?.addPrimaryClipChangedListener {
+//                    if (clipboard.hasPrimaryClip() && clipboard.primaryClipDescription?.hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN) == true) {
+//                        makeToast(String.format(getString(R.string.msg_copy_complete), trackId))
+//                    }
+//                }
 
-                if (trackId.isNotBlank()) makeToast(String.format(getString(R.string.msg_copy_complete), trackId))
+                val clip = ClipData.newPlainText(Constant.CLIPBOARD_LABEL_TRACK_ID, trackId)
+                clipboard?.setPrimaryClip(clip)
             }
         })
 
