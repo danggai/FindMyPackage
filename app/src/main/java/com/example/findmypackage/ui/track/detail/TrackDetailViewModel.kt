@@ -10,6 +10,7 @@ import com.example.findmypackage.data.db.track.TrackDao
 import com.example.findmypackage.data.db.track.TrackEntity
 import com.example.findmypackage.data.local.Tracks
 import com.example.findmypackage.util.Event
+import com.example.findmypackage.util.NonNullMutableLiveData
 import com.example.findmypackage.util.log
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -25,8 +26,8 @@ class TrackDetailViewModel(override val app: Application, private val api: ApiRe
     private val rxDaoUpdate: PublishSubject<TrackEntity> = PublishSubject.create()
     private val rxDaoUpdateNameById: PublishSubject<Pair<String, String>> = PublishSubject.create()
 
-    var lvTrackEntity: MutableLiveData<TrackEntity> = MutableLiveData(TrackEntity("","","","","","",""))
-    var lvTrackData: MutableLiveData<Tracks> = MutableLiveData(Tracks(Tracks.From("",""), Tracks.To("",""), Tracks.State("",""), listOf(), Tracks.Carrier("","","")))
+    var lvTrackEntity: NonNullMutableLiveData<TrackEntity> = NonNullMutableLiveData(TrackEntity("","","","","","",""))
+    var lvTrackData: NonNullMutableLiveData<Tracks> = NonNullMutableLiveData(Tracks(Tracks.From("",""), Tracks.To("",""), Tracks.State("",""), listOf(), Tracks.Carrier("","","")))
 
     init {
         rxApiCarrierTracks
@@ -103,12 +104,12 @@ class TrackDetailViewModel(override val app: Application, private val api: ApiRe
 
     fun onClickItemName() {
         log.e()
-        lvModifyItemName.value = Event(lvTrackEntity.value!!.itemName)
+        lvModifyItemName.value = Event(lvTrackEntity.value.itemName)
     }
 
     fun updateItemName(name: String) {
         log.e()
-        rxDaoUpdateNameById.onNext(Pair(name, lvTrackEntity.value?.trackId?:""))
+        rxDaoUpdateNameById.onNext(Pair(name, lvTrackEntity.value.trackId))
     }
 
 }

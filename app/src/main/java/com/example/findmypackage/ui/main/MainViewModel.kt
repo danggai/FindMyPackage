@@ -2,7 +2,6 @@ package com.example.findmypackage.ui.main
 
 import android.app.Application
 import android.view.View
-import androidx.lifecycle.MutableLiveData
 import com.example.findmypackage.Constant
 import com.example.findmypackage.R
 import com.example.findmypackage.data.AppSession
@@ -10,6 +9,7 @@ import com.example.findmypackage.data.api.ApiRepository
 import com.example.findmypackage.data.db.track.TrackDao
 import com.example.findmypackage.data.db.track.TrackEntity
 import com.example.findmypackage.ui.base.BaseViewModel
+import com.example.findmypackage.util.NonNullMutableLiveData
 import com.example.findmypackage.util.log
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -18,9 +18,9 @@ import io.reactivex.subjects.PublishSubject
 
 class MainViewModel(override val app: Application, private val api: ApiRepository, private val dao: TrackDao) : BaseViewModel(app) {
 
-    var lvStartAddAct: MutableLiveData<Boolean> = MutableLiveData(false)
-    var lvStartDetailAct: MutableLiveData<TrackEntity> = MutableLiveData()
-    var lvIsRefresh: MutableLiveData<Boolean> = MutableLiveData(false)
+    var lvStartAddAct: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(false)
+    var lvStartDetailAct: NonNullMutableLiveData<TrackEntity> = NonNullMutableLiveData(TrackEntity("","","","","","",""))
+    var lvIsRefresh: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(false)
 
     private val rxApiCarrier: PublishSubject<Boolean> = PublishSubject.create()
     private val rxApiCarrierTracks: PublishSubject<Pair<String, String>> = PublishSubject.create()
@@ -28,10 +28,10 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
     private val rxDaoUpdate: PublishSubject<TrackEntity> = PublishSubject.create()
     private val rxDaoDelete: PublishSubject<TrackEntity> = PublishSubject.create()
 
-    private var _lvMyTracksList: MutableLiveData<List<TrackEntity>> = MutableLiveData(listOf())
+    private var _lvMyTracksList: NonNullMutableLiveData<List<TrackEntity>> = NonNullMutableLiveData(listOf())
     val lvMyTracksList = _lvMyTracksList
 
-    private var lvRefreshStack: MutableLiveData<MutableList<Boolean>> = MutableLiveData(mutableListOf())
+    private var lvRefreshStack: NonNullMutableLiveData<MutableList<Boolean>> = NonNullMutableLiveData(mutableListOf())
 
     init {
         rxApiCarrier
@@ -143,21 +143,21 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
     }
 
     fun refreshAll() {
-        for (item in _lvMyTracksList.value!!) {
+        for (item in _lvMyTracksList.value) {
             if (item.recentStatus?.contains(Constant.STATE_DELIVERY_COMPLETE) == false) {
-                lvRefreshStack.value?.add(true)
+                lvRefreshStack.value.add(true)
                 rxApiCarrierTracks.onNext(Pair(item.carrierId, item.trackId))
             }
         }
-        if (lvRefreshStack.value?.size?:0 == 0) {
+        if (lvRefreshStack.value.size == 0) {
             lvIsRefresh.value = false
             return
         }
     }
 
     private fun checkRefreshing() {
-        lvRefreshStack.value?.remove(true)
-        if (lvRefreshStack.value?.size == 0) lvIsRefresh.value = false
+        lvRefreshStack.value.remove(true)
+        if (lvRefreshStack.value.size == 0) lvIsRefresh.value = false
     }
 
 }
