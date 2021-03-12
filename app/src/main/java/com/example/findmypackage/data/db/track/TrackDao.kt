@@ -18,6 +18,9 @@ interface TrackDao {
     @Query("DELETE FROM Track WHERE trackId = :id")
     fun deleteById(id: String)
 
+    @Query("UPDATE Track SET item_name = :name WHERE trackId = :id")
+    fun updateNameById(name: String, id: String)
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertWithReplace(item: TrackEntity)
 

@@ -11,7 +11,6 @@ object Constant {
     const val PATTERN_ENG_NUM_ONLY = "^[a-zA-Z0-9]+$"
     const val PATTERN_NUM_ONLY = "[^\\d]"
 
-
     const val STATE_DELIVERY_COMPLETE = "완료"
 
     const val DATE_FORMAT_BEFORE = "yyyy-MM-dd'T'HH:mm:ssX"

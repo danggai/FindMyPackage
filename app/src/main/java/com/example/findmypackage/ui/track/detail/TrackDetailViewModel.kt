@@ -9,6 +9,7 @@ import com.example.findmypackage.data.api.ApiRepository
 import com.example.findmypackage.data.db.track.TrackDao
 import com.example.findmypackage.data.db.track.TrackEntity
 import com.example.findmypackage.data.local.Tracks
+import com.example.findmypackage.util.Event
 import com.example.findmypackage.util.log
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -17,9 +18,12 @@ import io.reactivex.subjects.PublishSubject
 
 class TrackDetailViewModel(override val app: Application, private val api: ApiRepository, private val dao: TrackDao)  : BaseViewModel(app) {
 
+    var lvModifyItemName = MutableLiveData<Event<String>>()
+
     private val rxApiCarrierTracks: PublishSubject<Pair<String, String>> = PublishSubject.create()
     private val rxDaoSelect: PublishSubject<String> = PublishSubject.create()
     private val rxDaoUpdate: PublishSubject<TrackEntity> = PublishSubject.create()
+    private val rxDaoUpdateNameById: PublishSubject<Pair<String, String>> = PublishSubject.create()
 
     var lvTrackEntity: MutableLiveData<TrackEntity> = MutableLiveData(TrackEntity("","","","","","",""))
     var lvTrackData: MutableLiveData<Tracks> = MutableLiveData(Tracks(Tracks.From("",""), Tracks.To("",""), Tracks.State("",""), listOf(), Tracks.Carrier("","","")))
@@ -70,7 +74,17 @@ class TrackDetailViewModel(override val app: Application, private val api: ApiRe
         rxDaoUpdate
             .observeOn(Schedulers.newThread())
             .subscribe ({ item ->
+                log.e(item)
                 dao.update(TrackEntity(item.trackId, dao.selectItemNameById(item.trackId), item.fromName, item.carrierId, item.carrierName, item.recentTime, item.recentStatus))
+            }, {
+                it.message?.let { msg -> log.e(msg) }
+            }).addCompositeDisposable()
+
+        rxDaoUpdateNameById
+            .observeOn(Schedulers.newThread())
+            .subscribe ({ item ->
+                log.e(item)
+                dao.updateNameById(name = item.first, id = item.second)
             }, {
                 it.message?.let { msg -> log.e(msg) }
             }).addCompositeDisposable()
@@ -85,6 +99,16 @@ class TrackDetailViewModel(override val app: Application, private val api: ApiRe
         log.e()
         lvTrackEntity.value = item
         rxApiCarrierTracks.onNext(Pair(item.carrierId, item.trackId))
+    }
+
+    fun onClickItemName() {
+        log.e()
+        lvModifyItemName.value = Event(lvTrackEntity.value!!.itemName)
+    }
+
+    fun updateItemName(name: String) {
+        log.e()
+        rxDaoUpdateNameById.onNext(Pair(name, lvTrackEntity.value?.trackId?:""))
     }
 
 }
