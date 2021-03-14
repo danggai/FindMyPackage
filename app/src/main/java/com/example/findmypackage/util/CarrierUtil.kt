@@ -9,15 +9,11 @@ object CarrierUtil {
         "Kuroneko Yamato" to "jp.yamato",
         "Japan Post" to "jp.yuubin",
         "CJ대한통운" to "kr.cjlogistics",
-        "대한통운" to "kr.cjlogistics",
         "CU 편의점택배" to "kr.cupost",
-        "CUPost" to "kr.cupost",
         "GS Postbox택배" to "kr.cvsnet",
-        "Postbox" to "kr.cvsnet",
         "CWAY" to "kr.cway",
         "대신택배" to "kr.daesin",
         "우체국택배" to "kr.epost",
-        "우체국" to "kr.epost",
         "한의사랑택배" to "kr.hanips",
         "한진택배" to "kr.hanjin",
         "합동택배" to "kr.hdexp",
@@ -34,7 +30,12 @@ object CarrierUtil {
         "EMS" to "un.upu.ems",
         "Fedex" to "us.fedex",
         "UPS" to "us.ups",
-        "USPS" to "us.usps"
+        "USPS" to "us.usps",
+        
+        "대한통운" to "kr.cjlogistics",
+        "CUPost" to "kr.cupost",
+        "Postbox" to "kr.cvsnet",
+        "우체국" to "kr.epost",
     )
 
     fun getCarrierId(string: String): String {
