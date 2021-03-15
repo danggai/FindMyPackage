@@ -42,7 +42,7 @@ class TrackDetailViewModel(override val app: Application, private val api: ApiRe
                     Constant.META_CODE_SUCCESS -> {
                         lvTrackData.value = res.data
                         rxDaoUpdate.onNext(
-                            TrackEntity(res.trackId, "", res.data.from.name, res.data.carrier.id, res.data.carrier.name, res.data.progresses[res.data.progresses.size-1].time, res.data.state.text)
+                            TrackEntity(lvTrackEntity.value.trackId, "", res.data.from.name, res.data.carrier.id, res.data.carrier.name, res.data.progresses[res.data.progresses.size-1].time, res.data.state.text)
                         )
                     }
                     Constant.META_CODE_BAD_REQUEST,

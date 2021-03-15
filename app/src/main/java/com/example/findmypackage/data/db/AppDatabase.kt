@@ -15,7 +15,7 @@ import com.example.findmypackage.data.db.track.TrackDao
  */
 @Database(entities = [TrackEntity::class], version = DB_VERSION, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun getTrackListDao(): TrackDao
+    abstract fun trackDao(): TrackDao
 
     companion object {
         const val DB_VERSION = 1

@@ -9,5 +9,5 @@ import org.koin.dsl.module
  */
 val RoomModule = module {
     single { AppDatabase.getInstance(androidApplication()) }
-    single(createdAtStart = true) { get<AppDatabase>().getTrackListDao() }
+    single(createdAtStart = true) { get<AppDatabase>().trackDao() }
 }

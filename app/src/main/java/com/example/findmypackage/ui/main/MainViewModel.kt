@@ -35,6 +35,8 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
 
     private var lvRefreshStack: NonNullMutableLiveData<MutableList<Boolean>> = NonNullMutableLiveData(mutableListOf())
 
+    private var _mTrackId: String = ""
+
     init {
         rxApiCarrier
             .observeOn(Schedulers.newThread())
@@ -85,6 +87,7 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
         rxApiCarrierTracks
             .observeOn(Schedulers.newThread())
             .switchMap {
+                _mTrackId = it.second
                 api.carriersTracks(it.first, it.second)
             }
             .observeOn(AndroidSchedulers.mainThread())
@@ -93,7 +96,7 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
                     Constant.META_CODE_SUCCESS -> {
                         log.e(res.data)
                         rxDaoUpdate.onNext(
-                            TrackEntity(res.trackId, "", res.data.from.name, res.data.carrier.id, res.data.carrier.name, res.data.progresses[res.data.progresses.size-1].time, res.data.state.text)
+                            TrackEntity(_mTrackId, "", res.data.from.name, res.data.carrier.id, res.data.carrier.name, res.data.progresses[res.data.progresses.size-1].time, res.data.state.text)
                         )
                         checkRefreshing()
                     }
