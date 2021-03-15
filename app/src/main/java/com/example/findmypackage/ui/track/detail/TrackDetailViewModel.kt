@@ -22,7 +22,6 @@ class TrackDetailViewModel(override val app: Application, private val api: ApiRe
     var lvModifyItemName = MutableLiveData<Event<String>>()
 
     private val rxApiCarrierTracks: PublishSubject<Pair<String, String>> = PublishSubject.create()
-    private val rxDaoSelect: PublishSubject<String> = PublishSubject.create()
     private val rxDaoUpdate: PublishSubject<TrackEntity> = PublishSubject.create()
     private val rxDaoUpdateNameById: PublishSubject<Pair<String, String>> = PublishSubject.create()
 
@@ -59,19 +58,6 @@ class TrackDetailViewModel(override val app: Application, private val api: ApiRe
                 it.message?.let { msg -> log.e(msg) }
             }).addCompositeDisposable()
 
-        rxDaoSelect
-            .observeOn(Schedulers.newThread())
-            .switchMap { trackId ->
-                dao.selectById(trackId)
-            }
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe ({ item ->
-                lvTrackEntity.value = item
-                rxApiCarrierTracks.onNext(Pair(item.carrierId, item.trackId))
-            }, {
-                it.message?.let { msg -> log.e(msg) }
-            }).addCompositeDisposable()
-
         rxDaoUpdate
             .observeOn(Schedulers.newThread())
             .subscribe ({ item ->
@@ -89,11 +75,6 @@ class TrackDetailViewModel(override val app: Application, private val api: ApiRe
             }, {
                 it.message?.let { msg -> log.e(msg) }
             }).addCompositeDisposable()
-    }
-
-    fun initUi(trackId: String) {
-        log.e()
-        rxDaoSelect.onNext(trackId)
     }
 
     fun initUi(item: TrackEntity) {
