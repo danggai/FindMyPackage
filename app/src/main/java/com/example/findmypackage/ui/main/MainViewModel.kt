@@ -2,6 +2,7 @@ package com.example.findmypackage.ui.main
 
 import android.app.Application
 import android.view.View
+import androidx.lifecycle.MutableLiveData
 import com.example.findmypackage.Constant
 import com.example.findmypackage.R
 import com.example.findmypackage.data.AppSession
@@ -9,6 +10,7 @@ import com.example.findmypackage.data.api.ApiRepository
 import com.example.findmypackage.data.db.track.TrackDao
 import com.example.findmypackage.data.db.track.TrackEntity
 import com.example.findmypackage.ui.base.BaseViewModel
+import com.example.findmypackage.util.Event
 import com.example.findmypackage.util.NonNullMutableLiveData
 import com.example.findmypackage.util.log
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -18,8 +20,8 @@ import io.reactivex.subjects.PublishSubject
 
 class MainViewModel(override val app: Application, private val api: ApiRepository, private val dao: TrackDao) : BaseViewModel(app) {
 
-    var lvStartAddAct: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(false)
-    var lvStartDetailAct: NonNullMutableLiveData<TrackEntity> = NonNullMutableLiveData(TrackEntity("","","","","","",""))
+    var lvStartAddAct = MutableLiveData<Event<Boolean>>()
+    var lvStartDetailAct = MutableLiveData<Event<TrackEntity>>()
     var lvIsRefresh: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(false)
 
     private val rxApiCarrier: PublishSubject<Boolean> = PublishSubject.create()
@@ -122,14 +124,14 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
     fun onClick(view: View) {
         when (view.id) {
             R.id.btn_add -> {
-                lvStartAddAct.value = true
+                lvStartAddAct.value = Event(true)
             }
         }
     }
 
     fun onClickItem(item: TrackEntity) {
         log.e()
-        lvStartDetailAct.value = item
+        lvStartDetailAct.value = Event(item)
     }
 
     fun onClickTrackId(item: TrackEntity) {

@@ -10,6 +10,7 @@ import com.example.findmypackage.data.rxbus.RxBusMainRefresh
 import com.example.findmypackage.databinding.MainFragmentBinding
 import com.example.findmypackage.ui.track.add.TrackAddActivity
 import com.example.findmypackage.ui.track.detail.TrackDetailActivity
+import com.example.findmypackage.util.EventObserver
 import com.example.findmypackage.util.log
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
@@ -62,13 +63,13 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
     }
 
     private fun initLv() {
-        mVM.lvStartAddAct.observe(viewLifecycleOwner, Observer{
+        mVM.lvStartAddAct.observe(viewLifecycleOwner, EventObserver{
             if (it) {
                 log.d()
                 activity?.let {act -> TrackAddActivity.normalStart(act)}
             }
         })
-        mVM.lvStartDetailAct.observe(viewLifecycleOwner, Observer{ item ->
+        mVM.lvStartDetailAct.observe(viewLifecycleOwner, EventObserver{ item ->
             log.d()
             activity?.let {act -> TrackDetailActivity.normalStart(act, item)}
         })

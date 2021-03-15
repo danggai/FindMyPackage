@@ -2,6 +2,7 @@ package com.example.findmypackage.ui.track.add
 
 import android.app.Application
 import android.view.View
+import androidx.lifecycle.MutableLiveData
 import com.example.findmypackage.Constant
 import com.example.findmypackage.R
 import com.example.findmypackage.ui.base.BaseViewModel
@@ -10,6 +11,7 @@ import com.example.findmypackage.data.api.ApiRepository
 import com.example.findmypackage.data.db.track.TrackDao
 import com.example.findmypackage.data.db.track.TrackEntity
 import com.example.findmypackage.data.local.Carrier
+import com.example.findmypackage.util.Event
 import com.example.findmypackage.util.NonNullMutableLiveData
 import com.example.findmypackage.util.log
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -19,7 +21,7 @@ import io.reactivex.subjects.PublishSubject
 
 class TrackAddViewModel(override val app: Application, private val api: ApiRepository, private val dao: TrackDao) : BaseViewModel(app) {
 
-    var lvStartDetailAct: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(false)
+    var lvStartDetailAct = MutableLiveData<Event<Boolean>>()
 
     var lvCarrierId: NonNullMutableLiveData<String> = NonNullMutableLiveData("")
     var lvTrackId: NonNullMutableLiveData<String> = NonNullMutableLiveData("")
@@ -44,7 +46,7 @@ class TrackAddViewModel(override val app: Application, private val api: ApiRepos
                 log.e(res)
                 when (res.meta.code) {
                     Constant.META_CODE_SUCCESS -> {
-                        lvStartDetailAct.value = true
+                        lvStartDetailAct.value = Event(true)
                         rxDaoInsert.onNext(
                             TrackEntity(lvTrackId.value, lvItemName.value,  res.data.from.name,  res.data.carrier.id, res.data.carrier.name, res.data.progresses[res.data.progresses.size-1].time, res.data.state.text)
                         )
