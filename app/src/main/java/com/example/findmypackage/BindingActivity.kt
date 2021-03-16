@@ -5,8 +5,9 @@ import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.example.findmypackage.ui.base.BaseActivity
 
-abstract class BindingActivity<T: ViewDataBinding> : AppCompatActivity() {
+abstract class BindingActivity<T: ViewDataBinding> : BaseActivity() {
     @LayoutRes
     abstract fun getLayoutResId(): Int
 
