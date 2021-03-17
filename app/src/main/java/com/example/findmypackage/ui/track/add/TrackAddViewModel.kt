@@ -33,7 +33,6 @@ class TrackAddViewModel(override val app: Application, private val api: ApiRepos
     private var _lvCarrierList: NonNullMutableLiveData<List<Carrier>> = NonNullMutableLiveData(listOf())
     val lvCarrierList = _lvCarrierList
 
-
     init {
         rxApiCarrierTracks
             .observeOn(Schedulers.newThread())

@@ -32,4 +32,6 @@
     <string name="msg_empty_track_list">저장 된 운송장 번호가 없어요.</string>
     <string name="msg_empty_progress_list">운송 정보를 가져오고 있어요.</string>
 
+    <string name="toast_back_button">한번 더 눌러서 앱을 종료해요.</string>
+
 </resources>
