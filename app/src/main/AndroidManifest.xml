@@ -27,6 +27,11 @@
         </activity>
 
         <activity
+            android:name="com.example.findmypackage.ui.setting.SettingActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:launchMode="singleTop" />
+
+        <activity
             android:name="com.example.findmypackage.ui.track.add.TrackAddActivity"
             android:windowSoftInputMode="adjustResize"
             android:launchMode="singleTop" />

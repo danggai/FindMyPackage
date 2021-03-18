@@ -69,6 +69,12 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
                 activity?.let {act -> TrackAddActivity.normalStart(act)}
             }
         })
+        mVM.lvStartSettingAct.observe(viewLifecycleOwner, EventObserver{
+            if (it) {
+                log.d()
+//                activity?.let {act -> TrackAddActivity.normalStart(act)}
+            }
+        })
         mVM.lvStartDetailAct.observe(viewLifecycleOwner, EventObserver{ item ->
             log.d()
             activity?.let {act -> TrackDetailActivity.normalStart(act, item)}

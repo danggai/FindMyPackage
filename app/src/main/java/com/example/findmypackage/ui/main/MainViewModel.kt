@@ -21,6 +21,7 @@ import io.reactivex.subjects.PublishSubject
 class MainViewModel(override val app: Application, private val api: ApiRepository, private val dao: TrackDao) : BaseViewModel(app) {
 
     var lvStartAddAct = MutableLiveData<Event<Boolean>>()
+    var lvStartSettingAct = MutableLiveData<Event<Boolean>>()
     var lvStartDetailAct = MutableLiveData<Event<TrackEntity>>()
     var lvIsRefresh: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(false)
 
@@ -128,6 +129,9 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
         when (view.id) {
             R.id.btn_add -> {
                 lvStartAddAct.value = Event(true)
+            }
+            R.id.btn_setting -> {
+                lvStartSettingAct.value = Event(true)
             }
         }
     }
