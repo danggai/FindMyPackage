@@ -128,9 +128,11 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
     fun onClick(view: View) {
         when (view.id) {
             R.id.btn_add -> {
+                log.e()
                 lvStartAddAct.value = Event(true)
             }
             R.id.btn_setting -> {
+                log.e()
                 lvStartSettingAct.value = Event(true)
             }
         }

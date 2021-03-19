@@ -8,6 +8,7 @@ import com.example.findmypackage.BindingFragment
 import com.example.findmypackage.R
 import com.example.findmypackage.data.rxbus.RxBusMainRefresh
 import com.example.findmypackage.databinding.MainFragmentBinding
+import com.example.findmypackage.ui.setting.SettingActivity
 import com.example.findmypackage.ui.track.add.TrackAddActivity
 import com.example.findmypackage.ui.track.detail.TrackDetailActivity
 import com.example.findmypackage.util.EventObserver
@@ -72,7 +73,7 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
         mVM.lvStartSettingAct.observe(viewLifecycleOwner, EventObserver{
             if (it) {
                 log.d()
-//                activity?.let {act -> TrackAddActivity.normalStart(act)}
+                activity?.let {act -> SettingActivity.normalStart(act)}
             }
         })
         mVM.lvStartDetailAct.observe(viewLifecycleOwner, EventObserver{ item ->
