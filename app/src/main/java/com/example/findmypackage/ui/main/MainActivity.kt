@@ -26,9 +26,6 @@ class MainActivity : BindingActivity<MainActivityBinding>() {
         super.onCreate(savedInstanceState)
         binding.lifecycleOwner = this
 
-        if (!isNotificationPermissionAllowed())
-            startActivity(Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS"));
-
         initFragment()
         initRx()
     }
@@ -37,13 +34,6 @@ class MainActivity : BindingActivity<MainActivityBinding>() {
         supportFragmentManager.beginTransaction()
             .add(R.id.fragment, MainFragment.newInstance(), MainFragment.TAG)
             .commit()
-    }
-
-    private fun isNotificationPermissionAllowed(): Boolean {
-        return NotificationManagerCompat.getEnabledListenerPackages(applicationContext)
-            .any { enabledPackageName ->
-                enabledPackageName == packageName
-            }
     }
 
     override fun onBackPressed() {

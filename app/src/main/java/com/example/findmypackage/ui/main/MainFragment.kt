@@ -1,5 +1,6 @@
 package com.example.findmypackage.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
@@ -35,9 +36,11 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
         RxBusMainRefresh.getSubject()?.let { event ->
             event.subscribe {
                 log.e()
-                if (it) mVM?.getAllTrackList()
+                if (it) mVM.getAllTrackList()
             }
         }
+
+        if (!isNotificationPermissionAllowed()) startActivity(Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS"));
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

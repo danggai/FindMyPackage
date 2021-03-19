@@ -4,6 +4,7 @@ import android.content.*
 import android.content.ClipboardManager.OnPrimaryClipChangedListener
 import android.view.View
 import android.widget.Toast
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.MimeTypeFilter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -18,6 +19,13 @@ open class BaseFragment: Fragment() {
 
     fun makeToast(msg: String) {
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+    }
+
+    fun isNotificationPermissionAllowed(): Boolean {
+        return NotificationManagerCompat.getEnabledListenerPackages(context!!)
+            .any { enabledPackageName ->
+                enabledPackageName == context?.packageName
+            }
     }
 
     fun BaseViewModel.setCommonFun(view: View) {
