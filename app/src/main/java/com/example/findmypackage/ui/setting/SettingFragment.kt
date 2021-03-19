@@ -5,14 +5,7 @@ import android.view.View
 import androidx.annotation.LayoutRes
 import com.example.findmypackage.BindingFragment
 import com.example.findmypackage.R
-import com.example.findmypackage.data.db.track.TrackEntity
-import com.example.findmypackage.data.rxbus.RxBusMainRefresh
 import com.example.findmypackage.databinding.SettingFragmentBinding
-import com.example.findmypackage.databinding.TrackAddFragmentBinding
-import com.example.findmypackage.extension.onlyEngNum
-import com.example.findmypackage.ui.track.detail.TrackDetailActivity
-import com.example.findmypackage.util.EventObserver
-import com.example.findmypackage.util.log
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class SettingFragment : BindingFragment<SettingFragmentBinding>() {
@@ -42,6 +35,7 @@ class SettingFragment : BindingFragment<SettingFragmentBinding>() {
     }
 
     private fun initUi() {
+        context?.let { mVM.lvIsAllowNotiPermission.value = isNotificationPermissionAllowed() }
     }
 
     private fun initLv() {
