@@ -40,7 +40,7 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
             }
         }
 
-        if (!isNotificationPermissionAllowed()) startActivity(Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS"));
+        if (!isNotificationPermissionAllowed()) startNotificationSetting()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

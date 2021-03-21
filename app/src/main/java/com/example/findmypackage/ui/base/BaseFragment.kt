@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.findmypackage.Constant
 import com.example.findmypackage.R
+import com.example.findmypackage.util.log
 
 open class BaseFragment: Fragment() {
 
@@ -18,14 +19,21 @@ open class BaseFragment: Fragment() {
     }
 
     fun makeToast(msg: String) {
+        log.e()
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
     }
 
     fun isNotificationPermissionAllowed(): Boolean {
+        log.e()
         return NotificationManagerCompat.getEnabledListenerPackages(context!!)
             .any { enabledPackageName ->
                 enabledPackageName == context?.packageName
             }
+    }
+
+    fun startNotificationSetting() {
+        log.e()
+        startActivity(Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS"))
     }
 
     fun BaseViewModel.setCommonFun(view: View) {
