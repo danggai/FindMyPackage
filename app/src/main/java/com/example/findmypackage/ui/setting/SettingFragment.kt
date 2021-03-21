@@ -3,9 +3,12 @@ package com.example.findmypackage.ui.setting
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
+import androidx.lifecycle.Observer
 import com.example.findmypackage.BindingFragment
 import com.example.findmypackage.R
 import com.example.findmypackage.databinding.SettingFragmentBinding
+import com.example.findmypackage.util.EventObserver
+import com.example.findmypackage.util.log
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class SettingFragment : BindingFragment<SettingFragmentBinding>() {
@@ -30,8 +33,12 @@ class SettingFragment : BindingFragment<SettingFragmentBinding>() {
             it.setCommonFun(view)
         }
 
-        initUi()
         initLv()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        initUi()
     }
 
     private fun initUi() {
@@ -39,6 +46,9 @@ class SettingFragment : BindingFragment<SettingFragmentBinding>() {
     }
 
     private fun initLv() {
-
+        mVM.lvStartNotiSetting.observe(viewLifecycleOwner, EventObserver { allowed ->
+            log.e()
+            startNotificationSetting()
+        })
     }
 }

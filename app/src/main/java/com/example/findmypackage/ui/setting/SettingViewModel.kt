@@ -21,14 +21,17 @@ import io.reactivex.subjects.PublishSubject
 
 class SettingViewModel(override val app: Application, private val api: ApiRepository, private val dao: TrackDao) : BaseViewModel(app) {
 
-    var lvIsAllowNotiPermission: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(false)         // denied: -1, granted: 0
+    var lvStartNotiSetting = MutableLiveData<Event<Boolean>>()
 
+    var lvIsAllowNotiPermission: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(false)         // denied: -1, granted: 0
 
     init {
 
     }
 
-    fun onClick(view: View) {
+    fun onClickNotiSwitch() {
+        log.e()
+        lvStartNotiSetting.value = Event(true)
     }
 
 }
