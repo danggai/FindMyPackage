@@ -103,6 +103,7 @@
                     android:gravity="right"
                     android:textSize="12sp"
                     android:textColor="@color/b1"
+                    android:layout_marginVertical="3dp"
                     tools:text="=@{item.time}"
                     app:layout_constraintTop_toBottomOf="@+id/tv_location_name"
                     app:layout_constraintRight_toRightOf="parent"
@@ -119,6 +120,7 @@
                     tools:text="@{item.status.text}"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/tv_description"
                     />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -126,11 +128,11 @@
                     android:id="@+id/tv_description"
                     android:hint="@string/description"
                     android:gravity="left"
-                    android:textSize="13sp"
+                    android:textSize="12sp"
                     android:textColor="@color/b1"
-                    android:layout_marginTop="6dp"
+                    android:layout_marginTop="2dp"
                     tools:text="@{item.description}"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_status"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_time"
                     app:layout_constraintLeft_toLeftOf="parent"
                     />
 
