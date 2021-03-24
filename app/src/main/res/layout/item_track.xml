@@ -59,7 +59,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/c1"
                     android:paddingHorizontal="15dp"
-                    android:paddingVertical="10dp"
+                    android:paddingVertical="12dp"
                     android:onClick="@{()->vm.onClickItem(item)}"
                     >
 

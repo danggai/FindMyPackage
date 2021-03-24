@@ -17,12 +17,12 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
+        android:paddingHorizontal="20dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="25dp"
             android:layout_height="match_parent"
+            android:layout_marginRight="20dp"
             >
 
             <View
@@ -41,13 +41,13 @@
                 android:id="@+id/line_bottom"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                app:layout_constraintVertical_weight="1"
                 android:background="@drawable/dotted_line_vertical"
-                app:layout_constraintTop_toBottomOf="@id/line_top"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                />
+                app:layout_constraintTop_toBottomOf="@id/line_top"
+                app:layout_constraintVertical_weight="1" />
 
             <View
                 android:layout_width="match_parent"
@@ -59,17 +59,13 @@
                 app:layout_constraintRight_toRightOf="parent"
                 />
 
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cv_body"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginVertical="12dp"
             android:layout_marginRight="5dp"
             android:layout_gravity="center_vertical"
             app:cardBackgroundColor="@color/f2"
