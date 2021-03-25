@@ -71,7 +71,7 @@ class MyNotificationListenerService: NotificationListenerService() {
     private fun sendNoti(item: TrackEntity) {
         log.e()
         val notificationManager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        val msg = "itemName = ${item.itemName}\ncarrierId = ${item.carrierId}\ntrackId = ${item.trackId}"
+        val msg = "${item.itemName} (${CarrierUtil.getCarrierName(item.carrierId)} ${item.trackId}) 이 자동 등록 되었습니다."
 
         var builder = NotificationCompat.Builder(this, Constant.PUSH_CHANNEL_ID)
             .setSmallIcon(R.drawable.icon_truck)
