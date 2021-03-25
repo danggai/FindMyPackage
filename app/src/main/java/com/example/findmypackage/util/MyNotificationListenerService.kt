@@ -1,9 +1,8 @@
 package com.example.findmypackage.util
 
-import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
+import android.app.*
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
@@ -13,6 +12,7 @@ import com.example.findmypackage.R
 import com.example.findmypackage.data.db.AppDatabase
 import com.example.findmypackage.data.db.track.TrackDao
 import com.example.findmypackage.data.db.track.TrackEntity
+import com.example.findmypackage.ui.track.detail.TrackDetailActivity
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
@@ -73,10 +73,19 @@ class MyNotificationListenerService: NotificationListenerService() {
         val notificationManager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val msg = "${item.itemName} (${CarrierUtil.getCarrierName(item.carrierId)} ${item.trackId}) 이 자동 등록 되었습니다."
 
+        val resultIntent = Intent(this, TrackDetailActivity::class.java)
+        resultIntent.putExtra(TrackDetailActivity.ARG_TRACK_ENTITY, item)
+        val resultPendingIntent: PendingIntent? = TaskStackBuilder.create(this).run {
+            addNextIntentWithParentStack(resultIntent)
+            getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
+        }
+
+
         var builder = NotificationCompat.Builder(this, Constant.PUSH_CHANNEL_ID)
             .setSmallIcon(R.drawable.icon_truck)
-            .setContentTitle(Constant.PUSH_TITLE_NEW)
             .setContentText(msg)
+            .setContentIntent(resultPendingIntent)
+            .setAutoCancel(true)
             .setStyle(NotificationCompat.BigTextStyle().bigText(msg))
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
