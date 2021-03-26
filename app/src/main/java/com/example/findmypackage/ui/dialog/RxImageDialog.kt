@@ -3,16 +3,15 @@ package com.example.findmypackage.ui.dialog
 import android.app.Activity
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.Drawable
 import android.view.Gravity
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentActivity
 import com.example.findmypackage.R
-import com.example.findmypackage.databinding.DialogDefaultBinding
 import com.example.findmypackage.util.log
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
+import kotlinx.android.synthetic.main.dialog_default.*
 
 class RxImageDialog(builder: Builder) {
 
@@ -21,16 +20,17 @@ class RxImageDialog(builder: Builder) {
     private var mMsg        = builder.msg
     private val mConfirm    = builder.confirm
     private val mCancel     = builder.cancel
-    private val mCancelable = builder.cancelable
+    private val mConfirmOnly= builder.confirmOnly
 
     private val mDialog = getDialog()
 
     private fun getDialog(): ImageDialog {
-        return ImageDialog(mActivity, mImage, mMsg, mConfirm, mCancel, mCancelable)
+        return ImageDialog(mActivity, mImage, mMsg, mConfirm, mCancel, mConfirmOnly)
     }
 
     fun show(): Observable<Boolean> {
         val result: PublishSubject<Boolean> = PublishSubject.create()
+        mDialog.setCancelable(false)
         mDialog.requestRx(result)
         try {
             mDialog.show()
@@ -46,39 +46,33 @@ class RxImageDialog(builder: Builder) {
                    internal val msg: String,
                    internal val confirm: String,
                    internal val cancel: String,
-                   internal val cancelable: Boolean) {
+                   internal val confirmOnly: Boolean) {
         fun build(): RxImageDialog = RxImageDialog(this)
     }
 }
 
 private class ImageDialog (
     mActivity: Activity,
-    private var mImage: Int,
-    private var mMsg: String,
-    private val mConfirm: String,
-    private val mCancel: String,
-    private val mCancelable: Boolean) : AlertDialog(mActivity) {
-
-    private lateinit var binding: DialogDefaultBinding
+    private var mImage      : Int,
+    private var mMsg        : String,
+    private val mConfirm    : String,
+    private val mCancel     : String,
+    private val mConfirmOnly: Boolean) : AlertDialog(mActivity) {
 
     private var mPublishSubject: PublishSubject<Boolean> ?= null
     private var mResult = false
-    private var mNegative = false
 
     override fun onCreate(savedInstanceState: android.os.Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = DialogDefaultBinding.inflate(layoutInflater)
-
         setContentView(R.layout.dialog_default)
         window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        setImage(mImage)
-        setMessage(mMsg)
-
-        val params = window!!. attributes
+        val params = window!!.attributes
         params.gravity = Gravity.CENTER
 
+        setMessage(mMsg)
+        setImage(mImage)
         controlBtn()
     }
 
@@ -93,37 +87,37 @@ private class ImageDialog (
 
     fun setMessage(msg: String) {
         mMsg = msg
-        binding.tvMessage?.let {
+        tv_message?.let {
             it.text = mMsg
         }
     }
 
     fun setImage(img: Int) {
         mImage = img
-        binding.ivImage?.let {
+        iv_image?.let {
             it.setImageResource(img)
         }
     }
 
     private fun controlBtn() {
-        if (!mCancelable) {
-            binding.tvCancel.visibility = View.GONE
-            binding.tvConfirm.visibility = View.VISIBLE
-            binding.tvConfirm.text = mConfirm
+        if (!mConfirmOnly) {
+            tv_cancel.visibility = View.GONE
+            tv_confirm.visibility = View.VISIBLE
 
-            binding.tvConfirm.setOnClickListener {
+            tv_confirm.text = mConfirm
+            tv_confirm.setOnClickListener {
                 mResult = true
                 dismiss()
             }
         } else {
-            binding.tvConfirm.text = mConfirm
-            binding.tvCancel.text = mCancel
-            binding.tvCancel.setOnClickListener {
-                mResult = false
+            tv_confirm.text = mConfirm
+            tv_confirm.setOnClickListener {
+                mResult = true
                 dismiss()
             }
-            binding.tvConfirm.setOnClickListener {
-                mResult = true
+            tv_cancel.text = mCancel
+            tv_cancel.setOnClickListener {
+                mResult = false
                 dismiss()
             }
         }

@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import com.example.findmypackage.BindingFragment
 import com.example.findmypackage.R
 import com.example.findmypackage.databinding.SettingFragmentBinding
+import com.example.findmypackage.ui.dialog.RxImageDialog
 import com.example.findmypackage.util.EventObserver
 import com.example.findmypackage.util.log
 import org.koin.androidx.viewmodel.ext.android.getViewModel
@@ -48,7 +49,11 @@ class SettingFragment : BindingFragment<SettingFragmentBinding>() {
     private fun initLv() {
         mVM.lvStartNotiSetting.observe(viewLifecycleOwner, EventObserver { allowed ->
             log.e()
-            startNotificationSetting()
+            activity?.let { act ->
+                val mRxImageDialog = RxImageDialog(RxImageDialog.Builder(act, R.drawable.access_allow_example, "메시지", "확인", "취소", false))
+                mRxImageDialog.show()
+            }
+//            startNotificationSetting()
         })
     }
 }
