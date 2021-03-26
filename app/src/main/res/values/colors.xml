@@ -2,6 +2,7 @@
 <resources>
     <color name="b1">#000000</color>
     <color name="b2">#777777</color>
+    <color name="b3">#dddddd</color>
 
     <color name="c1">#8AAAE5</color>
     <color name="c2">#dd8AAAE5</color>
