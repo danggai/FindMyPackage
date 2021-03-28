@@ -24,6 +24,7 @@
     <string name="dialog_name_change_toast_done">변경되었어요.</string>
     <string name="dialog_name_change_toast_fail">변경에 실패했어요.</string>
 
+    <string name="dialog_noti_allow_help">위와 같은 팝업이 나오면, 앱의 알림 접근 권한을 조정해주세요.</string>
 
     <!--    메세지    -->
     <string name="msg_track_id_empty">운송장 번호를 입력해주세요.</string>
