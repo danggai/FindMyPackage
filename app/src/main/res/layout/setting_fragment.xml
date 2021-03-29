@@ -31,7 +31,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="알람 설정"
+                    android:text="@string/notification_access"
                     android:textSize="16sp"
                     android:textColor="@color/c1"
                     app:layout_constraintLeft_toLeftOf="parent"

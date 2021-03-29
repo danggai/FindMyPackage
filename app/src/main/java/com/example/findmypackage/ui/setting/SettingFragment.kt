@@ -50,7 +50,7 @@ class SettingFragment : BindingFragment<SettingFragmentBinding>() {
         mVM.lvStartNotiSetting.observe(viewLifecycleOwner, EventObserver { allowed ->
             log.e()
             activity?.let { act ->
-                val mRxImageDialog = RxImageDialog(RxImageDialog.Builder(act, R.drawable.access_allow_example, getString(R.string.dialog_noti_allow_help), "확인", "취소", false))
+                val mRxImageDialog = RxImageDialog(RxImageDialog.Builder(act, R.drawable.access_allow_example, getString(R.string.dialog_noti_allow_help), getString(R.string.confirm), getString(R.string.cancel), false))
                 mRxImageDialog.show()
                     .subscribe {
                         if (it) startNotificationSetting()
