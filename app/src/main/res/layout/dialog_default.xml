@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -49,33 +49,51 @@
             android:layout_height="50dp"
             >
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_cancel"
+            <com.balysv.materialripple.MaterialRippleLayout
+                android:id="@+id/mr_cancel"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="@string/cancel"
-                android:textSize="18sp"
-                android:gravity="center"
-                android:background="@color/b3"
-                />
+                app:mrl_rippleOverlay="true"
+                app:mrl_rippleDuration="250" >
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_cancel"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:text="@string/cancel"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:background="@color/b3"
+                    />
+
+            </com.balysv.materialripple.MaterialRippleLayout>
 
             <Space
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_weight="0" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_confirm"
+            <com.balysv.materialripple.MaterialRippleLayout
+                android:id="@+id/mr_confirm"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="@string/confirm"
-                android:textSize="18sp"
-                android:textColor="@color/f1"
-                android:gravity="center"
-                android:background="@color/c1"
-                />
+                app:mrl_rippleOverlay="true"
+                app:mrl_rippleDuration="250" >
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_confirm"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:text="@string/confirm"
+                    android:textSize="18sp"
+                    android:textColor="@color/f1"
+                    android:gravity="center"
+                    android:background="@color/c1"
+                    />
+
+            </com.balysv.materialripple.MaterialRippleLayout>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

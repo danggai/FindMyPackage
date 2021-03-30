@@ -101,22 +101,22 @@ private class ImageDialog (
 
     private fun controlBtn() {
         if (!mConfirmOnly) {
-            tv_cancel.visibility = View.GONE
-            tv_confirm.visibility = View.VISIBLE
+            mr_cancel.visibility = View.GONE
+            mr_confirm.visibility = View.VISIBLE
 
             tv_confirm.text = mConfirm
-            tv_confirm.setOnClickListener {
+            mr_confirm.setOnClickListener {
                 mResult = true
                 dismiss()
             }
         } else {
             tv_confirm.text = mConfirm
-            tv_confirm.setOnClickListener {
+            mr_confirm.setOnClickListener {
                 mResult = true
                 dismiss()
             }
             tv_cancel.text = mCancel
-            tv_cancel.setOnClickListener {
+            mr_cancel.setOnClickListener {
                 mResult = false
                 dismiss()
             }
