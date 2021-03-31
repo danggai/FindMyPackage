@@ -67,8 +67,6 @@
 
                 <com.balysv.materialripple.MaterialRippleLayout
                     style="@style/EditText.MatchWrap"
-                    android:background="@color/c1"
-                    android:onClick="@{(v)->vm.onClick(v)}"
                     app:mrl_rippleOverlay="true"
                     app:mrl_rippleDuration="250" >
 
@@ -78,7 +76,9 @@
                         android:paddingVertical="10dp"
                         android:text="@string/track_search"
                         android:textSize="20sp"
-                        android:textColor="@color/f1" />
+                        android:textColor="@color/f1"
+                        android:background="@color/c1"
+                        android:onClick="@{(v)->vm.onClick(v)}"  />
 
                 </com.balysv.materialripple.MaterialRippleLayout>
 
