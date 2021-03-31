@@ -67,7 +67,6 @@
 
                 <com.balysv.materialripple.MaterialRippleLayout
                     style="@style/EditText.MatchWrap"
-                    android:id="@+id/mr_confirm"
                     android:background="@color/c1"
                     android:onClick="@{(v)->vm.onClick(v)}"
                     app:mrl_rippleOverlay="true"
