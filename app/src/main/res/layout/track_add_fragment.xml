@@ -65,15 +65,23 @@
                     android:hint="@string/track_id"
                     android:background="@color/f1" />
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <com.balysv.materialripple.MaterialRippleLayout
                     style="@style/EditText.MatchWrap"
-                    android:id="@+id/btn_search"
-                    android:paddingVertical="10dp"
-                    android:text="@string/track_search"
-                    android:textSize="20sp"
-                    android:textColor="@color/f1"
+                    android:id="@+id/mr_confirm"
                     android:background="@color/c1"
-                    android:onClick="@{(v)->vm.onClick(v)}" />
+                    android:onClick="@{(v)->vm.onClick(v)}"
+                    app:mrl_rippleOverlay="true"
+                    app:mrl_rippleDuration="250" >
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/EditText.MatchWrap"
+                        android:id="@+id/btn_search"
+                        android:paddingVertical="10dp"
+                        android:text="@string/track_search"
+                        android:textSize="20sp"
+                        android:textColor="@color/f1" />
+
+                </com.balysv.materialripple.MaterialRippleLayout>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
