@@ -4,7 +4,7 @@ data class Tracks (
     val from: From,
     val to: To,
     val state: State,
-    val progresses: List<Progress>,
+    var progresses: List<Progress>,
     val carrier: Carrier,
 ) {
     data class From(
@@ -19,7 +19,7 @@ data class Tracks (
 
     data class State(
         val id: String,
-        val text: String,
+        var text: String,
     )
 
     data class Carrier(
