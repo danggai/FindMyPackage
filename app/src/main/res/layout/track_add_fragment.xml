@@ -16,8 +16,8 @@
             android:orientation="vertical"
             >
 
-            <GridView
-                android:id="@+id/gv_carriers"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_carriers"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -25,6 +25,7 @@
                 android:paddingBottom="5dp"
                 viewModel="@{vm}"
                 items="@{vm.lvCarrierList}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 />
 
             <androidx.appcompat.widget.LinearLayoutCompat

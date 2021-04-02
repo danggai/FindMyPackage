@@ -13,6 +13,10 @@ import com.example.findmypackage.extension.onlyEngNum
 import com.example.findmypackage.ui.track.detail.TrackDetailActivity
 import com.example.findmypackage.util.EventObserver
 import com.example.findmypackage.util.log
+import com.google.android.flexbox.FlexDirection
+import com.google.android.flexbox.FlexWrap
+import com.google.android.flexbox.FlexboxLayoutManager
+import com.google.android.flexbox.JustifyContent
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class TrackAddFragment : BindingFragment<TrackAddFragmentBinding>() {
@@ -35,6 +39,14 @@ class TrackAddFragment : BindingFragment<TrackAddFragmentBinding>() {
         binding.vm?.let {
             mVM = it
             it.setCommonFun(view)
+        }
+
+        FlexboxLayoutManager(activity).apply {
+            flexWrap = FlexWrap.WRAP
+            flexDirection = FlexDirection.ROW
+            justifyContent = JustifyContent.CENTER
+        }.let {
+            binding.rvCarriers.layoutManager = it
         }
 
         initUi()

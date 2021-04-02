@@ -2,16 +2,17 @@ package com.example.findmypackage.ui.track.add
 
 import android.graphics.Color
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
+import androidx.recyclerview.widget.RecyclerView
 import com.example.findmypackage.R
 import com.example.findmypackage.data.local.Carrier
 import com.example.findmypackage.databinding.ItemCarrierBinding
+import com.example.findmypackage.ui.main.MainAdapter
 import com.example.findmypackage.util.log
 
-class TrackAddAdapter(private val viewModel: TrackAddViewModel) : BaseAdapter() {
+class TrackAddAdapter(private val viewModel: TrackAddViewModel) : RecyclerView.Adapter<TrackAddAdapter.ItemViewHolder>(){
 
     private var mDataSet = mutableListOf<Carrier>()
     private var selectedPosition: Int = -1
@@ -29,50 +30,35 @@ class TrackAddAdapter(private val viewModel: TrackAddViewModel) : BaseAdapter() 
         notifyDataSetChanged()
     }
 
-    override fun getCount(): Int {
-        return mDataSet.size
-    }
-
-    override fun getItem(p0: Int): Carrier {
-        return mDataSet[p0]
-    }
-
     override fun getItemId(p0: Int): Long {
         return p0.toLong()
     }
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        lateinit var holder: ItemViewHolder
 
-        if (convertView == null) {
-            val itemBinding: ItemCarrierBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_carrier, parent, false)
-            holder = ItemViewHolder(itemBinding)
+    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
+        when (holder.binding) {
+            is ItemCarrierBinding -> {
+                holder.binding.vm = viewModel
 
-            holder.view = itemBinding.root
-            holder.view.tag = holder
-            holder.binding.vm = viewModel
+                holder.binding.tvCarrierName.setOnClickListener {
+                    setSelectedPosition(position)
+                }
 
-            holder.view.setOnClickListener {
-                setSelectedPosition(position)
+
+                if (selectedPosition == position) {
+                    log.e(position)
+                    holder.binding.tvCarrierName.setBackgroundColor(f1)
+                    holder.binding.tvCarrierName.setTextColor(c1)
+                } else {
+                    holder.binding.tvCarrierName.setBackgroundColor(c1)
+                    holder.binding.tvCarrierName.setTextColor(f1)
+                }
+
+                holder.binding.item = mDataSet[position]
+                holder.binding.tvCarrierName.isSelected = (selectedPosition == position)
             }
         }
-        else {
-            holder = convertView.tag as ItemViewHolder
-        }
 
-        if (selectedPosition == position) {
-            log.e(position)
-            holder.binding.tvCarrierName.setBackgroundColor(f1)
-            holder.binding.tvCarrierName.setTextColor(c1)
-        } else {
-            holder.binding.tvCarrierName.setBackgroundColor(c1)
-            holder.binding.tvCarrierName.setTextColor(f1)
-        }
-
-        holder.binding.item = mDataSet[position]
-        holder.view.isSelected = (selectedPosition == position)
-
-        return holder.view
     }
 
     private fun setSelectedPosition(position: Int) {
@@ -90,8 +76,17 @@ class TrackAddAdapter(private val viewModel: TrackAddViewModel) : BaseAdapter() 
         return TYPE_CARRIER
     }
 
-    class ItemViewHolder internal constructor(binding: ItemCarrierBinding) {
-        var view: View = binding.root
-        var binding: ItemCarrierBinding = binding
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
+        return ItemViewHolder(R.layout.item_carrier, parent)
     }
+
+    override fun getItemCount(): Int {
+        return mDataSet.size
+    }
+
+    class ItemViewHolder (
+        layoutId: Int,
+        parent: ViewGroup,
+        val binding: ViewDataBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), layoutId, parent, false)
+    ): RecyclerView.ViewHolder(binding.root)
 }

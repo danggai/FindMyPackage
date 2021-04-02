@@ -1,7 +1,7 @@
 package com.example.findmypackage.ui.track.add;
 
-import android.widget.GridView
 import androidx.databinding.BindingAdapter;
+import androidx.recyclerview.widget.RecyclerView
 import com.example.findmypackage.data.local.Carrier
 
 import kotlin.jvm.JvmStatic;
@@ -9,7 +9,7 @@ import kotlin.jvm.JvmStatic;
 object TrackAddBindingAdapter {
     @BindingAdapter(value = ["items", "viewModel"], requireAll = true)
     @JvmStatic fun bindItemList(
-        view: GridView,
+        view: RecyclerView,
         items: MutableList<Carrier>,
         vm: TrackAddViewModel
     ) {
