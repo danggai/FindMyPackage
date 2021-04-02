@@ -39,11 +39,12 @@ class TrackAddAdapter(private val viewModel: TrackAddViewModel) : RecyclerView.A
         when (holder.binding) {
             is ItemCarrierBinding -> {
                 holder.binding.vm = viewModel
+                holder.binding.item = mDataSet[position]
 
                 holder.binding.tvCarrierName.setOnClickListener {
                     setSelectedPosition(position)
+                    it.isSelected = (selectedPosition == position)
                 }
-
 
                 if (selectedPosition == position) {
                     log.e(position)
@@ -53,15 +54,13 @@ class TrackAddAdapter(private val viewModel: TrackAddViewModel) : RecyclerView.A
                     holder.binding.tvCarrierName.setBackgroundColor(c1)
                     holder.binding.tvCarrierName.setTextColor(f1)
                 }
-
-                holder.binding.item = mDataSet[position]
-                holder.binding.tvCarrierName.isSelected = (selectedPosition == position)
             }
         }
 
     }
 
     private fun setSelectedPosition(position: Int) {
+        val postPosition = selectedPosition
         selectedPosition = if (selectedPosition == position) {
             viewModel.onClickItem(Carrier(-1, "","",""))
             -1
@@ -69,7 +68,9 @@ class TrackAddAdapter(private val viewModel: TrackAddViewModel) : RecyclerView.A
             viewModel.onClickItem(mDataSet[position])
             position
         }
-        notifyDataSetChanged()
+
+        notifyItemChanged(postPosition)
+        notifyItemChanged(position)
     }
 
     override fun getItemViewType(position: Int): Int {
