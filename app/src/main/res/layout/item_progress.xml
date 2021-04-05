@@ -87,7 +87,7 @@
                     android:gravity="right"
                     android:textColor="@color/b1"
                     android:textSize="14sp"
-                    tools:text="@{item.location.name}"
+                    tools:text="@{item.location.name.trim()}"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     />
