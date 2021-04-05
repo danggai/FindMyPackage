@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.findmypackage.R
 import com.example.findmypackage.data.local.Carrier
 import com.example.findmypackage.databinding.ItemCarrierBinding
-import com.example.findmypackage.ui.main.MainAdapter
 import com.example.findmypackage.util.log
 
 class TrackAddAdapter(private val viewModel: TrackAddViewModel) : RecyclerView.Adapter<TrackAddAdapter.ItemViewHolder>(){
@@ -43,17 +42,9 @@ class TrackAddAdapter(private val viewModel: TrackAddViewModel) : RecyclerView.A
 
                 holder.binding.tvCarrierName.setOnClickListener {
                     setSelectedPosition(position)
-                    it.isSelected = (selectedPosition == position)
                 }
 
-                if (selectedPosition == position) {
-                    log.e(position)
-                    holder.binding.tvCarrierName.setBackgroundColor(f1)
-                    holder.binding.tvCarrierName.setTextColor(c1)
-                } else {
-                    holder.binding.tvCarrierName.setBackgroundColor(c1)
-                    holder.binding.tvCarrierName.setTextColor(f1)
-                }
+                holder.binding.tvCarrierName.isSelected = (selectedPosition == position)
             }
         }
 
@@ -69,7 +60,7 @@ class TrackAddAdapter(private val viewModel: TrackAddViewModel) : RecyclerView.A
             position
         }
 
-        notifyItemChanged(postPosition)
+        if (postPosition != position) notifyItemChanged(postPosition)
         notifyItemChanged(position)
     }
 

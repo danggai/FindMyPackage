@@ -11,6 +11,7 @@
     <color name="f1">#FEFEFE</color>
     <color name="f2">#F0F0F0</color>
     <color name="f3">#aaaaaa</color>
+    <color name="f4">#55ffffff</color>
 
     <color name="transparent">#00ffffff</color>
 </resources>

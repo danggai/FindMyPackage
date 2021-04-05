@@ -22,7 +22,7 @@
         android:textSize="16sp"
         android:hint="@string/carrier_name"
         android:singleLine="true"
-        android:textColor="@color/f1"
+        android:textColor="@color/sel_carrier_font_color"
         android:background="@drawable/rounded_square_8dp"
         android:paddingVertical="10dp"
         android:paddingHorizontal="12dp"
