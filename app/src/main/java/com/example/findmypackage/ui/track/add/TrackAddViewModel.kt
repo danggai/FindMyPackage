@@ -27,6 +27,7 @@ class TrackAddViewModel(override val app: Application, private val api: ApiRepos
     var lvTrackId: NonNullMutableLiveData<String> = NonNullMutableLiveData("")
     var lvItemName: NonNullMutableLiveData<String> = NonNullMutableLiveData("")
 
+    private val rxApiCarrier: PublishSubject<Boolean> = PublishSubject.create()
     private val rxApiCarrierTracks: PublishSubject<Pair<String, String>> = PublishSubject.create()
     private val rxDaoInsert: PublishSubject<TrackEntity> = PublishSubject.create()
 
@@ -34,6 +35,20 @@ class TrackAddViewModel(override val app: Application, private val api: ApiRepos
     val lvCarrierList = _lvCarrierList
 
     init {
+        rxApiCarrier
+            .observeOn(Schedulers.newThread())
+            .filter { it }
+            .switchMap {
+                api.carriers()
+            }
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe ({ res ->
+                AppSession.setCarrierList(res)
+                _lvCarrierList.value = res.data
+            }, {
+                it.message?.let { msg -> log.e(msg) }
+            }).addCompositeDisposable()
+
         rxApiCarrierTracks
             .observeOn(Schedulers.newThread())
             .switchMap {
@@ -73,6 +88,11 @@ class TrackAddViewModel(override val app: Application, private val api: ApiRepos
             }).addCompositeDisposable()
 
         _lvCarrierList.value = AppSession.getCarrierList()
+    }
+
+    fun initUi() {
+        log.e()
+        if (AppSession.getCarrierList().size < 2) rxApiCarrier.onNext(true)
     }
 
     fun onClick(view: View) {

@@ -55,6 +55,7 @@ class TrackAddFragment : BindingFragment<TrackAddFragmentBinding>() {
 
     private fun initUi() {
         binding.tvTrackId.onlyEngNum()
+        mVM.initUi()
     }
 
     private fun initLv() {
