@@ -2,6 +2,7 @@ package com.example.findmypackage.ui.track.add;
 
 import androidx.databinding.BindingAdapter;
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.SimpleItemAnimator
 import com.example.findmypackage.data.local.Carrier
 
 import kotlin.jvm.JvmStatic;
@@ -23,5 +24,8 @@ object TrackAddBindingAdapter {
                 this.setItemList(items)
             }
         }
+
+        (view.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
+//        view.itemAnimator?.changeDuration = 0
     }
 }
