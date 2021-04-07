@@ -61,5 +61,9 @@ class TrackDetailFragment : BindingFragment<TrackDetailFragmentBinding>() {
                 .setCancelable(false)
                 .show()
         })
+
+        mVM.lvGoBack.observe(viewLifecycleOwner, EventObserver { it ->
+            if (it) activity?.onBackPressed()
+        })
     }
 }

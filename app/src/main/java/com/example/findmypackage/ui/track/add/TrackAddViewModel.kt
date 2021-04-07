@@ -68,7 +68,7 @@ class TrackAddViewModel(override val app: Application, private val api: ApiRepos
                     Constant.META_CODE_BAD_REQUEST,
                     Constant.META_CODE_NOT_FOUND,
                     Constant.META_CODE_SERVER_ERROR -> {
-                        lvMakeToast.value = getString(R.string.msg_network_error)
+                        lvMakeToast.value = getString(R.string.msg_not_exist_network_error)
                     }
                     else -> {
 
