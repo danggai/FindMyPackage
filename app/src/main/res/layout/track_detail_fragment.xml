@@ -23,12 +23,12 @@
                 android:layout_marginHorizontal="15dp"
                 >
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     style="@style/EditText"
                     android:id="@+id/tv_item_name"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:text="@{vm.lvTrackEntity.itemName}"
+                    android:text="@={vm.lvItemName}"
                     android:textColor="@color/f1"
                     android:textSize="24sp"
                     android:textStyle="bold"

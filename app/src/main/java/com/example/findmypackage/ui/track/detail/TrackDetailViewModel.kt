@@ -20,6 +20,7 @@ import io.reactivex.subjects.PublishSubject
 class TrackDetailViewModel(override val app: Application, private val api: ApiRepository, private val dao: TrackDao)  : BaseViewModel(app) {
 
     var lvModifyItemName = MutableLiveData<Event<String>>()
+    var lvGoBack = MutableLiveData<Event<Boolean>>()
 
     private val rxApiCarrierTracks: PublishSubject<Pair<String, String>> = PublishSubject.create()
     private val rxDaoUpdate: PublishSubject<TrackEntity> = PublishSubject.create()
@@ -27,6 +28,8 @@ class TrackDetailViewModel(override val app: Application, private val api: ApiRe
 
     var lvTrackEntity: NonNullMutableLiveData<TrackEntity> = NonNullMutableLiveData(TrackEntity("","","","","","",""))
     var lvTrackData: NonNullMutableLiveData<Tracks> = NonNullMutableLiveData(Tracks(Tracks.From("",""), Tracks.To("",""), Tracks.State("",""), listOf(), Tracks.Carrier("","","")))
+
+    var lvItemName: NonNullMutableLiveData<String> = NonNullMutableLiveData("")
 
     init {
         rxApiCarrierTracks
@@ -69,6 +72,11 @@ class TrackDetailViewModel(override val app: Application, private val api: ApiRe
             }).addCompositeDisposable()
 
         rxDaoUpdateNameById
+            .observeOn(AndroidSchedulers.mainThread())
+            .filter {
+                lvItemName.value = it.first
+                true
+            }
             .observeOn(Schedulers.newThread())
             .subscribe ({ item ->
                 log.e(item)
@@ -81,6 +89,7 @@ class TrackDetailViewModel(override val app: Application, private val api: ApiRe
     fun initUi(item: TrackEntity) {
         log.e()
         lvTrackEntity.value = item
+        lvItemName.value = item.itemName
         rxApiCarrierTracks.onNext(Pair(item.carrierId, item.trackId))
     }
 
@@ -91,7 +100,7 @@ class TrackDetailViewModel(override val app: Application, private val api: ApiRe
 
     fun updateItemName(name: String) {
         log.e()
-        rxDaoUpdateNameById.onNext(Pair(name, lvTrackEntity.value.trackId))
+        rxDaoUpdateNameById.onNext(Pair(name.trim(), lvTrackEntity.value.trackId))
     }
 
 }
