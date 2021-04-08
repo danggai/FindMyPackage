@@ -39,7 +39,7 @@
         <activity
             android:name="com.example.findmypackage.ui.track.detail.TrackDetailActivity"
             android:parentActivityName=".ui.main.MainActivity"
-            android:windowSoftInputMode="adjustResize"
+            android:windowSoftInputMode="adjustNothing"
             android:launchMode="singleTop" />
 
         <service
