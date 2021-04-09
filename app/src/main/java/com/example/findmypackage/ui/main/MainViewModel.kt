@@ -38,6 +38,8 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
 
     private var _mTrackId: String = ""
 
+    private var lvRefreshSwitch: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(false)
+
     init {
         rxApiCarrier
             .observeOn(Schedulers.newThread())
@@ -60,8 +62,9 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
             }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe ({ items ->
-                _lvMyTracksList.value = items
                 log.e(items)
+                _lvMyTracksList.value = items
+                if (lvRefreshSwitch.value) refreshAll()
             }, {
                 it.message?.let { msg -> log.e(msg) }
             }).addCompositeDisposable()
@@ -121,6 +124,8 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
     }
 
     fun initUI() {
+        log.e()
+        lvRefreshSwitch.value = true
         getAllTrackList()
         rxApiCarrier.onNext(true)
     }
@@ -154,6 +159,7 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
     }
 
     fun refreshAll() {
+        log.e()
         for (item in _lvMyTracksList.value) {
             if (item.recentStatus?.contains(Constant.STATE_DELIVERY_COMPLETE) == false) {
                 lvRefreshStack.value.add(true)
