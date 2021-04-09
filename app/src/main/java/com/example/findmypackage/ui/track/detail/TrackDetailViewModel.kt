@@ -95,7 +95,7 @@ class TrackDetailViewModel(override val app: Application, private val api: ApiRe
 
     fun onClickItemName() {
         log.e()
-        lvModifyItemName.value = Event(lvTrackEntity.value.itemName)
+        lvModifyItemName.value = Event(lvItemName.value)
     }
 
     fun updateItemName(name: String) {
