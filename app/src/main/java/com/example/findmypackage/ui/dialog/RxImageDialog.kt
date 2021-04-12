@@ -41,22 +41,22 @@ class RxImageDialog(builder: Builder) {
         return result
     }
 
-    class Builder (internal val activity: FragmentActivity,
-                   internal val img: Int,
-                   internal val msg: String,
-                   internal val confirm: String,
-                   internal val cancel: String,
-                   internal val confirmOnly: Boolean) {
+    class Builder(internal val activity: FragmentActivity,
+                  internal val img: Int?,
+                  internal val msg: String,
+                  internal val confirm: String,
+                  internal val cancel: String,
+                  internal val confirmOnly: Boolean) {
         fun build(): RxImageDialog = RxImageDialog(this)
     }
 }
 
-private class ImageDialog (
+private class ImageDialog(
     mActivity: Activity,
-    private var mImage      : Int,
-    private var mMsg        : String,
-    private val mConfirm    : String,
-    private val mCancel     : String,
+    private var mImage: Int?,
+    private var mMsg: String,
+    private val mConfirm: String,
+    private val mCancel: String,
     private val mConfirmOnly: Boolean) : AlertDialog(mActivity) {
 
     private var mPublishSubject: PublishSubject<Boolean> ?= null
@@ -92,15 +92,21 @@ private class ImageDialog (
         }
     }
 
-    fun setImage(img: Int) {
+    fun setImage(img: Int?) {
         mImage = img
         iv_image?.let {
-            it.setImageResource(img)
+            if (img == null) {
+                it.visibility = View.GONE
+            } else {
+                it.visibility = View.VISIBLE
+                it.setImageResource(img)
+            }
         }
     }
 
     private fun controlBtn() {
-        if (!mConfirmOnly) {
+        if (mConfirmOnly) {
+            log.e()
             mr_cancel.visibility = View.GONE
             mr_confirm.visibility = View.VISIBLE
 
@@ -110,6 +116,9 @@ private class ImageDialog (
                 dismiss()
             }
         } else {
+            log.e()
+            mr_cancel.visibility = View.VISIBLE
+            mr_confirm.visibility = View.VISIBLE
             tv_confirm.text = mConfirm
             mr_confirm.setOnClickListener {
                 mResult = true

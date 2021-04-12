@@ -21,20 +21,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
+            android:layout_marginBottom="15dp"
             android:src="@drawable/baseline_edit_24"
             android:adjustViewBounds="true"
             />
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="15dp" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="10dp"
-            android:text="다이얼로그 내용 입력"
+            android:text="@string/hint_dialog"
             android:textSize="16sp"
             android:textColor="@color/b1"
             android:textAlignment="center"
@@ -42,7 +39,7 @@
 
         <Space
             android:layout_width="0dp"
-            android:layout_height="30dp" />
+            android:layout_height="28dp" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
@@ -68,11 +65,6 @@
                     />
 
             </com.balysv.materialripple.MaterialRippleLayout>
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="0" />
 
             <com.balysv.materialripple.MaterialRippleLayout
                 android:id="@+id/mr_confirm"
