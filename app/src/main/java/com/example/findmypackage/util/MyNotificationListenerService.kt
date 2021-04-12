@@ -82,7 +82,7 @@ class MyNotificationListenerService: NotificationListenerService() {
 
 
         var builder = NotificationCompat.Builder(this, Constant.PUSH_CHANNEL_ID)
-            .setSmallIcon(R.drawable.icon_truck)
+            .setSmallIcon(R.drawable.ic_truck)
             .setContentText(msg)
             .setContentIntent(resultPendingIntent)
             .setAutoCancel(true)
