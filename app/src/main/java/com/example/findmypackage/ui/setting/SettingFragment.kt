@@ -3,7 +3,6 @@ package com.example.findmypackage.ui.setting
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
-import androidx.lifecycle.Observer
 import com.example.findmypackage.BindingFragment
 import com.example.findmypackage.R
 import com.example.findmypackage.databinding.SettingFragmentBinding
@@ -43,17 +42,30 @@ class SettingFragment : BindingFragment<SettingFragmentBinding>() {
     }
 
     private fun initUi() {
-        context?.let { mVM.lvIsAllowNotiPermission.value = isNotificationPermissionAllowed() }
+        context?.let { mVM.lvIsAllowAccessNoti.value = isNotificationPermissionAllowed() }
     }
 
     private fun initLv() {
-        mVM.lvStartNotiSetting.observe(viewLifecycleOwner, EventObserver { allowed ->
+        mVM.lvStartAccessNotiSetting.observe(viewLifecycleOwner, EventObserver { allowed ->
             log.e()
             activity?.let { act ->
-                val mRxImageDialog = RxImageDialog(RxImageDialog.Builder(act, R.drawable.access_allow_example, getString(R.string.dialog_noti_allow_help), getString(R.string.confirm), getString(R.string.cancel), false))
+                val mRxImageDialog = RxImageDialog(RxImageDialog.Builder(act, R.drawable.help_access_noti_allow, getString(R.string.dialog_allow_noti_help_allow), getString(R.string.confirm), getString(R.string.cancel), false))
                 mRxImageDialog.show()
                     .subscribe {
                         if (it) startNotificationSetting()
+                    }
+            }
+        })
+
+        mVM.lvStartGetNotiSetting.observe(viewLifecycleOwner, EventObserver { allowed ->
+            log.e()
+            activity?.let { act ->
+                val msgResource = if (!allowed) R.string.dialog_get_noti_help_allow else R.string.dialog_get_noti_help_reject
+                val mRxImageDialog = RxImageDialog(RxImageDialog.Builder(act, null, getString(msgResource), getString(R.string.confirm), getString(R.string.cancel), false))
+                mRxImageDialog.show()
+                    .subscribe {
+                        mVM.lvIsAllowGetNoti.value = if (it) !allowed else allowed
+//                        if (it) startAllowNotiPermission()
                     }
             }
         })

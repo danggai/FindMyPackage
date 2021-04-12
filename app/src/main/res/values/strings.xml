@@ -15,7 +15,9 @@
     <string name="now_status_empty">현재 상태 알 수 없음</string>
     <string name="recent_time_empty">최근 갱신 시간 알 수 없음</string>
 
+    <string name="notification">알림</string>
     <string name="notification_access">알림 접근 허용</string>
+    <string name="get_notification">운송장 자동 등록 시 알림 수신</string>
 
     <!--    다이얼로그    -->
     <string name="confirm">확인</string>
@@ -23,13 +25,18 @@
     <string name="dialog_submit">저장</string>
     <string name="dialog_cancel">취소</string>
 
+    <string name="hint_dialog">다이얼로그 내용 입력</string>
+
     <string name="dialog_name_change_title">운송장 이름 변경</string>
     <string name="dialog_name_change_msg">저장을 누르시면 상품의 이름을 아래와 같이 변경해요.</string>
     <string name="dialog_name_change_toast_done">변경되었어요.</string>
     <string name="dialog_name_change_toast_fail">변경에 실패했어요.</string>
 
-    <string name="dialog_noti_allow_help">위와 같은 팝업이 나오면, 앱의 알림 접근 권한을 조정해 주세요.</string>
-    
+    <string name="dialog_allow_noti_help_allow">위와 같은 팝업이 나오면, 앱의 알림 접근 권한을 허용으로 조정해 주세요.\n\n앱은 절대 운송장, 물건명 외의 정보에 접근하거나 정보를 기기 밖으로 전달하지 않아요.</string>
+    <string name="dialog_allow_noti_help_reject">위와 같은 팝업이 나오면, 앱의 알림 접근 권한을 허용 안 됨으로 조정해 주세요.\n\n더 이상 운송장 번호를 자동으로 등록하지 않아요.</string>
+    <string name="dialog_get_noti_help_allow">운송장이 자동으로 등록 될 때, 알림으로 안내드려요.</string>
+    <string name="dialog_get_noti_help_reject">운송장이 자동으로 등록 될 때, 더 이상 알림으로 안내드리지 않아요.</string>
+
     <!--    메세지    -->
     <string name="msg_track_id_empty">운송장 번호를 입력해 주세요.</string>
     <string name="msg_carrier_empty">조회 하실 택배사를 선택해 주세요.</string>
