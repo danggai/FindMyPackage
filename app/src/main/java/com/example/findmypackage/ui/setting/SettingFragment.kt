@@ -42,17 +42,21 @@ class SettingFragment : BindingFragment<SettingFragmentBinding>() {
     }
 
     private fun initUi() {
-        context?.let { mVM.lvIsAllowAccessNoti.value = isNotificationPermissionAllowed() }
+        context?.let {
+            mVM.lvIsAllowAccessNoti.value = isNotificationPermissionAllowed()
+            mVM.lvIsAllowGetNoti.value = PreferenceManager.getBoolean(it, Constant.PREF_ALLOW_GET_NOTI)
+        }
     }
 
     private fun initLv() {
         mVM.lvStartAccessNotiSetting.observe(viewLifecycleOwner, EventObserver { allowed ->
             log.e()
             activity?.let { act ->
-                val mRxImageDialog = RxImageDialog(RxImageDialog.Builder(act, R.drawable.help_access_noti_allow, getString(R.string.dialog_allow_noti_help_allow), getString(R.string.confirm), getString(R.string.cancel), false))
+                val mRxImageDialog = RxImageDialog(RxImageDialog.Builder(act, R.drawable.help_access_noti_allow, getString(R.string.dialog_allow_noti_help_allow), getString(R.string.confirm), getString(R.string.denied), false))
                 mRxImageDialog.show()
                     .subscribe {
                         if (it) startNotificationSetting()
+                        else mVM.lvIsAllowAccessNoti.value = allowed
                     }
             }
         })
@@ -61,10 +65,13 @@ class SettingFragment : BindingFragment<SettingFragmentBinding>() {
             log.e()
             activity?.let { act ->
                 val msgResource = if (!allowed) R.string.dialog_get_noti_help_allow else R.string.dialog_get_noti_help_reject
-                val mRxImageDialog = RxImageDialog(RxImageDialog.Builder(act, null, getString(msgResource), getString(R.string.confirm), getString(R.string.cancel), false))
+                val mRxImageDialog = RxImageDialog(RxImageDialog.Builder(act, null, getString(msgResource), getString(R.string.confirm), getString(R.string.denied), false))
                 mRxImageDialog.show()
                     .subscribe {
-                        mVM.lvIsAllowGetNoti.value = if (it) !allowed else allowed
+                        mVM.lvIsAllowGetNoti.value = if (it) {
+                            PreferenceManager.setBoolean(context!!, Constant.PREF_ALLOW_GET_NOTI, !allowed)
+                            !allowed
+                        } else allowed
 //                        if (it) startAllowNotiPermission()
                     }
             }

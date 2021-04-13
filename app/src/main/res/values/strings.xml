@@ -22,6 +22,7 @@
     <!--    다이얼로그    -->
     <string name="confirm">확인</string>
     <string name="cancel">취소</string>
+    <string name="denied">거부</string>
     <string name="dialog_submit">저장</string>
     <string name="dialog_cancel">취소</string>
 

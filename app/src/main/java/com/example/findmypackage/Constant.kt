@@ -25,4 +25,6 @@ object Constant {
     const val PUSH_CHANNEL_DESC = "default"
     const val PUSH_TITLE_NEW = "신규 운송장 추가"
     const val PUSH_TITLE_EXIST = "운송장 갱신"
+
+    const val PREF_ALLOW_GET_NOTI = "PREF_ALLOW_GET_NOTI"
 }
