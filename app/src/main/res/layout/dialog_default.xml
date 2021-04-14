@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:paddingHorizontal="10dp"
             android:text="@string/hint_dialog"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textColor="@color/b1"
             android:textAlignment="center"
             />
