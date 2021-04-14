@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
 import com.example.findmypackage.BindingFragment
+import com.example.findmypackage.Constant
 import com.example.findmypackage.R
 import com.example.findmypackage.databinding.SettingFragmentBinding
 import com.example.findmypackage.ui.dialog.RxImageDialog
 import com.example.findmypackage.util.EventObserver
+import com.example.findmypackage.util.PreferenceManager
 import com.example.findmypackage.util.log
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
@@ -55,7 +57,7 @@ class SettingFragment : BindingFragment<SettingFragmentBinding>() {
                 val mRxImageDialog = RxImageDialog(RxImageDialog.Builder(act, R.drawable.help_access_noti_allow, getString(R.string.dialog_allow_noti_help_allow), getString(R.string.confirm), getString(R.string.denied), false))
                 mRxImageDialog.show()
                     .subscribe {
-                        if (it) startNotificationSetting()
+                        if (it) startAllowNotiPermission()
                         else mVM.lvIsAllowAccessNoti.value = allowed
                     }
             }

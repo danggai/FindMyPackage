@@ -1,10 +1,8 @@
 package com.example.findmypackage.ui.main
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
-import androidx.lifecycle.Observer
 import com.example.findmypackage.BindingFragment
 import com.example.findmypackage.R
 import com.example.findmypackage.data.rxbus.RxBusMainRefresh
@@ -40,7 +38,7 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
             }
         }
 
-        if (!isNotificationPermissionAllowed()) startNotificationSetting()
+        if (!isNotificationPermissionAllowed()) startAllowNotiPermission()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

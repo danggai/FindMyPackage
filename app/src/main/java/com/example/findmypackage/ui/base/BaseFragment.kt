@@ -27,11 +27,12 @@ open class BaseFragment: Fragment() {
         log.e()
         return NotificationManagerCompat.getEnabledListenerPackages(context!!)
             .any { enabledPackageName ->
+                log.e(enabledPackageName)
                 enabledPackageName == context?.packageName
             }
     }
 
-    fun startNotificationSetting() {
+    fun startAllowNotiPermission() {
         log.e()
         startActivity(Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS"))
     }
