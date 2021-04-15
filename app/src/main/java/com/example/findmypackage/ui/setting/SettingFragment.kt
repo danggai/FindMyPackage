@@ -46,7 +46,7 @@ class SettingFragment : BindingFragment<SettingFragmentBinding>() {
     private fun initUi() {
         context?.let {
             mVM.lvIsAllowAccessNoti.value = isNotificationPermissionAllowed()
-            mVM.lvIsAllowGetNoti.value = PreferenceManager.getBoolean(it, Constant.PREF_ALLOW_GET_NOTI)
+            mVM.lvIsAllowGetNoti.value = PreferenceManager.getBooleanDefaultTrue(it, Constant.PREF_ALLOW_GET_NOTI)
         }
     }
 
@@ -54,8 +54,8 @@ class SettingFragment : BindingFragment<SettingFragmentBinding>() {
         mVM.lvStartAccessNotiSetting.observe(viewLifecycleOwner, EventObserver { allowed ->
             log.e()
             activity?.let { act ->
-                val mRxImageDialog = RxImageDialog(RxImageDialog.Builder(act, R.drawable.help_access_noti_allow, getString(R.string.dialog_allow_noti_help_allow), getString(R.string.confirm), getString(R.string.denied), false))
-                mRxImageDialog.show()
+                RxImageDialog(RxImageDialog.Builder(act, R.drawable.help_access_noti_allow, getString(R.string.dialog_allow_noti_help_allow), getString(R.string.confirm), getString(R.string.denied), false))
+                    .show()
                     .subscribe {
                         if (it) startAllowNotiPermission()
                         else mVM.lvIsAllowAccessNoti.value = allowed

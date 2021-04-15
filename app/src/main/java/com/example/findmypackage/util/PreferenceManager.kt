@@ -97,9 +97,14 @@ object PreferenceManager {
      * @param key
      * @return
      */
-    fun getBoolean(context: Context, key: String?): Boolean {
+    fun getBooleanDefaultFalse(context: Context, key: String?): Boolean {
         val prefs = getPreferences(context)
-        return prefs.getBoolean(key, DEFAULT_VALUE_BOOLEAN)
+        return prefs.getBoolean(key, false)
+    }
+
+    fun getBooleanDefaultTrue(context: Context, key: String?): Boolean {
+        val prefs = getPreferences(context)
+        return prefs.getBoolean(key, true)
     }
 
     /**
