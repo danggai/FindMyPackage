@@ -4,13 +4,16 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
 import com.example.findmypackage.BindingFragment
+import com.example.findmypackage.Constant
 import com.example.findmypackage.R
 import com.example.findmypackage.data.rxbus.RxBusMainRefresh
 import com.example.findmypackage.databinding.MainFragmentBinding
+import com.example.findmypackage.ui.dialog.RxImageDialog
 import com.example.findmypackage.ui.setting.SettingActivity
 import com.example.findmypackage.ui.track.add.TrackAddActivity
 import com.example.findmypackage.ui.track.detail.TrackDetailActivity
 import com.example.findmypackage.util.EventObserver
+import com.example.findmypackage.util.PreferenceManager
 import com.example.findmypackage.util.log
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
@@ -38,7 +41,17 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
             }
         }
 
-        if (!isNotificationPermissionAllowed()) startAllowNotiPermission()
+        if (!PreferenceManager.getBooleanDefaultTrue(context!!, Constant.PREF_IS_FIRST_RUN)) {
+            log.e()
+            activity?.let { act ->
+                RxImageDialog(RxImageDialog.Builder(act, R.drawable.help_access_noti_allow, getString(R.string.dialog_allow_noti_help_first), getString(R.string.confirm), getString(R.string.denied), false))
+                    .show()
+                    .subscribe { confirm ->
+                        if (confirm) startAllowNotiPermission()
+                        PreferenceManager.setBoolean(context!!, Constant.PREF_IS_FIRST_RUN, false)
+                    }
+            }
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

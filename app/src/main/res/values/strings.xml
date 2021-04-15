@@ -33,6 +33,7 @@
     <string name="dialog_name_change_toast_done">변경되었어요.</string>
     <string name="dialog_name_change_toast_fail">변경에 실패했어요.</string>
 
+    <string name="dialog_allow_noti_help_first">운송장번호를 자동으로 등록하기 위해 앱의 알림 접근 권한을 허용해주세요.\n\n앱은 절대 운송장, 물건명 외의 정보에 접근하거나 정보를 기기 밖으로 전달하지 않아요.</string>
     <string name="dialog_allow_noti_help_allow">위와 같은 팝업이 나오면, 앱의 알림 접근 권한을 허용으로 조정해 주세요.\n\n앱은 절대 운송장, 물건명 외의 정보에 접근하거나 정보를 기기 밖으로 전달하지 않아요.</string>
     <string name="dialog_allow_noti_help_reject">위와 같은 팝업이 나오면, 앱의 알림 접근 권한을 허용 안 됨으로 조정해 주세요.\n\n더 이상 운송장 번호를 자동으로 등록하지 않아요.</string>
     <string name="dialog_get_noti_help_allow">운송장이 자동으로 등록 될 때, 알림으로 안내드려요.</string>
