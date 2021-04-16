@@ -7,10 +7,14 @@ import android.view.View
 import android.widget.EditText
 import androidx.annotation.LayoutRes
 import com.example.findmypackage.BindingFragment
+import com.example.findmypackage.Constant
 import com.example.findmypackage.R
 import com.example.findmypackage.data.db.track.TrackEntity
 import com.example.findmypackage.databinding.TrackDetailFragmentBinding
+import com.example.findmypackage.ui.dialog.RxImageDialog
 import com.example.findmypackage.util.EventObserver
+import com.example.findmypackage.util.PreferenceManager
+import com.example.findmypackage.util.log
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class TrackDetailFragment : BindingFragment<TrackDetailFragmentBinding>() {
@@ -64,6 +68,19 @@ class TrackDetailFragment : BindingFragment<TrackDetailFragmentBinding>() {
 
         mVM.lvGoBack.observe(viewLifecycleOwner, EventObserver { it ->
             if (it) activity?.onBackPressed()
+        })
+
+        mVM.lvParcelNotFound.observe(viewLifecycleOwner, EventObserver {
+            activity?.let { act ->
+                RxImageDialog(RxImageDialog.Builder(act, null, getString(R.string.dialog_parcel_not_found), getString(R.string.confirm), getString(R.string.dialog_cancel), false))
+                    .show()
+                    .subscribe {
+                        if (it) {
+                            log.e()
+                            mVM.deleteItem()
+                        } else mVM.goBack()
+                    }
+            }
         })
     }
 }

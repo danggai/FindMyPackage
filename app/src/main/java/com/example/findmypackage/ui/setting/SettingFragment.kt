@@ -67,8 +67,8 @@ class SettingFragment : BindingFragment<SettingFragmentBinding>() {
             log.e()
             activity?.let { act ->
                 val msgResource = if (!allowed) R.string.dialog_get_noti_help_allow else R.string.dialog_get_noti_help_reject
-                val mRxImageDialog = RxImageDialog(RxImageDialog.Builder(act, null, getString(msgResource), getString(R.string.confirm), getString(R.string.denied), false))
-                mRxImageDialog.show()
+                RxImageDialog(RxImageDialog.Builder(act, null, getString(msgResource), getString(R.string.confirm), getString(R.string.denied), false))
+                    .show()
                     .subscribe {
                         mVM.lvIsAllowGetNoti.value = if (it) {
                             PreferenceManager.setBoolean(context!!, Constant.PREF_ALLOW_GET_NOTI, !allowed)
