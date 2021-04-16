@@ -106,7 +106,6 @@ private class ImageDialog(
 
     private fun controlBtn() {
         if (mConfirmOnly) {
-            log.e()
             mr_cancel.visibility = View.GONE
             mr_confirm.visibility = View.VISIBLE
 
@@ -116,7 +115,6 @@ private class ImageDialog(
                 dismiss()
             }
         } else {
-            log.e()
             mr_cancel.visibility = View.VISIBLE
             mr_confirm.visibility = View.VISIBLE
             tv_confirm.text = mConfirm
