@@ -21,28 +21,17 @@
             android:orientation="vertical"
             >
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="15dp"
-                android:paddingHorizontal="20dp"
-                >
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/notification"
-                    android:textSize="24sp"
-                    android:textColor="@color/c1"
-                    android:textStyle="bold"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    />
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                android:text="@string/notification"
+                android:textSize="24sp"
+                android:textColor="@color/c1"
+                android:textStyle="bold"
+                android:paddingTop="30dp"
+                android:paddingBottom="15dp"
+                android:paddingLeft="20dp"
+                />
 
             <View
                 android:layout_width="match_parent"
@@ -116,6 +105,85 @@
                     android:onClick="@{() -> vm.onClickGetNotiSwitch()}"
                     android:theme="@style/Switch"
                     app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/c3"
+                android:layout_marginHorizontal="15dp"
+                />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/app_info"
+                android:textSize="24sp"
+                android:textColor="@color/c1"
+                android:textStyle="bold"
+                android:paddingTop="30dp"
+                android:paddingBottom="15dp"
+                android:paddingLeft="20dp"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/c3"
+                />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="10dp"
+                android:paddingHorizontal="30dp"
+                >
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_app_image"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/rounded_square_15dp"
+                    android:padding="7dp"
+                    android:src="@drawable/ic_truck"
+                    />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/app_name"
+                    android:textSize="16sp"
+                    android:textColor="@color/c1"
+                    android:paddingLeft="10dp"
+                    app:layout_constraintLeft_toRightOf="@id/iv_app_image"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_app_version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{vm.lvAppVersion}"
+                    android:textSize="16sp"
+                    android:textColor="@color/b2"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="v"
+                    android:textSize="16sp"
+                    android:textColor="@color/b2"
+                    android:padding="1dp"
+                    app:layout_constraintRight_toLeftOf="@id/tv_app_version"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     />

@@ -2,6 +2,8 @@ package com.example.findmypackage.ui.base
 
 import android.content.*
 import android.content.ClipboardManager.OnPrimaryClipChangedListener
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
 import android.view.View
 import android.widget.Toast
 import androidx.core.app.NotificationManagerCompat
@@ -21,6 +23,19 @@ open class BaseFragment: Fragment() {
     fun makeToast(msg: String) {
         log.e()
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+    }
+
+    fun getAppVersion(): String {
+
+        context?.let {
+            try {
+                val i: PackageInfo = it.packageManager.getPackageInfo(it.packageName, 0)
+                return i.versionName
+            } catch (e: PackageManager.NameNotFoundException)
+            { }
+        }
+
+        return ""
     }
 
     fun isNotificationPermissionAllowed(): Boolean {

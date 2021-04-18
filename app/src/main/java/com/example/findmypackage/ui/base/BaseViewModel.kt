@@ -13,6 +13,7 @@ open class BaseViewModel(open val app: Application) : ViewModel() {
     var lvMakeToast: NonNullMutableLiveData<String> = NonNullMutableLiveData("")
     var lvCopyClipboard: NonNullMutableLiveData<String> = NonNullMutableLiveData("")
 
+
     fun getString(resId: Int): String {
         return app.getString(resId)
     }

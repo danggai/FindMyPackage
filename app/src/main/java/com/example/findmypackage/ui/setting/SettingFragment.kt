@@ -33,6 +33,7 @@ class SettingFragment : BindingFragment<SettingFragmentBinding>() {
         binding.vm?.let {
             mVM = it
             it.setCommonFun(view)
+            it.lvAppVersion.value = getAppVersion()
         }
 
         initLv()
