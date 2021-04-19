@@ -47,12 +47,7 @@
                     android:hint="@string/item_name"
                     android:background="@color/f1" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/c1"
-                    android:layout_marginHorizontal="20dp"
-                    />
+                <View style="@style/LinearDevider.20dp" />
 
                 <androidx.appcompat.widget.AppCompatEditText
                     style="@style/EditText.MatchWrap"

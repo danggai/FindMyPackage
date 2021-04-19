@@ -33,11 +33,8 @@
                 android:paddingLeft="20dp"
                 />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/c3"
-                />
+            <View style="@style/LinearDevider" />
+            <View style="@style/AreaDevider" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -71,13 +68,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/c3"
-                android:layout_marginHorizontal="15dp"
-                />
-
+            <View style="@style/LinearDevider.15dp" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -111,12 +102,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/c3"
-                android:layout_marginHorizontal="15dp"
-                />
+            <View style="@style/LinearDevider.15dp" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
@@ -130,11 +116,8 @@
                 android:paddingLeft="20dp"
                 />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/c3"
-                />
+            <View style="@style/LinearDevider" />
+            <View style="@style/AreaDevider" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -190,12 +173,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/c3"
-                android:layout_marginHorizontal="15dp"
-                />
+            <View style="@style/LinearDevider.15dp" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
