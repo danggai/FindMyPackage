@@ -7,10 +7,10 @@
     <data>
         <variable
             name="vm"
-            type="com.example.findmypackage.ui.main.MainViewModel"/>
+            type="danggai.app.parcelwhere.ui.main.MainViewModel"/>
         <variable
             name="item"
-            type="com.example.findmypackage.data.db.track.TrackEntity"/>
+            type="danggai.app.parcelwhere.data.db.track.TrackEntity"/>
     </data>
 
     <androidx.appcompat.widget.LinearLayoutCompat

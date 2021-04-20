@@ -6,7 +6,7 @@
     <data>
         <variable
             name="vm"
-            type="com.example.findmypackage.ui.track.detail.TrackDetailViewModel"/>
+            type="danggai.app.parcelwhere.ui.track.detail.TrackDetailViewModel"/>
     </data>
 
     <FrameLayout

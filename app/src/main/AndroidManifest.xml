@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.findmypackage">
+    package="danggai.app.parcelwhere">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".App"
+        android:name="danggai.app.parcelwhere.App"
         android:label="@string/app_name"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,7 +16,7 @@
         >
 
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name="danggai.app.parcelwhere.ui.main.MainActivity"
             android:launchMode="singleTask" >
 
             <intent-filter>
@@ -27,23 +27,23 @@
         </activity>
 
         <activity
-            android:name="com.example.findmypackage.ui.setting.SettingActivity"
+            android:name="danggai.app.parcelwhere.ui.setting.SettingActivity"
             android:windowSoftInputMode="adjustResize"
             android:launchMode="singleTop" />
 
         <activity
-            android:name="com.example.findmypackage.ui.track.add.TrackAddActivity"
+            android:name="danggai.app.parcelwhere.ui.track.add.TrackAddActivity"
             android:windowSoftInputMode="adjustResize"
             android:launchMode="singleTop" />
 
         <activity
-            android:name="com.example.findmypackage.ui.track.detail.TrackDetailActivity"
-            android:parentActivityName=".ui.main.MainActivity"
+            android:name="danggai.app.parcelwhere.ui.track.detail.TrackDetailActivity"
+            android:parentActivityName="danggai.app.parcelwhere.ui.main.MainActivity"
             android:windowSoftInputMode="adjustNothing"
             android:launchMode="singleTop" />
 
         <service
-            android:name="com.example.findmypackage.util.MyNotificationListenerService"
+            android:name="danggai.app.parcelwhere.util.MyNotificationListenerService"
             android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
             <intent-filter>
                 <action android:name="android.service.notification.NotificationListenerService"/>

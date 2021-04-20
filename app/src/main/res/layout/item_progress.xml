@@ -7,10 +7,10 @@
     <data>
         <variable
             name="vm"
-            type="com.example.findmypackage.ui.track.detail.TrackDetailViewModel"/>
+            type="danggai.app.parcelwhere.ui.track.detail.TrackDetailViewModel"/>
         <variable
             name="item"
-            type="com.example.findmypackage.data.local.Progress"/>
+            type="danggai.app.parcelwhere.data.local.Progress"/>
     </data>
 
     <LinearLayout

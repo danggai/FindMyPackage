@@ -7,10 +7,10 @@
     <data>
         <variable
             name="vm"
-            type="com.example.findmypackage.ui.track.add.TrackAddViewModel"/>
+            type="danggai.app.parcelwhere.ui.track.add.TrackAddViewModel"/>
         <variable
             name="item"
-            type="com.example.findmypackage.data.local.Carrier"/>
+            type="danggai.app.parcelwhere.data.local.Carrier"/>
     </data>
 
     <androidx.appcompat.widget.AppCompatTextView

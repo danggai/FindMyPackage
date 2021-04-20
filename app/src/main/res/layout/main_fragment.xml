@@ -6,7 +6,7 @@
     <data>
         <variable
             name="vm"
-            type="com.example.findmypackage.ui.main.MainViewModel"/>
+            type="danggai.app.parcelwhere.ui.main.MainViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
