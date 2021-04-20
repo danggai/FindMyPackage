@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 
 
 object PreferenceManager {
-    const val PREFERENCES_NAME = "com.example.findmypackage"
+    const val PREFERENCES_NAME = "danggai.app.parcelwhere"
     private const val DEFAULT_VALUE_STRING = ""
     private const val DEFAULT_VALUE_BOOLEAN = false
     private const val DEFAULT_VALUE_INT = -1
