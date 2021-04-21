@@ -33,7 +33,8 @@ object CarrierUtil {
         "USPS" to "us.usps",
         
         "대한통운" to "kr.cjlogistics",
-        "CUPost" to "kr.cupost",
+        "CJ" to "kr.cjlogistics",
+        "CU" to "kr.cupost",
         "Postbox" to "kr.cvsnet",
         "우체국" to "kr.epost",
     )
