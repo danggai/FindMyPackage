@@ -44,7 +44,7 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
         if (PreferenceManager.getBooleanDefaultTrue(context!!, Constant.PREF_IS_FIRST_RUN)) {
             log.e()
             activity?.let { act ->
-                RxImageDialog(RxImageDialog.Builder(act, R.drawable.help_access_noti_allow, getString(R.string.dialog_allow_noti_help_first), getString(R.string.confirm), getString(R.string.denied), false))
+                RxImageDialog(RxImageDialog.Builder(act, R.drawable.help_access_noti_allow, getString(R.string.dialog_allow_noti_help_allow), getString(R.string.confirm), getString(R.string.denied), false))
                     .show()
                     .subscribe { confirm ->
                         if (confirm) startAllowNotiPermission()
