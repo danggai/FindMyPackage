@@ -11,11 +11,9 @@
     </data>
 
     <androidx.appcompat.widget.AppCompatTextView
-        style="@style/EditText"
+        style="@style/TextView.MatchMatch"
         android:id="@+id/tv_carrier_name"
         android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:text="@string/msg_empty_track_list"
         android:textColor="@color/c1"
         android:textSize="18sp"

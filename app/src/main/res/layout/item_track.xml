@@ -64,8 +64,7 @@
                     >
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/TextView"
-                        android:layout_width="match_parent"
+                        style="@style/TextView.MatchWrap"
                         android:id="@+id/tv_item_name"
                         android:hint="@string/item_name_empty"
                         android:gravity="start"

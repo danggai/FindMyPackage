@@ -14,12 +14,11 @@
     </data>
 
     <androidx.appcompat.widget.AppCompatTextView
+        style="@style/TextView"
         android:id="@+id/tv_carrier_name"
         android:gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="@{item.name}"
-        android:textSize="16sp"
+        android:textSize="14sp"
         android:hint="@string/carrier_name"
         android:singleLine="true"
         android:textColor="@color/sel_carrier_font_color"

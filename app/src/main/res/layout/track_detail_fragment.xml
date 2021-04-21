@@ -24,7 +24,7 @@
                 >
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    style="@style/EditText"
+                    style="@style/TextView"
                     android:id="@+id/tv_item_name"
                     android:layout_width="0dp"
                     android:layout_weight="1"
@@ -57,7 +57,7 @@
                 >
 
                 <TextView
-                    style="@style/EditText"
+                    style="@style/TextView"
                     android:textColor="@color/f1"
                     android:textSize="14sp"
                     android:text="@{vm.lvTrackEntity.carrierName}"
@@ -65,7 +65,7 @@
                     />
 
                 <TextView
-                    style="@style/EditText"
+                    style="@style/TextView"
                     android:textColor="@color/f1"
                     android:textSize="16sp"
                     android:text="@{vm.lvTrackEntity.trackId}"
@@ -84,7 +84,7 @@
                 >
 
                 <TextView
-                    style="@style/EditText"
+                    style="@style/TextView"
                     android:text="@{vm.lvTrackData.From.name}"
                     android:textColor="@color/f1"
                     android:textSize="14sp"
@@ -92,7 +92,7 @@
                     android:hint="발송인" />
 
                 <TextView
-                    style="@style/EditText"
+                    style="@style/TextView"
                     android:text="님 으로부터"
                     android:textColor="@color/f1"
                     android:textSize="14sp"
@@ -108,7 +108,7 @@
                 >
 
                 <TextView
-                    style="@style/EditText"
+                    style="@style/TextView"
                     android:textColor="@color/f1"
                     android:text="@{vm.lvTrackData.To.name}"
                     android:textSize="14sp"
@@ -116,7 +116,7 @@
                     android:hint="수취인" />
 
                 <TextView
-                    style="@style/EditText"
+                    style="@style/TextView"
                     android:text="님 께"
                     android:textColor="@color/f1"
                     android:textSize="14sp"

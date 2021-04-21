@@ -27,9 +27,8 @@
             />
 
         <androidx.appcompat.widget.AppCompatTextView
+            style="@style/TextView.MatchWrap"
             android:id="@+id/tv_message"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:paddingHorizontal="10dp"
             android:text="@string/hint_dialog"
             android:textSize="14sp"
@@ -55,9 +54,8 @@
                 app:mrl_rippleDuration="250" >
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TextView.MatchMatch"
                     android:id="@+id/tv_cancel"
-                    android:layout_height="match_parent"
-                    android:layout_width="match_parent"
                     android:text="@string/cancel"
                     android:textSize="18sp"
                     android:gravity="center"
@@ -75,6 +73,7 @@
                 app:mrl_rippleDuration="250" >
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TextView.MatchMatch"
                     android:id="@+id/tv_confirm"
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"

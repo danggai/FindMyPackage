@@ -3,16 +3,24 @@
     <style name="TextView">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:letterSpacing">-0.04</item>
     </style>
 
-    <style name="EditText">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="TextView.MatchWrap" parent="TextView">
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
+    <style name="TextView.MatchMatch" parent="TextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="EditText" parent="TextView">
         <item name="android:maxLines">1</item>
         <item name="android:singleLine">true</item>
     </style>
 
-    <style name="EditText.MatchWrap">
+    <style name="EditText.MatchWrap" parent="EditText">
         <item name="android:layout_width">match_parent</item>
         <item name="android:textAlignment">center</item>
     </style>
