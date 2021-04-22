@@ -24,9 +24,10 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
     var lvStartSettingAct = MutableLiveData<Event<Boolean>>()
     var lvStartDetailAct = MutableLiveData<Event<TrackEntity>>()
     var lvIsRefresh: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(false)
+    var lvIsFirstInit: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(true)
 
     private val rxApiCarrier: PublishSubject<Boolean> = PublishSubject.create()
-    private val rxApiCarrierTracks: PublishSubject<Pair<String, String>> = PublishSubject.create()
+    private val rxApiCarrierTracks: PublishSubject<TrackEntity> = PublishSubject.create()
     private val rxDaoSelectAll: PublishSubject<Boolean> = PublishSubject.create()
     private val rxDaoUpdate: PublishSubject<TrackEntity> = PublishSubject.create()
     private val rxDaoDelete: PublishSubject<TrackEntity> = PublishSubject.create()
@@ -34,9 +35,8 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
     private var _lvMyTracksList: NonNullMutableLiveData<List<TrackEntity>> = NonNullMutableLiveData(listOf())
     val lvMyTracksList = _lvMyTracksList
 
-    private var lvRefreshStack: NonNullMutableLiveData<MutableList<Boolean>> = NonNullMutableLiveData(mutableListOf())
-
     private var _mTrackId: String = ""
+    private var lvRefreshCount: NonNullMutableLiveData<Int> = NonNullMutableLiveData(0)
 
     private var lvRefreshSwitch: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(false)
 
@@ -64,7 +64,10 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
             .subscribe ({ items ->
                 log.e(items)
                 _lvMyTracksList.value = items
-                if (lvRefreshSwitch.value) refreshAll()
+                if (lvRefreshSwitch.value) {
+                    lvRefreshSwitch.value = false
+                    refreshAll()
+                }
             }, {
                 it.message?.let { msg -> log.e(msg) }
             }).addCompositeDisposable()
@@ -72,6 +75,7 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
         rxDaoUpdate
             .observeOn(Schedulers.newThread())
             .subscribe ({ item ->
+                log.e("refreshed item.trackId -> ${item.trackId}")
                 dao.update(
                     TrackEntity(item.trackId, dao.selectItemNameById(item.trackId), item.fromName, item.carrierId, item.carrierName, item.recentTime, item.recentStatus)
                 )
@@ -89,10 +93,18 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
             }).addCompositeDisposable()
 
         rxApiCarrierTracks
+            .observeOn(AndroidSchedulers.mainThread())
+            .filter {
+                val idx = lvMyTracksList.value.indexOf(it)
+                if (lvMyTracksList.value[idx].recentStatus!!.contains(Constant.STATE_DELIVERY_COMPLETE)) {
+                    checkRefreshing()
+                    false
+                } else true
+            }
             .observeOn(Schedulers.newThread())
             .switchMap {
-                _mTrackId = it.second
-                api.carriersTracks(it.first, it.second)
+                _mTrackId = it.trackId
+                api.carriersTracks(it.carrierId, it.trackId)
             }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ res ->
@@ -102,28 +114,27 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
                         rxDaoUpdate.onNext(
                             TrackEntity(_mTrackId, "", res.data.from.name, res.data.carrier.id, res.data.carrier.name, res.data.progresses[res.data.progresses.size-1].time, res.data.state.text)
                         )
-                        checkRefreshing()
                     }
                     Constant.META_CODE_BAD_REQUEST,
                     Constant.META_CODE_NOT_FOUND,
                     Constant.META_CODE_SERVER_ERROR -> {
-//                        lvMakeToast.value = getString(R.string.msg_network_error)
-                        checkRefreshing()
                     }
                     else -> {
-                        checkRefreshing()
                     }
                 }
+                checkRefreshing()
             }, {
                 it.message?.let { msg -> log.e(msg) }
             }).addCompositeDisposable()
     }
 
     fun getAllTrackList() {
+        log.e()
         rxDaoSelectAll.onNext(true)
     }
 
     fun initUI() {
+        if (!lvIsFirstInit.value) return else lvIsFirstInit.value = false
         log.e()
         lvRefreshSwitch.value = true
         getAllTrackList()
@@ -160,21 +171,18 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
 
     fun refreshAll() {
         log.e()
-        for (item in _lvMyTracksList.value) {
-            if (item.recentStatus?.contains(Constant.STATE_DELIVERY_COMPLETE) == false) {
-                lvRefreshStack.value.add(true)
-                rxApiCarrierTracks.onNext(Pair(item.carrierId, item.trackId))
-            }
-        }
-        if (lvRefreshStack.value.size == 0) {
-            lvIsRefresh.value = false
-            return
+        lvRefreshCount.value = lvMyTracksList.value.size
+
+        for (item in lvMyTracksList.value) {
+            rxApiCarrierTracks.onNext(item)
         }
     }
 
     private fun checkRefreshing() {
-        lvRefreshStack.value.remove(true)
-        if (lvRefreshStack.value.size == 0) lvIsRefresh.value = false
+        if (--lvRefreshCount.value == 0) {
+            log.e()
+            lvIsRefresh.value = false
+        }
     }
 
 }
