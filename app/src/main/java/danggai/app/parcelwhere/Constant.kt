@@ -3,6 +3,8 @@ package danggai.app.parcelwhere
 object Constant {
     const val BASE_URL = "https://apis.tracker.delivery/"
 
+    const val URL_GOOGLE_FORM_NOTI_FAIL = "https://forms.gle/CizyMXQJykaE6RCc7"
+
     const val META_CODE_SUCCESS = 200
     const val META_CODE_BAD_REQUEST = 400
     const val META_CODE_NOT_FOUND = 404

@@ -102,6 +102,37 @@
 
             <View style="@style/LinearDevider.15dp" />
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="20dp"
+                android:paddingHorizontal="30dp"
+                >
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TextView"
+                    android:text="@string/notification_catch_fail"
+                    android:textSize="16sp"
+                    android:textColor="@color/c1"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@android:drawable/ic_menu_info_details"
+                    android:onClick="@{() -> vm.onClickNotiReadFail()}"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View style="@style/LinearDevider.15dp" />
+
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/TextView"
                 android:layout_width="match_parent"

@@ -18,6 +18,8 @@ class SettingViewModel(override val app: Application, private val api: ApiReposi
     var lvStartGetNotiSetting = MutableLiveData<Event<Boolean>>()
     var lvIsAllowGetNoti: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(false)
 
+    var lvStartNotiFailForm = MutableLiveData<Event<Boolean>>()
+
     var lvAppVersion: NonNullMutableLiveData<String> = NonNullMutableLiveData("1.0.0")
 
     init {
@@ -32,6 +34,11 @@ class SettingViewModel(override val app: Application, private val api: ApiReposi
     fun onClickGetNotiSwitch() {
         log.e()
         lvStartGetNotiSetting.value = Event(lvIsAllowGetNoti.value)
+    }
+
+    fun onClickNotiReadFail() {
+        log.e()
+        lvStartNotiFailForm.value = Event(true)
     }
 
 }

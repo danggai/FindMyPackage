@@ -18,6 +18,7 @@
     <string name="notification">알림</string>
     <string name="notification_access">알림으로 운송장 자동 등록</string>
     <string name="get_notification">운송장 자동 등록 시 알림 수신</string>
+    <string name="notification_catch_fail">앱이 알림을 인식하지 못하나요?</string>
 
     <string name="app_info">앱 정보</string>
 
@@ -41,6 +42,7 @@
     <string name="dialog_allow_noti_help_reject">위와 같은 팝업이 나오면, 앱의 알림 접근 권한을 허용 안 됨으로 조정해 주세요.\n\n더 이상 운송장 번호를 자동으로 등록하지 않아요.</string>
     <string name="dialog_get_noti_help_allow">운송장이 자동으로 등록 될 때, 알림으로 안내드려요.</string>
     <string name="dialog_get_noti_help_reject">운송장이 자동으로 등록 될 때, 더 이상 알림으로 안내드리지 않아요.</string>
+    <string name="dialog_start_noti_fail_form">알림에 택배사 이름과, 운송장 번호가 있어야지 앱이 알림을 인식 할 수 있어요.\n\n그럼에도 인식하지 못한다면, 인식하지 못하는 알림메세지를 개발자에게 전달해서 함께 앱을 개선할 수 있어요.\n\n개발자에게 알림을 공유하시겠어요?</string>
 
     <!--    메세지    -->
     <string name="msg_track_id_empty">운송장 번호를 입력해 주세요.</string>

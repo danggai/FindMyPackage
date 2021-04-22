@@ -1,5 +1,7 @@
 package danggai.app.parcelwhere.ui.setting
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
@@ -76,6 +78,21 @@ class SettingFragment : BindingFragment<SettingFragmentBinding>() {
                             !allowed
                         } else allowed
 //                        if (it) startAllowNotiPermission()
+                    }
+            }
+        })
+
+        mVM.lvStartNotiFailForm.observe(viewLifecycleOwner, EventObserver { allowed ->
+            log.e()
+            activity?.let { act ->
+                RxImageDialog(RxImageDialog.Builder(act, null, getString(R.string.dialog_start_noti_fail_form), getString(R.string.confirm), getString(R.string.denied), false))
+                    .show()
+                    .subscribe {
+                        if (it) {
+                            val itn = Intent(Intent.ACTION_VIEW)
+                            itn.data = Uri.parse(Constant.URL_GOOGLE_FORM_NOTI_FAIL)
+                            act.startActivity(itn)
+                        }
                     }
             }
         })
