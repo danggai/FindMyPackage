@@ -9,6 +9,7 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import danggai.app.parcelwhere.Constant
+import danggai.app.parcelwhere.R
 import danggai.app.parcelwhere.util.log
 
 open class BaseFragment: Fragment() {
@@ -60,11 +61,12 @@ open class BaseFragment: Fragment() {
         lvCopyClipboard.observe(viewLifecycleOwner, Observer { trackId ->
             activity?.let {
                 val clipboard: ClipboardManager = context!!.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-//                clipboard?.addPrimaryClipChangedListener {
-//                    if (clipboard.hasPrimaryClip() && clipboard.primaryClipDescription?.hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN) == true) {
+                clipboard?.addPrimaryClipChangedListener {
+                    if (clipboard.hasPrimaryClip() && clipboard.primaryClipDescription?.hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN) == true) {
 //                        makeToast(String.format(getString(R.string.msg_copy_complete), trackId))
-//                    }
-//                }
+                        makeToast(getString(R.string.msg_copy_complete_temp))
+                    }
+                }
 
                 val clip = ClipData.newPlainText(Constant.CLIPBOARD_LABEL_TRACK_ID, trackId)
                 clipboard?.setPrimaryClip(clip)

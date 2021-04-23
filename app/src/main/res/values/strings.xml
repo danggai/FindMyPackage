@@ -47,9 +47,10 @@
     <!--    메세지    -->
     <string name="msg_track_id_empty">운송장 번호를 입력해 주세요.</string>
     <string name="msg_carrier_empty">조회 하실 택배사를 선택해 주세요.</string>
-    <string name="msg_not_exist_network_error">존재하지 않는 운송장 번호거나, 네트워크 오류가 발생했습니다.</string>
-    <string name="msg_network_error">네트워크 오류가 발생했습니다.</string>
+    <string name="msg_not_exist_network_error">존재하지 않는 운송장 번호거나, 네트워크 오류가 발생했어요.</string>
+    <string name="msg_network_error">네트워크 오류가 발생했어요.</string>
     <string name="msg_copy_complete">%s 을 복사했어요.</string>
+    <string name="msg_copy_complete_temp">운송장 번호가 복사됐어요.</string>
     <string name="msg_empty_track_list">저장된 운송장 번호가 없어요.</string>
     <string name="msg_empty_progress_list">운송 정보를 가져오고 있어요.</string>
 
