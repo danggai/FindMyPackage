@@ -35,7 +35,6 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
     private var _lvMyTracksList: NonNullMutableLiveData<List<TrackEntity>> = NonNullMutableLiveData(listOf())
     val lvMyTracksList = _lvMyTracksList
 
-    private var _mTrackId: String = ""
     private var lvRefreshCount: NonNullMutableLiveData<Int> = NonNullMutableLiveData(0)
 
     private var lvRefreshSwitch: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(false)
@@ -103,7 +102,6 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
             }
             .observeOn(Schedulers.newThread())
             .switchMap {
-                _mTrackId = it.trackId
                 api.carriersTracks(it.carrierId, it.trackId)
             }
             .observeOn(AndroidSchedulers.mainThread())
@@ -112,7 +110,7 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
                     Constant.META_CODE_SUCCESS -> {
                         log.e(res.data)
                         rxDaoUpdate.onNext(
-                            TrackEntity(_mTrackId, "", res.data.from.name, res.data.carrier.id, res.data.carrier.name, res.data.progresses[res.data.progresses.size-1].time, res.data.state.text)
+                            TrackEntity(res.data.trackId, "", res.data.from.name, res.data.carrier.id, res.data.carrier.name, res.data.progresses[res.data.progresses.size-1].time, res.data.state.text)
                         )
                     }
                     Constant.META_CODE_BAD_REQUEST,

@@ -26,7 +26,7 @@ class ApiRepository(private val api: ApiInterface) {
     }
 
     fun carriersTracks(carrierId: String, trackId: String): Observable<ResTracks> {
-        val emptyData = Tracks(Tracks.From("",""), Tracks.To("",""), Tracks.State("",""), listOf(), Tracks.Carrier("","",""))
+        val emptyData = Tracks(trackId, Tracks.From("",""), Tracks.To("",""), Tracks.State("",""), listOf(), Tracks.Carrier("","",""))
         return Observable.just(true)
             .switchMap {
                 api.carriersTracks(carrierId, trackId)
@@ -41,7 +41,9 @@ class ApiRepository(private val api: ApiInterface) {
                                 data.progresses = data.progresses.reversed()
                             }
                         }
-                        ResTracks(Meta(res.code(), res.message()), res.body()?:emptyData)
+                        var data = res.body()
+                        data?.trackId = trackId
+                        ResTracks(Meta(res.code(), res.message()), data?:emptyData)
                     } else -> {
                         ResTracks(Meta(res.code(), res.message()), emptyData)
                     }

@@ -1,6 +1,7 @@
 package danggai.app.parcelwhere.data.local
 
 data class Tracks (
+    var trackId: String,
     val from: From,
     val to: To,
     val state: State,

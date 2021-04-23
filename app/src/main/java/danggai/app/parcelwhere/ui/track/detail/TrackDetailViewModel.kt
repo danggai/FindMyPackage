@@ -30,7 +30,7 @@ class TrackDetailViewModel(override val app: Application, private val api: ApiRe
     private val rxFragmentQuit: PublishSubject<Boolean> = PublishSubject.create()
 
     var lvTrackEntity: NonNullMutableLiveData<TrackEntity> = NonNullMutableLiveData(TrackEntity("","","","","","",""))
-    var lvTrackData: NonNullMutableLiveData<Tracks> = NonNullMutableLiveData(Tracks(Tracks.From("",""), Tracks.To("",""), Tracks.State("",""), listOf(), Tracks.Carrier("","","")))
+    var lvTrackData: NonNullMutableLiveData<Tracks> = NonNullMutableLiveData(Tracks("", Tracks.From("",""), Tracks.To("",""), Tracks.State("",""), listOf(), Tracks.Carrier("","","")))
 
     var lvItemName: NonNullMutableLiveData<String> = NonNullMutableLiveData("")
 
