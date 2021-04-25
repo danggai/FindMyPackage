@@ -73,34 +73,16 @@ class MyNotificationListenerService: NotificationListenerService() {
 
         if (!PreferenceManager.getBooleanDefaultTrue(applicationContext, Constant.PREF_ALLOW_GET_NOTI)) return
 
-        val notificationManager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val msg = "${item.itemName} (${CarrierUtil.getCarrierName(item.carrierId)} ${item.trackId}) 이 자동 등록 되었습니다."
 
         val resultIntent = Intent(this, TrackDetailActivity::class.java)
-        resultIntent.putExtra(TrackDetailActivity.ARG_TRACK_ENTITY, item)
+            .putExtra(TrackDetailActivity.ARG_TRACK_ENTITY, item)
         val resultPendingIntent: PendingIntent? = TaskStackBuilder.create(this).run {
             addNextIntentWithParentStack(resultIntent)
             getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
         }
 
+        CommonFunction.sendNotification(this, resultPendingIntent, msg)
 
-        var builder = NotificationCompat.Builder(this, Constant.PUSH_CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_truck)
-            .setContentText(msg)
-            .setContentIntent(resultPendingIntent)
-            .setAutoCancel(true)
-            .setStyle(NotificationCompat.BigTextStyle().bigText(msg))
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            notificationManager.createNotificationChannel(
-                NotificationChannel(Constant.PUSH_CHANNEL_ID, Constant.PUSH_CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH).apply {
-                    description = Constant.PUSH_CHANNEL_DESC
-                }
-            )
-        }
-
-        notificationManager.notify(0, builder.build())
     }
 }

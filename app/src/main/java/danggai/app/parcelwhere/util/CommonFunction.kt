@@ -1,6 +1,14 @@
 package danggai.app.parcelwhere.util
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
+import android.os.Build
+import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat.getSystemService
 import danggai.app.parcelwhere.Constant
+import danggai.app.parcelwhere.R
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -51,5 +59,30 @@ object CommonFunction {
         val beforeDate: Date? = SimpleDateFormat(Constant.DATE_FORMAT_BEFORE).parse(string)
         beforeDate?.let { return SimpleDateFormat(Constant.DATE_FORMAT_AFTER).format(it) }
         return "날짜 정보가 없습니다."
+    }
+
+    fun sendNotification(context: Context, pendingIntent: PendingIntent?, msg: String) {
+
+        val notificationManager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        var builder = NotificationCompat.Builder(context, Constant.PUSH_CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_truck)
+            .setContentText(msg)
+            .setContentIntent(pendingIntent)
+            .setAutoCancel(true)
+            .setStyle(NotificationCompat.BigTextStyle().bigText(msg))
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            notificationManager.createNotificationChannel(
+                NotificationChannel(Constant.PUSH_CHANNEL_ID, Constant.PUSH_CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH).apply {
+                    description = Constant.PUSH_CHANNEL_DESC
+                }
+            )
+        }
+
+        notificationManager.notify(0, builder.build())
+
     }
 }
