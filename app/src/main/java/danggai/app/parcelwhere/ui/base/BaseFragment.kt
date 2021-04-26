@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import danggai.app.parcelwhere.Constant
 import danggai.app.parcelwhere.R
+import danggai.app.parcelwhere.util.EventObserver
 import danggai.app.parcelwhere.util.log
 
 open class BaseFragment: Fragment() {
@@ -52,13 +53,13 @@ open class BaseFragment: Fragment() {
 
     fun BaseViewModel.setCommonFun(view: View) {
 
-        lvMakeToast.observe(viewLifecycleOwner, Observer { msg ->
+        lvMakeToast.observe(viewLifecycleOwner, EventObserver { msg ->
             activity?.let {
                 if (msg.isNotBlank()) makeToast(msg)
             }
         })
 
-        lvCopyClipboard.observe(viewLifecycleOwner, Observer { trackId ->
+        lvCopyClipboard.observe(viewLifecycleOwner, EventObserver { trackId ->
             activity?.let {
                 val clipboard: ClipboardManager = context!!.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
                 clipboard?.addPrimaryClipChangedListener {

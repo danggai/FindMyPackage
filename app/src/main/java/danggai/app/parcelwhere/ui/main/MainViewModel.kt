@@ -159,7 +159,7 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
 
     fun onClickTrackId(item: TrackEntity) {
         log.e()
-        lvCopyClipboard.value = item.trackId
+        lvCopyClipboard.value = Event(item.trackId)
     }
 
     fun onClickDelete(item: TrackEntity) {

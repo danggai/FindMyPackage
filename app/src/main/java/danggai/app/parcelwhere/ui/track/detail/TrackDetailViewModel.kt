@@ -54,7 +54,7 @@ class TrackDetailViewModel(override val app: Application, private val api: ApiRe
                     Constant.META_CODE_BAD_REQUEST,
                     Constant.META_CODE_SERVER_ERROR -> {
                         log.e()
-                        lvMakeToast.value = getString(R.string.msg_network_error)
+                        lvMakeToast.value = Event(getString(R.string.msg_network_error))
                         goBack()
                     }
                     Constant.META_CODE_NOT_FOUND -> {
@@ -107,7 +107,7 @@ class TrackDetailViewModel(override val app: Application, private val api: ApiRe
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe ({
                 log.e()
-                lvMakeToast.value = getString(R.string.toast_parcel_delete_done)
+                lvMakeToast.value = Event(getString(R.string.toast_parcel_delete_done))
                 lvGoBack.value = Event(true)
             }, {
                 it.message?.let { msg -> log.e(msg) }

@@ -68,7 +68,7 @@ class TrackAddViewModel(override val app: Application, private val api: ApiRepos
                     Constant.META_CODE_BAD_REQUEST,
                     Constant.META_CODE_NOT_FOUND,
                     Constant.META_CODE_SERVER_ERROR -> {
-                        lvMakeToast.value = getString(R.string.msg_not_exist_network_error)
+                        lvMakeToast.value = Event(getString(R.string.msg_not_exist_network_error))
                     }
                     else -> {
 
@@ -121,9 +121,9 @@ class TrackAddViewModel(override val app: Application, private val api: ApiRepos
             lvTrackId.value.isNotEmpty() && lvCarrierId.value.isNotEmpty() -> {
                 rxApiCarrierTracks.onNext(Pair(lvCarrierId.value, lvTrackId.value))
             } lvCarrierId.value.isEmpty() -> {
-                lvMakeToast.value = getString(R.string.msg_carrier_empty)
+                lvMakeToast.value = Event(getString(R.string.msg_carrier_empty))
             } lvTrackId.value.isEmpty() -> {
-                lvMakeToast.value = getString(R.string.msg_track_id_empty)
+                lvMakeToast.value = Event(getString(R.string.msg_track_id_empty))
             } else -> {
                 log.e()
             }
