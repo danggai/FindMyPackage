@@ -4,6 +4,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
+import android.content.ContextWrapper
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat.getSystemService
@@ -27,10 +28,16 @@ object CommonFunction {
     }
 
     fun getTrackId(string: String): String {
-        if (string.contains("송장")) {
-            for (line in string.split("\n")) {
-                if (line.contains("송장")) {
-                    return line.replace(Regex(Constant.PATTERN_NUM_ONLY), "")
+        val keywords: MutableList<String> = mutableListOf("송장", "배송")
+        for (keyword in keywords) {
+            if (string.contains(keyword)) {
+                val substring = string.substring(string.indexOf(keyword) + keyword.length + 1)
+                for (str in substring.split("/", ":", "\n")) {
+                    val number = str.replace(Regex(Constant.PATTERN_NUM_ONLY), "")
+                    if (number.length in 9..14) {
+                        log.e(number)
+                        return number
+                    }
                 }
             }
         }
@@ -41,7 +48,7 @@ object CommonFunction {
         val keywords: MutableList<String> = mutableListOf("상품명", "물품명")
         for (keyword in keywords) {
             if (string.contains(keyword)) {
-                val substring = string.substring(string.lastIndexOf(keyword) + keyword.length + 1)
+                val substring = string.substring(string.indexOf(keyword) + keyword.length + 1)
                 val tokens = substring.split(":", "\n")
                 log.e(tokens)
                 for (name in tokens) {
