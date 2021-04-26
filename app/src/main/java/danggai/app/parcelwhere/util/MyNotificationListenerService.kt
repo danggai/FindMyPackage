@@ -61,6 +61,7 @@ class MyNotificationListenerService: NotificationListenerService() {
 
             log.e("itemName = $itemName, carrierId = $carrierId, trackId = $trackId")
             if ((trackId.length in 9..14 && CarrierUtil.checkCarrierId(carrierId))) {
+                log.e()
                 rxDaoInsertWithIgnore.onNext(
                     TrackEntity(trackId, itemName, "", carrierId, CarrierUtil.getCarrierName(carrierId), CommonFunction.now(), "")
                 )
@@ -81,10 +82,12 @@ class MyNotificationListenerService: NotificationListenerService() {
             .putExtra(TrackDetailActivity.ARG_TRACK_ENTITY, item)
         val resultPendingIntent: PendingIntent? = TaskStackBuilder.create(this).run {
             addNextIntentWithParentStack(resultIntent)
+//            getPendingIntent(item.trackId.toInt(), PendingIntent.FLAG_UPDATE_CURRENT)
             getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
         }
 
-        CommonFunction.sendNotification(this, notificationManager, resultPendingIntent, msg)
+        CommonFunction.sendNotification(0, this, notificationManager, resultPendingIntent, msg)
+//        CommonFunction.sendNotification(item.trackId.toInt(), this, notificationManager, resultPendingIntent, msg)
 
     }
 }

@@ -68,8 +68,7 @@ object CommonFunction {
         return "날짜 정보가 없습니다."
     }
 
-    fun sendNotification(context: Context, notiManager: NotificationManager, pendingIntent: PendingIntent?, msg: String) {
-
+    fun sendNotification(id: Int, context: Context, notiManager: NotificationManager, pendingIntent: PendingIntent?, msg: String) {
         var builder = NotificationCompat.Builder(context, Constant.PUSH_CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_truck)
             .setContentText(msg)
@@ -87,7 +86,10 @@ object CommonFunction {
             )
         }
 
-        notiManager.notify(0, builder.build())
+        notiManager.notify(id, builder.build())
+    }
 
+    fun sendNotification(context: Context, notiManager: NotificationManager, pendingIntent: PendingIntent?, msg: String) {
+        sendNotification(0, context, notiManager, pendingIntent, msg)
     }
 }
