@@ -61,9 +61,7 @@ object CommonFunction {
         return "날짜 정보가 없습니다."
     }
 
-    fun sendNotification(context: Context, pendingIntent: PendingIntent?, msg: String) {
-
-        val notificationManager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+    fun sendNotification(context: Context, notiManager: NotificationManager, pendingIntent: PendingIntent?, msg: String) {
 
         var builder = NotificationCompat.Builder(context, Constant.PUSH_CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_truck)
@@ -75,14 +73,14 @@ object CommonFunction {
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            notificationManager.createNotificationChannel(
+            notiManager.createNotificationChannel(
                 NotificationChannel(Constant.PUSH_CHANNEL_ID, Constant.PUSH_CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH).apply {
                     description = Constant.PUSH_CHANNEL_DESC
                 }
             )
         }
 
-        notificationManager.notify(0, builder.build())
+        notiManager.notify(0, builder.build())
 
     }
 }

@@ -71,6 +71,8 @@ class MyNotificationListenerService: NotificationListenerService() {
     private fun sendNoti(item: TrackEntity) {
         log.e()
 
+        val notificationManager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
         if (!PreferenceManager.getBooleanDefaultTrue(applicationContext, Constant.PREF_ALLOW_GET_NOTI)) return
 
         val msg = "${item.itemName} (${CarrierUtil.getCarrierName(item.carrierId)} ${item.trackId}) 이 자동 등록 되었습니다."
@@ -82,7 +84,7 @@ class MyNotificationListenerService: NotificationListenerService() {
             getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
         }
 
-        CommonFunction.sendNotification(this, resultPendingIntent, msg)
+        CommonFunction.sendNotification(this, notificationManager, resultPendingIntent, msg)
 
     }
 }
