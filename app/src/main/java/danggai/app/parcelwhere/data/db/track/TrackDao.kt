@@ -11,6 +11,9 @@ interface TrackDao {
     @Query("SELECT DISTINCT * FROM Track WHERE trackId = :id")
     fun selectById(id: String): Observable<TrackEntity>
 
+    @Query("SELECT EXISTS(SELECT DISTINCT * FROM Track WHERE trackId = :id)")
+    fun existById(id: String): Observable<Boolean>
+
     @Query("SELECT DISTINCT item_name FROM Track WHERE trackId = :id")
     fun selectItemNameById(id: String): String
 

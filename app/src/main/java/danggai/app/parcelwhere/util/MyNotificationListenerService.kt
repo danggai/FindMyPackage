@@ -3,16 +3,16 @@ package danggai.app.parcelwhere.util
 import android.app.*
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
-import androidx.core.app.NotificationCompat
 import danggai.app.parcelwhere.Constant
-import danggai.app.parcelwhere.R
+import danggai.app.parcelwhere.data.api.ApiInterface
+import danggai.app.parcelwhere.data.api.ApiRepository
 import danggai.app.parcelwhere.data.db.AppDatabase
 import danggai.app.parcelwhere.data.db.track.TrackDao
 import danggai.app.parcelwhere.data.db.track.TrackEntity
 import danggai.app.parcelwhere.ui.track.detail.TrackDetailActivity
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
@@ -23,10 +23,13 @@ class MyNotificationListenerService: NotificationListenerService() {
     private val dao: TrackDao = db.trackDao()
 
     private val rxDaoInsertWithIgnore: PublishSubject<TrackEntity> = PublishSubject.create()
+    private val rxDaoExistById: PublishSubject<TrackEntity> = PublishSubject.create()
     private val compositeDisposable = CompositeDisposable()
 
+    private var newTrackEntity: NonNullMutableLiveData<TrackEntity> = NonNullMutableLiveData(TrackEntity("","","","","","",""))
+
     init {
-        compositeDisposable.add (
+        compositeDisposable.addAll (
             rxDaoInsertWithIgnore
                 .observeOn(Schedulers.newThread())
                 .subscribe ({ item ->
@@ -35,7 +38,31 @@ class MyNotificationListenerService: NotificationListenerService() {
                     log.e(item)
                 }, {
                     it.message?.let { msg -> log.e(msg) }
-                })
+                }),
+
+            rxDaoExistById
+                .observeOn(AndroidSchedulers.mainThread())
+                .filter { track ->
+                    newTrackEntity.value = track
+                    true
+                }
+                .observeOn(Schedulers.newThread())
+                .switchMap { track ->
+                    log.e(track)
+                    dao.existById(track.trackId)
+                }
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ exist ->
+                    if (exist) {
+                        log.e()
+                        // TODO(이후 이미 등록 된 아이템은 새로고침하여 내역 변동 시 알림)
+                    } else {
+                        log.e()
+                        rxDaoInsertWithIgnore.onNext(newTrackEntity.value)
+                    }
+                }, {
+                    it.message?.let { msg -> log.e(msg) }
+                }),
         )
     }
 
@@ -62,9 +89,12 @@ class MyNotificationListenerService: NotificationListenerService() {
             log.e("itemName = $itemName, carrierId = $carrierId, trackId = $trackId")
             if ((trackId.length in 9..14 && CarrierUtil.checkCarrierId(carrierId))) {
                 log.e()
-                rxDaoInsertWithIgnore.onNext(
-                    TrackEntity(trackId, itemName, "", carrierId, CarrierUtil.getCarrierName(carrierId), CommonFunction.now(), "")
-                )
+                val track = TrackEntity(trackId, itemName, "", carrierId, CarrierUtil.getCarrierName(carrierId), CommonFunction.now(), "")
+
+                rxDaoExistById.onNext(track)
+//                rxDaoInsertWithIgnore.onNext(
+//                    TrackEntity(trackId, itemName, "", carrierId, CarrierUtil.getCarrierName(carrierId), CommonFunction.now(), "")
+//                )
             }
         }
     }
