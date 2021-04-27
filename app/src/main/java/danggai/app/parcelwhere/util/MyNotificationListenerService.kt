@@ -78,7 +78,10 @@ class MyNotificationListenerService: NotificationListenerService() {
 
     override fun onNotificationPosted(sbn: StatusBarNotification?) {
         super.onNotificationPosted(sbn)
-        if (sbn?.packageName == application.packageName) return
+        if (sbn!!.notification.flags and Notification.FLAG_GROUP_SUMMARY != 0
+            || sbn?.packageName == application.packageName) {
+            return
+        }
         sbn?.notification?.let {
             val text: CharSequence = it.extras.getCharSequence(Notification.EXTRA_TEXT)?:""
 
