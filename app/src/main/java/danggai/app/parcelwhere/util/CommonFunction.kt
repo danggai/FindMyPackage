@@ -34,7 +34,8 @@ object CommonFunction {
                 val substring = string.substring(string.indexOf(keyword) + keyword.length + 1)
                 for (str in substring.split("/", ":", "\n")) {
                     val number = str.replace(Regex(Constant.PATTERN_NUM_ONLY), "")
-                    if (number.length in 9..14) {
+                    if (number.length in 9..14 &&
+                        !number.startsWith("010")) {
                         log.e(number)
                         return number
                     }

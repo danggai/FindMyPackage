@@ -41,7 +41,7 @@ open class BaseFragment: Fragment() {
         log.e()
         return NotificationManagerCompat.getEnabledListenerPackages(context!!)
             .any { enabledPackageName ->
-                log.e(enabledPackageName)
+//                log.e(enabledPackageName)
                 enabledPackageName == context?.packageName
             }
     }
