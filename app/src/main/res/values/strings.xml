@@ -36,7 +36,7 @@
     <string name="dialog_name_change_toast_done">변경되었어요.</string>
     <string name="dialog_name_change_toast_fail">변경에 실패했어요.</string>
 
-    <string name="dialog_parcel_not_found">택배를 조회할 수 없어요.\n 인터넷 오류일 수도 있지만, 잘못 인식된 운송장 번호가 자동 등록되었을 수도 있어요.\n이 택배를 삭제할까요?</string>
+    <string name="dialog_parcel_not_found">택배를 조회할 수 없어요.\n보통 이런 문제는 이런 이유로 발생해요.\n\n1. 판매자가 택배사에 물품을 보내지 않은 경우\n2. 잘못 인식된 운송장 번호가 자동 등록 된 경우\n3. 인터넷 통신 오류\n\n잘못 등록 된 택배라면, 이 택배를 삭제할까요?</string>
 
     <string name="dialog_allow_noti_help_allow">운송장번호를 자동으로 등록하기 위해 앱의 알림 접근 권한을 허용해주세요.\n\n앱은 절대 운송장, 물건명 외의 정보에 접근하거나 정보를 기기 밖으로 전달하지 않아요.</string>
     <string name="dialog_allow_noti_help_reject">위와 같은 팝업이 나오면, 앱의 알림 접근 권한을 허용 안 됨으로 조정해 주세요.\n\n더 이상 운송장 번호를 자동으로 등록하지 않아요.</string>
