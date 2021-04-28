@@ -1,5 +1,9 @@
 package danggai.app.parcelwhere.ui.main
 
+import android.content.ClipData
+import android.content.ClipDescription
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
@@ -25,6 +29,7 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
     }
 
     private lateinit var mVM: MainViewModel
+    private lateinit var clipboard: ClipboardManager
 
     @LayoutRes
     override fun getLayoutResId() = R.layout.main_fragment
@@ -66,6 +71,7 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
 
         initUi()
         initLv()
+        initClipBoard()
     }
 
     override fun onDestroy() {
@@ -75,6 +81,19 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
 
     private fun initUi() {
         mVM.initUI()
+    }
+
+    private fun initClipBoard() {
+        clipboard = context!!.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        clipboard.addPrimaryClipChangedListener {
+            if (clipboard.hasPrimaryClip() && clipboard.primaryClipDescription?.hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN) == true) {
+                //                        makeToast(String.format(getString(R.string.msg_copy_complete), trackId))
+                log.e()
+                activity?.let {
+                    makeToast(it, getString(R.string.msg_copy_complete_temp))
+                }
+            }
+        }
     }
 
     private fun initLv() {
@@ -93,6 +112,13 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
         mVM.lvStartDetailAct.observe(viewLifecycleOwner, EventObserver{ item ->
             log.d()
             activity?.let {act -> TrackDetailActivity.normalStart(act, item)}
+        })
+        mVM.lvCopyClipboard.observe(viewLifecycleOwner, EventObserver { trackId ->
+            log.e()
+            activity?.let {
+                val clip = ClipData.newPlainText(Constant.CLIPBOARD_LABEL_TRACK_ID, trackId)
+                clipboard?.setPrimaryClip(clip)
+            }
         })
     }
 

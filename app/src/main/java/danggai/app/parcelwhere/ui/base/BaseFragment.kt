@@ -57,20 +57,6 @@ open class BaseFragment: Fragment() {
                 if (msg.isNotBlank()) makeToast(it, msg)
             }
         })
-
-        lvCopyClipboard.observe(viewLifecycleOwner, EventObserver { trackId ->
-            activity?.let {
-                val clipboard: ClipboardManager = context!!.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                clipboard?.addPrimaryClipChangedListener {
-                    if (clipboard.hasPrimaryClip() && clipboard.primaryClipDescription?.hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN) == true) {
-                    }
-                }
-
-                val clip = ClipData.newPlainText(Constant.CLIPBOARD_LABEL_TRACK_ID, trackId)
-                clipboard?.setPrimaryClip(clip)
-            }
-        })
-
     }
 
 }

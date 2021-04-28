@@ -23,6 +23,7 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
     var lvStartAddAct = MutableLiveData<Event<Boolean>>()
     var lvStartSettingAct = MutableLiveData<Event<Boolean>>()
     var lvStartDetailAct = MutableLiveData<Event<TrackEntity>>()
+    var lvCopyClipboard = MutableLiveData<Event<String>>()
     var lvIsRefresh: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(false)
     var lvIsFirstInit: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(true)
 
