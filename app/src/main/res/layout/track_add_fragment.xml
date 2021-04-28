@@ -69,7 +69,7 @@
                         style="@style/EditText.MatchWrap"
                         android:id="@+id/btn_search"
                         android:paddingVertical="10dp"
-                        android:text="@string/track_search"
+                        android:text="@string/track_add"
                         android:textSize="20sp"
                         android:textColor="@color/f1"
                         android:background="@color/c1"

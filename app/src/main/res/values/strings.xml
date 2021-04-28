@@ -4,7 +4,7 @@
     <string name="carrier_name">OO택배</string>
     <string name="item_name">상품 이름</string>
     <string name="track_id">운송장 번호</string>
-    <string name="track_search">운송장 조회</string>
+    <string name="track_add">운송장 추가</string>
     <string name="now_status">현재 상태</string>
     <string name="time">시간</string>
     <string name="recent_time">최근 조회 시간</string>

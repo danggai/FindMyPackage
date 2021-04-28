@@ -29,11 +29,12 @@
                 android:textColor="@color/c1"
                 android:textStyle="bold"
                 android:paddingTop="30dp"
-                android:paddingBottom="15dp"
+                android:paddingBottom="12dp"
                 android:paddingLeft="20dp"
                 />
 
-            <View style="@style/LinearDevider" />
+            <View style="@style/LinearDevider"
+                android:layout_height="3dp"/>
             <View style="@style/AreaDevider" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -141,17 +142,18 @@
                 android:textColor="@color/c1"
                 android:textStyle="bold"
                 android:paddingTop="30dp"
-                android:paddingBottom="15dp"
+                android:paddingBottom="12dp"
                 android:paddingLeft="20dp"
                 />
 
-            <View style="@style/LinearDevider" />
+            <View style="@style/LinearDevider"
+                android:layout_height="3dp"/>
             <View style="@style/AreaDevider" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingVertical="10dp"
+                android:paddingVertical="15dp"
                 android:paddingHorizontal="30dp"
                 >
 
@@ -162,6 +164,9 @@
                     android:background="@drawable/rounded_square_15dp"
                     android:padding="7dp"
                     android:src="@drawable/ic_truck"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     />
 
                 <androidx.appcompat.widget.AppCompatTextView
