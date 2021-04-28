@@ -74,7 +74,7 @@ class SettingFragment : BindingFragment<SettingFragmentBinding>() {
                     .show()
                     .subscribe {
                         mVM.lvIsAllowGetNoti.value = if (it) {
-                            PreferenceManager.setBoolean(context!!, Constant.PREF_ALLOW_GET_NOTI, !allowed)
+                            PreferenceManager.setBoolean(act, Constant.PREF_ALLOW_GET_NOTI, !allowed)
                             !allowed
                         } else allowed
 //                        if (it) startAllowNotiPermission()

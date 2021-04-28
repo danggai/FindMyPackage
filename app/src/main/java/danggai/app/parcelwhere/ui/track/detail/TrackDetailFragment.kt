@@ -47,21 +47,23 @@ class TrackDetailFragment : BindingFragment<TrackDetailFragmentBinding>() {
 
     private fun initLv() {
         mVM.lvModifyItemName.observe(viewLifecycleOwner, EventObserver { itemName ->
-            val input = EditText(activity)
-            input.inputType = InputType.TYPE_CLASS_TEXT
-            input.setText(itemName)
+            activity?.let { act ->
+                val input = EditText(act)
+                input.inputType = InputType.TYPE_CLASS_TEXT
+                input.setText(itemName)
 
-            AlertDialog.Builder(activity)
-                .setTitle(getString(R.string.dialog_name_change_title))
-                .setMessage(getString(R.string.dialog_name_change_msg))
-                .setView(input)
-                .setPositiveButton(getString(R.string.dialog_submit)) { dialog, whichButton ->
-                    makeToast(getString(R.string.dialog_name_change_toast_done))
-                    mVM.updateItemName(input.text.toString())
-                }
-                .setNegativeButton(getString(R.string.dialog_cancel)) { dialog, which -> dialog.cancel() }
-                .setCancelable(false)
-                .show()
+                AlertDialog.Builder(act)
+                    .setTitle(getString(R.string.dialog_name_change_title))
+                    .setMessage(getString(R.string.dialog_name_change_msg))
+                    .setView(input)
+                    .setPositiveButton(getString(R.string.dialog_submit)) { dialog, whichButton ->
+                        makeToast(act, getString(R.string.dialog_name_change_toast_done))
+                        mVM.updateItemName(input.text.toString())
+                    }
+                    .setNegativeButton(getString(R.string.dialog_cancel)) { dialog, which -> dialog.cancel() }
+                    .setCancelable(false)
+                    .show()
+            }
         })
 
         mVM.lvGoBack.observe(viewLifecycleOwner, EventObserver { it ->

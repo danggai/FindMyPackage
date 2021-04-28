@@ -48,7 +48,7 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
                     .show()
                     .subscribe { confirm ->
                         if (confirm) startAllowNotiPermission()
-                        PreferenceManager.setBoolean(context!!, Constant.PREF_IS_FIRST_RUN, false)
+                        PreferenceManager.setBoolean(act, Constant.PREF_IS_FIRST_RUN, false)
                     }
             }
         }

@@ -7,7 +7,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import danggai.app.parcelwhere.Constant
 import danggai.app.parcelwhere.R
 import danggai.app.parcelwhere.util.EventObserver
@@ -19,7 +18,7 @@ open class BaseFragment: Fragment() {
         return activity?.intent ?: Intent()
     }
 
-    fun makeToast(msg: String) {
+    fun makeToast(context: Context, msg: String) {
         log.e()
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
     }
@@ -52,10 +51,10 @@ open class BaseFragment: Fragment() {
     }
 
     fun BaseViewModel.setCommonFun(view: View) {
-
         lvMakeToast.observe(viewLifecycleOwner, EventObserver { msg ->
+            log.e()
             activity?.let {
-                if (msg.isNotBlank()) makeToast(msg)
+                if (msg.isNotBlank()) makeToast(it, msg)
             }
         })
 
@@ -64,8 +63,6 @@ open class BaseFragment: Fragment() {
                 val clipboard: ClipboardManager = context!!.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
                 clipboard?.addPrimaryClipChangedListener {
                     if (clipboard.hasPrimaryClip() && clipboard.primaryClipDescription?.hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN) == true) {
-//                        makeToast(String.format(getString(R.string.msg_copy_complete), trackId))
-                        makeToast(getString(R.string.msg_copy_complete_temp))
                     }
                 }
 
