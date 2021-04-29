@@ -4,13 +4,14 @@ import androidx.databinding.BindingAdapter;
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import danggai.app.parcelwhere.data.db.track.TrackEntity
+import danggai.app.parcelwhere.data.local.TrackListItem
 import kotlin.jvm.JvmStatic;
 
 object MainBindingAdapter {
     @BindingAdapter(value = ["items", "viewModel"], requireAll = true)
     @JvmStatic fun bindItemList(
         view: RecyclerView,
-        items: MutableList<TrackEntity>,
+        items: MutableList<TrackListItem>,
         vm: MainViewModel
     ) {
         view.adapter?.run {

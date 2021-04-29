@@ -9,6 +9,7 @@ import danggai.app.parcelwhere.data.AppSession
 import danggai.app.parcelwhere.data.api.ApiRepository
 import danggai.app.parcelwhere.data.db.track.TrackDao
 import danggai.app.parcelwhere.data.db.track.TrackEntity
+import danggai.app.parcelwhere.data.local.TrackListItem
 import danggai.app.parcelwhere.ui.base.BaseViewModel
 import danggai.app.parcelwhere.util.Event
 import danggai.app.parcelwhere.util.NonNullMutableLiveData
@@ -16,6 +17,7 @@ import danggai.app.parcelwhere.util.log
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
+import java.util.*
 
 
 class MainViewModel(override val app: Application, private val api: ApiRepository, private val dao: TrackDao) : BaseViewModel(app) {
@@ -28,15 +30,13 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
     var lvIsFirstInit: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(true)
 
     private val rxApiCarrier: PublishSubject<Boolean> = PublishSubject.create()
-    private val rxApiCarrierTracks: PublishSubject<TrackEntity> = PublishSubject.create()
+    private val rxApiCarrierTracks: PublishSubject<TrackListItem> = PublishSubject.create()
     private val rxDaoSelectAll: PublishSubject<Boolean> = PublishSubject.create()
     private val rxDaoUpdate: PublishSubject<TrackEntity> = PublishSubject.create()
     private val rxDaoDelete: PublishSubject<TrackEntity> = PublishSubject.create()
 
-    private var _lvMyTracksList: NonNullMutableLiveData<List<TrackEntity>> = NonNullMutableLiveData(listOf())
+    private var _lvMyTracksList: NonNullMutableLiveData<List<TrackListItem>> = NonNullMutableLiveData(listOf())
     val lvMyTracksList = _lvMyTracksList
-
-    private var lvRefreshCount: NonNullMutableLiveData<Int> = NonNullMutableLiveData(0)
 
     private var lvRefreshSwitch: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(false)
 
@@ -58,27 +58,50 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
             .observeOn(Schedulers.newThread())
             .filter { it }
             .switchMap {
+                log.e()
                 dao.selectAll()
             }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe ({ items ->
                 log.e(items)
-                _lvMyTracksList.value = items
+                val trackItems = mutableListOf<TrackListItem>()
+                for (item in items) {
+                    trackItems.add(TrackListItem(item, NonNullMutableLiveData(false),  false))
+                }
+                _lvMyTracksList.value = trackItems
+
                 if (lvRefreshSwitch.value) {
                     lvRefreshSwitch.value = false
                     refreshAll()
                 }
+
+                rxDaoSelectAll.onComplete()
             }, {
                 it.message?.let { msg -> log.e(msg) }
+            }, {
+                log.e()
             }).addCompositeDisposable()
 
         rxDaoUpdate
             .observeOn(Schedulers.newThread())
-            .subscribe ({ item ->
-                log.e("refreshed item.trackId -> ${item.trackId}")
-                dao.update(
-                    TrackEntity(item.trackId, dao.selectItemNameById(item.trackId), item.fromName, item.carrierId, item.carrierName, item.recentTime, item.recentStatus)
-                )
+            .map { item ->
+                TrackEntity(item.trackId, dao.selectItemNameById(item.trackId), item.fromName, item.carrierId, item.carrierName, item.recentTime, item.recentStatus)
+            }
+            .observeOn(AndroidSchedulers.mainThread())
+            .map { trackEntity ->
+                _lvMyTracksList.value[getIndexById(trackEntity.trackId)].let {
+                    it.trackEntity = trackEntity
+                    it.isRefreshing.value = false
+                    checkRefreshing()
+                }
+
+                trackEntity
+            }
+            .observeOn(Schedulers.newThread())
+            .subscribe ({ trackEntity ->
+                log.e("refreshed item.trackId -> ${trackEntity.trackId}")
+
+                dao.update(trackEntity)
             }, {
                 it.message?.let { msg -> log.e(msg) }
             }).addCompositeDisposable()
@@ -93,17 +116,9 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
             }).addCompositeDisposable()
 
         rxApiCarrierTracks
-            .observeOn(AndroidSchedulers.mainThread())
-            .filter {
-                val idx = lvMyTracksList.value.indexOf(it)
-                if (lvMyTracksList.value[idx].recentStatus!!.contains(Constant.STATE_DELIVERY_COMPLETE)) {
-                    checkRefreshing()
-                    false
-                } else true
-            }
             .observeOn(Schedulers.newThread())
             .switchMap {
-                api.carriersTracks(it.carrierId, it.trackId)
+                api.carriersTracks(it.trackEntity.carrierId, it.trackEntity.trackId)
             }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ res ->
@@ -117,14 +132,31 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
                     Constant.META_CODE_BAD_REQUEST,
                     Constant.META_CODE_NOT_FOUND,
                     Constant.META_CODE_SERVER_ERROR -> {
+                        log.e()
+                        checkRefreshing()
                     }
                     else -> {
+                        log.e()
+                        checkRefreshing()
                     }
                 }
-                checkRefreshing()
             }, {
                 it.message?.let { msg -> log.e(msg) }
             }).addCompositeDisposable()
+    }
+
+    private fun isDeliveryCompleted(trackEntity: TrackEntity): Boolean {
+//        return false
+        return trackEntity.recentStatus!!.contains(Constant.STATE_DELIVERY_COMPLETE)
+    }
+
+    private fun getIndexById(trackId: String): Int {
+        for (index in _lvMyTracksList.value.indices) {
+            if (_lvMyTracksList.value[index].trackEntity.trackId == trackId) {
+                return index
+            }
+        }
+        return -1
     }
 
     fun getAllTrackList() {
@@ -153,35 +185,42 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
         }
     }
 
-    fun onClickItem(item: TrackEntity) {
+    fun onClickItem(item: TrackListItem) {
         log.e()
-        lvStartDetailAct.value = Event(item)
+        lvStartDetailAct.value = Event(item.trackEntity)
     }
 
-    fun onClickTrackId(item: TrackEntity) {
+    fun onClickTrackId(item: TrackListItem) {
         log.e()
-        lvCopyClipboard.value = Event(item.trackId)
+        lvCopyClipboard.value = Event(item.trackEntity.trackId)
     }
 
-    fun onClickDelete(item: TrackEntity) {
+    fun onClickDelete(item: TrackListItem) {
         log.e()
-        rxDaoDelete.onNext(item)
+        rxDaoDelete.onNext(item.trackEntity)
     }
 
     fun refreshAll() {
         log.e()
-        lvRefreshCount.value = lvMyTracksList.value.size
 
-        for (item in lvMyTracksList.value) {
-            rxApiCarrierTracks.onNext(item)
+        for (idx in _lvMyTracksList.value.indices) {
+            if (!isDeliveryCompleted(_lvMyTracksList.value[idx].trackEntity)) {
+                log.e()
+                _lvMyTracksList.value[idx].isRefreshing.value = true
+                rxApiCarrierTracks.onNext(_lvMyTracksList.value[idx])
+            }
         }
+        checkRefreshing()
     }
 
     private fun checkRefreshing() {
-        if (--lvRefreshCount.value == 0) {
-            log.e()
-            lvIsRefresh.value = false
+        for (item in _lvMyTracksList.value) {
+            if (item.isRefreshing.value) {
+                lvIsRefresh.value = true
+                return
+            }
         }
+        lvIsRefresh.value = false
     }
 
 }

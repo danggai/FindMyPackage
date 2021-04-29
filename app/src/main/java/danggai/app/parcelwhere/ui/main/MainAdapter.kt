@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.chauthai.swipereveallayout.ViewBinderHelper
 import danggai.app.parcelwhere.R
 import danggai.app.parcelwhere.data.db.track.TrackEntity
+import danggai.app.parcelwhere.data.local.TrackListItem
 import danggai.app.parcelwhere.databinding.ItemTrackBinding
 import danggai.app.parcelwhere.databinding.ItemTrackEmptyBinding
 import danggai.app.parcelwhere.util.CommonFunction
@@ -24,7 +25,7 @@ class MainAdapter(private val viewModel: MainViewModel) : RecyclerView.Adapter<M
         const val TYPE_EMPTY = 1
     }
 
-    fun setItemList(_itemList: MutableList<TrackEntity>) {
+    fun setItemList(_itemList: MutableList<TrackListItem>) {
         mDataSet.clear()
         if (_itemList.size > 0) {
             mDataSet.addAll(_itemList)
@@ -44,7 +45,7 @@ class MainAdapter(private val viewModel: MainViewModel) : RecyclerView.Adapter<M
 
     override fun getItemViewType(position: Int): Int {
         return when (mDataSet[position]) {
-            is TrackEntity -> TYPE_TRACK_ITEM
+            is TrackListItem -> TYPE_TRACK_ITEM
             is EmptyItem -> TYPE_EMPTY
             else -> TYPE_EMPTY
         }
@@ -60,13 +61,13 @@ class MainAdapter(private val viewModel: MainViewModel) : RecyclerView.Adapter<M
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         when (holder.binding) {
             is ItemTrackBinding -> {
-                val item = mDataSet[position] as TrackEntity
+                val item = mDataSet[position] as TrackListItem
                 holder.binding.item = item
                 holder.binding.vm = viewModel
-                holder.binding.tvTime.text = item.recentTime?.let {CommonFunction.convertDateString(item.recentTime)}
+                holder.binding.tvTime.text = item.trackEntity.recentTime?.let {CommonFunction.convertDateString(it)}
 
                 viewBinderHelper.setOpenOnlyOne(true)
-                viewBinderHelper.bind(holder.binding.srl, item.trackId)
+                viewBinderHelper.bind(holder.binding.srl, item.trackEntity.trackId)
             }
             is ItemTrackEmptyBinding -> {
                 holder.binding.vm = viewModel
