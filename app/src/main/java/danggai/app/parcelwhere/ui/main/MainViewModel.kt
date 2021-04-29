@@ -26,8 +26,8 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
     var lvStartSettingAct = MutableLiveData<Event<Boolean>>()
     var lvStartDetailAct = MutableLiveData<Event<TrackEntity>>()
     var lvCopyClipboard = MutableLiveData<Event<String>>()
-    var lvIsRefresh: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(false)
     var lvIsFirstInit: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(true)
+    var lvIsRefreshing: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(false)
 
     private val rxApiCarrier: PublishSubject<Boolean> = PublishSubject.create()
     private val rxApiCarrierTracks: PublishSubject<TrackListItem> = PublishSubject.create()
@@ -145,9 +145,36 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
             }).addCompositeDisposable()
     }
 
+    fun initUI() {
+        if (!lvIsFirstInit.value) return else lvIsFirstInit.value = false
+        log.e()
+        lvRefreshSwitch.value = true
+        getAllTrackList()
+        rxApiCarrier.onNext(true)
+    }
+
     private fun isDeliveryCompleted(trackEntity: TrackEntity): Boolean {
 //        return false
         return trackEntity.recentStatus!!.contains(Constant.STATE_DELIVERY_COMPLETE)
+    }
+
+    fun refreshAll() {
+        log.e()
+
+        for (idx in _lvMyTracksList.value.indices) {
+            if (!isDeliveryCompleted(_lvMyTracksList.value[idx].trackEntity)) {
+                log.e()
+                _lvMyTracksList.value[idx].isRefreshing.value = true
+
+                rxApiCarrierTracks.onNext(_lvMyTracksList.value[idx])
+            }
+        }
+        checkRefreshing()
+    }
+
+    fun getAllTrackList() {
+        log.e()
+        rxDaoSelectAll.onNext(true)
     }
 
     private fun getIndexById(trackId: String): Int {
@@ -159,17 +186,14 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
         return -1
     }
 
-    fun getAllTrackList() {
-        log.e()
-        rxDaoSelectAll.onNext(true)
-    }
-
-    fun initUI() {
-        if (!lvIsFirstInit.value) return else lvIsFirstInit.value = false
-        log.e()
-        lvRefreshSwitch.value = true
-        getAllTrackList()
-        rxApiCarrier.onNext(true)
+    private fun checkRefreshing() {
+        for (item in _lvMyTracksList.value) {
+            if (item.isRefreshing.value) {
+                lvIsRefreshing.value = true
+                return
+            }
+        }
+        lvIsRefreshing.value = false
     }
 
     fun onClick(view: View) {
@@ -200,27 +224,5 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
         rxDaoDelete.onNext(item.trackEntity)
     }
 
-    fun refreshAll() {
-        log.e()
-
-        for (idx in _lvMyTracksList.value.indices) {
-            if (!isDeliveryCompleted(_lvMyTracksList.value[idx].trackEntity)) {
-                log.e()
-                _lvMyTracksList.value[idx].isRefreshing.value = true
-                rxApiCarrierTracks.onNext(_lvMyTracksList.value[idx])
-            }
-        }
-        checkRefreshing()
-    }
-
-    private fun checkRefreshing() {
-        for (item in _lvMyTracksList.value) {
-            if (item.isRefreshing.value) {
-                lvIsRefresh.value = true
-                return
-            }
-        }
-        lvIsRefresh.value = false
-    }
 
 }
