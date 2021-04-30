@@ -10,7 +10,7 @@ import androidx.annotation.LayoutRes
 import danggai.app.parcelwhere.BindingFragment
 import danggai.app.parcelwhere.Constant
 import danggai.app.parcelwhere.R
-import danggai.app.parcelwhere.data.rxbus.RxBusMainRefresh
+import danggai.app.parcelwhere.data.rxbus.RxBusMainSelectAll
 import danggai.app.parcelwhere.databinding.MainFragmentBinding
 import danggai.app.parcelwhere.ui.dialog.RxImageDialog
 import danggai.app.parcelwhere.ui.setting.SettingActivity
@@ -39,7 +39,7 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
 
         retainInstance = true
 
-        RxBusMainRefresh.getSubject()?.let { event ->
+        RxBusMainSelectAll.getSubject()?.let { event ->
             event.subscribe {
                 log.e()
                 if (it) mVM.getAllTrackList()
@@ -76,7 +76,7 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
 
     override fun onDestroy() {
         super.onDestroy()
-        RxBusMainRefresh.release()
+        RxBusMainSelectAll.release()
     }
 
     private fun initUi() {

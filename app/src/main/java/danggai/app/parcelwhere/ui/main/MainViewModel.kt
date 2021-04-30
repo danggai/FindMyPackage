@@ -81,13 +81,12 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
                     trackItems.add(TrackListItem(item, false,  false))
                 }
                 lvMyTracksList.value = trackItems
+                lvItemSetChanged.value = true
 
                 if (lvRefreshSwitch.value) {
                     lvRefreshSwitch.value = false
                     refreshAll()
                 }
-
-                rxDaoSelectAll.onComplete()
             }, {
                 it.message?.let { msg -> log.e(msg) }
             }, {

@@ -6,7 +6,7 @@ import androidx.annotation.LayoutRes
 import danggai.app.parcelwhere.BindingFragment
 import danggai.app.parcelwhere.R
 import danggai.app.parcelwhere.data.db.track.TrackEntity
-import danggai.app.parcelwhere.data.rxbus.RxBusMainRefresh
+import danggai.app.parcelwhere.data.rxbus.RxBusMainSelectAll
 import danggai.app.parcelwhere.databinding.TrackAddFragmentBinding
 import danggai.app.parcelwhere.ui.track.detail.TrackDetailActivity
 import danggai.app.parcelwhere.util.EventObserver
@@ -62,8 +62,9 @@ class TrackAddFragment : BindingFragment<TrackAddFragmentBinding>() {
             if (it) {
                 log.e()
                 activity?.let { act ->
+                    log.e()
+                    RxBusMainSelectAll.getSubject()?.onNext(true)
                     TrackDetailActivity.normalStart(act, TrackEntity(mVM.lvTrackId.value, mVM.lvItemName.value, "", mVM.lvCarrierId.value, "", "", ""))
-                    RxBusMainRefresh.getSubject()?.onNext(true)
                     act.finish()
                 }
             }

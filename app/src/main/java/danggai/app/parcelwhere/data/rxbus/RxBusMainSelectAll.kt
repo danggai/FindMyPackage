@@ -2,7 +2,7 @@ package danggai.app.parcelwhere.data.rxbus
 
 import io.reactivex.subjects.PublishSubject
 
-class RxBusMainRefresh{
+class RxBusMainSelectAll{
     companion object {
         private var busSubject : PublishSubject<Boolean>? = null
 
