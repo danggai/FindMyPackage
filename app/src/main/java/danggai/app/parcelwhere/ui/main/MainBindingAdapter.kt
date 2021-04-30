@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import danggai.app.parcelwhere.data.db.track.TrackEntity
 import danggai.app.parcelwhere.data.local.TrackListItem
+import danggai.app.parcelwhere.util.log
 import kotlin.jvm.JvmStatic;
 
 object MainBindingAdapter {
@@ -22,6 +23,19 @@ object MainBindingAdapter {
             MainAdapter(vm).apply {
                 view.adapter = this
                 this.setItemList(items)
+            }
+        }
+    }
+
+    @BindingAdapter(value = ["isChanged"], requireAll = true)
+    @JvmStatic fun bindRefresh(
+        view: RecyclerView,
+        isChanged: Boolean,
+    ) {
+        if (!isChanged) return
+        view.adapter?.run {
+            if (this is MainAdapter) {
+                this.notifyDataSetChanged()
             }
         }
     }

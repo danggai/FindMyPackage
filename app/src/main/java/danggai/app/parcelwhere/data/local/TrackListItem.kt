@@ -5,7 +5,7 @@ import danggai.app.parcelwhere.util.NonNullMutableLiveData
 
 class TrackListItem (
     var trackEntity: TrackEntity,
-    var isRefreshing: NonNullMutableLiveData<Boolean>,
+    var isRefreshing: Boolean,
     var isRefreshed: Boolean,
 
 //    var isRefreshing: NonNullMutableLiveData<Boolean>,

@@ -152,12 +152,26 @@
 
         </com.chauthai.swipereveallayout.SwipeRevealLayout>
 
+<!--        <View-->
+<!--            android:id="@+id/progress1"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="5dp"-->
+<!--            android:visibility="@{item.isRefreshing ?View.VISIBLE :View.GONE}"-->
+<!--            android:background="@color/f3"-->
+<!--            android:layout_gravity="center"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintLeft_toLeftOf="parent"-->
+<!--            app:layout_constraintRight_toRightOf="parent"-->
+<!--            />-->
+
         <ProgressBar
-            android:id="@+id/progress1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:indeterminateTint="@color/f2"
-            android:visibility="@{item.refreshing ?View.VISIBLE :View.GONE}"
+            android:id="@+id/progress"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:indeterminateTint="@color/f1"
+            android:layout_gravity="center"
+            android:visibility="@{item.isRefreshing ?View.VISIBLE :View.GONE}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"

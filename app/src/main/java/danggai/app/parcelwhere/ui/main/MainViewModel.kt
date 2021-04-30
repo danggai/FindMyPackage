@@ -29,6 +29,7 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
     
     private var lvIsFirstInit: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(true)
     private var lvSelectAllSwitch: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(false)
+    var lvItemSetChanged: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(false)
 
     private val rxApiCarrier: PublishSubject<Boolean> = PublishSubject.create()
     private val rxApiCarrierTracks: PublishSubject<TrackListItem> = PublishSubject.create()
@@ -77,7 +78,7 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
                 log.e(items)
                 val trackItems = mutableListOf<TrackListItem>()
                 for (item in items) {
-                    trackItems.add(TrackListItem(item, NonNullMutableLiveData(false),  false))
+                    trackItems.add(TrackListItem(item, false,  false))
                 }
                 lvMyTracksList.value = trackItems
 
@@ -103,7 +104,9 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
                 lvMyTracksList.value[getIndexById(trackEntity.trackId)].let {
                     log.e(it.trackEntity)
                     it.trackEntity = trackEntity
-                    it.isRefreshing.value = false
+                    it.isRefreshing = false
+                    lvItemSetChanged.value = true
+
                     checkRefreshing()
                 }
 
@@ -177,6 +180,7 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
             if (!isDeliveryCompleted(lvMyTracksList.value[idx].trackEntity)) {
                 log.e()
                 lvMyTracksList.value[idx].isRefreshing = true
+                lvItemSetChanged.value = true
 
                 rxApiCarrierTracks.onNext(lvMyTracksList.value[idx])
             }
