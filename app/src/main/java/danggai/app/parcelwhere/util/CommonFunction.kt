@@ -89,8 +89,4 @@ object CommonFunction {
 
         notiManager.notify(id, builder.build())
     }
-
-    fun sendNotification(context: Context, notiManager: NotificationManager, pendingIntent: PendingIntent?, msg: String) {
-        sendNotification(0, context, notiManager, pendingIntent, msg)
-    }
 }

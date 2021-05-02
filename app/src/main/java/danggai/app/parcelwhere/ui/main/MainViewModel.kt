@@ -70,12 +70,10 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
                 lvSelectAllSwitch.value
             }
             .observeOn(AndroidSchedulers.mainThread())
-            .map {
-                lvSelectAllSwitch.value = false
-                it
-            }
             .subscribe ({ items ->
                 log.e(items)
+                lvSelectAllSwitch.value = false
+
                 val trackItems = mutableListOf<TrackListItem>()
                 for (item in items) {
                     trackItems.add(TrackListItem(item, false,  false))
