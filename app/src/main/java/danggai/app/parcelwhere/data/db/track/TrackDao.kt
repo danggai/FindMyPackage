@@ -23,6 +23,9 @@ interface TrackDao {
     @Query("UPDATE Track SET item_name = :name WHERE trackId = :id")
     fun updateNameById(name: String, id: String)
 
+    @Query("UPDATE Track SET is_refreshed = :isRefreshed WHERE trackId = :id")
+    fun updateRefreshedById(isRefreshed: Boolean, id: String)
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertWithReplace(item: TrackEntity)
 

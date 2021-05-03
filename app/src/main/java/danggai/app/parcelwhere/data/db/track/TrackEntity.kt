@@ -15,6 +15,7 @@ data class TrackEntity (
     @ColumnInfo(name = "carrier_name") val carrierName: String,
     @ColumnInfo(name = "recent_time") val recentTime: String?,
     @ColumnInfo(name = "recent_status") val recentStatus: String?,
+    @ColumnInfo(name = "is_refreshed") val isRefreshed: Boolean
 ): Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString()?:"",
@@ -23,7 +24,8 @@ data class TrackEntity (
         parcel.readString()?:"",
         parcel.readString()?:"",
         parcel.readString()?:"",
-        parcel.readString()?:""
+        parcel.readString()?:"",
+        parcel.readInt() != 0
     ) {
     }
 
@@ -35,6 +37,7 @@ data class TrackEntity (
         parcel.writeString(carrierName)
         parcel.writeString(recentTime)
         parcel.writeString(recentStatus)
+        parcel.writeInt(if(isRefreshed) 1 else 0)
     }
 
     override fun describeContents(): Int {

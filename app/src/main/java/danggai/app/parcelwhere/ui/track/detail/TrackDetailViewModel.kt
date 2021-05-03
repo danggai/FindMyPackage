@@ -29,7 +29,7 @@ class TrackDetailViewModel(override val app: Application, private val api: ApiRe
     private val rxDaoUpdateNameById: PublishSubject<Pair<String, String>> = PublishSubject.create()
     private val rxFragmentQuit: PublishSubject<Boolean> = PublishSubject.create()
 
-    var lvTrackEntity: NonNullMutableLiveData<TrackEntity> = NonNullMutableLiveData(TrackEntity("","","","","","",""))
+    var lvTrackEntity: NonNullMutableLiveData<TrackEntity> = NonNullMutableLiveData(TrackEntity("","","","","","","",false))
     var lvTrackData: NonNullMutableLiveData<Tracks> = NonNullMutableLiveData(Tracks("", Tracks.From("",""), Tracks.To("",""), Tracks.State("",""), listOf(), Tracks.Carrier("","","")))
 
     var lvItemName: NonNullMutableLiveData<String> = NonNullMutableLiveData("")
@@ -48,7 +48,7 @@ class TrackDetailViewModel(override val app: Application, private val api: ApiRe
                     Constant.META_CODE_SUCCESS -> {
                         lvTrackData.value = res.data
                         rxDaoUpdate.onNext(
-                            TrackEntity(lvTrackEntity.value.trackId, "", res.data.from.name, res.data.carrier.id, res.data.carrier.name, res.data.progresses[res.data.progresses.size-1].time, res.data.state.text)
+                            TrackEntity(lvTrackEntity.value.trackId, "", res.data.from.name, res.data.carrier.id, res.data.carrier.name, res.data.progresses[res.data.progresses.size-1].time, res.data.state.text, false)
                         )
                     }
                     Constant.META_CODE_BAD_REQUEST,
@@ -73,7 +73,7 @@ class TrackDetailViewModel(override val app: Application, private val api: ApiRe
             .observeOn(Schedulers.newThread())
             .subscribe ({ item ->
                 log.e(item)
-                dao.update(TrackEntity(item.trackId, dao.selectItemNameById(item.trackId), item.fromName, item.carrierId, item.carrierName, item.recentTime, item.recentStatus))
+                dao.update(TrackEntity(item.trackId, dao.selectItemNameById(item.trackId), item.fromName, item.carrierId, item.carrierName, item.recentTime, item.recentStatus, item.isRefreshed))
             }, {
                 it.message?.let { msg -> log.e(msg) }
             }).addCompositeDisposable()

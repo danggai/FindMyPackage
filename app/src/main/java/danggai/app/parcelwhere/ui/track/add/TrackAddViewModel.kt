@@ -62,7 +62,7 @@ class TrackAddViewModel(override val app: Application, private val api: ApiRepos
                     Constant.META_CODE_SUCCESS -> {
                         lvStartDetailAct.value = Event(true)
                         rxDaoInsert.onNext(
-                            TrackEntity(lvTrackId.value, lvItemName.value,  res.data.from.name,  res.data.carrier.id, res.data.carrier.name, res.data.progresses[res.data.progresses.size-1].time, res.data.state.text)
+                            TrackEntity(lvTrackId.value, lvItemName.value,  res.data.from.name,  res.data.carrier.id, res.data.carrier.name, res.data.progresses[res.data.progresses.size-1].time, res.data.state.text, false)
                         )
                     }
                     Constant.META_CODE_BAD_REQUEST,

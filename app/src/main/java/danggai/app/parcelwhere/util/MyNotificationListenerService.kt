@@ -26,7 +26,7 @@ class MyNotificationListenerService: NotificationListenerService() {
     private val rxDaoExistById: PublishSubject<TrackEntity> = PublishSubject.create()
     private val compositeDisposable = CompositeDisposable()
 
-    private var newTrackEntity: NonNullMutableLiveData<TrackEntity> = NonNullMutableLiveData(TrackEntity("","","","","","",""))
+    private var newTrackEntity: NonNullMutableLiveData<TrackEntity> = NonNullMutableLiveData(TrackEntity("","","","","","","",false))
 
     init {
         compositeDisposable.addAll (
@@ -92,7 +92,7 @@ class MyNotificationListenerService: NotificationListenerService() {
             log.e("itemName = $itemName, carrierId = $carrierId, trackId = $trackId")
             if ((trackId.length in 9..14 && CarrierUtil.checkCarrierId(carrierId))) {
                 log.e()
-                val track = TrackEntity(trackId, itemName, "", carrierId, CarrierUtil.getCarrierName(carrierId), CommonFunction.now(), "")
+                val track = TrackEntity(trackId, itemName, "", carrierId, CarrierUtil.getCarrierName(carrierId), CommonFunction.now(), "", false)
 
                 rxDaoExistById.onNext(track)
 //                rxDaoInsertWithIgnore.onNext(

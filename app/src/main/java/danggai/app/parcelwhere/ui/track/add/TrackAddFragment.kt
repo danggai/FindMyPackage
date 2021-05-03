@@ -64,7 +64,7 @@ class TrackAddFragment : BindingFragment<TrackAddFragmentBinding>() {
                 activity?.let { act ->
                     log.e()
                     RxBusMainSelectAll.getSubject()?.onNext(true)
-                    TrackDetailActivity.normalStart(act, TrackEntity(mVM.lvTrackId.value, mVM.lvItemName.value, "", mVM.lvCarrierId.value, "", "", ""))
+                    TrackDetailActivity.normalStart(act, TrackEntity(mVM.lvTrackId.value, mVM.lvItemName.value, "", mVM.lvCarrierId.value, "", "", "", false))
                     act.finish()
                 }
             }

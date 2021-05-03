@@ -36,7 +36,7 @@ abstract class AppDatabase : RoomDatabase() {
 
         private val MIGRATION_1_TO_2 = object : Migration(1, 2) {
             override fun migrate(database: SupportSQLiteDatabase) {
-//                database.execSQL("ALTER TABLE Track RENAME COLUMN postNumber TO trackId;")
+//                database.execSQL("ALTER TABLE Track ADD COLUMN isRefresh boolean NOT NULL default 0")
             }
         }
     }
