@@ -15,5 +15,7 @@
     <color name="f3">#aaaaaa</color>
     <color name="f4">#55ffffff</color>
 
+    <color name="r1">#ee0000</color>
+
     <color name="transparent">#00ffffff</color>
 </resources>

@@ -57,7 +57,7 @@
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
-            <FrameLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -69,6 +69,10 @@
                     android:paddingHorizontal="15dp"
                     android:paddingVertical="12dp"
                     android:onClick="@{()->vm.onClickItem(item)}"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
                     >
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -148,7 +152,17 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </FrameLayout>
+                <View
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:background="@drawable/dot_red"
+                    android:layout_margin="7dp"
+                    android:visibility="@{item.trackEntity.refreshed ?View.VISIBLE :View.GONE}"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.chauthai.swipereveallayout.SwipeRevealLayout>
 

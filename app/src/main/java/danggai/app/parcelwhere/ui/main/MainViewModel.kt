@@ -75,8 +75,9 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
                 lvSelectAllSwitch.value = false
 
                 val trackItems = mutableListOf<TrackListItem>()
+
                 for (item in items) {
-                    trackItems.add(TrackListItem(item, false,  false))
+                    trackItems.add(TrackListItem(item, false))
                 }
                 lvMyTracksList.value = trackItems
                 lvItemSetChanged.value = true
@@ -98,10 +99,18 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
             }
             .observeOn(AndroidSchedulers.mainThread())
             .map { trackEntity ->
-                lvMyTracksList.value[getIndexById(trackEntity.trackId)].let {
-                    log.e(it.trackEntity)
-                    it.trackEntity = trackEntity
-                    it.isRefreshing = false
+                getIndexById(trackEntity.trackId)?. let {
+                    log.e(lvMyTracksList.value[it].trackEntity)
+
+                    trackEntity.isRefreshed = if (lvMyTracksList.value[it].trackEntity.recentTime != trackEntity.recentTime) {
+                        log.e()
+                        true
+                    } else {
+                        lvMyTracksList.value[it].trackEntity.isRefreshed
+                    }
+
+                    lvMyTracksList.value[it].trackEntity = trackEntity
+                    lvMyTracksList.value[it].isRefreshing = false
                     lvItemSetChanged.value = true
 
                     checkRefreshing()
@@ -190,13 +199,13 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
         rxDaoSelectAll.onNext(true)
     }
 
-    private fun getIndexById(trackId: String): Int {
+    private fun getIndexById(trackId: String): Int? {
         for (index in lvMyTracksList.value.indices) {
             if (lvMyTracksList.value[index].trackEntity.trackId == trackId) {
                 return index
             }
         }
-        return -1
+        return null
     }
 
     private fun checkRefreshing() {

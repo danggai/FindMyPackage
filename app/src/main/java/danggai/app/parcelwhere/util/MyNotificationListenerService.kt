@@ -92,7 +92,7 @@ class MyNotificationListenerService: NotificationListenerService() {
             log.e("itemName = $itemName, carrierId = $carrierId, trackId = $trackId")
             if ((trackId.length in 9..14 && CarrierUtil.checkCarrierId(carrierId))) {
                 log.e()
-                val track = TrackEntity(trackId, itemName, "", carrierId, CarrierUtil.getCarrierName(carrierId), CommonFunction.now(), "", false)
+                val track = TrackEntity(trackId, itemName, "", carrierId, CarrierUtil.getCarrierName(carrierId), CommonFunction.now(), "", true)
 
                 rxDaoExistById.onNext(track)
 //                rxDaoInsertWithIgnore.onNext(

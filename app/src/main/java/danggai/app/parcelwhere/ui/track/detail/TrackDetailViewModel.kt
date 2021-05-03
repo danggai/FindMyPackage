@@ -9,6 +9,7 @@ import danggai.app.parcelwhere.data.api.ApiRepository
 import danggai.app.parcelwhere.data.db.track.TrackDao
 import danggai.app.parcelwhere.data.db.track.TrackEntity
 import danggai.app.parcelwhere.data.local.Tracks
+import danggai.app.parcelwhere.data.rxbus.RxBusMainSelectAll
 import danggai.app.parcelwhere.util.Event
 import danggai.app.parcelwhere.util.NonNullMutableLiveData
 import danggai.app.parcelwhere.util.log
@@ -71,9 +72,21 @@ class TrackDetailViewModel(override val app: Application, private val api: ApiRe
 
         rxDaoUpdate
             .observeOn(Schedulers.newThread())
+            .map { item ->
+                log.e(item)
+                TrackEntity(item.trackId, dao.selectItemNameById(item.trackId), item.fromName, item.carrierId, item.carrierName, item.recentTime, item.recentStatus, item.isRefreshed)
+            }
+            .map { item ->
+                dao.update(item)
+                item
+            }
+            .observeOn(AndroidSchedulers.mainThread())
             .subscribe ({ item ->
                 log.e(item)
-                dao.update(TrackEntity(item.trackId, dao.selectItemNameById(item.trackId), item.fromName, item.carrierId, item.carrierName, item.recentTime, item.recentStatus, item.isRefreshed))
+                if (lvTrackEntity.value.isRefreshed) {
+                    RxBusMainSelectAll.getSubject()?.onNext(true)
+                }
+                lvTrackEntity.value = item
             }, {
                 it.message?.let { msg -> log.e(msg) }
             }).addCompositeDisposable()

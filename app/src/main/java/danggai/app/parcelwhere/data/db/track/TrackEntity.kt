@@ -15,7 +15,7 @@ data class TrackEntity (
     @ColumnInfo(name = "carrier_name") val carrierName: String,
     @ColumnInfo(name = "recent_time") val recentTime: String?,
     @ColumnInfo(name = "recent_status") val recentStatus: String?,
-    @ColumnInfo(name = "is_refreshed") val isRefreshed: Boolean
+    @ColumnInfo(name = "is_refreshed") var isRefreshed: Boolean
 ): Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString()?:"",
