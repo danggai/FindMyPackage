@@ -40,7 +40,10 @@ class MainAdapter(private val viewModel: MainViewModel) : RecyclerView.Adapter<M
     }
 
     override fun getItemId(p0: Int): Long {
-        return p0.toLong()
+        return when (mDataSet[p0]) {
+            is TrackListItem -> (mDataSet[p0] as TrackListItem).trackEntity.trackId.toLong()
+            else -> 0
+        }
     }
 
     override fun getItemViewType(position: Int): Int {

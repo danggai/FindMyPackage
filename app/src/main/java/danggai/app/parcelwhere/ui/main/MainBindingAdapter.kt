@@ -21,6 +21,7 @@ object MainBindingAdapter {
             }
         } ?: run {
             MainAdapter(vm).apply {
+                this.setHasStableIds(true)
                 view.adapter = this
                 this.setItemList(items)
             }
