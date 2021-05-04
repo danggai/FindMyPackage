@@ -4,6 +4,7 @@ import androidx.databinding.BindingAdapter;
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SimpleItemAnimator
 import danggai.app.parcelwhere.data.local.Carrier
+import danggai.app.parcelwhere.ui.main.MainAdapter
 
 import kotlin.jvm.JvmStatic;
 
@@ -20,6 +21,7 @@ object TrackAddBindingAdapter {
             }
         } ?: run {
             TrackAddAdapter(vm).apply {
+                this.setHasStableIds(true)
                 view.adapter = this
                 this.setItemList(items)
             }

@@ -27,6 +27,7 @@
         android:paddingHorizontal="12dp"
         android:layout_marginHorizontal="6dp"
         android:layout_marginVertical="4dp"
+        android:onClick="@{()-> vm.onClickItem(item)}"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

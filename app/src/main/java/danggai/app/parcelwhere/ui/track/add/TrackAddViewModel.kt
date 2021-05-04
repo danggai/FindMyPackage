@@ -23,6 +23,8 @@ class TrackAddViewModel(override val app: Application, private val api: ApiRepos
 
     var lvStartDetailAct = MutableLiveData<Event<Boolean>>()
 
+    var lvItemSetChanged: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(false)
+
     var lvCarrierId: NonNullMutableLiveData<String> = NonNullMutableLiveData("")
     var lvTrackId: NonNullMutableLiveData<String> = NonNullMutableLiveData("")
     var lvItemName: NonNullMutableLiveData<String> = NonNullMutableLiveData("")
@@ -107,13 +109,16 @@ class TrackAddViewModel(override val app: Application, private val api: ApiRepos
         }
     }
 
-    fun onClickItem(view: Carrier) {
-        log.e(view.id)
-        lvCarrierId.value = if (view.idx == -1) {
+    fun onClickItem(item: Carrier) {
+        val postCarrierId = lvCarrierId.value
+        val selectCarrierId = item.id
+        lvCarrierId.value = if (selectCarrierId == postCarrierId) {
             ""
         } else {
-            view.id
+            selectCarrierId
         }
+
+        lvItemSetChanged.value = true
     }
 
     private fun trackSearch() {

@@ -24,6 +24,7 @@
                 android:paddingBottom="5dp"
                 viewModel="@{vm}"
                 items="@{vm.lvCarrierList}"
+                isChanged="@{vm.lvItemSetChanged}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 />
 

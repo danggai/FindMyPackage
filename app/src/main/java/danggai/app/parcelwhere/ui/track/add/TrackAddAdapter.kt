@@ -25,7 +25,7 @@ class TrackAddAdapter(private val viewModel: TrackAddViewModel) : RecyclerView.A
     }
 
     override fun getItemId(p0: Int): Long {
-        return p0.toLong()
+        return mDataSet[p0].hashCode().toLong()
     }
 
 
@@ -35,28 +35,9 @@ class TrackAddAdapter(private val viewModel: TrackAddViewModel) : RecyclerView.A
                 holder.binding.vm = viewModel
                 holder.binding.item = mDataSet[position]
 
-                holder.binding.tvCarrierName.setOnClickListener {
-                    setSelectedPosition(position)
-                }
-
-                holder.binding.tvCarrierName.isSelected = (selectedPosition == position)
+                holder.binding.tvCarrierName.isSelected = (viewModel.lvCarrierId.value == mDataSet[position].id)
             }
         }
-
-    }
-
-    private fun setSelectedPosition(position: Int) {
-        val postPosition = selectedPosition
-        selectedPosition = if (selectedPosition == position) {
-            viewModel.onClickItem(Carrier(-1, "","",""))
-            -1
-        } else {
-            viewModel.onClickItem(mDataSet[position])
-            position
-        }
-
-        if (postPosition != position) notifyItemChanged(postPosition)
-        notifyItemChanged(position)
     }
 
     override fun getItemViewType(position: Int): Int {
