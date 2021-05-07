@@ -53,11 +53,12 @@ class TrackDetailViewModel(override val app: Application, private val api: ApiRe
                         )
                     }
                     Constant.META_CODE_BAD_REQUEST,
-                    Constant.META_CODE_SERVER_ERROR -> {
-                        log.e()
-                        lvMakeToast.value = Event(getString(R.string.msg_network_error))
-                        goBack()
-                    }
+                    Constant.META_CODE_SERVER_ERROR,
+//                    -> {
+//                        log.e()
+//                        lvMakeToast.value = Event(getString(R.string.msg_network_error))
+//                        goBack()
+//                    }
                     Constant.META_CODE_NOT_FOUND -> {
                         log.e()
                         lvParcelNotFound.value = Event(true)
@@ -96,6 +97,7 @@ class TrackDetailViewModel(override val app: Application, private val api: ApiRe
             .subscribe({ item ->
                 log.e()
                 dao.deleteById(item.trackId)
+                RxBusMainSelectAll.getSubject()?.onNext(true)
 
                 rxFragmentQuit.onNext(true)
             }, {

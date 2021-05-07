@@ -11,6 +11,7 @@ import danggai.app.parcelwhere.data.api.ApiRepository
 import danggai.app.parcelwhere.data.db.AppDatabase
 import danggai.app.parcelwhere.data.db.track.TrackDao
 import danggai.app.parcelwhere.data.db.track.TrackEntity
+import danggai.app.parcelwhere.data.rxbus.RxBusMainSelectAll
 import danggai.app.parcelwhere.ui.track.detail.TrackDetailActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -35,6 +36,7 @@ class MyNotificationListenerService: NotificationListenerService() {
                 .subscribe ({ item ->
                     dao.insertWithIgnore(item)
                     sendNoti(item)
+                    RxBusMainSelectAll.getSubject()?.onNext(true)
                     log.e(item)
                 }, {
                     it.message?.let { msg -> log.e(msg) }
