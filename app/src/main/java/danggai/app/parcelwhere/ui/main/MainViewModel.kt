@@ -184,7 +184,7 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
 
         for (idx in lvMyTracksList.value.indices) {
             if (!isDeliveryCompleted(lvMyTracksList.value[idx].trackEntity)) {
-                log.e()
+                log.e("trackId -> ${lvMyTracksList.value[idx].trackEntity.trackId}")
                 lvMyTracksList.value[idx].isRefreshing = true
                 lvItemSetChanged.value = true
 
