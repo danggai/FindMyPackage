@@ -17,6 +17,7 @@ import danggai.app.parcelwhere.util.log
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
+import java.util.concurrent.TimeUnit
 
 
 class MainViewModel(override val app: Application, private val api: ApiRepository, private val dao: TrackDao) : BaseViewModel(app) {
@@ -150,15 +151,21 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
                             TrackEntity(res.data.trackId, "", res.data.from.name, res.data.carrier.id, res.data.carrier.name, res.data.progresses[res.data.progresses.size-1].time, res.data.state.text, false)
                         )
                     }
-                    Constant.META_CODE_BAD_REQUEST,
-                    Constant.META_CODE_NOT_FOUND,
-                    Constant.META_CODE_SERVER_ERROR -> {
-                        log.e()
-                        checkRefreshing()
-                    }
+//                    Constant.META_CODE_BAD_REQUEST,
+//                    Constant.META_CODE_NOT_FOUND,
+//                    Constant.META_CODE_SERVER_ERROR,
                     else -> {
-                        log.e()
-                        checkRefreshing()
+                        log.e(res)
+
+                        getIndexById(res.data.trackId)?. let {
+                            val itemName = lvMyTracksList.value[it].trackEntity.itemName
+                            val trackId = lvMyTracksList.value[it].trackEntity.trackId
+
+                            lvMyTracksList.value[it].isRefreshing = false
+                            lvMakeToast.value = Event("$itemName(${trackId})를 새로고침 하지 못했어요.")
+                            lvItemSetChanged.value = true
+                            checkRefreshing()
+                        }
                     }
                 }
             }, {
