@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
         <variable
             name="vm"
             type="danggai.app.parcelwhere.ui.setting.SettingViewModel"/>
@@ -131,6 +132,116 @@
                     />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View style="@style/LinearDevider.15dp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextView"
+                android:layout_width="match_parent"
+                android:text="@string/manage_parcel"
+                android:textSize="24sp"
+                android:textColor="@color/c1"
+                android:textStyle="bold"
+                android:paddingTop="30dp"
+                android:paddingBottom="12dp"
+                android:paddingLeft="20dp"
+                />
+
+            <View style="@style/LinearDevider"
+                android:layout_height="3dp"/>
+            <View style="@style/AreaDevider" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="20dp"
+                android:paddingHorizontal="30dp"
+                >
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TextView"
+                    android:text="@string/parcel_auto_refresh"
+                    android:textSize="16sp"
+                    android:textColor="@color/c1"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/sm_auto_refresh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="@{vm.lvIsAllowAutoRefresh}"
+                    android:onClick="@{() -> vm.onClickSetAutoRefresh()}"
+                    android:theme="@style/Switch"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View style="@style/LinearDevider.15dp" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="20dp"
+                android:paddingHorizontal="30dp"
+                android:visibility="@{vm.lvIsAllowAutoRefresh ?View.VISIBLE :View.GONE}"
+                >
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TextView"
+                    android:text="@string/auto_refresh_term"
+                    android:textSize="16sp"
+                    android:textColor="@color/c1"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    >
+
+                    <RadioButton
+                        android:id="@+id/rb_15m"
+                        style="@style/radioButton"
+                        android:text="15분"
+                        android:onClick="@{(v) -> vm.onClickSetAutoRefreshTerm(v)}"
+                        />
+
+                    <RadioButton
+                        android:id="@+id/rb_30m"
+                        style="@style/radioButton"
+                        android:text="30분"
+                        android:onClick="@{(v) -> vm.onClickSetAutoRefreshTerm(v)}"
+                        />
+
+                    <RadioButton
+                        android:id="@+id/rb_1h"
+                        style="@style/radioButton"
+                        android:text="1시간"
+                        android:onClick="@{(v) -> vm.onClickSetAutoRefreshTerm(v)}"
+                        />
+
+                    <RadioButton
+                        android:id="@+id/rb_2h"
+                        style="@style/radioButton"
+                        android:text="2시간"
+                        android:onClick="@{(v) -> vm.onClickSetAutoRefreshTerm(v)}"
+                        />
+
+                </RadioGroup>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             <View style="@style/LinearDevider.15dp" />
 

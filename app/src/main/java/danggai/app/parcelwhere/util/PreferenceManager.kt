@@ -8,7 +8,7 @@ object PreferenceManager {
     const val PREFERENCES_NAME = "danggai.app.parcelwhere"
     private const val DEFAULT_VALUE_STRING = ""
     private const val DEFAULT_VALUE_BOOLEAN = false
-    private const val DEFAULT_VALUE_INT = -1
+    private const val DEFAULT_VALUE_INT = 60
     private const val DEFAULT_VALUE_LONG = -1L
     private const val DEFAULT_VALUE_FLOAT = -1f
     private fun getPreferences(context: Context): SharedPreferences {

@@ -30,4 +30,6 @@ object Constant {
 
     const val PREF_IS_FIRST_RUN = "PREF_IS_FIRST_RUN"
     const val PREF_ALLOW_GET_NOTI = "PREF_ALLOW_GET_NOTI"
+    const val PREF_AUTO_REFRESH = "PREF_AUTO_REFRESH"
+    const val PREF_AUTO_REFRESH_TERM = "PREF_AUTO_REFRESH_TERM"
 }
