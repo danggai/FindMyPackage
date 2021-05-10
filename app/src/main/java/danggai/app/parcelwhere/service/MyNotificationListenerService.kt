@@ -1,4 +1,4 @@
-package danggai.app.parcelwhere.util
+package danggai.app.parcelwhere.service
 
 import android.app.*
 import android.content.Context
@@ -6,13 +6,12 @@ import android.content.Intent
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
 import danggai.app.parcelwhere.Constant
-import danggai.app.parcelwhere.data.api.ApiInterface
-import danggai.app.parcelwhere.data.api.ApiRepository
 import danggai.app.parcelwhere.data.db.AppDatabase
 import danggai.app.parcelwhere.data.db.track.TrackDao
 import danggai.app.parcelwhere.data.db.track.TrackEntity
 import danggai.app.parcelwhere.data.rxbus.RxBusMainSelectAll
 import danggai.app.parcelwhere.ui.track.detail.TrackDetailActivity
+import danggai.app.parcelwhere.util.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
