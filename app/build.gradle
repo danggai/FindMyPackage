@@ -41,7 +41,7 @@ android {
 }
 
 dependencies {
-    def koin_version = "2.0.1"
+    def koin_version = "2.2.2"
     def lifecycle_version = "2.2.0"
     def room_version = "2.2.6"
     def retrofit_version = "2.6.0"
@@ -75,6 +75,7 @@ dependencies {
     implementation "org.koin:koin-core:$koin_version"
     implementation "org.koin:koin-android:$koin_version"
     implementation "org.koin:koin-androidx-viewmodel:$koin_version"
+    implementation "org.koin:koin-androidx-workmanager:$koin_version"
 
     // ViewPager2
     implementation 'androidx.viewpager2:viewpager2:1.1.0-alpha01'
