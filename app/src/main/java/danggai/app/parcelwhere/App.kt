@@ -1,11 +1,8 @@
 package danggai.app.parcelwhere
 
 import android.app.Application
-import androidx.work.DelegatingWorkerFactory
-import androidx.work.WorkerFactory
 import danggai.app.parcelwhere.di.*
 import danggai.app.parcelwhere.util.log
-import danggai.app.parcelwhere.worker.MyWorkerFactory
 import io.reactivex.exceptions.UndeliverableException
 import io.reactivex.plugins.RxJavaPlugins
 import org.koin.android.ext.koin.androidContext

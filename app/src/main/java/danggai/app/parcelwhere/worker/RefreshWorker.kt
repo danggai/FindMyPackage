@@ -1,18 +1,13 @@
 package danggai.app.parcelwhere.worker
 
-import android.annotation.SuppressLint
 import android.content.Context
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import danggai.app.parcelwhere.Constant
-import danggai.app.parcelwhere.data.api.ApiInterface
 import danggai.app.parcelwhere.data.api.ApiRepository
-import danggai.app.parcelwhere.data.db.AppDatabase
 import danggai.app.parcelwhere.data.db.track.TrackDao
 import danggai.app.parcelwhere.data.db.track.TrackEntity
-import danggai.app.parcelwhere.data.local.TrackListItem
 import danggai.app.parcelwhere.data.rxbus.RxBusMainSelectAll
-import danggai.app.parcelwhere.util.Event
 import danggai.app.parcelwhere.util.log
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -20,14 +15,11 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 
-class RefreshWorker (private val api: ApiRepository, context: Context, workerParams: WorkerParameters) :
+class RefreshWorker (context: Context, workerParams: WorkerParameters, private val api: ApiRepository, private val dao: TrackDao) :
     Worker(context, workerParams) {
 
     private val rxApiCarrierTracks: PublishSubject<Pair<String, String>> = PublishSubject.create()
     private val rxDaoUpdate: PublishSubject<TrackEntity> = PublishSubject.create()
-
-    private val db = AppDatabase.getInstance(context)
-    private val dao: TrackDao = db.trackDao()
 
     private val compositeDisposable = CompositeDisposable()
 
