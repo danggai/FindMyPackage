@@ -15,4 +15,7 @@ interface ApiInterface {
     @GET("carriers/{carrId}/tracks/{trackId}")
     fun carriersTracks(@Path("carrId") carrierId: String, @Path("trackId") trackId: String): Observable<Response<Tracks>>
 
+    @GET("carriers/{carrId}/tracks/{trackId}")
+    suspend fun suspendCarriersTracks(@Path("carrId") carrierId: String, @Path("trackId") trackId: String): Response<Tracks>
+
 }
