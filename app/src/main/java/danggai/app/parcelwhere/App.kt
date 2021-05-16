@@ -24,7 +24,7 @@ class App: Application() {
             androidLogger()
             androidContext(this@App)
             workManagerFactory()
-            modules(listOf(ViewModelModule, NetworkModule, repositoryModule, RoomModule, WorkerFactoryModule))
+            modules(listOf(ViewModelModule, NetworkModule, repositoryModule, RoomModule, WorkerModule))
         }
 
         RxJavaPlugins.setErrorHandler { e ->
