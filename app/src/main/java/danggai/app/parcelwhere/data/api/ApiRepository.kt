@@ -35,7 +35,8 @@ class ApiRepository(private val api: ApiInterface) {
                 when {
                     res.isSuccessful -> {
                         res.body()?.let { data ->
-                            if (data.progresses.size > 1 && data.progresses[0].time > data.progresses[1].time) {
+                            if (data.progresses.size > 1 &&
+                                data.progresses[0].time > data.progresses[data.progresses.lastIndex].time) {
                                 log.e()
                                 data.state.text = data.progresses[0].status.text
                                 data.progresses = data.progresses.reversed()
