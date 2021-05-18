@@ -35,7 +35,7 @@ object CommonFunction {
                 for (str in substring.split("/", ":", "\n")) {
                     val number = str.replace(Regex(Constant.PATTERN_NUM_ONLY), "")
                     if (number.length in 9..14 &&
-                        !number.startsWith("010")) {
+                        !number.startsWith("0")) {
                         log.e(number)
                         return number
                     }
