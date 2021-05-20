@@ -132,7 +132,8 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
             .observeOn(Schedulers.newThread())
             .subscribe({ item ->
                 dao.deleteById(item.trackId)
-//                rxDaoSelectAll.onNext(true)
+                lvMakeToast.value = Event("${item.itemName}(${item.trackId})이 삭제되었습니다.")
+                rxDaoSelectAll.onNext(true)
             }, {
                 it.message?.let { msg -> log.e(msg) }
             }).addCompositeDisposable()
