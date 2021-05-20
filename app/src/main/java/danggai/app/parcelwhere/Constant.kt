@@ -12,6 +12,9 @@ object Constant {
 
     const val BACK_BUTTON_INTERVAL: Long = 2000
 
+    const val REFRESH_PERIOD_DEFAULT = 15L
+
+
     const val PATTERN_ENG_NUM_ONLY = "^[a-zA-Z0-9]+$"
     const val PATTERN_NUM_ONLY = "[^\\d]"
 
@@ -22,7 +25,13 @@ object Constant {
 
     const val CLIPBOARD_LABEL_TRACK_ID = "track_id"
 
+
+
     const val WORKER_UNIQUE_NAME_AUTO_REFRESH = "AutoRefreshWork"
+
+    const val WORKER_DATA_REFRESH_PERIOD = "refresh_period"
+
+
 
     const val PUSH_CHANNEL_ID = "default_id"
     const val PUSH_CHANNEL_NAME= "운송장 추적 알림"

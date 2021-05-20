@@ -10,6 +10,7 @@ import danggai.app.parcelwhere.data.db.track.TrackEntity
 import danggai.app.parcelwhere.data.rxbus.RxBusMainSelectAll
 import danggai.app.parcelwhere.util.log
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
 
 class RefreshWorker (context: Context, workerParams: WorkerParameters, private val api: ApiRepository, private val dao: TrackDao) :
     CoroutineWorker(context, workerParams) {
@@ -50,6 +51,9 @@ class RefreshWorker (context: Context, workerParams: WorkerParameters, private v
     override suspend fun doWork(): Result {
         log.e()
         try {
+            val refreshDelay = inputData.getLong(Constant.WORKER_DATA_REFRESH_PERIOD, Constant.REFRESH_PERIOD_DEFAULT)
+            delay(refreshDelay - 1L)
+
             coroutineScope {
                 val trackList: List<TrackEntity> = dao.suspendSelectAll()
                 log.e(trackList)
@@ -62,6 +66,7 @@ class RefreshWorker (context: Context, workerParams: WorkerParameters, private v
                     }
                 }
             }
+
             return Result.success()
         } catch (e: java.lang.Exception) {
             log.e(e.message.toString())

@@ -7,6 +7,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
+import androidx.work.Data
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
@@ -71,8 +72,12 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
         context?.let {
             if (PreferenceManager.getBooleanDefaultTrue(it, Constant.PREF_AUTO_REFRESH)) {
                 log.e()
-                val refreshPeriod = PreferenceManager.getInt(it, Constant.PREF_AUTO_REFRESH_PERIOD)
-                val workRequest = PeriodicWorkRequestBuilder<RefreshWorker>(refreshPeriod.toLong(), TimeUnit.MINUTES)
+                val refreshPeriod = PreferenceManager.getLongAutoRefreshPeriod(it)
+                val workRequest = PeriodicWorkRequestBuilder<RefreshWorker>(refreshPeriod, TimeUnit.MINUTES)
+                    .setInputData(Data.Builder()
+                        .putLong(Constant.WORKER_DATA_REFRESH_PERIOD, refreshPeriod)
+                        .build()
+                    )
                     .build()
                 val workManager = WorkManager.getInstance(it)
 

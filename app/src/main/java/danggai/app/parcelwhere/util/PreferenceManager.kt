@@ -2,13 +2,14 @@ package danggai.app.parcelwhere.util
 
 import android.content.Context
 import android.content.SharedPreferences
+import danggai.app.parcelwhere.Constant
 
 
 object PreferenceManager {
     const val PREFERENCES_NAME = "danggai.app.parcelwhere"
     private const val DEFAULT_VALUE_STRING = ""
     private const val DEFAULT_VALUE_BOOLEAN = false
-    private const val DEFAULT_VALUE_INT = 60
+    private const val DEFAULT_VALUE_INT = -1
     private const val DEFAULT_VALUE_LONG = -1L
     private const val DEFAULT_VALUE_FLOAT = -1f
     private fun getPreferences(context: Context): SharedPreferences {
@@ -127,6 +128,15 @@ object PreferenceManager {
     fun getLong(context: Context, key: String?): Long {
         val prefs = getPreferences(context)
         return prefs.getLong(key, DEFAULT_VALUE_LONG)
+    }
+
+    fun getLong(context: Context, key: String?, default: Long): Long {
+        val prefs = getPreferences(context)
+        return prefs.getLong(key, default)
+    }
+
+    fun getLongAutoRefreshPeriod(context: Context): Long {
+        return getLong(context, Constant.PREF_AUTO_REFRESH_PERIOD, Constant.REFRESH_PERIOD_DEFAULT)
     }
 
     /**
