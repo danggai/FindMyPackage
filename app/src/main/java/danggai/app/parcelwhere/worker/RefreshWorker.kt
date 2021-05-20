@@ -51,7 +51,7 @@ class RefreshWorker (context: Context, workerParams: WorkerParameters, private v
     override suspend fun doWork(): Result {
         log.e()
         try {
-            val refreshDelay = inputData.getLong(Constant.WORKER_DATA_REFRESH_PERIOD, Constant.REFRESH_PERIOD_DEFAULT)
+            val refreshDelay = inputData.getLong(Constant.WORKER_DATA_REFRESH_PERIOD, Constant.PREF_DEFAULT_REFRESH_PERIOD)
             delay(refreshDelay - 1L)
 
             coroutineScope {

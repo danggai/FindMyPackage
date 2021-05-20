@@ -108,7 +108,7 @@ class MyNotificationListenerService: NotificationListenerService() {
 
         val notificationManager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-        if (!PreferenceManager.getBooleanDefaultTrue(applicationContext, Constant.PREF_ALLOW_GET_NOTI)) return
+        if (!PreferenceManager.getBooleanAllowGetNoti(applicationContext)) return
 
         val msg = "${item.itemName} (${CarrierUtil.getCarrierName(item.carrierId)} ${item.trackId}) 이 자동 등록 되었습니다."
 

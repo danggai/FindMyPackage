@@ -53,7 +53,7 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
         }
 
         context?.let {
-            if (PreferenceManager.getBooleanDefaultTrue(it, Constant.PREF_IS_FIRST_RUN)) {
+            if (PreferenceManager.getBooleanIsFirstRun(it)) {
                 log.e()
                 activity?.let { act ->
                     RxImageDialog(RxImageDialog.Builder(act, R.drawable.help_access_noti_allow, getString(R.string.dialog_allow_noti_help_allow), getString(R.string.confirm), getString(R.string.denied), false))
@@ -70,7 +70,7 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
     override fun onStop() {
         super.onStop()
         context?.let {
-            if (PreferenceManager.getBooleanDefaultTrue(it, Constant.PREF_AUTO_REFRESH)) {
+            if (PreferenceManager.getBooleanAutoRefresh(it)) {
                 log.e()
                 val refreshPeriod = PreferenceManager.getLongAutoRefreshPeriod(it)
                 val workRequest = PeriodicWorkRequestBuilder<RefreshWorker>(refreshPeriod, TimeUnit.MINUTES)

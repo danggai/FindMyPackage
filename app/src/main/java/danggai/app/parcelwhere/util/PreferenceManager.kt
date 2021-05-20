@@ -98,14 +98,9 @@ object PreferenceManager {
      * @param key
      * @return
      */
-    fun getBooleanDefaultFalse(context: Context, key: String?): Boolean {
+    fun getBoolean(context: Context, key: String?, default: Boolean): Boolean {
         val prefs = getPreferences(context)
-        return prefs.getBoolean(key, false)
-    }
-
-    fun getBooleanDefaultTrue(context: Context, key: String?): Boolean {
-        val prefs = getPreferences(context)
-        return prefs.getBoolean(key, true)
+        return prefs.getBoolean(key, default)
     }
 
     /**
@@ -133,10 +128,6 @@ object PreferenceManager {
     fun getLong(context: Context, key: String?, default: Long): Long {
         val prefs = getPreferences(context)
         return prefs.getLong(key, default)
-    }
-
-    fun getLongAutoRefreshPeriod(context: Context): Long {
-        return getLong(context, Constant.PREF_AUTO_REFRESH_PERIOD, Constant.REFRESH_PERIOD_DEFAULT)
     }
 
     /**
@@ -172,4 +163,25 @@ object PreferenceManager {
         edit.clear()
         edit.apply()
     }
+
+
+    /**
+     * 커스텀 함수
+     */
+    fun getBooleanIsFirstRun(context: Context): Boolean {
+        return getBoolean(context, Constant.PREF_IS_FIRST_RUN, Constant.PREF_DEFAULT_IS_FIRST_RUN)
+    }
+
+    fun getBooleanAllowGetNoti(context: Context): Boolean {
+        return getBoolean(context, Constant.PREF_ALLOW_GET_NOTI, Constant.PREF_DEFAULT_ALLOW_GET_NOTI)
+    }
+
+    fun getBooleanAutoRefresh(context: Context): Boolean {
+        return getBoolean(context, Constant.PREF_AUTO_REFRESH, Constant.PREF_DEFAULT_REFRESH)
+    }
+
+    fun getLongAutoRefreshPeriod(context: Context): Long {
+        return getLong(context, Constant.PREF_AUTO_REFRESH_PERIOD, Constant.PREF_DEFAULT_REFRESH_PERIOD)
+    }
+
 }

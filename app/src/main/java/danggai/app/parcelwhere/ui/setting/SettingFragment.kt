@@ -49,8 +49,8 @@ class SettingFragment : BindingFragment<SettingFragmentBinding>() {
     private fun initUi() {
         context?.let {
             mVM.lvIsAllowAccessNoti.value = isNotificationPermissionAllowed()
-            mVM.lvIsAllowGetNoti.value = PreferenceManager.getBooleanDefaultTrue(it, Constant.PREF_ALLOW_GET_NOTI)
-            mVM.lvIsAllowAutoRefresh.value = PreferenceManager.getBooleanDefaultTrue(it, Constant.PREF_AUTO_REFRESH)
+            mVM.lvIsAllowGetNoti.value = PreferenceManager.getBooleanAllowGetNoti(it)
+            mVM.lvIsAllowAutoRefresh.value = PreferenceManager.getBooleanAutoRefresh(it)
             mVM.lvAutoRefreshPeriod.value = PreferenceManager.getInt(it, Constant.PREF_AUTO_REFRESH_PERIOD)
         }
 
