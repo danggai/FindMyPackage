@@ -2,6 +2,7 @@ package danggai.app.parcelwhere.ui.main
 
 import android.app.Application
 import android.view.View
+import androidx.annotation.MainThread
 import androidx.lifecycle.MutableLiveData
 import danggai.app.parcelwhere.Constant
 import danggai.app.parcelwhere.R
@@ -130,10 +131,14 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
 
         rxDaoDelete
             .observeOn(Schedulers.newThread())
-            .subscribe({ item ->
+            .map { item ->
                 dao.deleteById(item.trackId)
-                lvMakeToast.value = Event("${item.itemName}(${item.trackId})이 삭제되었습니다.")
                 rxDaoSelectAll.onNext(true)
+                item
+            }
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ item ->
+                lvMakeToast.value = Event("${item.itemName}(${item.trackId})이 삭제되었습니다.")
             }, {
                 it.message?.let { msg -> log.e(msg) }
             }).addCompositeDisposable()
@@ -170,7 +175,10 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
                     }
                 }
             }, {
-                it.message?.let { msg -> log.e(msg) }
+                 it.message?.let { msg ->
+                     log.e(msg)
+                     refreshUiDisable()
+                 }
             }).addCompositeDisposable()
     }
 
@@ -224,6 +232,14 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
             }
         }
         lvIsRefreshing.value = false
+    }
+
+    private fun refreshUiDisable() {
+        for (item in lvMyTracksList.value) {
+            item.isRefreshing = false
+        }
+        lvIsRefreshing.value = false
+        lvItemSetChanged.value = true
     }
 
     fun onClick(view: View) {
