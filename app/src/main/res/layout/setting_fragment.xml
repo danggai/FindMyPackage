@@ -194,7 +194,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     style="@style/TextView"
-                    android:text="@string/auto_refresh_term"
+                    android:text="@string/auto_refresh_period"
                     android:textSize="16sp"
                     android:textColor="@color/c1"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -214,28 +214,28 @@
                         android:id="@+id/rb_15m"
                         style="@style/radioButton"
                         android:text="15분"
-                        android:onClick="@{(v) -> vm.onClickSetAutoRefreshTerm(v)}"
+                        android:onClick="@{(v) -> vm.onClickSetAutoRefreshPeriod(v)}"
                         />
 
                     <RadioButton
                         android:id="@+id/rb_30m"
                         style="@style/radioButton"
                         android:text="30분"
-                        android:onClick="@{(v) -> vm.onClickSetAutoRefreshTerm(v)}"
+                        android:onClick="@{(v) -> vm.onClickSetAutoRefreshPeriod(v)}"
                         />
 
                     <RadioButton
                         android:id="@+id/rb_1h"
                         style="@style/radioButton"
                         android:text="1시간"
-                        android:onClick="@{(v) -> vm.onClickSetAutoRefreshTerm(v)}"
+                        android:onClick="@{(v) -> vm.onClickSetAutoRefreshPeriod(v)}"
                         />
 
                     <RadioButton
                         android:id="@+id/rb_2h"
                         style="@style/radioButton"
                         android:text="2시간"
-                        android:onClick="@{(v) -> vm.onClickSetAutoRefreshTerm(v)}"
+                        android:onClick="@{(v) -> vm.onClickSetAutoRefreshPeriod(v)}"
                         />
 
                 </RadioGroup>

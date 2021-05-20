@@ -51,10 +51,10 @@ class SettingFragment : BindingFragment<SettingFragmentBinding>() {
             mVM.lvIsAllowAccessNoti.value = isNotificationPermissionAllowed()
             mVM.lvIsAllowGetNoti.value = PreferenceManager.getBooleanDefaultTrue(it, Constant.PREF_ALLOW_GET_NOTI)
             mVM.lvIsAllowAutoRefresh.value = PreferenceManager.getBooleanDefaultTrue(it, Constant.PREF_AUTO_REFRESH)
-            mVM.lvAutoRefreshTerm.value = PreferenceManager.getInt(it, Constant.PREF_AUTO_REFRESH_TERM)
+            mVM.lvAutoRefreshPeriod.value = PreferenceManager.getInt(it, Constant.PREF_AUTO_REFRESH_PERIOD)
         }
 
-        when(mVM.lvAutoRefreshTerm.value) {
+        when(mVM.lvAutoRefreshPeriod.value) {
             15 -> binding.rb15m.isChecked = true
             30 -> binding.rb30m.isChecked = true
             60 -> binding.rb1h.isChecked = true
@@ -114,10 +114,10 @@ class SettingFragment : BindingFragment<SettingFragmentBinding>() {
             }
         })
 
-        mVM.lvSetAutoRefreshTerm.observe(viewLifecycleOwner, EventObserver { term ->
+        mVM.lvSetAutoRefreshPeriod.observe(viewLifecycleOwner, EventObserver { period ->
             activity?.let { act ->
-                log.e(term)
-                PreferenceManager.setInt(act, Constant.PREF_AUTO_REFRESH_TERM, term)
+                log.e(period)
+                PreferenceManager.setInt(act, Constant.PREF_AUTO_REFRESH_PERIOD, period)
             }
         })
     }

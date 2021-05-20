@@ -71,8 +71,9 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
         context?.let {
             if (PreferenceManager.getBooleanDefaultTrue(it, Constant.PREF_AUTO_REFRESH)) {
                 log.e()
-                val refreshTerm = PreferenceManager.getInt(it, Constant.PREF_AUTO_REFRESH_TERM)
-                val workRequest = PeriodicWorkRequestBuilder<RefreshWorker>(refreshTerm.toLong(), TimeUnit.MINUTES).build()
+                val refreshPeriod = PreferenceManager.getInt(it, Constant.PREF_AUTO_REFRESH_PERIOD)
+                val workRequest = PeriodicWorkRequestBuilder<RefreshWorker>(refreshPeriod.toLong(), TimeUnit.MINUTES)
+                    .build()
                 val workManager = WorkManager.getInstance(it)
 
                 workManager.enqueueUniquePeriodicWork(Constant.WORKER_UNIQUE_NAME_AUTO_REFRESH, ExistingPeriodicWorkPolicy.REPLACE, workRequest)
