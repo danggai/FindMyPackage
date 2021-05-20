@@ -7,6 +7,9 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
 import danggai.app.parcelwhere.BindingFragment
 import danggai.app.parcelwhere.Constant
 import danggai.app.parcelwhere.R
@@ -19,7 +22,9 @@ import danggai.app.parcelwhere.ui.track.detail.TrackDetailActivity
 import danggai.app.parcelwhere.util.EventObserver
 import danggai.app.parcelwhere.util.PreferenceManager
 import danggai.app.parcelwhere.util.log
+import danggai.app.parcelwhere.worker.RefreshWorker
 import org.koin.androidx.viewmodel.ext.android.getViewModel
+import java.util.concurrent.TimeUnit
 
 class MainFragment : BindingFragment<MainFragmentBinding>() {
 
@@ -46,15 +51,31 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
             }
         }
 
-        if (PreferenceManager.getBooleanDefaultTrue(context!!, Constant.PREF_IS_FIRST_RUN)) {
-            log.e()
-            activity?.let { act ->
-                RxImageDialog(RxImageDialog.Builder(act, R.drawable.help_access_noti_allow, getString(R.string.dialog_allow_noti_help_allow), getString(R.string.confirm), getString(R.string.denied), false))
-                    .show()
-                    .subscribe { confirm ->
-                        if (confirm) startAllowNotiPermission()
-                        PreferenceManager.setBoolean(act, Constant.PREF_IS_FIRST_RUN, false)
-                    }
+        context?.let {
+            if (PreferenceManager.getBooleanDefaultTrue(it, Constant.PREF_IS_FIRST_RUN)) {
+                log.e()
+                activity?.let { act ->
+                    RxImageDialog(RxImageDialog.Builder(act, R.drawable.help_access_noti_allow, getString(R.string.dialog_allow_noti_help_allow), getString(R.string.confirm), getString(R.string.denied), false))
+                        .show()
+                        .subscribe { confirm ->
+                            if (confirm) startAllowNotiPermission()
+                            PreferenceManager.setBoolean(act, Constant.PREF_IS_FIRST_RUN, false)
+                        }
+                }
+            }
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        context?.let {
+            if (PreferenceManager.getBooleanDefaultTrue(it, Constant.PREF_AUTO_REFRESH)) {
+                log.e()
+                val refreshTerm = PreferenceManager.getInt(it, Constant.PREF_AUTO_REFRESH_TERM)
+                val workRequest = PeriodicWorkRequestBuilder<RefreshWorker>(refreshTerm.toLong(), TimeUnit.MINUTES).build()
+                val workManager = WorkManager.getInstance(it)
+
+                workManager.enqueueUniquePeriodicWork(Constant.WORKER_UNIQUE_NAME_AUTO_REFRESH, ExistingPeriodicWorkPolicy.REPLACE, workRequest)
             }
         }
     }

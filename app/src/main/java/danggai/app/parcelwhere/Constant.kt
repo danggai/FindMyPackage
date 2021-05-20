@@ -22,6 +22,8 @@ object Constant {
 
     const val CLIPBOARD_LABEL_TRACK_ID = "track_id"
 
+    const val WORKER_UNIQUE_NAME_AUTO_REFRESH = "AutoRefreshWork"
+
     const val PUSH_CHANNEL_ID = "default_id"
     const val PUSH_CHANNEL_NAME= "운송장 추적 알림"
     const val PUSH_CHANNEL_DESC = "앱에서 알림을 통해 운송장을 추적 할 때 수신하게 되는 알림이에요."
