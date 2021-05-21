@@ -52,7 +52,7 @@ class RefreshWorker (context: Context, workerParams: WorkerParameters, private v
         log.e()
         try {
             val refreshDelay = inputData.getLong(Constant.WORKER_DATA_REFRESH_PERIOD, Constant.PREF_DEFAULT_REFRESH_PERIOD)
-            delay(refreshDelay - 1L)
+            delay((refreshDelay - 1L)*60000)
 
             coroutineScope {
                 val trackList: List<TrackEntity> = dao.suspendSelectAll()
