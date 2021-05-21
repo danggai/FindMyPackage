@@ -27,6 +27,10 @@
 
     <string name="app_info">앱 정보</string>
 
+    <string name="push_title_new">신규 운송장 추가</string>
+    <string name="push_title_exist">운송장 갱신</string>
+
+
     <!--    다이얼로그    -->
     <string name="confirm">확인</string>
     <string name="cancel">취소</string>
