@@ -6,6 +6,7 @@ import android.content.Intent
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
 import danggai.app.parcelwhere.Constant
+import danggai.app.parcelwhere.R
 import danggai.app.parcelwhere.data.db.AppDatabase
 import danggai.app.parcelwhere.data.db.track.TrackDao
 import danggai.app.parcelwhere.data.db.track.TrackEntity
@@ -104,24 +105,19 @@ class MyNotificationListenerService: NotificationListenerService() {
     }
 
     private fun sendNoti(item: TrackEntity) {
-        log.e()
-
-        val notificationManager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
         if (!PreferenceManager.getBooleanAllowGetNoti(applicationContext)) return
 
+        val title = getString(R.string.push_title_new)
         val msg = "${item.itemName} (${CarrierUtil.getCarrierName(item.carrierId)} ${item.trackId}) 이 자동 등록 되었습니다."
 
         val resultIntent = Intent(this, TrackDetailActivity::class.java)
             .putExtra(TrackDetailActivity.ARG_TRACK_ENTITY, item)
         val resultPendingIntent: PendingIntent? = TaskStackBuilder.create(this).run {
             addNextIntentWithParentStack(resultIntent)
-//            getPendingIntent(item.trackId.toInt(), PendingIntent.FLAG_UPDATE_CURRENT)
             getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
         }
 
-        CommonFunction.sendNotification(0, this, notificationManager, resultPendingIntent, msg)
-//        CommonFunction.sendNotification(item.trackId.toInt(), this, notificationManager, resultPendingIntent, msg)
+        CommonFunction.sendNotification(item.trackId.substring(0,9).toInt(), this, resultPendingIntent, title, msg)
 
     }
 }

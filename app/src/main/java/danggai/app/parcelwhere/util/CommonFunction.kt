@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.ContextWrapper
 import android.os.Build
 import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getSystemService
 import danggai.app.parcelwhere.Constant
 import danggai.app.parcelwhere.R
@@ -69,24 +70,26 @@ object CommonFunction {
         return "날짜 정보가 없습니다."
     }
 
-    fun sendNotification(id: Int, context: Context, notiManager: NotificationManager, pendingIntent: PendingIntent?, msg: String) {
+    fun sendNotification(id: Int, context: Context, pendingIntent: PendingIntent?, title: String, msg: String) {
+        val notificationManager: NotificationManager = getSystemService(context, NotificationManager::class.java) ?: return
+
         var builder = NotificationCompat.Builder(context, Constant.PUSH_CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_truck)
+            .setContentTitle(title)
             .setContentText(msg)
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
             .setStyle(NotificationCompat.BigTextStyle().bigText(msg))
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            notiManager.createNotificationChannel(
+            notificationManager.createNotificationChannel(
                 NotificationChannel(Constant.PUSH_CHANNEL_ID, Constant.PUSH_CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH).apply {
                     description = Constant.PUSH_CHANNEL_DESC
                 }
             )
         }
 
-        notiManager.notify(id, builder.build())
+        notificationManager.notify(id, builder.build())
     }
 }
