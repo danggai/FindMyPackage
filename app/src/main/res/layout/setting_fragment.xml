@@ -122,10 +122,12 @@
                     />
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@android:drawable/ic_menu_info_details"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/baseline_feedback_24"
+                    android:tint="@color/c1"
                     android:onClick="@{() -> vm.onClickNotiReadFail()}"
+                    android:background="@drawable/ripple_c1"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
