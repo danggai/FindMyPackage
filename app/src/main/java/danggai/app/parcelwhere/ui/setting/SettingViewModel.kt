@@ -17,7 +17,7 @@ class SettingViewModel(override val app: Application, private val api: ApiReposi
     var lvStartAccessNotiSetting = MutableLiveData<Event<Boolean>>()
     var lvIsAllowAccessNoti: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(false)         // denied: -1, granted: 0
     var lvIsAllowAutoRefresh: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(false)         // denied: -1, granted: 0
-    var lvAutoRefreshPeriod: NonNullMutableLiveData<Int> = NonNullMutableLiveData(15)         // denied: -1, granted: 0
+    var lvAutoRefreshPeriod: NonNullMutableLiveData<Long> = NonNullMutableLiveData(15L)         // denied: -1, granted: 0
 
     var lvStartGetNotiSetting = MutableLiveData<Event<Boolean>>()
     var lvIsAllowGetNoti: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(false)

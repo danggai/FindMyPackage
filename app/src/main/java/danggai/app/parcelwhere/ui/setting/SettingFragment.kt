@@ -51,14 +51,14 @@ class SettingFragment : BindingFragment<SettingFragmentBinding>() {
             mVM.lvIsAllowAccessNoti.value = isNotificationPermissionAllowed()
             mVM.lvIsAllowGetNoti.value = PreferenceManager.getBooleanAllowGetNoti(it)
             mVM.lvIsAllowAutoRefresh.value = PreferenceManager.getBooleanAutoRefresh(it)
-            mVM.lvAutoRefreshPeriod.value = PreferenceManager.getInt(it, Constant.PREF_AUTO_REFRESH_PERIOD)
+            mVM.lvAutoRefreshPeriod.value = PreferenceManager.getLongAutoRefreshPeriod(it)
         }
 
         when(mVM.lvAutoRefreshPeriod.value) {
-            15 -> binding.rb15m.isChecked = true
-            30 -> binding.rb30m.isChecked = true
-            60 -> binding.rb1h.isChecked = true
-            120 -> binding.rb2h.isChecked = true
+            15L -> binding.rb15m.isChecked = true
+            30L -> binding.rb30m.isChecked = true
+            60L -> binding.rb1h.isChecked = true
+            120L -> binding.rb2h.isChecked = true
         }
     }
 
