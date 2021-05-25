@@ -117,7 +117,7 @@ class SettingFragment : BindingFragment<SettingFragmentBinding>() {
         mVM.lvSetAutoRefreshPeriod.observe(viewLifecycleOwner, EventObserver { period ->
             activity?.let { act ->
                 log.e(period)
-                PreferenceManager.setInt(act, Constant.PREF_AUTO_REFRESH_PERIOD, period)
+                PreferenceManager.setLong(act, Constant.PREF_AUTO_REFRESH_PERIOD, period)
             }
         })
     }

@@ -25,7 +25,7 @@ class SettingViewModel(override val app: Application, private val api: ApiReposi
     var lvStartNotiFailForm = MutableLiveData<Event<Boolean>>()
 
     var lvSetAutoRefresh = MutableLiveData<Event<Boolean>>()
-    var lvSetAutoRefreshPeriod = MutableLiveData<Event<Int>>()
+    var lvSetAutoRefreshPeriod = MutableLiveData<Event<Long>>()
 
     var lvAppVersion: NonNullMutableLiveData<String> = NonNullMutableLiveData("1.0.0")
 
@@ -56,11 +56,11 @@ class SettingViewModel(override val app: Application, private val api: ApiReposi
     fun onClickSetAutoRefreshPeriod(view: View) {
         log.e()
         val period = when (view.id) {
-            R.id.rb_15m -> 15
-            R.id.rb_30m -> 30
-            R.id.rb_1h -> 60
-            R.id.rb_2h -> 120
-            else -> -1
+            R.id.rb_15m -> 15L
+            R.id.rb_30m -> 30L
+            R.id.rb_1h -> 60L
+            R.id.rb_2h -> 120L
+            else -> -1L
         }
 
         lvSetAutoRefreshPeriod.value = Event(period)
