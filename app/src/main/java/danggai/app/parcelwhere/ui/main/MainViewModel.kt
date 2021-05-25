@@ -2,7 +2,6 @@ package danggai.app.parcelwhere.ui.main
 
 import android.app.Application
 import android.view.View
-import androidx.annotation.MainThread
 import androidx.lifecycle.MutableLiveData
 import danggai.app.parcelwhere.Constant
 import danggai.app.parcelwhere.R
@@ -18,7 +17,6 @@ import danggai.app.parcelwhere.util.log
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
-import java.util.concurrent.TimeUnit
 
 
 class MainViewModel(override val app: Application, private val api: ApiRepository, private val dao: TrackDao) : BaseViewModel(app) {
@@ -251,6 +249,10 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
             R.id.btn_setting -> {
                 log.e()
                 lvStartSettingAct.value = Event(true)
+            }
+            R.id.btn_help -> {
+                log.e()
+                lvMakeToast.value = Event("사용자들의 편의를 위한 기본 튜토리얼을 개발 중이에요.")
             }
         }
     }
