@@ -71,35 +71,30 @@ class TrackDetailAdapter(private val viewModel: TrackDetailViewModel) : Recycler
                 holder.binding.item = item
                 holder.binding.vm = viewModel
                 holder.binding.tvTime.text = CommonFunction.convertDateString(item.time)
-                when (position) {
-                    0 -> {
-                        holder.binding.cvBody.setBackgroundColor(f1)
-                        holder.binding.tvDescription.setTextColor(b1)
-                        holder.binding.tvLocationName.setTextColor(b1)
-                        holder.binding.tvStatus.setTextColor(b1)
-                        holder.binding.tvTime.setTextColor(b1)
-                        holder.binding.lineTop.visibility = View.INVISIBLE
-                        holder.binding.lineBottom.visibility = View.VISIBLE
-                    }
-                    mDataSet.size-1 -> {
-                        holder.binding.cvBody.setBackgroundColor(f2)
-                        holder.binding.tvDescription.setTextColor(b2)
-                        holder.binding.tvLocationName.setTextColor(b2)
-                        holder.binding.tvStatus.setTextColor(b2)
-                        holder.binding.tvTime.setTextColor(b2)
-                        holder.binding.lineTop.visibility = View.VISIBLE
-                        holder.binding.lineBottom.visibility = View.INVISIBLE
-                    }
-                    else -> {
-                        holder.binding.cvBody.setBackgroundColor(f2)
-                        holder.binding.tvDescription.setTextColor(b2)
-                        holder.binding.tvLocationName.setTextColor(b2)
-                        holder.binding.tvStatus.setTextColor(b2)
-                        holder.binding.tvTime.setTextColor(b2)
-                        holder.binding.lineTop.visibility = View.VISIBLE
-                        holder.binding.lineBottom.visibility = View.VISIBLE
-                    }
-//                    itemCount-1 -> holder.binding.lineBottom.visibility = View.INVISIBLE
+
+                if (position == mDataSet.size-1) {
+                    holder.binding.cvBody.setBackgroundColor(f2)
+                    holder.binding.tvDescription.setTextColor(b2)
+                    holder.binding.tvLocationName.setTextColor(b2)
+                    holder.binding.tvStatus.setTextColor(b2)
+                    holder.binding.tvTime.setTextColor(b2)
+                    holder.binding.lineBottom.visibility = View.INVISIBLE
+                }
+                if (position == 0) {
+                    holder.binding.cvBody.setBackgroundColor(f1)
+                    holder.binding.tvDescription.setTextColor(b1)
+                    holder.binding.tvLocationName.setTextColor(b1)
+                    holder.binding.tvStatus.setTextColor(b1)
+                    holder.binding.tvTime.setTextColor(b1)
+                    holder.binding.lineTop.visibility = View.INVISIBLE
+                }
+                if (position != mDataSet.size-1 &&
+                        position != 0) {
+                    holder.binding.cvBody.setBackgroundColor(f2)
+                    holder.binding.tvDescription.setTextColor(b2)
+                    holder.binding.tvLocationName.setTextColor(b2)
+                    holder.binding.tvStatus.setTextColor(b2)
+                    holder.binding.tvTime.setTextColor(b2)
                 }
             }
             is ItemProgressEmptyBinding -> {
