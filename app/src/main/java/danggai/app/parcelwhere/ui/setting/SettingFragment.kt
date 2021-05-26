@@ -64,7 +64,7 @@ class SettingFragment : BindingFragment<SettingFragmentBinding>() {
 
     private fun initLv() {
         mVM.lvStartAccessNotiSetting.observe(viewLifecycleOwner, EventObserver { allowed ->
-            log.e()
+            log.e(allowed)
             activity?.let { act ->
                 RxImageDialog(RxImageDialog.Builder(act, R.drawable.help_access_noti_allow, getString(R.string.dialog_allow_noti_help_allow), getString(R.string.confirm), getString(R.string.denied), false))
                     .show()

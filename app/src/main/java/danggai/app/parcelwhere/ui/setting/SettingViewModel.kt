@@ -35,7 +35,7 @@ class SettingViewModel(override val app: Application, private val api: ApiReposi
 
     fun onClickAccessNotiSwitch() {
         log.e()
-        lvStartAccessNotiSetting.value = Event(true)
+        lvStartAccessNotiSetting.value = Event(lvIsAllowAccessNoti.value)
     }
 
     fun onClickGetNotiSwitch() {
