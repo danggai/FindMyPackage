@@ -80,10 +80,11 @@ class MyNotificationListenerService: NotificationListenerService() {
 
     override fun onNotificationPosted(sbn: StatusBarNotification?) {
         super.onNotificationPosted(sbn)
+        if (sbn?.packageName == "com.android.systemui") return
         if (sbn!!.notification.flags and Notification.FLAG_GROUP_SUMMARY != 0
-            || sbn?.packageName == application.packageName) {
-            return
-        }
+            || sbn?.packageName == application.packageName) return
+
+        log.e(sbn?.packageName)
         sbn?.notification?.let {
             val text: CharSequence = it.extras.getCharSequence(Notification.EXTRA_TEXT)?:""
 
@@ -91,15 +92,11 @@ class MyNotificationListenerService: NotificationListenerService() {
             val trackId: String = CommonFunction.getTrackId(text.toString())
             val itemName: String = CommonFunction.getItemName(text.toString())
 
-            log.e("itemName = $itemName, carrierId = $carrierId, trackId = $trackId")
             if ((trackId.length in 9..14 && CarrierUtil.checkCarrierId(carrierId))) {
-                log.e()
+                log.e("itemName = $itemName, carrierId = $carrierId, trackId = $trackId")
                 val track = TrackEntity(trackId, itemName, "", carrierId, CarrierUtil.getCarrierName(carrierId), CommonFunction.now(), "", true)
 
                 rxDaoExistById.onNext(track)
-//                rxDaoInsertWithIgnore.onNext(
-//                    TrackEntity(trackId, itemName, "", carrierId, CarrierUtil.getCarrierName(carrierId), CommonFunction.now(), "")
-//                )
             }
         }
     }
