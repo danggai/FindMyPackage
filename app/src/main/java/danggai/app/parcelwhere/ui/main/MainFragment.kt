@@ -20,6 +20,7 @@ import danggai.app.parcelwhere.ui.dialog.RxImageDialog
 import danggai.app.parcelwhere.ui.setting.SettingActivity
 import danggai.app.parcelwhere.ui.track.add.TrackAddActivity
 import danggai.app.parcelwhere.ui.track.detail.TrackDetailActivity
+import danggai.app.parcelwhere.util.CommonFunction
 import danggai.app.parcelwhere.util.EventObserver
 import danggai.app.parcelwhere.util.PreferenceManager
 import danggai.app.parcelwhere.util.log
@@ -69,20 +70,8 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
 
     override fun onStop() {
         super.onStop()
-        context?.let {
-            if (PreferenceManager.getBooleanAutoRefresh(it)) {
-                log.e()
-                val refreshPeriod = PreferenceManager.getLongAutoRefreshPeriod(it)
-                val workRequest = PeriodicWorkRequestBuilder<RefreshWorker>(refreshPeriod, TimeUnit.MINUTES)
-                    .setInputData(Data.Builder()
-                        .putLong(Constant.WORKER_DATA_REFRESH_PERIOD, refreshPeriod)
-                        .build()
-                    )
-                    .build()
-                val workManager = WorkManager.getInstance(it)
-
-                workManager.enqueueUniquePeriodicWork(Constant.WORKER_UNIQUE_NAME_AUTO_REFRESH, ExistingPeriodicWorkPolicy.REPLACE, workRequest)
-            }
+        context?.let { act ->
+            CommonFunction.startUniquePeriodicRefreshWorker(act)
         }
     }
 

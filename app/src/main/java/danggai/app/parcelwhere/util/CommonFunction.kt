@@ -4,15 +4,19 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
-import android.content.ContextWrapper
 import android.os.Build
 import androidx.core.app.NotificationCompat
-import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getSystemService
+import androidx.work.Data
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
 import danggai.app.parcelwhere.Constant
 import danggai.app.parcelwhere.R
+import danggai.app.parcelwhere.worker.RefreshWorker
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 object CommonFunction {
 
@@ -26,6 +30,32 @@ object CommonFunction {
 
         }
         return ""
+    }
+
+    fun startUniquePeriodicRefreshWorker(context: Context) {
+        val period = PreferenceManager.getLongAutoRefreshPeriod(context)
+
+        startUniquePeriodicRefreshWorker(context, period)
+    }
+
+    fun startUniquePeriodicRefreshWorker(context: Context, period: Long) {
+        if (!PreferenceManager.getBooleanAutoRefresh(context)) return
+        log.e()
+
+        val workManager = WorkManager.getInstance(context)
+        val workRequest = PeriodicWorkRequestBuilder<RefreshWorker>(period, TimeUnit.MINUTES)
+            .setInputData(Data.Builder()
+                .putLong(Constant.WORKER_DATA_REFRESH_PERIOD, period)
+                .build()
+            )
+            .build()
+        workManager.enqueueUniquePeriodicWork(Constant.WORKER_UNIQUE_NAME_AUTO_REFRESH, ExistingPeriodicWorkPolicy.REPLACE, workRequest)
+    }
+
+    fun cancellAllWorkers(context: Context) {
+        log.e()
+        val workManager = WorkManager.getInstance(context)
+        workManager.cancelAllWork()
     }
 
     fun getTrackId(string: String): String {

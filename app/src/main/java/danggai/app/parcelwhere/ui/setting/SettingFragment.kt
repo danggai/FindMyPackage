@@ -5,21 +5,16 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
-import androidx.work.Data
-import androidx.work.ExistingPeriodicWorkPolicy
-import androidx.work.PeriodicWorkRequestBuilder
-import androidx.work.WorkManager
 import danggai.app.parcelwhere.BindingFragment
 import danggai.app.parcelwhere.Constant
 import danggai.app.parcelwhere.R
 import danggai.app.parcelwhere.databinding.SettingFragmentBinding
 import danggai.app.parcelwhere.ui.dialog.RxImageDialog
+import danggai.app.parcelwhere.util.CommonFunction
 import danggai.app.parcelwhere.util.EventObserver
 import danggai.app.parcelwhere.util.PreferenceManager
 import danggai.app.parcelwhere.util.log
-import danggai.app.parcelwhere.worker.RefreshWorker
 import org.koin.androidx.viewmodel.ext.android.getViewModel
-import java.util.concurrent.TimeUnit
 
 class SettingFragment : BindingFragment<SettingFragmentBinding>() {
 
@@ -117,18 +112,10 @@ class SettingFragment : BindingFragment<SettingFragmentBinding>() {
             activity?.let { act ->
                 PreferenceManager.setBoolean(act, Constant.PREF_AUTO_REFRESH, !allowed)
                 mVM.lvIsAllowAutoRefresh.value = !allowed
-                val workManager = WorkManager.getInstance(act)
                 if (!allowed) {
-                    val refreshPeriod = PreferenceManager.getLongAutoRefreshPeriod(act)
-                    val workRequest = PeriodicWorkRequestBuilder<RefreshWorker>(refreshPeriod, TimeUnit.MINUTES)
-                        .setInputData(Data.Builder()
-                            .putLong(Constant.WORKER_DATA_REFRESH_PERIOD, refreshPeriod)
-                            .build()
-                        )
-                        .build()
-                    workManager.enqueueUniquePeriodicWork(Constant.WORKER_UNIQUE_NAME_AUTO_REFRESH, ExistingPeriodicWorkPolicy.REPLACE, workRequest)
+                    CommonFunction.startUniquePeriodicRefreshWorker(act)
                 } else {
-                    workManager.cancelAllWork()
+                    CommonFunction.cancellAllWorkers(act)
                 }
             }
         })
@@ -136,7 +123,7 @@ class SettingFragment : BindingFragment<SettingFragmentBinding>() {
         mVM.lvSetAutoRefreshPeriod.observe(viewLifecycleOwner, EventObserver { period ->
             activity?.let { act ->
                 log.e(period)
-                PreferenceManager.setLong(act, Constant.PREF_AUTO_REFRESH_PERIOD, period)
+                CommonFunction.startUniquePeriodicRefreshWorker(act, period)
             }
         })
     }
