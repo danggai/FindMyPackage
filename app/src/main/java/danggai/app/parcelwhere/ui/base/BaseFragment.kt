@@ -38,11 +38,12 @@ open class BaseFragment: Fragment() {
 
     fun isNotificationPermissionAllowed(): Boolean {
         log.e()
-        return NotificationManagerCompat.getEnabledListenerPackages(context!!)
-            .any { enabledPackageName ->
-//                log.e(enabledPackageName)
-                enabledPackageName == context?.packageName
-            }
+        return context?.let { context ->
+            NotificationManagerCompat.getEnabledListenerPackages(context)
+                .any { enabledPackageName ->
+                    enabledPackageName == context.packageName
+                }
+        }?: false
     }
 
     fun startAllowNotiPermission() {

@@ -84,7 +84,7 @@ class RefreshWorker (context: Context, workerParams: WorkerParameters, private v
 
                 for (item in trackList) {
 //                    if (true) {
-                    if (!item.recentStatus!!.contains(Constant.STATE_DELIVERY_COMPLETE)) {
+                    if (item.recentStatus?.contains(Constant.STATE_DELIVERY_COMPLETE) != true) {
                         log.e()
                         apiCarrierTracks(item)
                     }

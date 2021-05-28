@@ -100,13 +100,15 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
     }
 
     private fun initClipBoard() {
-        clipboard = context!!.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        clipboard.addPrimaryClipChangedListener {
-            if (clipboard.hasPrimaryClip() && clipboard.primaryClipDescription?.hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN) == true) {
-                //                        makeToast(String.format(getString(R.string.msg_copy_complete), trackId))
-                log.e()
-                activity?.let {
-                    makeToast(it, getString(R.string.msg_copy_complete_temp))
+        context?.let { cont ->
+            clipboard = cont.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            clipboard.addPrimaryClipChangedListener {
+                if (clipboard.hasPrimaryClip() && clipboard.primaryClipDescription?.hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN) == true) {
+                    //                        makeToast(String.format(getString(R.string.msg_copy_complete), trackId))
+                    log.e()
+                    activity?.let { act ->
+                        makeToast(act, getString(R.string.msg_copy_complete_temp))
+                    }
                 }
             }
         }
