@@ -44,10 +44,7 @@ object CommonFunction {
 
         val workManager = WorkManager.getInstance(context)
         val workRequest = PeriodicWorkRequestBuilder<RefreshWorker>(period, TimeUnit.MINUTES)
-            .setInputData(Data.Builder()
-                .putLong(Constant.WORKER_DATA_REFRESH_PERIOD, period)
-                .build()
-            )
+            .setInitialDelay(period, TimeUnit.MINUTES)
             .build()
         workManager.enqueueUniquePeriodicWork(Constant.WORKER_UNIQUE_NAME_AUTO_REFRESH, ExistingPeriodicWorkPolicy.REPLACE, workRequest)
     }
