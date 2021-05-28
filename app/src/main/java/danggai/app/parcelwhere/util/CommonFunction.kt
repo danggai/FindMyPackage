@@ -40,7 +40,7 @@ object CommonFunction {
 
     fun startUniquePeriodicRefreshWorker(context: Context, period: Long) {
         if (!PreferenceManager.getBooleanAutoRefresh(context)) return
-        log.e()
+        log.e("period -> $period")
 
         val workManager = WorkManager.getInstance(context)
         val workRequest = PeriodicWorkRequestBuilder<RefreshWorker>(period, TimeUnit.MINUTES)
