@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "120445822278",
+    "project_id": "parcel-where",
+    "storage_bucket": "parcel-where.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:120445822278:android:6dfb91ab0f5445b261b147",
+        "android_client_info": {
+          "package_name": "danggai.app.parcelwhere"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "120445822278-qumh9le8fdcgqea6j1vlb4fv8nj17i7l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCX3qcwmSAmgJY9VB6s3sOGkKVmkKOtytU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "120445822278-qumh9le8fdcgqea6j1vlb4fv8nj17i7l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
