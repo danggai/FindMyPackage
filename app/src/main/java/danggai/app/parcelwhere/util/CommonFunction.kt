@@ -59,7 +59,7 @@ object CommonFunction {
         val keywords: MutableList<String> = mutableListOf("송장", "배송")
         for (keyword in keywords) {
             if (string.contains(keyword)) {
-                val substring = string.substring(string.indexOf(keyword) + keyword.length + 1)
+                val substring = string.substring(string.indexOf(keyword) + keyword.length)
                 for (str in substring.split("/", ":", "\n")) {
                     val number = str.replace(Regex(Constant.PATTERN_NUM_ONLY), "")
                     if (number.length in 9..14 &&
