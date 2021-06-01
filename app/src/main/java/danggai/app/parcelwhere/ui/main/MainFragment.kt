@@ -7,6 +7,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
+import androidx.core.content.ContextCompat
 import androidx.work.Data
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
@@ -101,7 +102,7 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
 
     private fun initClipBoard() {
         context?.let { cont ->
-            clipboard = cont.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            clipboard = ContextCompat.getSystemService(cont, ClipboardManager::class.java) as ClipboardManager
             clipboard.addPrimaryClipChangedListener {
                 if (clipboard.hasPrimaryClip() && clipboard.primaryClipDescription?.hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN) == true) {
                     //                        makeToast(String.format(getString(R.string.msg_copy_complete), trackId))
