@@ -84,8 +84,8 @@ class MyNotificationListenerService: NotificationListenerService() {
         if (sbn!!.notification.flags and Notification.FLAG_GROUP_SUMMARY != 0
             || sbn.packageName == application.packageName) return
 
-        log.e(sbn?.packageName)
-        sbn?.notification?.let {
+        log.e(sbn.packageName)
+        sbn.notification?.let {
             val text: CharSequence = it.extras.getCharSequence(Notification.EXTRA_TEXT)?:""
 
             val carrierId: String = CarrierUtil.getCarrierId(text.toString())

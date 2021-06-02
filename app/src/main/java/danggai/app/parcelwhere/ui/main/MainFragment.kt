@@ -136,7 +136,7 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
             log.e()
             activity?.let {
                 val clip = ClipData.newPlainText(Constant.CLIPBOARD_LABEL_TRACK_ID, trackId)
-                clipboard?.setPrimaryClip(clip)
+                clipboard.setPrimaryClip(clip)
             }
         })
     }

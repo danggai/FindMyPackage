@@ -35,8 +35,7 @@ class App: Application() {
                 return@setErrorHandler
             }
             if (e is NullPointerException || e is IllegalArgumentException || e is IllegalStateException) {
-                Thread.currentThread().uncaughtExceptionHandler
-                    .uncaughtException(Thread.currentThread(), e)
+                Thread.currentThread().uncaughtExceptionHandler?.uncaughtException(Thread.currentThread(), e)
                 return@setErrorHandler
             }
         }

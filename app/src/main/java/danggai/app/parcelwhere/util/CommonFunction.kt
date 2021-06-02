@@ -24,14 +24,6 @@ object CommonFunction {
         return SimpleDateFormat(Constant.DATE_FORMAT_BEFORE).format(Date())
     }
 
-    fun convertState(string: String): String {
-        TODO()
-        when (string) {
-
-        }
-        return ""
-    }
-
     fun startUniquePeriodicRefreshWorker(context: Context) {
         val period = PreferenceManager.getLongAutoRefreshPeriod(context)
 
