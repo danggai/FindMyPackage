@@ -30,13 +30,16 @@ class RefreshWorker (context: Context, workerParams: WorkerParameters, private v
         log.e(res)
         when (res.meta.code) {
             Constant.META_CODE_SUCCESS -> {
+                val isRefreshed = item.recentTime != res.data.progresses[res.data.progresses.lastIndex].time
+                val refreshedItem = TrackEntity(item.trackId, item.itemName, item.fromName, item.carrierId, item.carrierName, res.data.progresses[res.data.progresses.lastIndex].time, res.data.state.text, isRefreshed)
+
                 if (item.recentStatus != res.data.state.text) {
                     log.e()
                     // 알람 전송
-                    sendNoti(item)
+                    sendNoti(refreshedItem)
                 }
-                val isRefreshed = item.recentTime != res.data.progresses[res.data.progresses.lastIndex].time
-                daoUpdate(TrackEntity(res.data.trackId, "", res.data.from.name, res.data.carrier.id, res.data.carrier.name, res.data.progresses[res.data.progresses.size-1].time, res.data.state.text, isRefreshed))
+
+                daoUpdate(refreshedItem)
             }
             Constant.META_CODE_BAD_REQUEST,
             Constant.META_CODE_SERVER_ERROR,
