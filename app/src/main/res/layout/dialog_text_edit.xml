@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:background="@color/f1"
+        >
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="30dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/TextView.MatchWrap"
+            android:id="@+id/tv_message"
+            android:paddingHorizontal="10dp"
+            android:text="@string/hint_dialog"
+            android:textSize="14sp"
+            android:textColor="@color/b1"
+            android:textAlignment="center"
+            />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="10dp" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/text_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:textColor="@color/b1"
+            android:textCursorDrawable="@drawable/cursor_black"
+            android:backgroundTint="@color/c1"
+            />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="28dp" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            >
+
+            <com.balysv.materialripple.MaterialRippleLayout
+                android:id="@+id/mr_cancel"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:mrl_rippleOverlay="true"
+                app:mrl_rippleDuration="250" >
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TextView.MatchMatch"
+                    android:id="@+id/tv_cancel"
+                    android:text="@string/cancel"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:background="@color/b3"
+                    />
+
+            </com.balysv.materialripple.MaterialRippleLayout>
+
+            <com.balysv.materialripple.MaterialRippleLayout
+                android:id="@+id/mr_confirm"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:mrl_rippleOverlay="true"
+                app:mrl_rippleDuration="250" >
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TextView.MatchMatch"
+                    android:id="@+id/tv_confirm"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:text="@string/confirm"
+                    android:textSize="18sp"
+                    android:textColor="@color/f1"
+                    android:gravity="center"
+                    android:background="@color/c1"
+                    />
+
+            </com.balysv.materialripple.MaterialRippleLayout>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</layout>
