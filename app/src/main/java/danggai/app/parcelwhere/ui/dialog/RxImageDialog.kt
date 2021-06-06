@@ -12,6 +12,7 @@ import danggai.app.parcelwhere.databinding.DialogDefaultBinding
 import danggai.app.parcelwhere.util.log
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
+import kotlinx.android.synthetic.main.dialog_default.*
 
 class RxImageDialog(builder: Builder) {
 
@@ -90,14 +91,14 @@ private class ImageDialog(
 
     fun setMessage(msg: String) {
         mMsg = msg
-        binding.tvMessage.let {
+        tv_message.let {
             it.text = mMsg
         }
     }
 
     fun setImage(img: Int?) {
         mImage = img
-        binding.ivImage.let {
+        iv_image.let {
             if (img == null) {
                 it.visibility = View.GONE
             } else {
@@ -109,24 +110,24 @@ private class ImageDialog(
 
     private fun controlBtn() {
         if (mConfirmOnly) {
-            binding.mrCancel.visibility = View.GONE
-            binding.mrConfirm.visibility = View.VISIBLE
+            mr_cancel.visibility = View.GONE
+            mr_confirm.visibility = View.VISIBLE
 
-            binding.tvConfirm.text = mConfirm
-            binding.mrConfirm.setOnClickListener {
+            tv_confirm.text = mConfirm
+            mr_confirm.setOnClickListener {
                 mResult = true
                 dismiss()
             }
         } else {
-            binding.mrCancel.visibility = View.VISIBLE
-            binding.mrConfirm.visibility = View.VISIBLE
-            binding.tvConfirm.text = mConfirm
-            binding.mrConfirm.setOnClickListener {
+            mr_cancel.visibility = View.VISIBLE
+            mr_confirm.visibility = View.VISIBLE
+            tv_confirm.text = mConfirm
+            mr_confirm.setOnClickListener {
                 mResult = true
                 dismiss()
             }
-            binding.tvCancel.text = mCancel
-            binding.mrCancel.setOnClickListener {
+            tv_cancel.text = mCancel
+            mr_cancel.setOnClickListener {
                 mResult = false
                 dismiss()
             }
