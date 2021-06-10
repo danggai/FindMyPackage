@@ -7,10 +7,7 @@ import android.content.Context
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat.getSystemService
-import androidx.work.Data
-import androidx.work.ExistingPeriodicWorkPolicy
-import androidx.work.PeriodicWorkRequestBuilder
-import androidx.work.WorkManager
+import androidx.work.*
 import danggai.app.parcelwhere.Constant
 import danggai.app.parcelwhere.R
 import danggai.app.parcelwhere.worker.RefreshWorker
@@ -22,6 +19,17 @@ object CommonFunction {
 
     fun now(): String {
         return SimpleDateFormat(Constant.DATE_FORMAT_BEFORE).format(Date())
+    }
+
+    fun startOneTimeRefreshWorker(context: Context) {
+        if (!PreferenceManager.getBooleanAutoRefresh(context)) return
+        log.e()
+
+        val workManager = WorkManager.getInstance(context)
+        val workRequest = OneTimeWorkRequestBuilder<RefreshWorker>()
+            .setInputData(workDataOf(Constant.ARG_IS_ONE_TIME to true))
+            .build()
+        workManager.enqueue(workRequest)
     }
 
     fun startUniquePeriodicRefreshWorker(context: Context) {
@@ -37,6 +45,7 @@ object CommonFunction {
         val workManager = WorkManager.getInstance(context)
         val workRequest = PeriodicWorkRequestBuilder<RefreshWorker>(period, TimeUnit.MINUTES)
             .setInitialDelay(period, TimeUnit.MINUTES)
+            .setInputData(workDataOf(Constant.ARG_IS_ONE_TIME to false))
             .build()
         workManager.enqueueUniquePeriodicWork(Constant.WORKER_UNIQUE_NAME_AUTO_REFRESH, ExistingPeriodicWorkPolicy.REPLACE, workRequest)
     }

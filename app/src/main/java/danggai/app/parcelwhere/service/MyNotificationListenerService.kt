@@ -35,7 +35,9 @@ class MyNotificationListenerService: NotificationListenerService() {
                 .observeOn(Schedulers.newThread())
                 .subscribe ({ item ->
                     dao.insertWithIgnore(item)
+                    CommonFunction.startOneTimeRefreshWorker(applicationContext)
                     sendNoti(item)
+
                     RxBusMainSelectAll.getSubject()?.onNext(true)
                     log.e(item)
                 }, {

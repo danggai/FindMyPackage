@@ -5,6 +5,7 @@ import android.app.TaskStackBuilder
 import android.content.Context
 import android.content.Intent
 import androidx.work.CoroutineWorker
+import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import danggai.app.parcelwhere.Constant
 import danggai.app.parcelwhere.R
@@ -75,7 +76,10 @@ class RefreshWorker (context: Context, workerParams: WorkerParameters, private v
             getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
         }
 
-        CommonFunction.sendNotification(item.trackId.substring(0,9).toInt(), applicationContext, resultPendingIntent, title, msg)
+        if (!inputData.getBoolean(Constant.ARG_IS_ONE_TIME, false)) {
+            log.e()
+            CommonFunction.sendNotification(item.trackId.substring(0,9).toInt(), applicationContext, resultPendingIntent, title, msg)
+        }
     }
 
     override suspend fun doWork(): Result {

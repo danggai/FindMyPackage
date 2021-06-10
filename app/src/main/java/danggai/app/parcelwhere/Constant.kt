@@ -64,4 +64,9 @@ object Constant {
     const val PREF_DEFAULT_ALLOW_GET_NOTI = true
     const val PREF_DEFAULT_REFRESH = true
     const val PREF_DEFAULT_REFRESH_PERIOD = 60L
+
+
+    /* ARGUMENT */
+
+    const val ARG_IS_ONE_TIME = "ARG_IS_ONE_TIME"
 }
