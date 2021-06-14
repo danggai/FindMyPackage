@@ -4,15 +4,16 @@ import android.app.Activity
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentActivity
 import danggai.app.parcelwhere.R
+import danggai.app.parcelwhere.databinding.DialogDefaultBinding
 import danggai.app.parcelwhere.databinding.DialogTextEditBinding
 import danggai.app.parcelwhere.util.log
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
-import kotlinx.android.synthetic.main.dialog_text_edit.*
 
 class RxTextEditDialog(builder: Builder) {
 
@@ -67,10 +68,9 @@ private class TextEditDialog(
 
     override fun onCreate(savedInstanceState: android.os.Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = DialogTextEditBinding.inflate(layoutInflater)
+        binding = DialogTextEditBinding.inflate(LayoutInflater.from(context))
+        setContentView(binding.root)
         
-        setContentView(R.layout.dialog_text_edit)
         window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         val params = window!!.attributes
@@ -91,36 +91,36 @@ private class TextEditDialog(
 
     fun setMessage(msg: String) {
         mMsg = msg
-        tv_message.text = mMsg
+        binding.tvMessage.text = mMsg
     }
 
     fun setHint(hint: String) {
         mHint = hint
-        text_input.hint = mHint
+        binding.textInput.hint = mHint
     }
 
     private fun controlBtn() {
         if (mConfirmOnly) {
-            tv_cancel.visibility = View.GONE
-            tv_confirm.visibility = View.VISIBLE
+            binding.tvCancel.visibility = View.GONE
+            binding.tvConfirm.visibility = View.VISIBLE
 
-            tv_confirm.text = mConfirm
-            tv_confirm.setOnClickListener {
-                log.e(text_input.text.toString())
-                mResult = text_input.text.toString()
+            binding.tvConfirm.text = mConfirm
+            binding.tvConfirm.setOnClickListener {
+                log.e(binding.textInput.text.toString())
+                mResult = binding.textInput.text.toString()
                 dismiss()
             }
         } else {
-            tv_cancel.visibility = View.VISIBLE
-            tv_confirm.visibility = View.VISIBLE
-            tv_confirm.text = mConfirm
-            tv_confirm.setOnClickListener {
+            binding.tvCancel.visibility = View.VISIBLE
+            binding.tvConfirm.visibility = View.VISIBLE
+            binding.tvConfirm.text = mConfirm
+            binding.tvConfirm.setOnClickListener {
                 log.e()
-                mResult = text_input.text.toString()
+                mResult = binding.textInput.text.toString()
                 dismiss()
             }
-            tv_cancel.text = mCancel
-            tv_cancel.setOnClickListener {
+            binding.tvCancel.text = mCancel
+            binding.tvCancel.setOnClickListener {
                 log.e()
                 mResult = ""
                 dismiss()

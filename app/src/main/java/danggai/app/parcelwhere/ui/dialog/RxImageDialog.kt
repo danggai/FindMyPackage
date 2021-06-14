@@ -4,15 +4,16 @@ import android.app.Activity
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentActivity
+import androidx.viewbinding.ViewBinding
 import danggai.app.parcelwhere.R
 import danggai.app.parcelwhere.databinding.DialogDefaultBinding
 import danggai.app.parcelwhere.util.log
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
-import kotlinx.android.synthetic.main.dialog_default.*
 
 class RxImageDialog(builder: Builder) {
 
@@ -60,8 +61,7 @@ private class ImageDialog(
     private var mMsg: String,
     private val mConfirm: String,
     private val mCancel: String,
-    private val mConfirmOnly: Boolean,
-) : AlertDialog(mActivity) {
+    private val mConfirmOnly: Boolean) : AlertDialog(mActivity) {
 
     private lateinit var binding: DialogDefaultBinding
 
@@ -70,9 +70,9 @@ private class ImageDialog(
 
     override fun onCreate(savedInstanceState: android.os.Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DialogDefaultBinding.inflate(layoutInflater)
-        
-        setContentView(R.layout.dialog_default)
+        binding = DialogDefaultBinding.inflate(LayoutInflater.from(context))
+        setContentView(binding.root)
+
         window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         val params = window!!.attributes
@@ -94,14 +94,14 @@ private class ImageDialog(
 
     fun setMessage(msg: String) {
         mMsg = msg
-        tv_message.let {
+        binding.tvMessage.let {
             it.text = mMsg
         }
     }
 
     fun setImage(img: Int?) {
         mImage = img
-        iv_image.let {
+        binding.ivImage.let {
             if (img == null) {
                 it.visibility = View.GONE
             } else {
@@ -113,24 +113,24 @@ private class ImageDialog(
 
     private fun controlBtn() {
         if (mConfirmOnly) {
-            mr_cancel.visibility = View.GONE
-            mr_confirm.visibility = View.VISIBLE
+            binding.mrCancel.visibility = View.GONE
+            binding.mrConfirm.visibility = View.VISIBLE
 
-            tv_confirm.text = mConfirm
-            mr_confirm.setOnClickListener {
+            binding.tvConfirm.text = mConfirm
+            binding.mrConfirm.setOnClickListener {
                 mResult = true
                 dismiss()
             }
         } else {
-            mr_cancel.visibility = View.VISIBLE
-            mr_confirm.visibility = View.VISIBLE
-            tv_confirm.text = mConfirm
-            mr_confirm.setOnClickListener {
+            binding.mrCancel.visibility = View.VISIBLE
+            binding.mrConfirm.visibility = View.VISIBLE
+            binding.tvConfirm.text = mConfirm
+            binding.mrConfirm.setOnClickListener {
                 mResult = true
                 dismiss()
             }
-            tv_cancel.text = mCancel
-            mr_cancel.setOnClickListener {
+            binding.tvCancel.text = mCancel
+            binding.mrCancel.setOnClickListener {
                 mResult = false
                 dismiss()
             }
