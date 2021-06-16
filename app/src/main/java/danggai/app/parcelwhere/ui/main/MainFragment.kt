@@ -3,15 +3,10 @@ package danggai.app.parcelwhere.ui.main
 import android.content.ClipData
 import android.content.ClipDescription
 import android.content.ClipboardManager
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.core.content.ContextCompat
-import androidx.work.Data
-import androidx.work.ExistingPeriodicWorkPolicy
-import androidx.work.PeriodicWorkRequestBuilder
-import androidx.work.WorkManager
 import danggai.app.parcelwhere.BindingFragment
 import danggai.app.parcelwhere.Constant
 import danggai.app.parcelwhere.R
@@ -25,9 +20,7 @@ import danggai.app.parcelwhere.util.CommonFunction
 import danggai.app.parcelwhere.util.EventObserver
 import danggai.app.parcelwhere.util.PreferenceManager
 import danggai.app.parcelwhere.util.log
-import danggai.app.parcelwhere.worker.RefreshWorker
 import org.koin.androidx.viewmodel.ext.android.getViewModel
-import java.util.concurrent.TimeUnit
 
 class MainFragment : BindingFragment<MainFragmentBinding>() {
 

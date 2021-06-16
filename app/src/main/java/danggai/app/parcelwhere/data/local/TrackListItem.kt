@@ -1,7 +1,6 @@
 package danggai.app.parcelwhere.data.local
 
 import danggai.app.parcelwhere.data.db.track.TrackEntity
-import danggai.app.parcelwhere.util.NonNullMutableLiveData
 
 class TrackListItem (
     var trackEntity: TrackEntity,

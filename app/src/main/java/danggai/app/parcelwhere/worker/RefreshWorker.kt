@@ -5,7 +5,6 @@ import android.app.TaskStackBuilder
 import android.content.Context
 import android.content.Intent
 import androidx.work.CoroutineWorker
-import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import danggai.app.parcelwhere.Constant
 import danggai.app.parcelwhere.R
@@ -19,7 +18,6 @@ import danggai.app.parcelwhere.util.CommonFunction
 import danggai.app.parcelwhere.util.PreferenceManager
 import danggai.app.parcelwhere.util.log
 import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
 
 class RefreshWorker (context: Context, workerParams: WorkerParameters, private val api: ApiRepository, private val dao: TrackDao) :
     CoroutineWorker(context, workerParams) {

@@ -2,7 +2,9 @@ package danggai.app.parcelwhere.data.api
 
 import danggai.app.parcelwhere.data.local.Carrier
 import danggai.app.parcelwhere.data.local.Tracks
-import danggai.app.parcelwhere.data.res.*
+import danggai.app.parcelwhere.data.res.Meta
+import danggai.app.parcelwhere.data.res.ResCarrier
+import danggai.app.parcelwhere.data.res.ResTracks
 import danggai.app.parcelwhere.util.log
 import io.reactivex.Observable
 

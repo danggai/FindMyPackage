@@ -1,7 +1,7 @@
 package danggai.app.parcelwhere.di
 
-import danggai.app.parcelwhere.Constant
 import com.google.gson.GsonBuilder
+import danggai.app.parcelwhere.Constant
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidApplication

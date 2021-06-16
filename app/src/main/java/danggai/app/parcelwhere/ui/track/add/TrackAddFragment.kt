@@ -3,19 +3,19 @@ package danggai.app.parcelwhere.ui.track.add
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
+import com.google.android.flexbox.FlexDirection
+import com.google.android.flexbox.FlexWrap
+import com.google.android.flexbox.FlexboxLayoutManager
+import com.google.android.flexbox.JustifyContent
 import danggai.app.parcelwhere.BindingFragment
 import danggai.app.parcelwhere.R
 import danggai.app.parcelwhere.data.db.track.TrackEntity
 import danggai.app.parcelwhere.data.rxbus.RxBusMainSelectAll
 import danggai.app.parcelwhere.databinding.TrackAddFragmentBinding
+import danggai.app.parcelwhere.extension.onlyEngNum
 import danggai.app.parcelwhere.ui.track.detail.TrackDetailActivity
 import danggai.app.parcelwhere.util.EventObserver
 import danggai.app.parcelwhere.util.log
-import com.google.android.flexbox.FlexDirection
-import com.google.android.flexbox.FlexWrap
-import com.google.android.flexbox.FlexboxLayoutManager
-import com.google.android.flexbox.JustifyContent
-import danggai.app.parcelwhere.extension.onlyEngNum
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class TrackAddFragment : BindingFragment<TrackAddFragmentBinding>() {

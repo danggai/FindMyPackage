@@ -1,12 +1,9 @@
 package danggai.app.parcelwhere.ui.track.add;
 
-import androidx.databinding.BindingAdapter;
+import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SimpleItemAnimator
 import danggai.app.parcelwhere.data.local.Carrier
-import danggai.app.parcelwhere.ui.main.MainAdapter
-
-import kotlin.jvm.JvmStatic;
 
 object TrackAddBindingAdapter {
     @BindingAdapter(value = ["items", "viewModel"], requireAll = true)

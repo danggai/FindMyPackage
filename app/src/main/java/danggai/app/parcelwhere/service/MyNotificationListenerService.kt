@@ -1,11 +1,11 @@
 package danggai.app.parcelwhere.service
 
-import android.app.*
-import android.content.Context
+import android.app.Notification
+import android.app.PendingIntent
+import android.app.TaskStackBuilder
 import android.content.Intent
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
-import danggai.app.parcelwhere.Constant
 import danggai.app.parcelwhere.R
 import danggai.app.parcelwhere.data.db.AppDatabase
 import danggai.app.parcelwhere.data.db.track.TrackDao

@@ -7,7 +7,6 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.chauthai.swipereveallayout.ViewBinderHelper
 import danggai.app.parcelwhere.R
-import danggai.app.parcelwhere.data.db.track.TrackEntity
 import danggai.app.parcelwhere.data.local.TrackListItem
 import danggai.app.parcelwhere.databinding.ItemTrackBinding
 import danggai.app.parcelwhere.databinding.ItemTrackEmptyBinding

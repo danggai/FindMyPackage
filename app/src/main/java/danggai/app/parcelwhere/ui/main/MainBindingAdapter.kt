@@ -1,13 +1,10 @@
 package danggai.app.parcelwhere.ui.main;
 
-import androidx.databinding.BindingAdapter;
+import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import danggai.app.parcelwhere.data.db.track.TrackEntity
 import danggai.app.parcelwhere.data.local.TrackListItem
 import danggai.app.parcelwhere.ui.track.add.TrackAddAdapter
-import danggai.app.parcelwhere.util.log
-import kotlin.jvm.JvmStatic;
 
 object MainBindingAdapter {
     @BindingAdapter(value = ["items", "viewModel"], requireAll = true)

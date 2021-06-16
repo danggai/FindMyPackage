@@ -1,14 +1,13 @@
 package danggai.app.parcelwhere.ui.base
 
-import android.content.*
+import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.view.View
 import android.widget.Toast
 import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
-import danggai.app.parcelwhere.Constant
-import danggai.app.parcelwhere.R
 import danggai.app.parcelwhere.util.EventObserver
 import danggai.app.parcelwhere.util.log
 

@@ -7,8 +7,8 @@ import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import danggai.app.parcelwhere.data.db.AppDatabase.Companion.DB_VERSION
-import danggai.app.parcelwhere.data.db.track.TrackEntity
 import danggai.app.parcelwhere.data.db.track.TrackDao
+import danggai.app.parcelwhere.data.db.track.TrackEntity
 
 /**
  * @author Leopold

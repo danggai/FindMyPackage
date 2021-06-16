@@ -8,8 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentActivity
-import danggai.app.parcelwhere.R
-import danggai.app.parcelwhere.databinding.DialogDefaultBinding
 import danggai.app.parcelwhere.databinding.DialogTextEditBinding
 import danggai.app.parcelwhere.util.log
 import io.reactivex.Observable

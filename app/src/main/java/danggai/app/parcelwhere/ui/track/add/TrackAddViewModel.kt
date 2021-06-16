@@ -5,12 +5,12 @@ import android.view.View
 import androidx.lifecycle.MutableLiveData
 import danggai.app.parcelwhere.Constant
 import danggai.app.parcelwhere.R
-import danggai.app.parcelwhere.ui.base.BaseViewModel
 import danggai.app.parcelwhere.data.AppSession
 import danggai.app.parcelwhere.data.api.ApiRepository
 import danggai.app.parcelwhere.data.db.track.TrackDao
 import danggai.app.parcelwhere.data.db.track.TrackEntity
 import danggai.app.parcelwhere.data.local.Carrier
+import danggai.app.parcelwhere.ui.base.BaseViewModel
 import danggai.app.parcelwhere.util.Event
 import danggai.app.parcelwhere.util.NonNullMutableLiveData
 import danggai.app.parcelwhere.util.log
