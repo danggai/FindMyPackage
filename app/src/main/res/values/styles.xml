@@ -36,26 +36,26 @@
         <item name="android:colorForeground">#42221f1f</item>
     </style>
 
-    <style name="LinearDevider">
+    <style name="LinearDivider">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
         <item name="android:background">@color/c3</item>
     </style>
 
-    <style name="LinearDevider.15dp" parent="LinearDevider">
+    <style name="LinearDivider.15dp" parent="LinearDivider">
         <item name="android:layout_marginLeft">15dp</item>
         <item name="android:layout_marginRight">15dp</item>
     </style>
 
-    <style name="LinearDevider.20dp" parent="LinearDevider">
+    <style name="LinearDivider.20dp" parent="LinearDivider">
         <item name="android:layout_marginLeft">20dp</item>
         <item name="android:layout_marginRight">20dp</item>
     </style>
 
-    <style name="AreaDevider">
+    <style name="GradientDivider">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">5dp</item>
-        <item name="android:background">@color/c4</item>
+        <item name="android:background">@drawable/gradient_c3_to_f1</item>
     </style>
 
     <style name="radioButton">

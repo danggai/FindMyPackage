@@ -34,9 +34,9 @@
                 android:paddingLeft="20dp"
                 />
 
-            <View style="@style/LinearDevider"
-                android:layout_height="3dp"/>
-            <View style="@style/AreaDevider" />
+            <View style="@style/LinearDivider"
+                android:layout_height="1dp"/>
+            <View style="@style/GradientDivider" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -69,7 +69,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <View style="@style/LinearDevider.15dp" />
+            <View style="@style/LinearDivider.15dp" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -102,7 +102,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <View style="@style/LinearDevider.15dp" />
+            <View style="@style/LinearDivider.15dp" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -136,7 +136,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <View style="@style/LinearDevider.15dp" />
+            <View style="@style/LinearDivider.15dp" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/TextView"
@@ -150,9 +150,9 @@
                 android:paddingLeft="20dp"
                 />
 
-            <View style="@style/LinearDevider"
-                android:layout_height="3dp"/>
-            <View style="@style/AreaDevider" />
+            <View style="@style/LinearDivider"
+                android:layout_height="1dp"/>
+            <View style="@style/GradientDivider" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -185,7 +185,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <View style="@style/LinearDevider.15dp" />
+            <View style="@style/LinearDivider.15dp" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -246,7 +246,9 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-            <View style="@style/LinearDevider.15dp" />
+            <View style="@style/LinearDivider.15dp"
+                android:visibility="@{vm.lvIsAllowAutoRefresh ?View.VISIBLE :View.GONE}"
+                />
 
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/TextView"
@@ -260,9 +262,9 @@
                 android:paddingLeft="20dp"
                 />
 
-            <View style="@style/LinearDevider"
-                android:layout_height="3dp"/>
-            <View style="@style/AreaDevider" />
+            <View style="@style/LinearDivider"
+                android:layout_height="1dp"/>
+            <View style="@style/GradientDivider" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -320,7 +322,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <View style="@style/LinearDevider.15dp" />
+            <View style="@style/LinearDivider.15dp" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
