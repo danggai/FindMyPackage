@@ -5,8 +5,14 @@ import android.content.ClipDescription
 import android.content.ClipboardManager
 import android.os.Bundle
 import android.view.View
+import android.view.animation.DecelerateInterpolator
+import android.widget.FrameLayout
 import androidx.annotation.LayoutRes
 import androidx.core.content.ContextCompat
+import com.takusemba.spotlight.OnSpotlightListener
+import com.takusemba.spotlight.OnTargetListener
+import com.takusemba.spotlight.Spotlight
+import com.takusemba.spotlight.shape.Circle
 import danggai.app.parcelwhere.BindingFragment
 import danggai.app.parcelwhere.Constant
 import danggai.app.parcelwhere.R
@@ -82,6 +88,153 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
         initUi()
         initLv()
         initClipBoard()
+
+        view.findViewById<View>(R.id.btn_help).setOnClickListener { startButton ->
+            val targets: MutableList<com.takusemba.spotlight.Target> = ArrayList()
+
+            // first target
+            val firstRoot = FrameLayout(requireContext())
+            val first = layoutInflater.inflate(R.layout.main_fragment, firstRoot)
+            val firstTarget = com.takusemba.spotlight.Target.Builder()
+                .setAnchor(view.findViewById<View>(R.id.btn_add))
+                .setShape(Circle(100f))
+                .setOverlay(first)
+                .setOnTargetListener(object : OnTargetListener {
+                    override fun onStarted() {
+                        log.e("started test1")
+//                        currentToast?.cancel()
+//                        currentToast = Toast.makeText(
+//                            requireContext(),
+//                            "first target is started",
+//                            Toast.LENGTH_SHORT
+//                        )
+//                        currentToast?.show()
+                    }
+
+                    override fun onEnded() {
+                        log.e("ended test1")
+//                        currentToast?.cancel()
+//                        currentToast = Toast.makeText(
+//                            requireContext(),
+//                            "first target is ended",
+//                            Toast.LENGTH_SHORT
+//                        )
+//                        currentToast?.show()
+                    }
+                })
+                .build()
+
+            targets.add(firstTarget)
+
+//            // second target
+//            val secondRoot = FrameLayout(requireActivity())
+//            val second = layoutInflater.inflate(R.layout.layout_target, secondRoot)
+//            val secondTarget = Target.Builder()
+//                .setAnchor(view.findViewById<View>(R.id.two))
+//                .setShape(Circle(150f))
+//                .setOverlay(second)
+//                .setOnTargetListener(object : OnTargetListener {
+//                    override fun onStarted() {
+//                        currentToast?.cancel()
+//                        currentToast = Toast.makeText(
+//                            requireContext(),
+//                            "second target is started",
+//                            Toast.LENGTH_SHORT
+//                        )
+//                        currentToast?.show()
+//                    }
+//
+//                    override fun onEnded() {
+//                        currentToast?.cancel()
+//                        currentToast = Toast.makeText(
+//                            requireContext(),
+//                            "second target is ended",
+//                            Toast.LENGTH_SHORT
+//                        )
+//                        currentToast?.show()
+//                    }
+//                })
+//                .build()
+//
+//            targets.add(secondTarget)
+//
+//            // third target
+//            val thirdRoot = FrameLayout(requireContext())
+//            val third = layoutInflater.inflate(R.layout.layout_target, thirdRoot)
+//            val thirdTarget = Target.Builder()
+//                .setAnchor(view.findViewById<View>(R.id.three))
+//                .setShape(Circle(200f))
+//                .setOverlay(third)
+//                .setOnTargetListener(object : OnTargetListener {
+//                    override fun onStarted() {
+//                        currentToast?.cancel()
+//                        currentToast = Toast.makeText(
+//                            requireContext(),
+//                            "third target is started",
+//                            Toast.LENGTH_SHORT
+//                        )
+//                        currentToast?.show()
+//                    }
+//
+//                    override fun onEnded() {
+//                        currentToast?.cancel()
+//                        currentToast = Toast.makeText(
+//                            requireContext(),
+//                            "third target is ended",
+//                            Toast.LENGTH_SHORT
+//                        )
+//                        currentToast?.show()
+//                    }
+//                })
+//                .build()
+//
+//            targets.add(thirdTarget)
+
+            // create spotlight
+            val spotlight = Spotlight.Builder(requireActivity())
+                .setTargets(targets)
+                .setBackgroundColorRes(R.color.b3)
+                .setDuration(1000L)
+                .setAnimation(DecelerateInterpolator(2f))
+                .setOnSpotlightListener(object : OnSpotlightListener {
+                    override fun onStarted() {
+//                        currentToast?.cancel()
+//                        currentToast = Toast.makeText(
+//                            requireContext(),
+//                            "spotlight is started",
+//                            Toast.LENGTH_SHORT
+//                        )
+//                        currentToast?.show()
+//                        startButton.isEnabled = false
+                    }
+
+                    override fun onEnded() {
+//                        currentToast?.cancel()
+//                        currentToast = Toast.makeText(
+//                            requireContext(),
+//                            "spotlight is ended",
+//                            Toast.LENGTH_SHORT
+//                        )
+//                        currentToast?.show()
+//                        startButton.isEnabled = true
+                    }
+                })
+                .build()
+
+            spotlight.start()
+
+            val nextTarget = View.OnClickListener { spotlight.next() }
+
+            val closeSpotlight = View.OnClickListener { spotlight.finish() }
+
+            first.findViewById<View>(R.id.close_target).setOnClickListener(nextTarget)
+//            second.findViewById<View>(R.id.close_target).setOnClickListener(nextTarget)
+//            third.findViewById<View>(R.id.close_target).setOnClickListener(nextTarget)
+
+            first.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
+//            second.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
+//            third.findViewById<View>(R.id.close_spotlight).setOnClickListener(closeSpotlight)
+        }
     }
 
     override fun onDestroy() {
@@ -133,5 +286,4 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
             }
         })
     }
-
 }
