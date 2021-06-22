@@ -85,7 +85,7 @@
                     app:tint="@color/f1"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:src="@drawable/baseline_help_24"
-                    android:onClick="@{(v) -> vm.onClick(v)}" />
+                    />
 
             </LinearLayout>
 
