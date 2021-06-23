@@ -49,6 +49,14 @@
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
+        <View
+            android:id="@+id/tutorial_target"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="150dp"
+            />
+
         <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/btm_appbar"
             android:layout_width="match_parent"

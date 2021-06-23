@@ -26,6 +26,7 @@ class SettingViewModel(override val app: Application, private val api: ApiReposi
 
     var lvSetAutoRefresh = MutableLiveData<Event<Boolean>>()
     var lvSetAutoRefreshPeriod = MutableLiveData<Event<Long>>()
+    var lvDevTestAction = MutableLiveData<Event<Boolean>>()
 
     var lvAppVersion: NonNullMutableLiveData<String> = NonNullMutableLiveData("1.0.0")
 
@@ -46,6 +47,11 @@ class SettingViewModel(override val app: Application, private val api: ApiReposi
     fun onClickNotiReadFail() {
         log.e()
         lvStartNotiFailForm.value = Event(true)
+    }
+
+    fun onClickDevTestAction() {
+        log.e()
+        lvDevTestAction.value = Event(true)
     }
 
     fun onClickSetAutoRefresh() {

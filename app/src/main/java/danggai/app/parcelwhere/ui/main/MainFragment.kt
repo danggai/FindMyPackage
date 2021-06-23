@@ -7,13 +7,13 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.DecelerateInterpolator
 import android.widget.FrameLayout
+import android.widget.TextView
 import androidx.annotation.LayoutRes
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import com.takusemba.spotlight.OnSpotlightListener
-import com.takusemba.spotlight.OnTargetListener
 import com.takusemba.spotlight.Spotlight
 import com.takusemba.spotlight.shape.Circle
+import com.takusemba.spotlight.shape.RoundedRectangle
 import danggai.app.parcelwhere.BindingFragment
 import danggai.app.parcelwhere.Constant
 import danggai.app.parcelwhere.R
@@ -150,6 +150,7 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
 
                 // first target
                 val first = layoutInflater.inflate(R.layout.layout_target, FrameLayout(requireContext()))
+                first.findViewById<TextView>(R.id.tv_text).text = getString(R.string.tutorial_msg_1)
                 val firstTarget = com.takusemba.spotlight.Target.Builder()
                     .setAnchor(view.findViewById<View>(R.id.btn_add))
                     .setShape(Circle(100f))
@@ -160,6 +161,7 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
 
                 // second target
                 val second = layoutInflater.inflate(R.layout.layout_target, FrameLayout(requireContext()))
+                second.findViewById<TextView>(R.id.tv_text).text = getString(R.string.tutorial_msg_2)
                 val secondTarget = com.takusemba.spotlight.Target.Builder()
                     .setAnchor(view.findViewById<View>(R.id.btn_setting))
                     .setShape(Circle(75f))
@@ -170,9 +172,10 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
 
                 // third target
                 val third = layoutInflater.inflate(R.layout.layout_target, FrameLayout(requireContext()))
+                third.findViewById<TextView>(R.id.tv_text).text = getString(R.string.tutorial_msg_3)
                 val thirdTarget = com.takusemba.spotlight.Target.Builder()
-                    .setAnchor(view.findViewById<View>(R.id.rv_track_list))
-                    .setShape(Circle(600f))
+                    .setAnchor(view.findViewById<View>(R.id.tutorial_target))
+                    .setShape(RoundedRectangle(700f, 1000f,50f))
                     .setOverlay(third)
                     .build()
 

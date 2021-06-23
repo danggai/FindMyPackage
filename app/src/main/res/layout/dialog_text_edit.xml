@@ -30,7 +30,7 @@
             android:layout_width="0dp"
             android:layout_height="10dp" />
 
-        <com.google.android.material.textfield.TextInputEditText
+        <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/text_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -40,7 +40,9 @@
             android:textColor="@color/b1"
             android:textCursorDrawable="@drawable/cursor_black"
             android:backgroundTint="@color/c1"
-            />
+            android:textIsSelectable="true"
+            android:focusable="true"
+            android:selectAllOnFocus="true" />
 
         <Space
             android:layout_width="0dp"
