@@ -38,6 +38,7 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
 
     private lateinit var mVM: MainViewModel
     private lateinit var clipboard: ClipboardManager
+    private var spotlight: Spotlight? = null
 
     @LayoutRes
     override fun getLayoutResId() = R.layout.main_fragment
@@ -119,17 +120,20 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
         mVM.lvStartAddAct.observe(viewLifecycleOwner, EventObserver{
             if (it) {
                 log.d()
+                spotlight?.finish()
                 activity?.let {act -> TrackAddActivity.normalStart(act)}
             }
         })
         mVM.lvStartSettingAct.observe(viewLifecycleOwner, EventObserver{
             if (it) {
                 log.d()
+                spotlight?.finish()
                 activity?.let {act -> SettingActivity.normalStart(act)}
             }
         })
         mVM.lvStartDetailAct.observe(viewLifecycleOwner, EventObserver{ item ->
             log.d()
+            spotlight?.finish()
             activity?.let {act -> TrackDetailActivity.normalStart(act, item)}
         })
         mVM.lvCopyClipboard.observe(viewLifecycleOwner, EventObserver { trackId ->
@@ -187,18 +191,18 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
             targets.add(thirdTarget)
 
             // create spotlight
-            val spotlight = Spotlight.Builder(requireActivity())
+            spotlight = Spotlight.Builder(requireActivity())
                 .setTargets(targets)
                 .setBackgroundColorRes(R.color.b5)
                 .setDuration(100L)
                 .setAnimation(DecelerateInterpolator(10f))
                 .build()
 
-            spotlight.start()
+            spotlight?.start()
 
             val nextTarget = View.OnClickListener {
                 log.e()
-                spotlight.next()
+                spotlight?.next()
             }
 
             first.findViewById<View>(R.id.btn_next).setOnClickListener(nextTarget)
