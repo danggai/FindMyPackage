@@ -10,7 +10,6 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.core.content.ContextCompat
-import com.takusemba.spotlight.OnSpotlightListener
 import com.takusemba.spotlight.Spotlight
 import com.takusemba.spotlight.shape.Circle
 import com.takusemba.spotlight.shape.RoundedRectangle
@@ -90,7 +89,6 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
         initUi()
         initLv()
         initClipBoard()
-        initTutorial()
     }
 
     override fun onDestroy() {
@@ -141,88 +139,71 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
                 clipboard.setPrimaryClip(clip)
             }
         })
+        mVM.lvStartTutorial.observe(viewLifecycleOwner, EventObserver{
+            log.d()
+            startTutorial()
+        })
     }
 
-    private fun initTutorial() {
+    private fun startTutorial() {
         view?.let { view ->
-            view.findViewById<View>(R.id.btn_help).setOnClickListener { startButton ->
-                val targets: MutableList<com.takusemba.spotlight.Target> = ArrayList()
+            val targets: MutableList<com.takusemba.spotlight.Target> = ArrayList()
 
-                // first target
-                val first = layoutInflater.inflate(R.layout.layout_target, FrameLayout(requireContext()))
-                first.findViewById<TextView>(R.id.tv_text).text = getString(R.string.tutorial_msg_1)
-                val firstTarget = com.takusemba.spotlight.Target.Builder()
-                    .setAnchor(view.findViewById<View>(R.id.btn_add))
-                    .setShape(Circle(100f))
-                    .setOverlay(first)
-                    .build()
+            // first target
+            val first = layoutInflater.inflate(R.layout.layout_target, FrameLayout(requireContext()))
+            first.findViewById<TextView>(R.id.tv_text).text = getString(R.string.tutorial_msg_1)
+            first.findViewById<TextView>(R.id.tv_page).text = "1/3"
+            val firstTarget = com.takusemba.spotlight.Target.Builder()
+                .setAnchor(view.findViewById<View>(R.id.btn_add))
+                .setShape(Circle(100f))
+                .setOverlay(first)
+                .build()
 
-                targets.add(firstTarget)
+            targets.add(firstTarget)
 
-                // second target
-                val second = layoutInflater.inflate(R.layout.layout_target, FrameLayout(requireContext()))
-                second.findViewById<TextView>(R.id.tv_text).text = getString(R.string.tutorial_msg_2)
-                val secondTarget = com.takusemba.spotlight.Target.Builder()
-                    .setAnchor(view.findViewById<View>(R.id.btn_setting))
-                    .setShape(Circle(75f))
-                    .setOverlay(second)
-                    .build()
+            // second target
+            val second = layoutInflater.inflate(R.layout.layout_target, FrameLayout(requireContext()))
+            second.findViewById<TextView>(R.id.tv_text).text = getString(R.string.tutorial_msg_2)
+            second.findViewById<TextView>(R.id.tv_page).text = "2/3"
+            val secondTarget = com.takusemba.spotlight.Target.Builder()
+                .setAnchor(view.findViewById<View>(R.id.btn_setting))
+                .setShape(Circle(75f))
+                .setOverlay(second)
+                .build()
 
-                targets.add(secondTarget)
+            targets.add(secondTarget)
 
-                // third target
-                val third = layoutInflater.inflate(R.layout.layout_target, FrameLayout(requireContext()))
-                third.findViewById<TextView>(R.id.tv_text).text = getString(R.string.tutorial_msg_3)
-                val thirdTarget = com.takusemba.spotlight.Target.Builder()
-                    .setAnchor(view.findViewById<View>(R.id.tutorial_target))
-                    .setShape(RoundedRectangle(700f, 1000f,50f))
-                    .setOverlay(third)
-                    .build()
+            // third target
+            val third = layoutInflater.inflate(R.layout.layout_target, FrameLayout(requireContext()))
+            third.findViewById<TextView>(R.id.tv_text).text = getString(R.string.tutorial_msg_3)
+            third.findViewById<TextView>(R.id.tv_page).text = "3/3"
+            third.findViewById<TextView>(R.id.btn_next).text = "닫기"
+            val thirdTarget = com.takusemba.spotlight.Target.Builder()
+                .setAnchor(view.findViewById<View>(R.id.tutorial_target))
+                .setShape(RoundedRectangle(700f, 1000f, 50f))
+                .setOverlay(third)
+                .build()
 
-                targets.add(thirdTarget)
+            targets.add(thirdTarget)
 
-                // create spotlight
-                val spotlight = Spotlight.Builder(requireActivity())
-                    .setTargets(targets)
-                    .setBackgroundColorRes(R.color.b5)
-                    .setDuration(300L)
-                    .setAnimation(DecelerateInterpolator(3f))
-                    .setOnSpotlightListener(object : OnSpotlightListener {
-                        override fun onStarted() {
-        //                        currentToast?.cancel()
-        //                        currentToast = Toast.makeText(
-        //                            requireContext(),
-        //                            "spotlight is started",
-        //                            Toast.LENGTH_SHORT
-        //                        )
-        //                        currentToast?.show()
-        //                        startButton.isEnabled = false
-                        }
+            // create spotlight
+            val spotlight = Spotlight.Builder(requireActivity())
+                .setTargets(targets)
+                .setBackgroundColorRes(R.color.b5)
+                .setDuration(100L)
+                .setAnimation(DecelerateInterpolator(10f))
+                .build()
 
-                        override fun onEnded() {
-        //                        currentToast?.cancel()
-        //                        currentToast = Toast.makeText(
-        //                            requireContext(),
-        //                            "spotlight is ended",
-        //                            Toast.LENGTH_SHORT
-        //                        )
-        //                        currentToast?.show()
-        //                        startButton.isEnabled = true
-                        }
-                    })
-                    .build()
+            spotlight.start()
 
-                spotlight.start()
-
-                val nextTarget = View.OnClickListener {
-                    log.e()
-                    spotlight.next()
-                }
-
-                first.findViewById<View>(R.id.close_target).setOnClickListener(nextTarget)
-                second.findViewById<View>(R.id.close_target).setOnClickListener(nextTarget)
-                third.findViewById<View>(R.id.close_target).setOnClickListener(nextTarget)
+            val nextTarget = View.OnClickListener {
+                log.e()
+                spotlight.next()
             }
+
+            first.findViewById<View>(R.id.btn_next).setOnClickListener(nextTarget)
+            second.findViewById<View>(R.id.btn_next).setOnClickListener(nextTarget)
+            third.findViewById<View>(R.id.btn_next).setOnClickListener(nextTarget)
         }
     }
 }

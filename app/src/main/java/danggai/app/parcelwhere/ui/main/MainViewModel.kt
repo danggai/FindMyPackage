@@ -24,6 +24,7 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
     var lvStartAddAct = MutableLiveData<Event<Boolean>>()
     var lvStartSettingAct = MutableLiveData<Event<Boolean>>()
     var lvStartDetailAct = MutableLiveData<Event<TrackEntity>>()
+    var lvStartTutorial = MutableLiveData<Event<Boolean>>()
     var lvCopyClipboard = MutableLiveData<Event<String>>()
     var lvIsRefreshing: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(false)
     
@@ -252,7 +253,7 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
             }
             R.id.btn_help -> {
                 log.e()
-                lvMakeToast.value = Event("사용자들의 편의를 위한 기본 튜토리얼을 개발 중이에요.")
+                lvStartTutorial.value = Event(true)
             }
         }
     }
