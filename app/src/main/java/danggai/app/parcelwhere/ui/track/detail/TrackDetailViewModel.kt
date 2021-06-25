@@ -114,6 +114,7 @@ class TrackDetailViewModel(override val app: Application, private val api: ApiRe
             .subscribe ({ item ->
                 log.e(item)
                 dao.updateNameById(name = item.first, id = item.second)
+                RxBusMainSelectAll.getSubject()?.onNext(true)
             }, {
                 it.message?.let { msg -> log.e(msg) }
             }).addCompositeDisposable()
