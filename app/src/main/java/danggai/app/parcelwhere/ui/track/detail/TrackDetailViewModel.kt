@@ -107,7 +107,7 @@ class TrackDetailViewModel(override val app: Application, private val api: ApiRe
         rxDaoUpdateNameById
             .observeOn(AndroidSchedulers.mainThread())
             .filter {
-                lvItemName.value = it.first
+                setItemName(it.first)
                 true
             }
             .observeOn(Schedulers.newThread())
@@ -133,13 +133,26 @@ class TrackDetailViewModel(override val app: Application, private val api: ApiRe
     fun initUi(item: TrackEntity) {
         log.e()
         lvTrackEntity.value = item
-        lvItemName.value = item.itemName
+        setItemName(item.itemName)
         rxApiCarrierTracks.onNext(Pair(item.carrierId, item.trackId))
     }
 
     fun onClickItemName() {
         log.e()
-        lvModifyItemName.value = Event(lvItemName.value)
+        lvModifyItemName.value = Event(
+            if (lvItemName.value == getString(R.string.item_name_empty)) "" else lvItemName.value
+        )
+    }
+
+    fun setItemName(name: String) {
+        log.e()
+        lvItemName.value = if (name.isNotEmpty()) {
+            log.e()
+            name
+        } else {
+            log.e()
+            getString(R.string.item_name_empty)
+        }
     }
 
     fun updateItemName(name: String) {
