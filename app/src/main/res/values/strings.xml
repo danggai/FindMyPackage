@@ -48,8 +48,9 @@
 
     <string name="dialog_parcel_not_found">택배를 조회할 수 없어요.\n보통 이런 문제는 이런 이유로 발생해요.\n\n1. 판매자가 택배사에 물품을 보내지 않은 경우\n2. 잘못 인식된 운송장 번호가 자동 등록 된 경우\n3. 인터넷 통신 오류\n\n잘못 등록 된 택배라면, 이 택배를 삭제할까요?</string>
 
-    <string name="dialog_allow_noti_help_allow">운송장번호를 자동으로 등록하기 위해 앱의 알림 접근 권한을 허용해주세요.\n\n앱은 절대 운송장, 물건명 외의 정보에 접근하거나 정보를 기기 밖으로 전달하지 않아요.</string>
-    <string name="dialog_allow_noti_help_reject">위와 같은 팝업이 나오면, 앱의 알림 접근 권한을 허용 안 됨으로 조정해 주세요.\n\n더 이상 운송장 번호를 자동으로 등록하지 않아요.</string>
+    <string name="dialog_allow_noti_help_allow_first">앱이 알림 영역에 접근할 수 있으면 운송장번호를 자동으로 등록할 수 있어요.\n허용하려면 아래 확인 버튼을 눌러주세요.\n\n앱은 절대 운송장 외의 정보에 접근하거나 정보를 기기 밖으로 전달하지 않아요.</string>
+    <string name="dialog_allow_noti_help_allow">운송장을 자동으로 등록하기 위해 앱이 알림에 접근할 수 있도록 권한을 허용해주세요.\n\n앱은 절대 운송장 외의 정보에 접근하거나 정보를 기기 밖으로 전달하지 않아요.</string>
+    <string name="dialog_allow_noti_help_reject">위와 같은 팝업이 나오면, 앱의 알림 접근 권한을 허용 안 됨으로 조정해 주세요.\n\n이후, 앱은 더 이상 운송장 번호를 자동으로 등록하지 않아요.</string>
     <string name="dialog_get_noti_help_allow">운송장이 자동으로 등록 될 때, 알림으로 안내드려요.</string>
     <string name="dialog_get_noti_help_reject">운송장이 자동으로 등록 될 때, 더 이상 알림으로 안내드리지 않아요.</string>
     <string name="dialog_start_noti_fail_form">알림에 택배사 이름과, 운송장 번호가 있어야지 앱이 알림을 인식 할 수 있어요.\n\n그럼에도 인식하지 못한다면, 인식하지 못하는 알림메세지를 개발자에게 전달해서 함께 앱을 개선할 수 있어요.\n\n개발자에게 알림을 공유하시겠어요?</string>
