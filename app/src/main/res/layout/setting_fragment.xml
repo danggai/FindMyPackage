@@ -56,7 +56,7 @@
                     />
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/sm_alarm"
+                    android:id="@+id/sm_noti_permission"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="@{vm.lvIsAllowAccessNoti}"

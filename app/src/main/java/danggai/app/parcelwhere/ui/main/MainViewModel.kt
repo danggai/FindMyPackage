@@ -251,7 +251,7 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
                 log.e()
                 lvStartSettingAct.value = Event(true)
             }
-            R.id.btn_help -> {
+            R.id.btn_tutorial -> {
                 log.e()
                 lvStartTutorial.value = Event(true)
             }
