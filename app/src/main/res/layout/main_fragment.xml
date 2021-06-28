@@ -26,6 +26,7 @@
             app:layout_anchor="@id/btm_appbar"
             app:borderWidth="0dp"
             app:tint="@color/f1"
+            android:contentDescription="@string/desc_parcel_add"
             />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -45,7 +46,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/f1"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
@@ -82,7 +84,9 @@
                     app:tint="@color/f1"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:src="@drawable/baseline_settings_24"
-                    android:onClick="@{(v) -> vm.onClick(v)}" />
+                    android:onClick="@{(v) -> vm.onClick(v)}"
+                    android:contentDescription="@string/desc_setting"
+                    />
 
                 <ImageView
                     android:id="@+id/btn_help"
@@ -94,6 +98,7 @@
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:src="@drawable/baseline_help_24"
                     android:onClick="@{(v) -> vm.onClick(v)}"
+                    android:contentDescription="@string/desc_tutorial"
                     />
 
             </LinearLayout>
