@@ -70,9 +70,9 @@ class TrackDetailFragment : BindingFragment<TrackDetailFragmentBinding>() {
             if (it) activity?.onBackPressed()
         })
 
-        mVM.lvParcelNotFound.observe(viewLifecycleOwner, EventObserver {
+        mVM.lvParcelNotFound.observe(viewLifecycleOwner, EventObserver { msg ->
             activity?.let { act ->
-                RxImageDialog(RxImageDialog.Builder(act, null, getString(R.string.dialog_parcel_not_found), getString(R.string.confirm), getString(R.string.dialog_cancel), false))
+                RxImageDialog(RxImageDialog.Builder(act, null, msg, getString(R.string.confirm), getString(R.string.dialog_cancel), false))
                     .show()
                     .subscribe {
                         if (it) {

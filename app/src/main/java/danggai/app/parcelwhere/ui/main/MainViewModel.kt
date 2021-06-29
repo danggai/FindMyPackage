@@ -167,7 +167,7 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
                             val trackId = lvMyTracksList.value[it].trackEntity.trackId
 
                             lvMyTracksList.value[it].isRefreshing = false
-                            lvMakeToast.value = Event( String.format(getString(R.string.error_default), res.meta.code, String.format(getString(R.string.msg_refresh_error), itemName, trackId)) )
+                            lvMakeToast.value = Event( String.format(getString(R.string.error), res.meta.code, String.format(getString(R.string.msg_refresh_error), itemName, trackId)) )
                             lvItemSetChanged.value = true
                             checkRefreshing()
                         }

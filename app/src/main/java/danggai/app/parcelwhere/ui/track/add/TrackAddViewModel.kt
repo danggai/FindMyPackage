@@ -11,6 +11,7 @@ import danggai.app.parcelwhere.data.db.track.TrackDao
 import danggai.app.parcelwhere.data.db.track.TrackEntity
 import danggai.app.parcelwhere.data.local.Carrier
 import danggai.app.parcelwhere.ui.base.BaseViewModel
+import danggai.app.parcelwhere.util.CarrierUtil
 import danggai.app.parcelwhere.util.Event
 import danggai.app.parcelwhere.util.NonNullMutableLiveData
 import danggai.app.parcelwhere.util.log
@@ -71,21 +72,21 @@ class TrackAddViewModel(override val app: Application, private val api: ApiRepos
                     Constant.META_CODE_BAD_REQUEST,
                     Constant.META_CODE_NOT_FOUND -> {
                         log.e()
-                        lvMakeToast.value = Event( String.format(getString(R.string.error_default), res.meta.code, getString(R.string.msg_percel_not_exist_error)) )
+                        val msg = String.format(getString(R.string.error), res.meta.code, getString(R.string.msg_percel_not_exist_error))
                     }
                     Constant.META_CODE_SERVER_ERROR -> {
                         log.e()
-                        lvMakeToast.value = Event( String.format(getString(R.string.error_default), res.meta.code, getString(R.string.msg_carrier_network_error)) )
+                        val msg = String.format(getString(R.string.error), res.meta.code, getString(R.string.msg_carrier_network_error))
                     }
                     else -> {
                         log.e()
-                        lvMakeToast.value = Event( String.format(getString(R.string.error_default), res.meta.code, res.meta.message) )
+                        lvMakeToast.value = Event( String.format(getString(R.string.error), res.meta.code, res.meta.message) )
                     }
                 }
             }, {
                 it.message?.let { msg ->
                     log.e(msg)
-                    lvMakeToast.value = Event( String.format(getString(R.string.error_default), 0, msg) )
+                    lvMakeToast.value = Event( String.format(getString(R.string.error), 0, msg) )
                 }
             }).addCompositeDisposable()
 

@@ -21,7 +21,7 @@ import io.reactivex.subjects.PublishSubject
 class TrackDetailViewModel(override val app: Application, private val api: ApiRepository, private val dao: TrackDao)  : BaseViewModel(app) {
 
     var lvModifyItemName = MutableLiveData<Event<String>>()
-    var lvParcelNotFound = MutableLiveData<Event<Boolean>>()
+    var lvParcelNotFound = MutableLiveData<Event<String>>()
     var lvGoBack = MutableLiveData<Event<Boolean>>()
 
     private val rxApiCarrierTracks: PublishSubject<Pair<String, String>> = PublishSubject.create()
@@ -53,22 +53,28 @@ class TrackDetailViewModel(override val app: Application, private val api: ApiRe
                         )
                     }
                     Constant.META_CODE_BAD_REQUEST,
-                    Constant.META_CODE_SERVER_ERROR,
-//                    -> {
-//                        log.e()
-//                        lvMakeToast.value = Event(getString(R.string.msg_network_error))
-//                        goBack()
-//                    }
                     Constant.META_CODE_NOT_FOUND -> {
                         log.e()
-                        lvParcelNotFound.value = Event(true)
+                        val msg = String.format(getString(R.string.error), res.meta.code, getString(R.string.msg_percel_not_exist_error))
+                        lvParcelNotFound.value = Event( String.format(getString(R.string.dialog_forcely_delete_parcel), msg, getString(R.string.error_reason_404)) )
+                    }
+                    Constant.META_CODE_SERVER_ERROR-> {
+                        log.e()
+                        val msg = String.format(getString(R.string.error), res.meta.code, getString(R.string.msg_carrier_network_error))
+                        lvParcelNotFound.value = Event( String.format(getString(R.string.dialog_forcely_delete_parcel), msg, getString(R.string.error_reason_500)) )
                     }
                     else -> {
-
+                        log.e()
+                        lvMakeToast.value = Event( String.format(getString(R.string.error), res.meta.code, res.meta.message) )
+                        goBack()
                     }
                 }
             }, {
-                it.message?.let { msg -> log.e(msg) }
+                it.message?.let { msg ->
+                    log.e(msg)
+                    lvMakeToast.value = Event( String.format(getString(R.string.error), 0, msg) )
+                    goBack()
+                }
             }).addCompositeDisposable()
 
         rxDaoUpdate

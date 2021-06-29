@@ -46,7 +46,11 @@
     <string name="dialog_name_change_toast_done">변경되었어요.</string>
     <string name="dialog_name_change_toast_fail">변경에 실패했어요.</string>
 
-    <string name="dialog_parcel_not_found">택배를 조회할 수 없어요.\n보통 이런 문제는 이런 이유로 발생해요.\n\n1. 판매자가 택배사에 물품을 보내지 않은 경우\n2. 잘못 인식된 운송장 번호가 자동 등록 된 경우\n3. 인터넷 통신 오류\n\n잘못 등록 된 택배라면, 이 택배를 삭제할까요?</string>
+    <string name="dialog_forcely_delete_parcel">%s\n이런 문제는 일반적으로 이런 이유로 발생해요.\n\n%s\n\n잘못 등록 된 택배라면, 이 택배를 삭제할까요?</string>
+    <string name="dialog_forcely_add_parcel">%s\n이런 문제는 일반적으로 이런 이유로 발생해요.\n\n%s\n\n그래도 물건을 등록할까요?</string>
+
+    <string name="error_reason_404">1. 택배사가 물품 배송을 시작하기 전\n2. 잘못 된 운송장 번호</string>
+    <string name="error_reason_500">1. 일시적인 서버 오류</string>
 
     <string name="dialog_allow_noti_help_allow_first">앱이 알림 영역에 접근할 수 있으면 운송장번호를 자동으로 등록할 수 있어요.\n허용하려면 아래 확인 버튼을 눌러주세요.\n\n앱은 절대 운송장 외의 정보에 접근하거나 정보를 기기 밖으로 전달하지 않아요.</string>
     <string name="dialog_allow_noti_help_allow">운송장을 자동으로 등록하기 위해 앱이 알림에 접근할 수 있도록 권한을 허용해주세요.\n\n앱은 절대 운송장 외의 정보에 접근하거나 정보를 기기 밖으로 전달하지 않아요.</string>
@@ -61,7 +65,7 @@
 
 
     <!--    메세지    -->
-    <string name="error_default">[%d] %s</string>
+    <string name="error">[%d] %s</string>
 
     <string name="msg_track_id_empty">운송장 번호를 입력해 주세요.</string>
     <string name="msg_carrier_empty">조회 하실 택배사를 선택해 주세요.</string>
