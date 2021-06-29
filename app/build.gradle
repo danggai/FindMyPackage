@@ -38,6 +38,14 @@ android {
         dataBinding = true
         viewBinding = true
     }
+    buildTypes {
+        debug {
+            debuggable true
+        }
+        release {
+            debuggable false
+        }
+    }
 }
 
 dependencies {
