@@ -62,22 +62,31 @@ class TrackAddViewModel(override val app: Application, private val api: ApiRepos
                 log.e(res)
                 when (res.meta.code) {
                     Constant.META_CODE_SUCCESS -> {
+                        log.e()
                         lvStartDetailAct.value = Event(true)
                         rxDaoInsert.onNext(
                             TrackEntity(lvTrackId.value, lvItemName.value,  res.data.from.name,  res.data.carrier.id, res.data.carrier.name, res.data.progresses[res.data.progresses.size-1].time, res.data.state.text, false)
                         )
                     }
                     Constant.META_CODE_BAD_REQUEST,
-                    Constant.META_CODE_NOT_FOUND,
+                    Constant.META_CODE_NOT_FOUND -> {
+                        log.e()
+                        lvMakeToast.value = Event( String.format(getString(R.string.error_default), res.meta.code, getString(R.string.msg_percel_not_exist_error)) )
+                    }
                     Constant.META_CODE_SERVER_ERROR -> {
-                        lvMakeToast.value = Event(getString(R.string.msg_not_exist_network_error))
+                        log.e()
+                        lvMakeToast.value = Event( String.format(getString(R.string.error_default), res.meta.code, getString(R.string.msg_carrier_network_error)) )
                     }
                     else -> {
-
+                        log.e()
+                        lvMakeToast.value = Event( String.format(getString(R.string.error_default), res.meta.code, res.meta.message) )
                     }
                 }
             }, {
-                it.message?.let { msg -> log.e(msg) }
+                it.message?.let { msg ->
+                    log.e(msg)
+                    lvMakeToast.value = Event( String.format(getString(R.string.error_default), 0, msg) )
+                }
             }).addCompositeDisposable()
 
         rxDaoInsert
