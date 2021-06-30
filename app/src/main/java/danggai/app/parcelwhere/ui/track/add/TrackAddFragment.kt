@@ -80,7 +80,7 @@ class TrackAddFragment : BindingFragment<TrackAddFragmentBinding>() {
                 }
             }
         })
-        mVM.lvDialogAddItemForcely.observe(viewLifecycleOwner, EventObserver { msg ->
+        mVM.lvDialogAddItemForcibly.observe(viewLifecycleOwner, EventObserver { msg ->
             log.e()
             activity?.let { act ->
                 log.e()
@@ -89,7 +89,7 @@ class TrackAddFragment : BindingFragment<TrackAddFragmentBinding>() {
                     .subscribe {
                         if (it) {
                             log.e()
-                            mVM.forcelyAddItem()
+                            mVM.forciblyAddItem()
                         } else log.e()
                     }
             }

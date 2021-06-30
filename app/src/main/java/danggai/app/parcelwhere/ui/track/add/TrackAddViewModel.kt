@@ -24,7 +24,7 @@ class TrackAddViewModel(override val app: Application, private val api: ApiRepos
 
     var lvStartDetailAct = MutableLiveData<Event<Boolean>>()
     var lvGoBack = MutableLiveData<Event<Boolean>>()
-    var lvDialogAddItemForcely = MutableLiveData<Event<String>>()
+    var lvDialogAddItemForcibly = MutableLiveData<Event<String>>()
 
     var lvItemSetChanged: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(false)
 
@@ -85,12 +85,12 @@ class TrackAddViewModel(override val app: Application, private val api: ApiRepos
                     Constant.META_CODE_NOT_FOUND -> {
                         log.e()
                         val msg = String.format(getString(R.string.error), res.meta.code, getString(R.string.msg_percel_not_exist_error))
-                        lvDialogAddItemForcely.value = Event( String.format(getString(R.string.dialog_forcely_add_parcel), msg, getString(R.string.error_reason_404)) )
+                        lvDialogAddItemForcibly.value = Event( String.format(getString(R.string.dialog_forcibly_add_parcel), msg, getString(R.string.error_reason_404)) )
                     }
                     Constant.META_CODE_SERVER_ERROR -> {
                         log.e()
                         val msg = String.format(getString(R.string.error), res.meta.code, getString(R.string.msg_carrier_network_error))
-                        lvDialogAddItemForcely.value = Event( String.format(getString(R.string.dialog_forcely_add_parcel), msg, getString(R.string.error_reason_500)) )
+                        lvDialogAddItemForcibly.value = Event( String.format(getString(R.string.dialog_forcibly_add_parcel), msg, getString(R.string.error_reason_500)) )
                     }
                     else -> {
                         log.e()
@@ -157,7 +157,7 @@ class TrackAddViewModel(override val app: Application, private val api: ApiRepos
         }
     }
 
-    fun forcelyAddItem() {
+    fun forciblyAddItem() {
         log.e()
         rxDaoInsert.onNext(
             TrackEntity(lvTrackId.value, lvItemName.value, "", lvCarrierId.value, CarrierUtil.getCarrierName(lvCarrierId.value), "", "", true)

@@ -155,7 +155,7 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
 
             // first target
             val first = layoutInflater.inflate(R.layout.layout_target, FrameLayout(requireContext()))
-            first.findViewById<TextView>(R.id.tv_text).text = getString(R.string.tutorial_msg_1)
+            first.findViewById<TextView>(R.id.tv_text).text = getString(R.string.msg_tutorial_1)
             first.findViewById<TextView>(R.id.tv_page).text = "1/3"
             val firstTarget = com.takusemba.spotlight.Target.Builder()
                 .setAnchor(view.findViewById<View>(R.id.btn_add))
@@ -167,7 +167,7 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
 
             // second target
             val second = layoutInflater.inflate(R.layout.layout_target, FrameLayout(requireContext()))
-            second.findViewById<TextView>(R.id.tv_text).text = getString(R.string.tutorial_msg_2)
+            second.findViewById<TextView>(R.id.tv_text).text = getString(R.string.msg_tutorial_2)
             second.findViewById<TextView>(R.id.tv_page).text = "2/3"
             val secondTarget = com.takusemba.spotlight.Target.Builder()
                 .setAnchor(view.findViewById<View>(R.id.btn_setting))
@@ -179,7 +179,7 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
 
             // third target
             val third = layoutInflater.inflate(R.layout.layout_target, FrameLayout(requireContext()))
-            third.findViewById<TextView>(R.id.tv_text).text = getString(R.string.tutorial_msg_3)
+            third.findViewById<TextView>(R.id.tv_text).text = getString(R.string.msg_tutorial_3)
             third.findViewById<TextView>(R.id.tv_page).text = "3/3"
             third.findViewById<TextView>(R.id.btn_next).text = "닫기"
             val thirdTarget = com.takusemba.spotlight.Target.Builder()

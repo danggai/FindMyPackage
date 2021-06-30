@@ -47,11 +47,8 @@
     <string name="dialog_name_change_toast_done">변경되었어요.</string>
     <string name="dialog_name_change_toast_fail">변경에 실패했어요.</string>
 
-    <string name="dialog_forcely_delete_parcel">%s\n이런 문제는 일반적으로 이런 이유로 발생해요.\n\n%s\n\n잘못 등록 된 택배라면, 이 택배를 삭제할까요?</string>
-    <string name="dialog_forcely_add_parcel">%s\n이런 문제는 일반적으로 이런 이유로 발생해요.\n\n%s\n\n그래도 물건을 등록할까요?</string>
-
-    <string name="error_reason_404">1. 택배사가 물품 배송을 시작하기 전\n2. 잘못 된 운송장 번호</string>
-    <string name="error_reason_500">1. 일시적인 서버 오류</string>
+    <string name="dialog_forcibly_add_parcel">%s\n이런 문제는 일반적으로 이런 이유로 발생해요.\n\n%s\n\n그래도 물건을 등록할까요?</string>
+    <string name="dialog_forcibly_delete_parcel">%s\n이런 문제는 일반적으로 이런 이유로 발생해요.\n\n%s\n\n잘못 등록 된 택배라면, 이 택배를 삭제할까요?</string>
 
     <string name="dialog_noti_permission_allow_first">앱이 알림 영역에 접근할 수 있으면 운송장번호를 자동으로 등록할 수 있어요.\n허용하려면 아래 확인 버튼을 눌러주세요.\n\n앱은 절대 운송장 외의 정보에 접근하거나 정보를 기기 밖으로 전달하지 않아요.</string>
     <string name="dialog_noti_permission_allow">운송장을 자동으로 등록하기 위해 앱이 알림에 접근할 수 있도록 권한을 허용해주세요.\n\n앱은 절대 운송장 외의 정보에 접근하거나 정보를 기기 밖으로 전달하지 않아요.</string>
@@ -61,10 +58,6 @@
     <string name="dialog_noti_when_parcel_refresh_allow">운송장이 새로고침 될 때, 알림으로 안내드려요.</string>
     <string name="dialog_noti_when_parcel_refresh_reject">운송장이 새로고침 될 때, 더 이상 알림으로 안내드리지 않아요.</string>
     <string name="dialog_start_noti_fail_form">알림에 택배사 이름과, 운송장 번호가 있어야지 앱이 알림을 인식 할 수 있어요.\n\n그럼에도 인식하지 못한다면, 인식하지 못하는 알림메세지를 개발자에게 전달해서 함께 앱을 개선할 수 있어요.\n\n개발자에게 알림을 공유하시겠어요?</string>
-
-    <string name="tutorial_msg_1">여기에선 운송장 정보를 직접 입력해서 수동으로 추가할 수 있어요.</string>
-    <string name="tutorial_msg_2">여기에선 앱이 알림으로 운송장을 등록할지, 자동으로 새로고침 할 지 설정할 수 있어요.</string>
-    <string name="tutorial_msg_3">여기에는 내 운송장들의 정보가 나열되어 있어요.</string>
 
 
     <!--    메세지    -->
@@ -81,8 +74,15 @@
     <string name="msg_empty_track_list">저장된 운송장 번호가 없어요.</string>
     <string name="msg_empty_progress_list">운송 정보를 가져오고 있어요.</string>
 
+    <string name="msg_tutorial_1">여기에선 운송장 정보를 직접 입력해서 수동으로 추가할 수 있어요.</string>
+    <string name="msg_tutorial_2">여기에선 앱이 알림으로 운송장을 등록할지, 자동으로 새로고침 할 지 설정할 수 있어요.</string>
+    <string name="msg_tutorial_3">여기에는 내 운송장들의 정보가 나열되어 있어요.</string>
+
     <string name="toast_back_button">한 번 더 눌러서 앱을 종료해요.</string>
     <string name="toast_parcel_delete_done">운송장 번호를 삭제했어요.</string>
+
+    <string name="error_reason_404">1. 택배사가 물품 배송을 시작하기 전\n2. 잘못 된 운송장 번호</string>
+    <string name="error_reason_500">1. 일시적인 서버 오류</string>
 
 
     <!--    ContentDescription    -->

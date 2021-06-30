@@ -56,12 +56,12 @@ class TrackDetailViewModel(override val app: Application, private val api: ApiRe
                     Constant.META_CODE_NOT_FOUND -> {
                         log.e()
                         val msg = String.format(getString(R.string.error), res.meta.code, getString(R.string.msg_percel_not_exist_error))
-                        lvParcelNotFound.value = Event( String.format(getString(R.string.dialog_forcely_delete_parcel), msg, getString(R.string.error_reason_404)) )
+                        lvParcelNotFound.value = Event( String.format(getString(R.string.dialog_forcibly_delete_parcel), msg, getString(R.string.error_reason_404)) )
                     }
                     Constant.META_CODE_SERVER_ERROR-> {
                         log.e()
                         val msg = String.format(getString(R.string.error), res.meta.code, getString(R.string.msg_carrier_network_error))
-                        lvParcelNotFound.value = Event( String.format(getString(R.string.dialog_forcely_delete_parcel), msg, getString(R.string.error_reason_500)) )
+                        lvParcelNotFound.value = Event( String.format(getString(R.string.dialog_forcibly_delete_parcel), msg, getString(R.string.error_reason_500)) )
                     }
                     else -> {
                         log.e()
