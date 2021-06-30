@@ -175,11 +175,11 @@ object PreferenceManager {
         setBoolean(context, Constant.PREF_IS_FIRST_RUN, value)
     }
 
-    fun getBooleanReceiveNoti(context: Context): Boolean {
-        return getBoolean(context, Constant.PREF_RECEIVE_NOTI, Constant.PREF_DEFAULT_RECEIVE_NOTI)
+    fun getBooleanNotiWhenAutoRegister(context: Context): Boolean {
+        return getBoolean(context, Constant.PREF_NOTI_WHEN_AUTO_REGISTER, Constant.PREF_DEFAULT_NOTI_WHEN_AUTO_REGISTER)
     }
-    fun setBooleanReceiveNoti(context: Context, value: Boolean) {
-        setBoolean(context, Constant.PREF_RECEIVE_NOTI, value)
+    fun setBooleanNotiWhenAutoRegister(context: Context, value: Boolean) {
+        setBoolean(context, Constant.PREF_NOTI_WHEN_AUTO_REGISTER, value)
     }
 
     fun getBooleanAutoRefresh(context: Context): Boolean {
@@ -194,6 +194,13 @@ object PreferenceManager {
     }
     fun setLongAutoRefreshPeriod(context: Context, value: Long) {
         setLong(context, Constant.PREF_AUTO_REFRESH_PERIOD, value)
+    }
+
+    fun getBooleanNotiWhenParcelRefresh(context: Context): Boolean {
+        return getBoolean(context, Constant.PREF_NOTI_WHEN_PARCEL_REFRESH, Constant.PREF_DEFAULT_NOTI_WHEN_PARCEL_REFRESH)
+    }
+    fun setBooleanNotiWhenParcelRefresh(context: Context, value: Boolean) {
+        setBoolean(context, Constant.PREF_NOTI_WHEN_PARCEL_REFRESH, value)
     }
 
 }

@@ -62,7 +62,7 @@ class RefreshWorker (context: Context, workerParams: WorkerParameters, private v
     private fun sendNoti(item: TrackEntity) {
         log.e()
 
-        if (!PreferenceManager.getBooleanReceiveNoti(applicationContext)) return
+        if (!PreferenceManager.getBooleanNotiWhenParcelRefresh(applicationContext)) return
 
         val title = applicationContext.getString(R.string.push_title_exist)
         val msg = "${item.itemName} (${CarrierUtil.getCarrierName(item.carrierId)} ${item.trackId}) 상품이 '${item.recentStatus}' 상태가 되었습니다."

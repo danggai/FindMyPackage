@@ -25,7 +25,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/TextView"
                 android:layout_width="match_parent"
-                android:text="@string/notification"
+                android:text="@string/auto_register"
                 android:textSize="24sp"
                 android:textColor="@color/c1"
                 android:textStyle="bold"
@@ -59,7 +59,7 @@
                     android:id="@+id/sm_noti_permission"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="@{vm.lvIsAllowAccessNoti}"
+                    android:checked="@{vm.lvIsAllowNotiPermission}"
                     android:onClick="@{() -> vm.onClickAccessNotiSwitch()}"
                     android:theme="@style/Switch"
                     app:layout_constraintRight_toRightOf="parent"
@@ -81,7 +81,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     style="@style/TextView"
-                    android:text="@string/get_notification"
+                    android:text="@string/receive_noti"
                     android:textSize="16sp"
                     android:textColor="@color/c1"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -90,11 +90,11 @@
                     />
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/sm_noti_get"
+                    android:id="@+id/sm_noti_when_auto_register"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="@{vm.lvIsAllowGetNoti}"
-                    android:onClick="@{() -> vm.onClickGetNotiSwitch()}"
+                    android:checked="@{vm.lvIsAllowNotiWhenAutoRegister}"
+                    android:onClick="@{() -> vm.onClickSwitchNotiWhenAutoRegister()}"
                     android:theme="@style/Switch"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -144,7 +144,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/TextView"
                 android:layout_width="match_parent"
-                android:text="@string/manage_parcel"
+                android:text="@string/auto_refresh"
                 android:textSize="24sp"
                 android:textColor="@color/c1"
                 android:textStyle="bold"
@@ -190,6 +190,43 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View style="@style/LinearDivider.15dp" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="20dp"
+                android:paddingHorizontal="30dp"
+                android:visibility="@{vm.lvIsAllowAutoRefresh ?View.VISIBLE :View.GONE}"
+                >
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TextView"
+                    android:text="@string/parcel_refresh_receive_noti"
+                    android:textSize="16sp"
+                    android:textColor="@color/c1"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/sm_auto_refresh_receive_noti"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="@{vm.lvIsAllowNotiWhenParcelRefresh}"
+                    android:onClick="@{() -> vm.onClickSetParcelRefreshReceiveNoti()}"
+                    android:theme="@style/Switch"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:contentDescription="@string/desc_parcel_refresh_receive_noti"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View style="@style/LinearDivider.15dp"
+                android:visibility="@{vm.lvIsAllowAutoRefresh ?View.VISIBLE :View.GONE}"
+                />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

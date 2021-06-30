@@ -104,7 +104,7 @@ class MyNotificationListenerService: NotificationListenerService() {
     }
 
     private fun sendNoti(item: TrackEntity) {
-        if (!PreferenceManager.getBooleanReceiveNoti(applicationContext)) return
+        if (!PreferenceManager.getBooleanNotiWhenAutoRegister(applicationContext)) return
 
         val title = getString(R.string.push_title_new)
         val msg = "${item.itemName} (${CarrierUtil.getCarrierName(item.carrierId)} ${item.trackId}) 이 자동 등록 되었습니다."

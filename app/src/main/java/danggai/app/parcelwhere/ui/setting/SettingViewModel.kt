@@ -14,18 +14,20 @@ import danggai.app.parcelwhere.util.log
 
 class SettingViewModel(override val app: Application, private val api: ApiRepository, private val dao: TrackDao) : BaseViewModel(app) {
 
-    var lvStartAccessNotiSetting = MutableLiveData<Event<Boolean>>()
-    var lvIsAllowAccessNoti: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(false)         // denied: -1, granted: 0
-    var lvIsAllowAutoRefresh: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(false)         // denied: -1, granted: 0
-    var lvAutoRefreshPeriod: NonNullMutableLiveData<Long> = NonNullMutableLiveData(15L)         // denied: -1, granted: 0
+    var lvSetNotiPermission = MutableLiveData<Event<Boolean>>()
+    var lvIsAllowNotiPermission: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(false)
+    var lvIsAllowNotiWhenAutoRegister: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(false)
+    var lvIsAllowAutoRefresh: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(false)
+    var lvIsAllowNotiWhenParcelRefresh: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(false)
+    var lvAutoRefreshPeriod: NonNullMutableLiveData<Long> = NonNullMutableLiveData(15L)
 
-    var lvStartGetNotiSetting = MutableLiveData<Event<Boolean>>()
-    var lvIsAllowGetNoti: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(false)
+    var lvActionNotiFailForm = MutableLiveData<Event<Boolean>>()
 
-    var lvStartNotiFailForm = MutableLiveData<Event<Boolean>>()
-
+    var lvSetNotiWhenAutoRegister = MutableLiveData<Event<Boolean>>()
     var lvSetAutoRefresh = MutableLiveData<Event<Boolean>>()
     var lvSetAutoRefreshPeriod = MutableLiveData<Event<Long>>()
+    var lvSetNotiWhenParcelRefresh = MutableLiveData<Event<Boolean>>()
+
     var lvDevTestAction = MutableLiveData<Event<Boolean>>()
 
     var lvAppVersion: NonNullMutableLiveData<String> = NonNullMutableLiveData("1.0.0")
@@ -36,17 +38,17 @@ class SettingViewModel(override val app: Application, private val api: ApiReposi
 
     fun onClickAccessNotiSwitch() {
         log.e()
-        lvStartAccessNotiSetting.value = Event(lvIsAllowAccessNoti.value)
+        lvSetNotiPermission.value = Event(lvIsAllowNotiPermission.value)
     }
 
-    fun onClickGetNotiSwitch() {
+    fun onClickSwitchNotiWhenAutoRegister() {
         log.e()
-        lvStartGetNotiSetting.value = Event(lvIsAllowGetNoti.value)
+        lvSetNotiWhenAutoRegister.value = Event(lvIsAllowNotiWhenAutoRegister.value)
     }
 
     fun onClickNotiReadFail() {
         log.e()
-        lvStartNotiFailForm.value = Event(true)
+        lvActionNotiFailForm.value = Event(true)
     }
 
     fun onClickDevTestAction() {
@@ -57,6 +59,11 @@ class SettingViewModel(override val app: Application, private val api: ApiReposi
     fun onClickSetAutoRefresh() {
         log.e()
         lvSetAutoRefresh.value = Event(lvIsAllowAutoRefresh.value)
+    }
+
+    fun onClickSetParcelRefreshReceiveNoti() {
+        log.e()
+        lvSetNotiWhenParcelRefresh.value = Event(lvIsAllowNotiWhenParcelRefresh.value)
     }
 
     fun onClickSetAutoRefreshPeriod(view: View) {

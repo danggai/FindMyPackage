@@ -49,9 +49,10 @@ class SettingFragment : BindingFragment<SettingFragmentBinding>() {
 
     private fun initUi() {
         context?.let {
-            mVM.lvIsAllowAccessNoti.value = isNotificationPermissionAllowed()
-            mVM.lvIsAllowGetNoti.value = PreferenceManager.getBooleanReceiveNoti(it)
+            mVM.lvIsAllowNotiPermission.value = isNotificationPermissionAllowed()
+            mVM.lvIsAllowNotiWhenAutoRegister.value = PreferenceManager.getBooleanNotiWhenAutoRegister(it)
             mVM.lvIsAllowAutoRefresh.value = PreferenceManager.getBooleanAutoRefresh(it)
+            mVM.lvIsAllowNotiWhenParcelRefresh.value = PreferenceManager.getBooleanNotiWhenParcelRefresh(it)
             mVM.lvAutoRefreshPeriod.value = PreferenceManager.getLongAutoRefreshPeriod(it)
         }
 
@@ -64,27 +65,27 @@ class SettingFragment : BindingFragment<SettingFragmentBinding>() {
     }
 
     private fun initLv() {
-        mVM.lvStartAccessNotiSetting.observe(viewLifecycleOwner, EventObserver { allowed ->
+        mVM.lvSetNotiPermission.observe(viewLifecycleOwner, EventObserver { allowed ->
             log.e(allowed)
             activity?.let { act ->
-                RxImageDialog(RxImageDialog.Builder(act, R.drawable.help_access_noti_allow, getString(R.string.dialog_allow_noti_help_allow), getString(R.string.confirm), getString(R.string.denied), false))
+                RxImageDialog(RxImageDialog.Builder(act, R.drawable.help_noti_permission, getString(R.string.dialog_noti_permission_allow), getString(R.string.confirm), getString(R.string.denied), false))
                     .show()
                     .subscribe {
                         if (it) startAllowNotiPermission()
-                        else mVM.lvIsAllowAccessNoti.value = allowed
+                        else mVM.lvIsAllowNotiPermission.value = allowed
                     }
             }
         })
 
-        mVM.lvStartGetNotiSetting.observe(viewLifecycleOwner, EventObserver { allowed ->
+        mVM.lvSetNotiWhenAutoRegister.observe(viewLifecycleOwner, EventObserver { allowed ->
             log.e()
             activity?.let { act ->
-                val msgResource = if (!allowed) R.string.dialog_get_noti_help_allow else R.string.dialog_get_noti_help_reject
+                val msgResource = if (!allowed) R.string.dialog_noti_when_auto_register_allow else R.string.dialog_noti_when_auto_register_reject
                 RxImageDialog(RxImageDialog.Builder(act, null, getString(msgResource), getString(R.string.confirm), getString(R.string.denied), false))
                     .show()
                     .subscribe {
-                        mVM.lvIsAllowGetNoti.value = if (it) {
-                            PreferenceManager.setBooleanReceiveNoti(act, !allowed)
+                        mVM.lvIsAllowNotiWhenAutoRegister.value = if (it) {
+                            PreferenceManager.setBooleanNotiWhenAutoRegister(act, !allowed)
                             !allowed
                         } else allowed
 //                        if (it) startAllowNotiPermission()
@@ -92,7 +93,7 @@ class SettingFragment : BindingFragment<SettingFragmentBinding>() {
             }
         })
 
-        mVM.lvStartNotiFailForm.observe(viewLifecycleOwner, EventObserver { allowed ->
+        mVM.lvActionNotiFailForm.observe(viewLifecycleOwner, EventObserver { allowed ->
             log.e()
             activity?.let { act ->
                 RxImageDialog(RxImageDialog.Builder(act, null, getString(R.string.dialog_start_noti_fail_form), getString(R.string.confirm), getString(R.string.denied), false))
@@ -117,6 +118,22 @@ class SettingFragment : BindingFragment<SettingFragmentBinding>() {
                 } else {
                     CommonFunction.cancellAllWorkers(act)
                 }
+            }
+        })
+
+        mVM.lvSetNotiWhenParcelRefresh.observe(viewLifecycleOwner, EventObserver { allowed ->
+            log.e()
+            activity?.let { act ->
+                val msgResource = if (!allowed) R.string.dialog_noti_when_parcel_refresh_allow else R.string.dialog_noti_when_parcel_refresh_reject
+                RxImageDialog(RxImageDialog.Builder(act, null, getString(msgResource), getString(R.string.confirm), getString(R.string.denied), false))
+                    .show()
+                    .subscribe {
+                        mVM.lvIsAllowNotiWhenParcelRefresh.value = if (it) {
+                            PreferenceManager.setBooleanNotiWhenParcelRefresh(act, !allowed)
+                            !allowed
+                        } else allowed
+//                        if (it) startAllowNotiPermission()
+                    }
             }
         })
 
