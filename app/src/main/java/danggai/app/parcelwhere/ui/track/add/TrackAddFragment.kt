@@ -13,6 +13,7 @@ import danggai.app.parcelwhere.data.db.track.TrackEntity
 import danggai.app.parcelwhere.data.rxbus.RxBusMainSelectAll
 import danggai.app.parcelwhere.databinding.TrackAddFragmentBinding
 import danggai.app.parcelwhere.extension.onlyEngNum
+import danggai.app.parcelwhere.ui.dialog.RxImageDialog
 import danggai.app.parcelwhere.ui.track.detail.TrackDetailActivity
 import danggai.app.parcelwhere.util.EventObserver
 import danggai.app.parcelwhere.util.log
@@ -67,6 +68,30 @@ class TrackAddFragment : BindingFragment<TrackAddFragmentBinding>() {
                     TrackDetailActivity.normalStart(act, TrackEntity(mVM.lvTrackId.value, mVM.lvItemName.value, "", mVM.lvCarrierId.value, "", "", "", false))
                     act.finish()
                 }
+            }
+        })
+        mVM.lvGoBack.observe(viewLifecycleOwner, EventObserver {
+            if (it) {
+                log.e()
+                activity?.let { act ->
+                    log.e()
+                    RxBusMainSelectAll.getSubject()?.onNext(true)
+                    act.finish()
+                }
+            }
+        })
+        mVM.lvDialogAddItemForcely.observe(viewLifecycleOwner, EventObserver { msg ->
+            log.e()
+            activity?.let { act ->
+                log.e()
+                RxImageDialog(RxImageDialog.Builder(act, null, msg, getString(R.string.confirm), getString(R.string.dialog_cancel), false))
+                    .show()
+                    .subscribe {
+                        if (it) {
+                            log.e()
+                            mVM.forcelyAddItem()
+                        } else log.e()
+                    }
             }
         })
     }

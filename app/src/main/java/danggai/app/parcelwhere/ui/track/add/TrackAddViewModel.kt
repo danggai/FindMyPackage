@@ -23,6 +23,8 @@ import io.reactivex.subjects.PublishSubject
 class TrackAddViewModel(override val app: Application, private val api: ApiRepository, private val dao: TrackDao) : BaseViewModel(app) {
 
     var lvStartDetailAct = MutableLiveData<Event<Boolean>>()
+    var lvGoBack = MutableLiveData<Event<Boolean>>()
+    var lvDialogAddItemForcely = MutableLiveData<Event<String>>()
 
     var lvItemSetChanged: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(false)
 
@@ -38,6 +40,16 @@ class TrackAddViewModel(override val app: Application, private val api: ApiRepos
     val lvCarrierList = _lvCarrierList
 
     init {
+        initRx()
+        _lvCarrierList.value = AppSession.getCarrierList()
+    }
+
+    fun initUi() {
+        log.e()
+        if (AppSession.getCarrierList().size < 2) rxApiCarrier.onNext(true)
+    }
+
+    private fun initRx() {
         rxApiCarrier
             .observeOn(Schedulers.newThread())
             .filter { it }
@@ -73,10 +85,12 @@ class TrackAddViewModel(override val app: Application, private val api: ApiRepos
                     Constant.META_CODE_NOT_FOUND -> {
                         log.e()
                         val msg = String.format(getString(R.string.error), res.meta.code, getString(R.string.msg_percel_not_exist_error))
+                        lvDialogAddItemForcely.value = Event( String.format(getString(R.string.dialog_forcely_add_parcel), msg, getString(R.string.error_reason_404)) )
                     }
                     Constant.META_CODE_SERVER_ERROR -> {
                         log.e()
                         val msg = String.format(getString(R.string.error), res.meta.code, getString(R.string.msg_carrier_network_error))
+                        lvDialogAddItemForcely.value = Event( String.format(getString(R.string.dialog_forcely_add_parcel), msg, getString(R.string.error_reason_500)) )
                     }
                     else -> {
                         log.e()
@@ -88,23 +102,21 @@ class TrackAddViewModel(override val app: Application, private val api: ApiRepos
                     log.e(msg)
                     lvMakeToast.value = Event( String.format(getString(R.string.error), 0, msg) )
                 }
+                initRx()
             }).addCompositeDisposable()
 
         rxDaoInsert
             .observeOn(Schedulers.newThread())
-            .subscribe ({ item ->
+            .map { item ->
                 dao.insertWithReplace(item)
+            }
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe ({ item ->
                 log.e(item)
+                lvGoBack.value = Event(true)
             }, {
                 it.message?.let { msg -> log.e(msg) }
             }).addCompositeDisposable()
-
-        _lvCarrierList.value = AppSession.getCarrierList()
-    }
-
-    fun initUi() {
-        log.e()
-        if (AppSession.getCarrierList().size < 2) rxApiCarrier.onNext(true)
     }
 
     fun onClick(view: View) {
@@ -143,6 +155,13 @@ class TrackAddViewModel(override val app: Application, private val api: ApiRepos
                 log.e()
             }
         }
+    }
+
+    fun forcelyAddItem() {
+        log.e()
+        rxDaoInsert.onNext(
+            TrackEntity(lvTrackId.value, lvItemName.value, "", lvCarrierId.value, CarrierUtil.getCarrierName(lvCarrierId.value), "", "", true)
+        )
     }
 
 }
