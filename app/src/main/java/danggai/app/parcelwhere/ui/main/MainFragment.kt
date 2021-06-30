@@ -10,6 +10,7 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.core.content.ContextCompat
+import androidx.work.impl.model.Preference
 import com.takusemba.spotlight.Spotlight
 import com.takusemba.spotlight.shape.Circle
 import com.takusemba.spotlight.shape.RoundedRectangle
@@ -63,7 +64,7 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
                         .show()
                         .subscribe { confirm ->
                             if (confirm) startAllowNotiPermission()
-                            PreferenceManager.setBoolean(act, Constant.PREF_IS_FIRST_RUN, false)
+                            PreferenceManager.setBooleanIsFirstRun(act, false)
                         }
                 }
             }

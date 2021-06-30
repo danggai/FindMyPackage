@@ -171,17 +171,29 @@ object PreferenceManager {
     fun getBooleanIsFirstRun(context: Context): Boolean {
         return getBoolean(context, Constant.PREF_IS_FIRST_RUN, Constant.PREF_DEFAULT_IS_FIRST_RUN)
     }
+    fun setBooleanIsFirstRun(context: Context, value: Boolean) {
+        setBoolean(context, Constant.PREF_IS_FIRST_RUN, value)
+    }
 
-    fun getBooleanAllowGetNoti(context: Context): Boolean {
-        return getBoolean(context, Constant.PREF_ALLOW_GET_NOTI, Constant.PREF_DEFAULT_ALLOW_GET_NOTI)
+    fun getBooleanReceiveNoti(context: Context): Boolean {
+        return getBoolean(context, Constant.PREF_RECEIVE_NOTI, Constant.PREF_DEFAULT_RECEIVE_NOTI)
+    }
+    fun setBooleanReceiveNoti(context: Context, value: Boolean) {
+        setBoolean(context, Constant.PREF_RECEIVE_NOTI, value)
     }
 
     fun getBooleanAutoRefresh(context: Context): Boolean {
         return getBoolean(context, Constant.PREF_AUTO_REFRESH, Constant.PREF_DEFAULT_REFRESH)
     }
+    fun setBooleanAutoRefresh(context: Context, value: Boolean) {
+        setBoolean(context, Constant.PREF_AUTO_REFRESH, value)
+    }
 
     fun getLongAutoRefreshPeriod(context: Context): Long {
         return getLong(context, Constant.PREF_AUTO_REFRESH_PERIOD, Constant.PREF_DEFAULT_REFRESH_PERIOD)
+    }
+    fun setLongAutoRefreshPeriod(context: Context, value: Long) {
+        setLong(context, Constant.PREF_AUTO_REFRESH_PERIOD, value)
     }
 
 }

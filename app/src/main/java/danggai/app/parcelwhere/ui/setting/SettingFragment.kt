@@ -50,7 +50,7 @@ class SettingFragment : BindingFragment<SettingFragmentBinding>() {
     private fun initUi() {
         context?.let {
             mVM.lvIsAllowAccessNoti.value = isNotificationPermissionAllowed()
-            mVM.lvIsAllowGetNoti.value = PreferenceManager.getBooleanAllowGetNoti(it)
+            mVM.lvIsAllowGetNoti.value = PreferenceManager.getBooleanReceiveNoti(it)
             mVM.lvIsAllowAutoRefresh.value = PreferenceManager.getBooleanAutoRefresh(it)
             mVM.lvAutoRefreshPeriod.value = PreferenceManager.getLongAutoRefreshPeriod(it)
         }
@@ -84,7 +84,7 @@ class SettingFragment : BindingFragment<SettingFragmentBinding>() {
                     .show()
                     .subscribe {
                         mVM.lvIsAllowGetNoti.value = if (it) {
-                            PreferenceManager.setBoolean(act, Constant.PREF_ALLOW_GET_NOTI, !allowed)
+                            PreferenceManager.setBooleanReceiveNoti(act, !allowed)
                             !allowed
                         } else allowed
 //                        if (it) startAllowNotiPermission()
@@ -110,7 +110,7 @@ class SettingFragment : BindingFragment<SettingFragmentBinding>() {
         mVM.lvSetAutoRefresh.observe(viewLifecycleOwner, EventObserver { allowed ->
             log.e()
             activity?.let { act ->
-                PreferenceManager.setBoolean(act, Constant.PREF_AUTO_REFRESH, !allowed)
+                PreferenceManager.setBooleanAutoRefresh(act, !allowed)
                 mVM.lvIsAllowAutoRefresh.value = !allowed
                 if (!allowed) {
                     CommonFunction.startUniquePeriodicRefreshWorker(act)
@@ -123,7 +123,7 @@ class SettingFragment : BindingFragment<SettingFragmentBinding>() {
         mVM.lvSetAutoRefreshPeriod.observe(viewLifecycleOwner, EventObserver { period ->
             activity?.let { act ->
                 log.e(period)
-                PreferenceManager.setLong(act, Constant.PREF_AUTO_REFRESH_PERIOD, period)
+                PreferenceManager.setLongAutoRefreshPeriod(act, period)
                 CommonFunction.startUniquePeriodicRefreshWorker(act, period)
             }
         })

@@ -56,12 +56,12 @@ object Constant {
     /* PREFERENCE */
 
     const val PREF_IS_FIRST_RUN = "PREF_IS_FIRST_RUN"
-    const val PREF_ALLOW_GET_NOTI = "PREF_ALLOW_GET_NOTI"
+    const val PREF_RECEIVE_NOTI = "PREF_RECEIVE_NOTI"
     const val PREF_AUTO_REFRESH = "PREF_AUTO_REFRESH"
     const val PREF_AUTO_REFRESH_PERIOD = "PREF_AUTO_REFRESH_PERIOD"
 
     const val PREF_DEFAULT_IS_FIRST_RUN = true
-    const val PREF_DEFAULT_ALLOW_GET_NOTI = true
+    const val PREF_DEFAULT_RECEIVE_NOTI = true
     const val PREF_DEFAULT_REFRESH = true
     const val PREF_DEFAULT_REFRESH_PERIOD = 60L
 
