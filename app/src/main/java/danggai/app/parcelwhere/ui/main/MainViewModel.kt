@@ -42,7 +42,7 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
 
     private var lvRefreshSwitch: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(false)
 
-    init {
+    private fun initRx() {
         rxApiCarrier
             .observeOn(Schedulers.newThread())
             .filter { it }
@@ -51,9 +51,13 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
             }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe ({ res ->
+                log.e(res)
                 AppSession.setCarrierList(res)
             }, {
-                it.message?.let { msg -> log.e(msg) }
+                it.message?.let { msg ->
+                    log.e(msg)
+                    initUI()
+              }
             }).addCompositeDisposable()
 
         rxDaoSelectAll
@@ -174,14 +178,15 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
                     }
                 }
             }, {
-                 it.message?.let { msg ->
-                     log.e(msg)
-                     refreshUiDisable()
-                 }
+                it.message?.let { msg ->
+                    log.e(msg)
+                    refreshUiDisable()
+                }
             }).addCompositeDisposable()
     }
 
     fun initUI() {
+        initRx()
         if (!lvIsFirstInit.value) return else lvIsFirstInit.value = false
         log.e()
         lvRefreshSwitch.value = true
