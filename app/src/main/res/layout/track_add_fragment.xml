@@ -22,6 +22,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:paddingBottom="5dp"
+                android:paddingHorizontal="18dp"
                 viewModel="@{vm}"
                 items="@{vm.lvCarrierList}"
                 isChanged="@{vm.lvItemSetChanged}"
