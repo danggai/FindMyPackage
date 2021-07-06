@@ -92,7 +92,10 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
                     refreshAll()
                 }
             }, {
-                it.message?.let { msg -> log.e(msg) }
+                it.message?.let { msg ->
+                    log.e(msg)
+                    initRx()
+                }
             }, {
                 log.e()
             }).addCompositeDisposable()
@@ -129,7 +132,10 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
 
                 dao.update(trackEntity)
             }, {
-                it.message?.let { msg -> log.e(msg) }
+                it.message?.let { msg ->
+                    log.e(msg)
+                    initRx()
+                }
             }).addCompositeDisposable()
 
         rxDaoDelete
@@ -143,7 +149,10 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
             .subscribe({ item ->
                 lvMakeToast.value = Event("${item.itemName}(${item.trackId})이 삭제되었습니다.")
             }, {
-                it.message?.let { msg -> log.e(msg) }
+                it.message?.let { msg ->
+                    log.e(msg)
+                    initRx()
+                }
             }).addCompositeDisposable()
 
         rxApiCarrierTracks
@@ -181,6 +190,7 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
                 it.message?.let { msg ->
                     log.e(msg)
                     refreshUiDisable()
+                    initRx()
                 }
             }).addCompositeDisposable()
     }
