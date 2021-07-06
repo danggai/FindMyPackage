@@ -12,7 +12,7 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/c1"
+            android:background="@color/f1"
             android:orientation="vertical"
             >
 
@@ -34,13 +34,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@color/f1"
                 >
+
+                <View style="@style/LinearDivider" />
 
                 <androidx.appcompat.widget.AppCompatEditText
                     style="@style/EditText.MatchWrap"
                     android:id="@+id/tv_item_name"
-                    android:layout_marginTop="5dp"
                     android:paddingVertical="10dp"
                     android:text="@={vm.lvItemName}"
                     android:textSize="18sp"

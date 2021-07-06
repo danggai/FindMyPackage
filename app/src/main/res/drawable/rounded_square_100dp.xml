@@ -4,7 +4,7 @@
 
     <solid android:color="@color/sel_carrier_background_color" />
     <corners android:radius="100dp" />
-    <stroke android:color="@color/f4"
+    <stroke android:color="@color/c3"
         android:width="1dp" />
 
 </shape>
