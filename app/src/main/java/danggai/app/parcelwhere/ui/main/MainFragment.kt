@@ -92,6 +92,11 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
         initClipBoard()
     }
 
+    override fun onResume() {
+        super.onResume()
+        setStatusBarColorPrimary()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         RxBusMainSelectAll.release()

@@ -44,6 +44,7 @@ class SettingFragment : BindingFragment<SettingFragmentBinding>() {
 
     override fun onResume() {
         super.onResume()
+        setStatusBarColorWhite()
         initUi()
     }
 

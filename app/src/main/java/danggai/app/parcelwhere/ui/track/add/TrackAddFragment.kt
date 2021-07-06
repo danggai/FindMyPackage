@@ -53,6 +53,11 @@ class TrackAddFragment : BindingFragment<TrackAddFragmentBinding>() {
         initLv()
     }
 
+    override fun onResume() {
+        super.onResume()
+        setStatusBarColorWhite()
+    }
+
     private fun initUi() {
         binding.tvTrackId.onlyEngNum()
         mVM.initUi()

@@ -41,6 +41,11 @@ class TrackDetailFragment : BindingFragment<TrackDetailFragmentBinding>() {
         initLv()
     }
 
+     override fun onResume() {
+        super.onResume()
+        setStatusBarColorPrimary()
+    }
+
     private fun initUi() {
         getIntent().getParcelableExtra<TrackEntity>(TrackDetailActivity.ARG_TRACK_ENTITY)?.let { item -> mVM.initUi(item) }
     }
