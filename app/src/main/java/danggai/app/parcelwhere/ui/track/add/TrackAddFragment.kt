@@ -99,5 +99,9 @@ class TrackAddFragment : BindingFragment<TrackAddFragmentBinding>() {
                     }
             }
         })
+        mVM.lvProgressVisibility.observe(viewLifecycleOwner, EventObserver { boolean ->
+            log.e()
+            binding.llProgress.visibility = if (boolean) View.VISIBLE else View.GONE
+        })
     }
 }

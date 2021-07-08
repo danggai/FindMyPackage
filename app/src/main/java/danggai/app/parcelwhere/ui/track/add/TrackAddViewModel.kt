@@ -24,6 +24,7 @@ class TrackAddViewModel(override val app: Application, private val api: ApiRepos
 
     var lvStartDetailAct = MutableLiveData<Event<Boolean>>()
     var lvGoBack = MutableLiveData<Event<Boolean>>()
+    var lvProgressVisibility = MutableLiveData<Event<Boolean>>()
     var lvDialogAddItemForcibly = MutableLiveData<Event<String>>()
 
     var lvItemSetChanged: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(false)
@@ -65,6 +66,11 @@ class TrackAddViewModel(override val app: Application, private val api: ApiRepos
             }).addCompositeDisposable()
 
         rxApiCarrierTracks
+            .observeOn(AndroidSchedulers.mainThread())
+            .map {
+                lvProgressVisibility.value = Event(true)
+                it
+            }
             .observeOn(Schedulers.newThread())
             .switchMap {
                 log.e()
@@ -73,6 +79,7 @@ class TrackAddViewModel(override val app: Application, private val api: ApiRepos
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ res ->
                 log.e(res)
+                lvProgressVisibility.value = Event(false)
                 when (res.meta.code) {
                     Constant.META_CODE_SUCCESS -> {
                         log.e()
@@ -100,6 +107,7 @@ class TrackAddViewModel(override val app: Application, private val api: ApiRepos
             }, {
                 it.message?.let { msg ->
                     log.e(msg)
+                    lvProgressVisibility.value = Event(false)
                     lvMakeToast.value = Event( String.format(getString(R.string.error), 0, msg) )
                 }
                 initRx()
