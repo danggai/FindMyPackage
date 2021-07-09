@@ -48,7 +48,7 @@
 
                 <androidx.appcompat.widget.AppCompatEditText
                     style="@style/EditText.MatchWrap"
-                    android:id="@+id/tv_item_name"
+                    android:id="@+id/et_item_name"
                     android:paddingVertical="10dp"
                     android:text="@={vm.lvItemName}"
                     android:textSize="18sp"
@@ -61,7 +61,7 @@
 
                 <androidx.appcompat.widget.AppCompatEditText
                     style="@style/EditText.MatchWrap"
-                    android:id="@+id/tv_track_id"
+                    android:id="@+id/et_track_id"
                     android:paddingVertical="10dp"
                     android:text="@={vm.lvTrackId}"
                     android:textSize="18sp"

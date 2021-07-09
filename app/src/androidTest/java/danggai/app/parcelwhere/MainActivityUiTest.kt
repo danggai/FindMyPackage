@@ -25,15 +25,22 @@ class MainActivityUiTest {
 
     @Test
     fun tutorialTest() {
-        Espresso.onView(ViewMatchers.withId(R.id.btn_tutorial)).perform(ViewActions.click())
+        Espresso.onView(ViewMatchers.withId(R.id.btn_tutorial))
+            .perform(ViewActions.click())
 
-        Espresso.onView(ViewMatchers.withText(R.string.msg_tutorial_1)).check(matches(ViewMatchers.isDisplayed()))
-        Espresso.onView(ViewMatchers.withId(R.id.btn_next)).perform(ViewActions.click())
+        Espresso.onView(ViewMatchers.withText(R.string.msg_tutorial_1))
+            .check(matches(ViewMatchers.isDisplayed()))
+        Espresso.onView(ViewMatchers.withId(R.id.btn_next))
+            .perform(ViewActions.click())
 
-        Espresso.onView(ViewMatchers.withText(R.string.msg_tutorial_2)).check(matches(ViewMatchers.isDisplayed()))
-        Espresso.onView(ViewMatchers.withId(R.id.btn_next)).perform(ViewActions.click())
+        Espresso.onView(ViewMatchers.withText(R.string.msg_tutorial_2))
+            .check(matches(ViewMatchers.isDisplayed()))
+        Espresso.onView(ViewMatchers.withId(R.id.btn_next))
+            .perform(ViewActions.click())
 
-        Espresso.onView(ViewMatchers.withText(R.string.msg_tutorial_3)).check(matches(ViewMatchers.isDisplayed()))
-        Espresso.onView(ViewMatchers.withId(R.id.btn_next)).perform(ViewActions.click())
+        Espresso.onView(ViewMatchers.withText(R.string.msg_tutorial_3))
+            .check(matches(ViewMatchers.isDisplayed()))
+        Espresso.onView(ViewMatchers.withId(R.id.btn_next))
+            .perform(ViewActions.click())
     }
 }

@@ -13,11 +13,6 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class ExampleUnitTest {
     @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
-    }
-
-    @Test
     fun carrierUtilTest() {
         val carrier = Mockito.mock(Carrier::class.java)
 
