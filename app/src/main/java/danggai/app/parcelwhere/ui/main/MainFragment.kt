@@ -155,6 +155,8 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
     }
 
     private fun startTutorial() {
+        if (::spotlight.isInitialized) spotlight.finish()
+
         view?.let { view ->
             val targets: MutableList<com.takusemba.spotlight.Target> = ArrayList()
 
