@@ -62,8 +62,10 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
                     RxImageDialog(RxImageDialog.Builder(act, R.drawable.help_noti_permission, getString(R.string.dialog_noti_permission_allow_first), getString(R.string.confirm), getString(R.string.denied), false))
                         .show()
                         .subscribe { confirm ->
+                            log.e()
                             if (confirm) startAllowNotiPermission()
                             PreferenceManager.setBooleanIsFirstRun(act, false)
+                            startTutorial()
                         }
                 }
             }
