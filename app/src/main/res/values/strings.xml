@@ -95,4 +95,11 @@
     <string name="desc_auto_refresh">운송장을 일정 시간마다 자동으로 새로고침 할 지 여부를 설정할 수 있어요.</string>
     <string name="desc_parcel_refresh_receive_noti">운송장 자동 새로고침 시 알림을 수신할 지 여부를 설정할 수 있어요.</string>
 
+
+    <!-- Google Ads -->
+    <string name="google_ads_app_id">ca-app-pub-8407462596213276~2658827782</string>
+    <string name="google_ads_banner_id">ca-app-pub-8407462596213276/5807605420</string>
+
+    <string name="google_ads_test_banner_id">ca-app-pub-3940256099942544/6300978111</string>
+
 </resources>

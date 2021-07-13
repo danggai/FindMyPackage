@@ -10,10 +10,12 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.core.content.ContextCompat
+import com.google.android.gms.ads.*
 import com.takusemba.spotlight.Spotlight
 import com.takusemba.spotlight.shape.Circle
 import com.takusemba.spotlight.shape.RoundedRectangle
 import danggai.app.parcelwhere.BindingFragment
+import danggai.app.parcelwhere.BuildConfig
 import danggai.app.parcelwhere.Constant
 import danggai.app.parcelwhere.R
 import danggai.app.parcelwhere.data.rxbus.RxBusMainSelectAll
@@ -27,6 +29,8 @@ import danggai.app.parcelwhere.util.EventObserver
 import danggai.app.parcelwhere.util.PreferenceManager
 import danggai.app.parcelwhere.util.log
 import org.koin.androidx.viewmodel.ext.android.getViewModel
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class MainFragment : BindingFragment<MainFragmentBinding>() {
@@ -39,6 +43,7 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
     private lateinit var mVM: MainViewModel
     private lateinit var clipboard: ClipboardManager
     private lateinit var spotlight: Spotlight
+    private lateinit var mAdView : AdView
 
     @LayoutRes
     override fun getLayoutResId() = R.layout.main_fragment
@@ -91,7 +96,17 @@ class MainFragment : BindingFragment<MainFragmentBinding>() {
 
         initUi()
         initLv()
+        initAd()
         initClipBoard()
+    }
+
+    private fun initAd() {
+        log.e()
+        MobileAds.initialize(requireContext())
+
+        mAdView = binding.adView
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
     }
 
     override fun onResume() {

@@ -9,102 +9,124 @@
             type="danggai.app.parcelwhere.ui.main.MainViewModel"/>
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/cl_bottom"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/f1"
         >
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btn_add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/baseline_add_24"
-            android:backgroundTint="@color/c1"
-            android:onClick="@{(v) -> vm.onClick(v)}"
-            app:layout_anchor="@id/btm_appbar"
-            app:borderWidth="0dp"
-            app:tint="@color/f1"
-            android:contentDescription="@string/desc_parcel_add"
-            />
-
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/sr_layout"
-            isRefreshing="@{vm.lvIsRefreshing}"
-            viewModel="@{vm}"
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/cl_bottom"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="50dp"
+            android:layout_height="0dp"
+            android:background="@color/f1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/adView"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             >
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_track_list"
-                isChanged="@{vm.lvItemSetChanged}"
-                items="@{vm.lvMyTracksList}"
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btn_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_add_24"
+                android:backgroundTint="@color/c1"
+                android:onClick="@{(v) -> vm.onClick(v)}"
+                app:layout_anchor="@id/btm_appbar"
+                app:borderWidth="0dp"
+                app:tint="@color/f1"
+                android:contentDescription="@string/desc_parcel_add"
+                />
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/sr_layout"
+                isRefreshing="@{vm.lvIsRefreshing}"
                 viewModel="@{vm}"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/f1"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:layout_marginBottom="50dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_track_list"
+                    isChanged="@{vm.lvItemSetChanged}"
+                    items="@{vm.lvMyTracksList}"
+                    viewModel="@{vm}"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/f1"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+            <View
+                android:id="@+id/tutorial_target"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="150dp"
                 />
 
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-        <View
-            android:id="@+id/tutorial_target"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="150dp"
-            />
-
-        <com.google.android.material.bottomappbar.BottomAppBar
-            android:id="@+id/btm_appbar"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_gravity="bottom"
-            app:backgroundTint="@color/c1"
-            app:fabAlignmentMode="end"
-            >
-
-            <LinearLayout
+            <com.google.android.material.bottomappbar.BottomAppBar
+                android:id="@+id/btm_appbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:orientation="horizontal"
+                android:layout_height="50dp"
+                android:layout_gravity="bottom"
+                app:backgroundTint="@color/c1"
+                app:fabAlignmentMode="end"
                 >
 
-                <ImageView
-                    android:id="@+id/btn_setting"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:padding="5dp"
-                    app:tint="@color/f1"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:src="@drawable/baseline_settings_24"
-                    android:onClick="@{(v) -> vm.onClick(v)}"
-                    android:contentDescription="@string/desc_setting"
-                    />
+                    android:gravity="left"
+                    android:orientation="horizontal"
+                    >
 
-                <ImageView
-                    android:id="@+id/btn_tutorial"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:padding="5dp"
-                    app:tint="@color/f1"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:src="@drawable/baseline_help_24"
-                    android:onClick="@{(v) -> vm.onClick(v)}"
-                    android:contentDescription="@string/desc_tutorial"
-                    />
+                    <ImageView
+                        android:id="@+id/btn_setting"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:padding="5dp"
+                        app:tint="@color/f1"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/baseline_settings_24"
+                        android:onClick="@{(v) -> vm.onClick(v)}"
+                        android:contentDescription="@string/desc_setting"
+                        />
 
-            </LinearLayout>
+                    <ImageView
+                        android:id="@+id/btn_tutorial"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:padding="5dp"
+                        app:tint="@color/f1"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/baseline_help_24"
+                        android:onClick="@{(v) -> vm.onClick(v)}"
+                        android:contentDescription="@string/desc_tutorial"
+                        />
 
-        </com.google.android.material.bottomappbar.BottomAppBar>
+                </LinearLayout>
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+            </com.google.android.material.bottomappbar.BottomAppBar>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            ads:layout_constraintBottom_toBottomOf="parent"
+            ads:layout_constraintLeft_toLeftOf="parent"
+            ads:layout_constraintRight_toRightOf="parent"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/google_ads_banner_id" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
