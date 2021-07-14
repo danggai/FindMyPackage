@@ -27,6 +27,8 @@ class MyNotificationListenerService: NotificationListenerService() {
     private val rxDaoExistById: PublishSubject<TrackEntity> = PublishSubject.create()
     private val compositeDisposable = CompositeDisposable()
 
+    private var lvIsValidRxFlow: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(false)
+
     private var newTrackEntity: NonNullMutableLiveData<TrackEntity> = NonNullMutableLiveData(TrackEntity("","","","","","","",false))
 
     init {
@@ -47,6 +49,7 @@ class MyNotificationListenerService: NotificationListenerService() {
             rxDaoExistById
                 .observeOn(AndroidSchedulers.mainThread())
                 .filter { track ->
+                    lvIsValidRxFlow.value = true
                     newTrackEntity.value = track
                     true
                 }
@@ -55,8 +58,12 @@ class MyNotificationListenerService: NotificationListenerService() {
                     log.e(track)
                     dao.existById(track.trackId)
                 }
+                .filter {
+                    lvIsValidRxFlow.value
+                }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ exist ->
+                    lvIsValidRxFlow.value = false
                     if (exist) {
                         log.e()
                         // TODO(이후 이미 등록 된 아이템은 새로고침하여 내역 변동 시 알림)

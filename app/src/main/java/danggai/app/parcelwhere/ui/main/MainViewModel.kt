@@ -29,7 +29,7 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
     var lvIsRefreshing: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(false)
     
     private var lvIsFirstInit: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(true)
-    private var lvSelectAllSwitch: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(false)
+    private var lvIsValidRxFlow: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(false)
     var lvItemSetChanged: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(false)
 
     private val rxApiCarrier: PublishSubject<Boolean> = PublishSubject.create()
@@ -63,7 +63,7 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
         rxDaoSelectAll
             .observeOn(AndroidSchedulers.mainThread())
             .filter {
-                lvSelectAllSwitch.value = true
+                lvIsValidRxFlow.value = true
                 it
             }
             .observeOn(Schedulers.newThread())
@@ -72,12 +72,12 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
                 dao.selectAll()
             }
             .filter {
-                lvSelectAllSwitch.value
+                lvIsValidRxFlow.value
             }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe ({ items ->
                 log.e(items)
-                lvSelectAllSwitch.value = false
+                lvIsValidRxFlow.value = false
 
                 val trackItems = mutableListOf<TrackListItem>()
 
