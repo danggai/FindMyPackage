@@ -1,5 +1,7 @@
 # 택배ㅇㄷ?
 
+![icon.jpg](https://github.com/danggai/FindMyPackage/blob/master/assets/icon.jpg?raw=true)
+
 개인 프로젝트로 개발 된 코틀린 언어를 사용한 안드로이드 앱이에요.
 
 - 연락처: donggi9313@gmail.com
@@ -44,7 +46,13 @@
 
 ## 스크린샷
 
-준비중
+![screenshot_1.jpg](https://github.com/danggai/FindMyPackage/blob/master/assets/screenshot_1.jpg?raw=true)
+
+![screenshot_2.jpg](https://github.com/danggai/FindMyPackage/blob/master/assets/screenshot_2.jpg?raw=true)
+
+![screenshot_3.jpg](https://github.com/danggai/FindMyPackage/blob/master/assets/screenshot_3.jpg?raw=true)
+
+![screenshot_4.jpg](https://github.com/danggai/FindMyPackage/blob/master/assets/screenshot_4.jpg?raw=true)
 
 
 
