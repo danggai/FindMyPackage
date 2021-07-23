@@ -1,6 +1,6 @@
 # 택배ㅇㄷ?
 
-![icon.jpg](https://github.com/danggai/FindMyPackage/blob/master/assets/icon.jpg?raw=true)
+![icon.jpg](https://github.com/danggai/FindMyPackage/blob/master/assets/icon.jpg?raw=true){: width="50%" height="50%"}
 
 개인 프로젝트로 개발 된 코틀린 언어를 사용한 안드로이드 앱이에요.
 
@@ -46,13 +46,13 @@
 
 ## 스크린샷
 
-![screenshot_1.jpg](https://github.com/danggai/FindMyPackage/blob/master/assets/screenshot_1.jpg?raw=true)
 
-![screenshot_2.jpg](https://github.com/danggai/FindMyPackage/blob/master/assets/screenshot_2.jpg?raw=true)
 
-![screenshot_3.jpg](https://github.com/danggai/FindMyPackage/blob/master/assets/screenshot_3.jpg?raw=true)
+| ![screenshot_1.jpg](https://github.com/danggai/FindMyPackage/blob/master/assets/screenshot_1.jpg?raw=true){: width="50%" height="50%"}<br /><center>메인 화면</center> | ![screenshot_2.jpg](https://github.com/danggai/FindMyPackage/blob/master/assets/screenshot_2.jpg?raw=true){: width="50%" height="50%"}<br /><center>설정 화면</center> |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| ![screenshot_3.jpg](https://github.com/danggai/FindMyPackage/blob/master/assets/screenshot_3.jpg?raw=true){: width="50%" height="50%"}<br /><center>운송장 등록 화면</center> | ![screenshot_4.jpg](https://github.com/danggai/FindMyPackage/blob/master/assets/screenshot_4.jpg?raw=true){: width="50%" height="50%"}<br /><center>운송장 등록 시 알림</center> |
 
-![screenshot_4.jpg](https://github.com/danggai/FindMyPackage/blob/master/assets/screenshot_4.jpg?raw=true)
+
 
 
 
