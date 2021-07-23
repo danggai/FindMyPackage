@@ -1,6 +1,6 @@
 # 택배ㅇㄷ?
 
-![icon.jpg](https://github.com/danggai/FindMyPackage/blob/master/assets/icon.jpg?raw=true){: width="50%" height="50%"}
+![icon.jpg](https://github.com/danggai/FindMyPackage/blob/master/assets/icon.jpg?raw=true)
 
 개인 프로젝트로 개발 된 코틀린 언어를 사용한 안드로이드 앱이에요.
 
@@ -125,10 +125,4 @@ Android app using Kotlin language developed as a personal project.
 ## screenshot
 
 
-
-
-
-## Final Presentation PPT
-
- 
 
