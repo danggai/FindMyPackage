@@ -90,7 +90,7 @@ object CommonFunction {
                 }
             }
         }
-        return "자동 등록 된 물건"
+        return Constant.DEFAULT_ITEM_NAME
     }
 
     fun convertDateString(string: String): String {
@@ -98,9 +98,9 @@ object CommonFunction {
             val beforeDate: Date? = SimpleDateFormat(Constant.DATE_FORMAT_BEFORE).parse(string)
             beforeDate?.let { return SimpleDateFormat(Constant.DATE_FORMAT_AFTER).format(it) }
         } catch (e: Exception) {
-            return "날짜 정보가 없습니다."
+            return Constant.DEFAULT_DATE
         }
-        return "날짜 정보가 없습니다."
+        return Constant.DEFAULT_DATE
     }
 
     fun sendNotification(id: Int, context: Context, pendingIntent: PendingIntent?, title: String, msg: String) {

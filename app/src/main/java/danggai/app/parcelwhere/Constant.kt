@@ -71,4 +71,10 @@ object Constant {
     /* ARGUMENT */
 
     const val ARG_IS_ONE_TIME = "ARG_IS_ONE_TIME"
+
+
+    /* DEFAULT VALUE */
+
+    const val DEFAULT_ITEM_NAME = "자동 등록 된 물건"
+    const val DEFAULT_DATE = "날짜 정보가 없습니다."
 }
