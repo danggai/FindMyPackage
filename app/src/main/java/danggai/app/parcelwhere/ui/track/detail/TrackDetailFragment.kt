@@ -57,6 +57,7 @@ class TrackDetailFragment : BindingFragment<TrackDetailFragmentBinding>() {
                 input.inputType = InputType.TYPE_CLASS_TEXT
                 input.setText(itemName)
 
+                // TODO("이름 변경 Dialog custom")
                 AlertDialog.Builder(act)
                     .setTitle(getString(R.string.dialog_name_change_title))
                     .setMessage(getString(R.string.dialog_name_change_msg))
