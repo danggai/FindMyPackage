@@ -27,7 +27,7 @@ object MainBindingAdapter {
     }
 
     @BindingAdapter(value = ["isChanged"], requireAll = true)
-    @JvmStatic fun bindRefresh(
+    @JvmStatic fun bindNotifyDataSetChanged(
         view: RecyclerView,
         isChanged: Boolean,
     ) {

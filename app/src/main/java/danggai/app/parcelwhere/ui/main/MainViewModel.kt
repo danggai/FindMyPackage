@@ -148,7 +148,6 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ item ->
                 lvMakeToast.value = Event("${item.itemName}(${item.trackId})이 삭제되었습니다.")
-                // TODO("item 드래그 정보 초기화")
             }, {
                 it.message?.let { msg ->
                     log.e(msg)

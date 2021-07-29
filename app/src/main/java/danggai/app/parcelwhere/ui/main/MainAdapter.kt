@@ -70,6 +70,7 @@ class MainAdapter(private val viewModel: MainViewModel) : RecyclerView.Adapter<M
 
                 viewBinderHelper.setOpenOnlyOne(true)
                 viewBinderHelper.bind(holder.binding.srl, item.trackEntity.trackId)
+                viewBinderHelper.closeLayout(item.trackEntity.trackId)
             }
             is ItemTrackEmptyBinding -> {
                 holder.binding.vm = viewModel
