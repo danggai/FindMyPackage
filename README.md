@@ -1,4 +1,4 @@
-# 택배ㅇㄷ?
+# 택배ㅇㄷ? / ParcelWhere?
 
 ![icon.jpg](https://github.com/danggai/FindMyPackage/blob/master/assets/icon.jpg?raw=true)
 
@@ -29,7 +29,7 @@
 
 
 
-## 어플리케이션 버전
+## Application Version
 
 - minSdkVersion : 24
 - targetSdkVersion : 30
@@ -44,7 +44,7 @@
 
 
 
-## 스크린샷
+## ScreenShots
 
 
 
@@ -56,7 +56,7 @@
 
 
 
-## 라이센스
+## License
 
 ```
 MIT License
@@ -82,5 +82,7 @@ SOFTWARE.
 ```
 
 
+
+## Font
 
 [나눔 바른 고딕](https://hangeul.naver.com/font)
