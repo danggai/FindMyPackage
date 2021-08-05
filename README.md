@@ -21,11 +21,11 @@
 
 ## 개발 환경
 
-- Android Studio 4.2.1
-- Koltin
-- RxKotlin
-- Koin
-- Room
+- [Android Studio 4.2.1](https://developer.android.com/studio/intro)
+- [Koltin](https://developer.android.com/kotlin)
+- [RxKotlin](https://github.com/ReactiveX/RxKotlin)
+- [Koin](https://insert-koin.io/)
+- [Room](https://developer.android.com/topic/libraries/architecture/room)
 
 
 
