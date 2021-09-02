@@ -16,6 +16,7 @@ data class TrackEntity (
     @ColumnInfo(name = "recent_time") val recentTime: String?,
     @ColumnInfo(name = "recent_status") val recentStatus: String?,
     @ColumnInfo(name = "is_refreshed") var isRefreshed: Boolean
+    // TODO (최근 위치 추가)
 ): Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString()?:"",
@@ -26,7 +27,7 @@ data class TrackEntity (
         parcel.readString()?:"",
         parcel.readString()?:"",
         parcel.readInt() != 0
-    ) {
+    ) {새
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

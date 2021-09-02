@@ -385,6 +385,9 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+<!--            TODO// 사용 된 오픈 소스 목록 확인 가능한 fragment 추가 -->
+
+<!--            TODO// 깃 허브 원본 소스로 연결 되는 view 추가 -->
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
