@@ -27,7 +27,7 @@ data class TrackEntity (
         parcel.readString()?:"",
         parcel.readString()?:"",
         parcel.readInt() != 0
-    ) {새
+    ) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
