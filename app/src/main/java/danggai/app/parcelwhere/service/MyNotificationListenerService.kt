@@ -29,7 +29,7 @@ class MyNotificationListenerService: NotificationListenerService() {
 
     private var lvIsValidRxFlow: NonNullMutableLiveData<Boolean> = NonNullMutableLiveData(false)
 
-    private var newTrackEntity: NonNullMutableLiveData<TrackEntity> = NonNullMutableLiveData(TrackEntity("","","","","","","",false))
+    private var newTrackEntity: NonNullMutableLiveData<TrackEntity> = NonNullMutableLiveData(TrackEntity("","","","","","","","",false))
 
     init {
         compositeDisposable.addAll (
@@ -103,7 +103,7 @@ class MyNotificationListenerService: NotificationListenerService() {
 
             if ((trackId.length in 9..14 && CarrierUtil.checkCarrierId(carrierId))) {
                 log.e("itemName = $itemName, carrierId = $carrierId, trackId = $trackId")
-                val track = TrackEntity(trackId, itemName, "", carrierId, CarrierUtil.getCarrierName(carrierId), CommonFunction.now(), "", true)
+                val track = TrackEntity(trackId, itemName, "", carrierId, CarrierUtil.getCarrierName(carrierId), CommonFunction.now(), "", "", true)
 
                 rxDaoExistById.onNext(track)
             }

@@ -12,7 +12,8 @@
     <string name="description">상세 설명</string>
 
     <string name="item_name_empty">이름 없는 물건</string>
-    <string name="now_status_empty">현재 상태 알 수 없음</string>
+    <string name="now_location_empty">현재 위치</string>
+    <string name="now_status_empty">현재 상태</string>
     <string name="recent_time_empty">최근 갱신 시간 알 수 없음</string>
 
     <string name="auto_register">자동 등록</string>

@@ -103,7 +103,7 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
         rxDaoUpdate
             .observeOn(Schedulers.newThread())
             .map { item ->
-                TrackEntity(item.trackId, dao.selectItemNameById(item.trackId), item.fromName, item.carrierId, item.carrierName, item.recentTime, item.recentStatus, item.isRefreshed)
+                TrackEntity(item.trackId, dao.selectItemNameById(item.trackId), item.fromName, item.carrierId, item.carrierName, item.recentTime, item.recentStatus, item.recentLocation, item.isRefreshed)
             }
             .observeOn(AndroidSchedulers.mainThread())
             .map { trackEntity ->
@@ -166,7 +166,7 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
                     Constant.META_CODE_SUCCESS -> {
                         log.e(res.data)
                         rxDaoUpdate.onNext(
-                            TrackEntity(res.data.trackId, "", res.data.from.name, res.data.carrier.id, res.data.carrier.name, res.data.progresses[res.data.progresses.size-1].time, res.data.state.text, false)
+                            TrackEntity(res.data.trackId, "", res.data.from.name, res.data.carrier.id, res.data.carrier.name, res.data.progresses[res.data.progresses.size-1].time, res.data.state.text, res.data.progresses[res.data.progresses.size-1].location.name,false)
                         )
                     }
 //                    Constant.META_CODE_BAD_REQUEST,

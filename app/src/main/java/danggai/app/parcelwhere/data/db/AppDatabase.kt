@@ -18,7 +18,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun trackDao(): TrackDao
 
     companion object {
-        const val DB_VERSION = 1
+        const val DB_VERSION = 2
         private const val DB_NAME = "my_db"
 
         @Volatile
@@ -36,7 +36,7 @@ abstract class AppDatabase : RoomDatabase() {
 
         private val MIGRATION_1_TO_2 = object : Migration(1, 2) {
             override fun migrate(database: SupportSQLiteDatabase) {
-//                database.execSQL("ALTER TABLE Track ADD COLUMN isRefresh boolean NOT NULL default 0")
+                database.execSQL("ALTER TABLE Track ADD COLUMN recent_location TEXT default null")
             }
         }
     }

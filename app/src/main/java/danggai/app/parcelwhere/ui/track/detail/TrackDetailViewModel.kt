@@ -30,7 +30,7 @@ class TrackDetailViewModel(override val app: Application, private val api: ApiRe
     private val rxDaoUpdateNameById: PublishSubject<Pair<String, String>> = PublishSubject.create()
     private val rxFragmentQuit: PublishSubject<Boolean> = PublishSubject.create()
 
-    var lvTrackEntity: NonNullMutableLiveData<TrackEntity> = NonNullMutableLiveData(TrackEntity("","","","","","","",false))
+    var lvTrackEntity: NonNullMutableLiveData<TrackEntity> = NonNullMutableLiveData(TrackEntity("","","","","","","","",false))
     var lvTrackData: NonNullMutableLiveData<Tracks> = NonNullMutableLiveData(Tracks("", Tracks.From("",""), Tracks.To("",""), Tracks.State("",""), listOf(), Tracks.Carrier("","","")))
 
     var lvItemName: NonNullMutableLiveData<String> = NonNullMutableLiveData("")
@@ -49,7 +49,7 @@ class TrackDetailViewModel(override val app: Application, private val api: ApiRe
                     Constant.META_CODE_SUCCESS -> {
                         lvTrackData.value = res.data
                         rxDaoUpdate.onNext(
-                            TrackEntity(lvTrackEntity.value.trackId, "", res.data.from.name, res.data.carrier.id, res.data.carrier.name, res.data.progresses[res.data.progresses.size-1].time, res.data.state.text, false)
+                            TrackEntity(lvTrackEntity.value.trackId, "", res.data.from.name, res.data.carrier.id, res.data.carrier.name, res.data.progresses[res.data.progresses.size-1].time,res.data.state.text, res.data.progresses[res.data.progresses.size-1].location.name, false)
                         )
                     }
                     Constant.META_CODE_BAD_REQUEST,
@@ -81,7 +81,7 @@ class TrackDetailViewModel(override val app: Application, private val api: ApiRe
             .observeOn(Schedulers.newThread())
             .map { item ->
                 log.e(item)
-                TrackEntity(item.trackId, dao.selectItemNameById(item.trackId), item.fromName, item.carrierId, item.carrierName, item.recentTime, item.recentStatus, item.isRefreshed)
+                TrackEntity(item.trackId, dao.selectItemNameById(item.trackId), item.fromName, item.carrierId, item.carrierName, item.recentTime, item.recentStatus, item.recentLocation, item.isRefreshed)
             }
             .map { item ->
                 dao.update(item)

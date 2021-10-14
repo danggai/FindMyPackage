@@ -30,7 +30,7 @@ class RefreshWorker (context: Context, workerParams: WorkerParameters, private v
         when (res.meta.code) {
             Constant.META_CODE_SUCCESS -> {
                 val isRefreshed = item.recentTime != res.data.progresses[res.data.progresses.lastIndex].time
-                val refreshedItem = TrackEntity(item.trackId, item.itemName, item.fromName, item.carrierId, item.carrierName, res.data.progresses[res.data.progresses.lastIndex].time, res.data.state.text, isRefreshed)
+                val refreshedItem = TrackEntity(item.trackId, item.itemName, item.fromName, item.carrierId, item.carrierName, res.data.progresses[res.data.progresses.lastIndex].time, res.data.state.text, res.data.progresses[res.data.progresses.lastIndex].location.name, isRefreshed)
 
                 if (item.recentStatus != res.data.state.text) {
                     log.e()
@@ -52,7 +52,7 @@ class RefreshWorker (context: Context, workerParams: WorkerParameters, private v
     }
 
     private suspend fun daoUpdate(item: TrackEntity) {
-        val updatedItem = TrackEntity(item.trackId, dao.suspendSelectItemNameById(item.trackId), item.fromName, item.carrierId, item.carrierName, item.recentTime, item.recentStatus, item.isRefreshed)
+        val updatedItem = TrackEntity(item.trackId, dao.suspendSelectItemNameById(item.trackId), item.fromName, item.carrierId, item.carrierName, item.recentTime, item.recentStatus, item.recentLocation, item.isRefreshed)
         dao.suspendUpdate(updatedItem)
 
         log.e(updatedItem)
