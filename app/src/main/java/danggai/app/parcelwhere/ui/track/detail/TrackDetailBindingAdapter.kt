@@ -9,11 +9,12 @@ object TrackDetailBindingAdapter {
     @JvmStatic fun bindItemList(
         view: RecyclerView,
         items: MutableList<Progress>,
-        vm: TrackDetailViewModel
+        vm: TrackDetailViewModel,
     ) {
         view.adapter?.run {
             if (this is TrackDetailAdapter) {
                 this.setItemList(items)
+                view.layoutManager?.scrollToPosition(0)
             }
         } ?: run {
             TrackDetailAdapter(vm).apply {

@@ -71,6 +71,7 @@ class TrackDetailAdapter(private val viewModel: TrackDetailViewModel) : Recycler
                 holder.binding.item = item
                 holder.binding.vm = viewModel
                 holder.binding.tvTime.text = CommonFunction.convertDateString(item.time)
+                holder.binding.tvDescription.text = item.description
 
                 if (position == mDataSet.size-1) {
                     holder.binding.cvBody.setBackgroundColor(f2)
