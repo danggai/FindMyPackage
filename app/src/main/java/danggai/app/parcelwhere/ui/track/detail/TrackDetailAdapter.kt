@@ -80,6 +80,8 @@ class TrackDetailAdapter(private val viewModel: TrackDetailViewModel) : Recycler
                     holder.binding.tvStatus.setTextColor(b2)
                     holder.binding.tvTime.setTextColor(b2)
                     holder.binding.lineBottom.visibility = View.INVISIBLE
+                    holder.binding.vMarker.visibility = View.VISIBLE
+                    holder.binding.ivTruck.visibility = View.GONE
                 }
                 if (position == 0) {
                     holder.binding.cvBody.setBackgroundColor(f1)
@@ -88,6 +90,8 @@ class TrackDetailAdapter(private val viewModel: TrackDetailViewModel) : Recycler
                     holder.binding.tvStatus.setTextColor(b1)
                     holder.binding.tvTime.setTextColor(b1)
                     holder.binding.lineTop.visibility = View.INVISIBLE
+                    holder.binding.vMarker.visibility = View.GONE
+                    holder.binding.ivTruck.visibility = View.VISIBLE
                 }
                 if (position != mDataSet.size-1 &&
                         position != 0) {
@@ -96,6 +100,8 @@ class TrackDetailAdapter(private val viewModel: TrackDetailViewModel) : Recycler
                     holder.binding.tvLocationName.setTextColor(b2)
                     holder.binding.tvStatus.setTextColor(b2)
                     holder.binding.tvTime.setTextColor(b2)
+                    holder.binding.vMarker.visibility = View.VISIBLE
+                    holder.binding.ivTruck.visibility = View.GONE
                 }
             }
             is ItemProgressEmptyBinding -> {
