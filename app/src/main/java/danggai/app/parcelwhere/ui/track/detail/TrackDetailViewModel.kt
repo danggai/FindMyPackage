@@ -7,6 +7,7 @@ import danggai.app.parcelwhere.R
 import danggai.app.parcelwhere.data.api.ApiRepository
 import danggai.app.parcelwhere.data.db.track.TrackDao
 import danggai.app.parcelwhere.data.db.track.TrackEntity
+import danggai.app.parcelwhere.data.local.Progress
 import danggai.app.parcelwhere.data.local.Tracks
 import danggai.app.parcelwhere.data.rxbus.RxBusMainSelectAll
 import danggai.app.parcelwhere.ui.base.BaseViewModel
@@ -47,9 +48,15 @@ class TrackDetailViewModel(override val app: Application, private val api: ApiRe
                 log.e(res)
                 when (res.meta.code) {
                     Constant.META_CODE_SUCCESS -> {
-                        lvTrackData.value = res.data
                         rxDaoUpdate.onNext(
-                            TrackEntity(lvTrackEntity.value.trackId, "", res.data.from.name, res.data.carrier.id, res.data.carrier.name, res.data.progresses[res.data.progresses.size-1].time,res.data.state.text, res.data.progresses[res.data.progresses.size-1].location.name, false)
+                            if (res.data.progresses.isEmpty()) {
+                                val emptyProgress = Progress(Constant.EMPTY_PROGRESS_TIME, Progress.Location(""), Progress.Status("",""),"")
+                                lvTrackData.value = Tracks("", Tracks.From("",""), Tracks.To("",""), Tracks.State("",""), listOf(emptyProgress), Tracks.Carrier("","",""))
+                                TrackEntity(lvTrackEntity.value.trackId, "", res.data.from.name, res.data.carrier.id, res.data.carrier.name, "", res.data.state.text, "", false)
+                            } else {
+                                lvTrackData.value = res.data
+                                TrackEntity(lvTrackEntity.value.trackId, "", res.data.from.name, res.data.carrier.id, res.data.carrier.name, res.data.progresses[res.data.progresses.size-1].time, res.data.state.text, res.data.progresses[res.data.progresses.size-1].location.name, false)
+                            }
                         )
                     }
                     Constant.META_CODE_BAD_REQUEST,

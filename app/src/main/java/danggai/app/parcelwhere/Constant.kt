@@ -77,4 +77,6 @@ object Constant {
 
     const val DEFAULT_ITEM_NAME = "자동 등록 된 물건"
     const val DEFAULT_DATE = "날짜 정보가 없습니다."
+
+    const val EMPTY_PROGRESS_TIME = "1996-02-27T00:00:00+09:00"
 }

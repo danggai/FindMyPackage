@@ -166,7 +166,11 @@ class MainViewModel(override val app: Application, private val api: ApiRepositor
                     Constant.META_CODE_SUCCESS -> {
                         log.e(res.data)
                         rxDaoUpdate.onNext(
-                            TrackEntity(res.data.trackId, "", res.data.from.name, res.data.carrier.id, res.data.carrier.name, res.data.progresses[res.data.progresses.size-1].time, res.data.state.text, res.data.progresses[res.data.progresses.size-1].location.name,false)
+                            if (res.data.progresses.isEmpty()) {
+                                TrackEntity(res.data.trackId, "", res.data.from.name, res.data.carrier.id, res.data.carrier.name, "", res.data.state.text, "",false)
+                            } else {
+                                TrackEntity(res.data.trackId, "", res.data.from.name, res.data.carrier.id, res.data.carrier.name, res.data.progresses[res.data.progresses.size-1].time, res.data.state.text, res.data.progresses[res.data.progresses.size-1].location.name,false)
+                            }
                         )
                     }
 //                    Constant.META_CODE_BAD_REQUEST,

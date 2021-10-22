@@ -9,6 +9,7 @@ import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
+import danggai.app.parcelwhere.Constant
 import danggai.app.parcelwhere.R
 import danggai.app.parcelwhere.data.local.Progress
 import danggai.app.parcelwhere.databinding.ItemProgressBinding
@@ -23,6 +24,7 @@ class TrackDetailAdapter(private val viewModel: TrackDetailViewModel) : Recycler
     companion object {
         const val TYPE_PROGRESS_ITEM = 0
         const val TYPE_EMPTY = 1
+        const val TYPE_LOADING = 2
 
         var f1 = Color.parseColor("#FEFEFE")
         var f2 = Color.parseColor("#F0F0F0")
@@ -32,13 +34,16 @@ class TrackDetailAdapter(private val viewModel: TrackDetailViewModel) : Recycler
 
     fun setItemList(_itemList: MutableList<Progress>) {
         mDataSet.clear()
-
         if (_itemList.size > 0) {
-            for (i in _itemList.indices.reversed()) {
-                mDataSet.add(_itemList[i])
+            if (_itemList[0].time == Constant.EMPTY_PROGRESS_TIME) {
+                mDataSet.add(EmptyItem())
+            } else {
+                for (i in _itemList.indices.reversed()) {
+                    mDataSet.add(_itemList[i])
+                }
             }
         } else {
-            mDataSet.add(EmptyItem())
+            mDataSet.add(LoadingItem())
         }
         notifyDataSetChanged()
     }
@@ -47,14 +52,16 @@ class TrackDetailAdapter(private val viewModel: TrackDetailViewModel) : Recycler
         return when (mDataSet[position]) {
             is Progress -> TYPE_PROGRESS_ITEM
             is EmptyItem -> TYPE_EMPTY
-            else -> TYPE_EMPTY
+            is LoadingItem -> TYPE_LOADING
+            else -> TYPE_LOADING
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         return when (viewType) {
             TYPE_PROGRESS_ITEM -> ItemViewHolder(R.layout.item_progress, parent)
-            else -> ItemViewHolder(R.layout.item_progress_empty, parent)
+            TYPE_EMPTY -> ItemViewHolder(R.layout.item_progress_empty, parent)
+            else -> ItemViewHolder(R.layout.item_progress_loading, parent)
         }
     }
 
@@ -116,5 +123,6 @@ class TrackDetailAdapter(private val viewModel: TrackDetailViewModel) : Recycler
         val binding: ViewDataBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), layoutId, parent, false)
     ) : RecyclerView.ViewHolder(binding.root)
 
+    class LoadingItem()
     class EmptyItem()
 }

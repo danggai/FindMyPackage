@@ -14,7 +14,7 @@
         style="@style/TextView.MatchMatch"
         android:id="@+id/tv_carrier_name"
         android:gravity="center"
-        android:text="@string/msg_empty_track_list"
+        android:text="@string/msg_track_list_empty"
         android:textColor="@color/c1"
         android:textSize="18sp"
         app:layout_constraintTop_toTopOf="parent"

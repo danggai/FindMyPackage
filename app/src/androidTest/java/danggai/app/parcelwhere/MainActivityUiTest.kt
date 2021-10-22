@@ -18,7 +18,7 @@ class MainActivityUiTest {
 
     @Test
     fun emptyRecyclerViewTest(){
-        Espresso.onView(ViewMatchers.withText(R.string.msg_empty_track_list))
+        Espresso.onView(ViewMatchers.withText(R.string.msg_track_list_empty))
             .check(matches(ViewMatchers.isDisplayed()))
     }
 

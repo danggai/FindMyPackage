@@ -11,10 +11,10 @@
     <string name="location">위치</string>
     <string name="description">상세 설명</string>
 
-    <string name="item_name_empty">이름 없는 물건</string>
+    <string name="item_name_empty">상품명</string>
     <string name="now_location_empty">현재 위치</string>
-    <string name="now_status_empty">현재 상태</string>
-    <string name="recent_time_empty">최근 갱신 시간 알 수 없음</string>
+    <string name="now_status_empty">배송 상태</string>
+    <string name="recent_time_empty">최근 갱신 시간</string>
 
     <string name="auto_register">자동 등록</string>
     <string name="notification_access">알림으로 운송장 자동 등록</string>
@@ -72,8 +72,9 @@
     <string name="msg_refresh_error">%s(%s)를 새로고침 하지 못했어요.</string>
     <string name="msg_copy_complete">%s 을 복사했어요.</string>
     <string name="msg_copy_complete_temp">운송장 번호가 복사됐어요.</string>
-    <string name="msg_empty_track_list">저장된 운송장 번호가 없어요.</string>
-    <string name="msg_empty_progress_list">운송 정보를 가져오고 있어요.</string>
+    <string name="msg_track_list_empty">저장된 운송장 번호가 없어요.</string>
+    <string name="msg_progress_list_loading">운송 정보를 가져오고 있어요.</string>
+    <string name="msg_progress_list_empty">아직 택배사에서 택배를 수령하지 않았어요.</string>
 
     <string name="msg_tutorial_1">여기에선 운송장 정보를 직접 입력해서 수동으로 추가할 수 있어요.</string>
     <string name="msg_tutorial_2">여기에선 앱이 알림으로 운송장을 등록할지, 자동으로 새로고침 할 지 설정할 수 있어요.</string>
